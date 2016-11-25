@@ -1,7 +1,7 @@
 # Microsoft Power BI visuals TestUtils
 [![Build Status](https://travis-ci.org/Microsoft/powerbi-visuals-utils-testutils.svg?branch=master)](https://travis-ci.org/Microsoft/powerbi-visuals-utils-testutils) [![npm version](https://img.shields.io/npm/v/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils) [![npm](https://img.shields.io/npm/dm/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils)
 
-> Test utility interfaces for creating powerbi custom visuals
+> SVGUtils is a set of mocks and fakes in order to simplify unit testing for Power BI custom visuals
 
 ## Usage
 Learn how to install and use the TestUtils in your custom visuals:
