@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "target": "es5",
+    "outFile": "./lib/index.js"
+  },
+  "files": [
+    "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.2.0/PowerBI-visuals.d.ts",
+    "typings/index.d.ts",
+    "src/common.ts",
+    "src/mocks/mockVisualHost.ts",
+    "src/mocks/mockIColorPalette.ts",
+    "src/mocks/mockISelectionId.ts",
+    "src/mocks/mockISelectionIdBuilder.ts",
+    "src/mocks/mockISelectionManager.ts",
+    "src/mocks/mocks.ts",
+    "src/helpers/helpers.ts",
+    "src/helpers/visualTestHelpers.ts",
+    "src/VisualBuilderBase.ts"
+  ]
+}
