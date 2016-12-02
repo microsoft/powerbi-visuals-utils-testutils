@@ -63,9 +63,14 @@ module powerbi.extensibility.utils.test {
         constructor(
             width: number = 800,
             height: number = 600,
+            guid?: string,
             element: JQuery = testDom(height, width)) {
 
             this.element = element;
+
+            if (guid) {
+                this.element.addClass(`visual-${guid}`);
+            }
 
             this.visualHost = createVisualHost();
 
@@ -124,7 +129,11 @@ module powerbi.extensibility.utils.test {
             flushAllD3Transitions();
         }
 
-        public updateflushAllD3TransitionsRenderTimeout(dataViews: DataView[] | DataView, fn: Function, timeout?: number): number {
+        public updateflushAllD3TransitionsRenderTimeout(
+            dataViews: DataView[] | DataView,
+            fn: Function,
+            timeout?: number): number {
+
             this.update(dataViews);
 
             flushAllD3Transitions();

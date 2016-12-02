@@ -2,22 +2,6 @@ declare module powerbi.extensibility.utils.test {
     const DefaultWaitForRender: number;
 }
 declare module powerbi.extensibility.utils.test.mocks {
-    import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    import ISelectionManager = powerbi.extensibility.ISelectionManager;
-    import IColorPalette = powerbi.extensibility.IColorPalette;
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
-    class MockIVisualHost implements IVisualHost {
-        private colorPaletteInstance;
-        private selectionManager;
-        constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager);
-        createSelectionIdBuilder(): ISelectionIdBuilder;
-        createSelectionManager(): ISelectionManager;
-        colorPalette: IColorPalette;
-        persistProperties(changes: VisualObjectInstancesToPersist): void;
-    }
-}
-declare module powerbi.extensibility.utils.test.mocks {
     import IColorPalette = powerbi.extensibility.IColorPalette;
     class MockIColorPalette implements IColorPalette {
         /**
@@ -71,6 +55,34 @@ declare module powerbi.extensibility.utils.test.mocks {
     }
 }
 declare module powerbi.extensibility.utils.test.mocks {
+    class MockITooltipService implements ITooltipService {
+        private isEnabled;
+        constructor(isEnabled?: boolean);
+        enabled(): boolean;
+        show(options: TooltipShowOptions): void;
+        move(options: TooltipMoveOptions): void;
+        hide(options: TooltipHideOptions): void;
+    }
+}
+declare module powerbi.extensibility.utils.test.mocks {
+    import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
+    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+    import ISelectionManager = powerbi.extensibility.ISelectionManager;
+    import IColorPalette = powerbi.extensibility.IColorPalette;
+    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+    class MockIVisualHost implements IVisualHost {
+        private colorPaletteInstance;
+        private selectionManager;
+        private tooltipServiceInstance;
+        constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager, tooltipServiceInstance?: ITooltipService);
+        createSelectionIdBuilder(): ISelectionIdBuilder;
+        createSelectionManager(): ISelectionManager;
+        colorPalette: IColorPalette;
+        persistProperties(changes: VisualObjectInstancesToPersist): void;
+        tooltipService: ITooltipService;
+    }
+}
+declare module powerbi.extensibility.utils.test.mocks {
     import IColorInfo = powerbi.IColorInfo;
     import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
     import ISelectionId = powerbi.visuals.ISelectionId;
@@ -82,6 +94,7 @@ declare module powerbi.extensibility.utils.test.mocks {
     function createSelectionId(key?: string): ISelectionId;
     function createSelectionIdBuilder(): ISelectionIdBuilder;
     function createSelectionManager(): ISelectionManager;
+    function createTooltipService(isEnabled?: boolean): ITooltipService;
 }
 declare module powerbi.extensibility.utils.test.helpers {
     function testDom(height: number | string, width: number | string): JQuery;
@@ -114,6 +127,7 @@ declare module powerbi.extensibility.utils.test.helpers {
     function createContextMenuEvent(x: number, y: number): MouseEvent;
     function createTouchesList(touches: Touch[]): TouchList;
     function createTouch(x: number, y: number, element: JQuery, id?: number): Touch;
+    function clickElement(element: JQuery, ctrlKey?: boolean): void;
     /**
      * Forces all D3 transitions to complete.
      * Normally, zero-delay transitions are executed after an instantaneous delay (<10ms).
@@ -124,6 +138,8 @@ declare module powerbi.extensibility.utils.test.helpers {
      * These flickers are noticable on IE, and with a large number of webviews(not recommend you ever do this) on iOS.
      */
     function flushAllD3Transitions(): void;
+    function getRandomNumbers(count: number, min?: number, max?: number): number[];
+    function getRandomNumber(min: number, max: number, exceptionList?: number[], changeResult?: (value: any) => number): number;
 }
 interface JQuery {
     d3Click(x: number, y: number, eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType, button?: number): void;
@@ -137,6 +153,16 @@ interface JQuery {
     d3MouseMove(x: number, y: number, eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType, button?: number): void;
     d3MouseOut(x: number, y: number, eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType, button?: number): void;
     d3KeyEvent(typeArg: string, keyArg: string, keyCode: number): void;
+}
+declare module powerbi.extensibility.utils.test.helpers.color {
+    interface RgbColor {
+        R: number;
+        G: number;
+        B: number;
+        A?: number;
+    }
+    function assertColorsMatch(actual: string, expected: string, invert?: boolean): boolean;
+    function parseColorString(color: string): RgbColor;
 }
 declare module powerbi.extensibility.utils.test.helpers {
     function renderTimeout(fn: Function, timeout?: number): number;
@@ -154,7 +180,7 @@ declare module powerbi.extensibility.utils.test {
         viewport: IViewport;
         visualHost: IVisualHost;
         protected visual: T;
-        constructor(width?: number, height?: number, element?: JQuery);
+        constructor(width?: number, height?: number, guid?: string, element?: JQuery);
         protected abstract build(options: VisualConstructorOptions): T;
         init(): void;
         destroy(): void;
@@ -164,5 +190,75 @@ declare module powerbi.extensibility.utils.test {
         updateFlushAllD3Transitions(dataViews: DataView[] | DataView): void;
         updateflushAllD3TransitionsRenderTimeout(dataViews: DataView[] | DataView, fn: Function, timeout?: number): number;
         enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[];
+    }
+}
+declare module powerbi.extensibility.utils.test.dataViewBuilder {
+    /** Utility for creating a DataView from columns of data. */
+    interface IDataViewBuilderCategorical {
+        withCategory(options: DataViewBuilderCategoryColumnOptions): IDataViewBuilderCategorical;
+        withCategories(categories: DataViewCategoryColumn[]): IDataViewBuilderCategorical;
+        withValues(options: DataViewBuilderValuesOptions): IDataViewBuilderCategorical;
+        withGroupedValues(options: DataViewBuilderGroupedValuesOptions): IDataViewBuilderCategorical;
+        build(): DataView;
+    }
+    interface DataViewBuilderColumnOptions {
+        source: DataViewMetadataColumn;
+    }
+    interface DataViewBuilderValuesOptions {
+        columns: DataViewBuilderValuesColumnOptions[];
+    }
+    interface DataViewBuilderGroupedValuesOptions {
+        groupColumn: DataViewBuilderCategoryColumnOptions;
+        valueColumns: DataViewBuilderColumnOptions[];
+        data: DataViewBuilderSeriesData[][];
+    }
+    interface DataViewBuilderCategoryColumnOptions extends DataViewBuilderColumnOptions {
+        values: PrimitiveValue[];
+        identityFrom: any;
+    }
+    /** Indicates the source set of identities. */
+    interface DataViewBuilderColumnIdentitySource {
+        fields: any[];
+        identities?: DataViewScopeIdentity[];
+    }
+    interface DataViewBuilderValuesColumnOptions extends DataViewBuilderColumnOptions, DataViewBuilderSeriesData {
+    }
+    interface DataViewBuilderSeriesData {
+        values: PrimitiveValue[];
+        highlights?: PrimitiveValue[];
+        /** Client-computed maximum value for a column. */
+        maxLocal?: any;
+        /** Client-computed maximum value for a column. */
+        minLocal?: any;
+    }
+    function createCategoricalDataViewBuilder(): IDataViewBuilderCategorical;
+    function createValueColumns(values?: DataViewValueColumn[], valueIdentityFields?: any[], source?: DataViewMetadataColumn): DataViewValueColumns;
+    function setGrouped(values: DataViewValueColumns, groupedResult?: DataViewValueColumnGroup[]): void;
+}
+declare module powerbi.extensibility.utils.test.dataViewBuilder {
+    type CustomizeColumnFn = (source: DataViewMetadataColumn) => void;
+    interface TestDataViewBuilderColumnOptions extends DataViewBuilderColumnOptions {
+        values: any[];
+    }
+    interface TestDataViewBuilderCategoryColumnOptions extends TestDataViewBuilderColumnOptions {
+        objects?: DataViewObjects[];
+        isGroup?: boolean;
+    }
+    interface DataViewBuilderAllColumnOptions {
+        categories: TestDataViewBuilderCategoryColumnOptions[];
+        grouped: TestDataViewBuilderCategoryColumnOptions[];
+        values: DataViewBuilderValuesColumnOptions[];
+    }
+    abstract class TestDataViewBuilder {
+        static DataViewName: string;
+        private aggregateFunction;
+        static setDefaultQueryName(source: DataViewMetadataColumn): DataViewMetadataColumn;
+        static getDataViewBuilderColumnIdentitySources(options: TestDataViewBuilderColumnOptions[] | TestDataViewBuilderColumnOptions): DataViewBuilderColumnIdentitySource[];
+        static getValuesTable(categories?: DataViewCategoryColumn[], values?: DataViewValueColumn[]): any[][];
+        static createDataViewBuilderColumnOptions(categoriesColumns: (TestDataViewBuilderCategoryColumnOptions | TestDataViewBuilderCategoryColumnOptions[])[], valuesColumns: (DataViewBuilderValuesColumnOptions | DataViewBuilderValuesColumnOptions[])[], filter?: (options: TestDataViewBuilderColumnOptions) => boolean, customizeColumns?: CustomizeColumnFn): DataViewBuilderAllColumnOptions;
+        static setUpDataViewBuilderColumnOptions(options: DataViewBuilderAllColumnOptions, aggregateFunction: (array: number[]) => number): DataViewBuilderAllColumnOptions;
+        static setUpDataView(dataView: DataView, options: DataViewBuilderAllColumnOptions): DataView;
+        protected createCategoricalDataViewBuilder(categoriesColumns: (TestDataViewBuilderCategoryColumnOptions | TestDataViewBuilderCategoryColumnOptions[])[], valuesColumns: (DataViewBuilderValuesColumnOptions | DataViewBuilderValuesColumnOptions[])[], columnNames: string[], customizeColumns?: CustomizeColumnFn): IDataViewBuilderCategorical;
+        abstract getDataView(columnNames?: string[]): DataView;
     }
 }

@@ -41,10 +41,16 @@ module powerbi.extensibility.utils.test.mocks {
     export class MockIVisualHost implements IVisualHost {
         private colorPaletteInstance: IColorPalette;
         private selectionManager: ISelectionManager;
+        private tooltipServiceInstance: ITooltipService;
 
-        constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager) {
+        constructor(
+            colorPalette?: IColorPalette,
+            selectionManager?: ISelectionManager,
+            tooltipServiceInstance?: ITooltipService) {
+
             this.colorPaletteInstance = colorPalette;
             this.selectionManager = selectionManager;
+            this.tooltipServiceInstance = tooltipServiceInstance;
         }
 
         public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -60,5 +66,9 @@ module powerbi.extensibility.utils.test.mocks {
         }
 
         public persistProperties(changes: VisualObjectInstancesToPersist) { };
+
+        public get tooltipService(): ITooltipService {
+            return this.tooltipServiceInstance;
+        }
     }
 }

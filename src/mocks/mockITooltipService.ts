@@ -25,34 +25,19 @@
  */
 
 module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
-    import DataViewValueColumn = powerbi.DataViewValueColumn;
-    import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;
-    import DataViewValueColumns = powerbi.DataViewValueColumns;
+    export class MockITooltipService implements ITooltipService {
+        private isEnabled: boolean;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    import ISelectionId = powerbi.visuals.ISelectionId;
-
-    export class MockISelectionIdBuilder implements ISelectionIdBuilder {
-        public withCategory(categoryColumn: DataViewCategoryColumn, index: number): this {
-            return this;
+        constructor(isEnabled: boolean = true) {
+            this.isEnabled = isEnabled;
         }
 
-        public withSeries(
-            seriesColumn: DataViewValueColumns,
-            valueColumn: DataViewValueColumn | DataViewValueColumnGroup): this {
-
-            return this;
+        public enabled(): boolean {
+            return this.isEnabled;
         }
 
-        public withMeasure(measureId: string): this {
-            return this;
-        }
-
-        public createSelectionId(): ISelectionId {
-            return createSelectionId();
-        }
+        public show(options: TooltipShowOptions): void { }
+        public move(options: TooltipMoveOptions): void { }
+        public hide(options: TooltipHideOptions): void { }
     }
 }

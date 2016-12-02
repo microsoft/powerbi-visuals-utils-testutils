@@ -7,17 +7,21 @@
     "outFile": "./lib/index.js"
   },
   "files": [
-    "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.2.0/PowerBI-visuals.d.ts",
+    "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.3.0/PowerBI-visuals.d.ts",
     "typings/index.d.ts",
     "src/common.ts",
-    "src/mocks/mockVisualHost.ts",
     "src/mocks/mockIColorPalette.ts",
     "src/mocks/mockISelectionId.ts",
     "src/mocks/mockISelectionIdBuilder.ts",
     "src/mocks/mockISelectionManager.ts",
+    "src/mocks/mockITooltipService.ts",
+    "src/mocks/mockVisualHost.ts",
     "src/mocks/mocks.ts",
     "src/helpers/helpers.ts",
+    "src/helpers/color.ts",
     "src/helpers/visualTestHelpers.ts",
-    "src/VisualBuilderBase.ts"
+    "src/visualBuilderBase.ts",
+    "src/dataViewBuilder/dataViewBuilder.ts",
+    "src/dataViewBuilder/testDataViewBuilder.ts"
   ]
 }
