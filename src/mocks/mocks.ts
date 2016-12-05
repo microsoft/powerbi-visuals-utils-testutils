@@ -43,9 +43,13 @@ module powerbi.extensibility.utils.test.mocks {
     import MockISelectionId = powerbi.extensibility.utils.test.mocks.MockISelectionId;
     import MockISelectionIdBuilder = powerbi.extensibility.utils.test.mocks.MockISelectionIdBuilder;
     import MockISelectionManager = powerbi.extensibility.utils.test.mocks.MockISelectionManager;
+    import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
 
     export function createVisualHost(): IVisualHost {
-        return new MockVisualHost(createColorPalette());
+        return new MockVisualHost(
+            createColorPalette(),
+            createSelectionManager(),
+            createTooltipService(true));
     }
 
     export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -62,5 +66,9 @@ module powerbi.extensibility.utils.test.mocks {
 
     export function createSelectionManager(): ISelectionManager {
         return new MockISelectionManager();
+    }
+
+    export function createTooltipService(isEnabled?: boolean): ITooltipService {
+        return new MockITooltipService(isEnabled);
     }
 }

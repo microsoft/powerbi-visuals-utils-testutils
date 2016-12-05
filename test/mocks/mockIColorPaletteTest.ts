@@ -24,28 +24,44 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
+/// <reference path="../_references.ts" />
+
+module powerbi.extensibility.utils.test.mocks.test {
+    // powerbi
+    import IColorInfo = powerbi.IColorInfo;
+
     // powerbi.extensibility
     import IColorPalette = powerbi.extensibility.IColorPalette;
 
-    export class MockIColorPalette implements IColorPalette {
-        /**
-         * This array represents the default colors of the IColorPalette.
-         */
-        private static DefaultColors: IColorInfo[] = [
-            { value: "red" },
-            { value: "green" },
-            { value: "blue" }
-        ];
+    // powerbi.extensibility.utils.test.mocks
+    import MockIColorPalette = powerbi.extensibility.utils.test.mocks.MockIColorPalette;
+    import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
 
-        private colors: IColorInfo[];
+    describe("MockIColorPalette", () => {
+        let colorPalette: IColorPalette;
 
-        constructor(colors: IColorInfo[] = MockIColorPalette.DefaultColors) {
-            this.colors = colors;
-        }
+        beforeEach(() => {
+            colorPalette = createColorPalette();
+        });
 
-        public getColor(key: string): IColorInfo {
-            return this.colors[key] || MockIColorPalette.DefaultColors[0];
-        }
-    }
+        describe("getColor", () => {
+            it("the method should be defined", () => {
+                expect(colorPalette.getColor).toBeDefined();
+            });
+
+            it("should return red as a first color", () => {
+                const color: IColorInfo = colorPalette.getColor("0");
+
+                expect(color.value).toBe("red");
+            });
+        });
+    });
+
+    describe("createColorPalette", () => {
+        it("should return an instance of MockIColorPalette", () => {
+            const instance: IColorPalette = createColorPalette();
+
+            expect(instance instanceof MockIColorPalette).toBeTruthy();
+        });
+    });
 }

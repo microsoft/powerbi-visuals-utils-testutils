@@ -270,6 +270,20 @@ module powerbi.extensibility.utils.test.helpers {
         };
     }
 
+    export function clickElement(element: JQuery, ctrlKey: boolean = false): void {
+        let coordinates: JQueryCoordinates = element.offset(),
+            width: number = element.outerWidth(),
+            height: number = element.outerHeight(),
+            eventType: ClickEventType = ctrlKey
+                ? helpers.ClickEventType.CtrlKey
+                : helpers.ClickEventType.Default;
+
+        element.d3Click(
+            coordinates.left + (width / 2),
+            coordinates.top + (height / 2),
+            eventType);
+    }
+
     /**
      * Forces all D3 transitions to complete.
      * Normally, zero-delay transitions are executed after an instantaneous delay (<10ms). 
@@ -284,6 +298,25 @@ module powerbi.extensibility.utils.test.helpers {
         Date.now = function () { return Infinity; };
         d3.timer.flush();
         Date.now = now;
+    }
+
+    export function getRandomNumbers(count: number, min: number = 0, max: number = 1): number[] {
+        return _.range(count).map(x => getRandomNumber(min, max));
+    }
+
+    export function getRandomNumber(
+        min: number,
+        max: number,
+        exceptionList?: number[],
+        changeResult: (value: any) => number = x => x): number {
+
+        let result = changeResult(Math.random() * (max - min) + min);
+
+        if (exceptionList && exceptionList.length && _.includes(exceptionList, result)) {
+            return getRandomNumber(min, max, exceptionList);
+        }
+
+        return result;
     }
 }
 
