@@ -19,8 +19,6 @@ import IColorPalette = powerbi.extensibility.IColorPalette;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
 class MockIVisualHost implements IVisualHost {
-    private colorPaletteInstance;
-    private selectionManager;
     constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager);
     createSelectionIdBuilder(): ISelectionIdBuilder;
     createSelectionManager(): ISelectionManager;

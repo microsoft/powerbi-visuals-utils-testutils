@@ -17,7 +17,6 @@ import ISelectionId = powerbi.visuals.ISelectionId;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 
 class MockISelectionManager implements ISelectionManager {
-    private selectionIds;
     select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]>;
     hasSelection(): boolean;
     clear(): IPromise<{}>;

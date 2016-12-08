@@ -15,11 +15,6 @@ Please note, it's fake implementation of ```IColorPalette```, in other words, it
 import IColorPalette = powerbi.extensibility.IColorPalette;
 
 class MockIColorPalette implements IColorPalette {
-    /**
-     * This array represents the default colors of IColorPalette.
-     */
-    private static DefaultColors;
-    private colors;
     constructor(colors?: IColorInfo[]);
     getColor(key: string): IColorInfo;
 }
