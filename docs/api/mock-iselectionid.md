@@ -16,7 +16,6 @@ import Selector = powerbi.data.Selector;
 import ISelectionId = powerbi.visuals.ISelectionId;
 
 class MockISelectionId implements ISelectionId {
-    private key;
     constructor(key: string);
     equals(other: ISelectionId): boolean;
     includes(other: ISelectionId, ignoreHighlight?: boolean): boolean;
