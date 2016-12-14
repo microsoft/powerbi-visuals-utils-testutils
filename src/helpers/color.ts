@@ -32,6 +32,10 @@ module powerbi.extensibility.utils.test.helpers.color {
         A?: number;
     }
 
+    export function getSolidColorStructuralObject(color: string): any {
+        return { solid: { color: color } };
+    }
+
     export function assertColorsMatch(actual: string, expected: string, invert: boolean = false): boolean {
         const rgbActual: RgbColor = parseColorString(actual),
             rgbExpected: RgbColor = parseColorString(expected);
