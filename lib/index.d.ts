@@ -161,6 +161,7 @@ declare module powerbi.extensibility.utils.test.helpers.color {
         B: number;
         A?: number;
     }
+    function getSolidColorStructuralObject(color: string): any;
     function assertColorsMatch(actual: string, expected: string, invert?: boolean): boolean;
     function parseColorString(color: string): RgbColor;
 }
