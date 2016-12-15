@@ -34,7 +34,7 @@ npm install typings -g
 After that, you should run the following command in the directory with your current custom visual:
 
 ```bash
-typings install --save --global dt~d3 dt~jasmine dt~jasmine-jquery dt~jquery dt~lodash
+typings install --save --global dt~d3#0.0.0+20160907005744 dt~jasmine#2.5.0+20161025102649 dt~jasmine-jquery#0.0.0+20160317120654 dt~jquery#1.10.0+20160929162922 dt~lodash#4.14.0+20161028154038
 ```
 
 This command installs type declarations to the ```typings``` directory. These declarations are necessary for TypeScript compiler and Intellisense.
@@ -76,7 +76,7 @@ As a result you will have the following file structure:
   "externalJS": [
     "node_modules/jquery/dist/jquery.min.js",
     "node_modules/lodash/lodash.min.js",
-    "node_modules/d3/d3.min.js"
+    "node_modules/d3/d3.min.js",
     "node_modules/jasmine-jquery/lib/jasmine-jquery.js",
     "node_modules/powerbi-visuals-utils-testutils/lib/index.js"
   ],
