@@ -4,7 +4,8 @@
     "experimentalDecorators": true,
     "declaration": true,
     "target": "es5",
-    "outFile": "./lib/index.js"
+    "outFile": "./lib/index.js",
+    "sourceMap": true
   },
   "files": [
     "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.3.0/PowerBI-visuals.d.ts",
@@ -20,7 +21,7 @@
     "src/helpers/helpers.ts",
     "src/helpers/color.ts",
     "src/helpers/visualTestHelpers.ts",
-    "src/visualBuilderBase.ts",
+    "src/VisualBuilderBase.ts",
     "src/dataViewBuilder/dataViewBuilder.ts",
     "src/dataViewBuilder/testDataViewBuilder.ts"
   ]
