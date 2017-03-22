@@ -25,27 +25,25 @@
  */
 
 module powerbi.extensibility.utils.test.mocks {
-    // powerbi.extensibility
-    import IColorPalette = powerbi.extensibility.IColorPalette;
+    export class MockILocale {
+        private currentLocale: string;
+        private locales: Object;
+        private static DefaultLocales: Object = {
+            "en" : "en-US",
+            "ru" : "ru-RU"
+        };
 
-    export class MockIColorPalette implements IColorPalette {
-        /**
-         * This array represents the default colors of the IColorPalette.
-         */
-        private static DefaultColors: IColorInfo[] = [
-            { value: "red" },
-            { value: "green" },
-            { value: "blue" }
-        ];
-
-        private colors: IColorInfo[];
-
-        constructor(colors: IColorInfo[] = MockIColorPalette.DefaultColors) {
-            this.colors = colors;
+        constructor(locales: Object = MockILocale.DefaultLocales) {
+            this.locales = locales;
+            this.locale = _.keys(locales)[0];
         }
 
-        public getColor(key: string): IColorInfo {
-            return this.colors[key] || MockIColorPalette.DefaultColors[0];
+        public set locale(key: string) {
+            this.currentLocale = this.locales[key] || MockILocale.DefaultLocales[key] || MockILocale.DefaultLocales["en"];
+        }
+
+        public get locale(): string {
+            return this.currentLocale;
         }
     }
 }
