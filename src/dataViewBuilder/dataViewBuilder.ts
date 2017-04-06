@@ -12,7 +12,7 @@
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
  *
- *  The above copyright notice and this permission notice shall be included in 
+ *  The above copyright notice and this permission notice shall be included in
  *  all copies or substantial portions of the Software.
  *
  *  THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -105,7 +105,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
         public withCategory(options: DataViewBuilderCategoryColumnOptions): IDataViewBuilderCategorical {
             let categoryValues = options.values,
                 identityFrom = options.identityFrom,
-                type = options.source.type;
+                sourceType = options.source.type;
 
             let categoryColumn: DataViewCategoryColumn = {
                 source: options.source,
@@ -123,7 +123,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
                         identityFrom,
                         categoryIndex,
                         categoryValues[categoryIndex],
-                        type));
+                        sourceType));
                 }
             }
 
@@ -150,7 +150,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
         /**
          * Adds static series columns.
          *
-         * Note that it is illegal to have both dynamic series and static series in a visual DataViewCategorical.  It is only legal to have them both in 
+         * Note that it is illegal to have both dynamic series and static series in a visual DataViewCategorical.  It is only legal to have them both in
          * a query DataViewCategorical, where DataViewTransform is expected to split them up into separate visual DataViewCategorical objects.
          */
         public withValues(options: DataViewBuilderValuesOptions): IDataViewBuilderCategorical {
@@ -168,7 +168,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
         /**
          * Adds dynamic series columns.
          *
-         * Note that it is illegal to have both dynamic series and static series in a visual DataViewCategorical.  It is only legal to have them both in 
+         * Note that it is illegal to have both dynamic series and static series in a visual DataViewCategorical.  It is only legal to have them both in
          * a query DataViewCategorical, where DataViewTransform is expected to split them up into separate visual DataViewCategorical objects.
          */
         public withGroupedValues(options: DataViewBuilderGroupedValuesOptions): IDataViewBuilderCategorical {
@@ -355,7 +355,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
         }
 
         /**
-         * This function infers that if any metadata column has 'queryName', 
+         * This function infers that if any metadata column has 'queryName',
          * then the user of this builder is building a visual DataView (as opposed to query DataView).
          *
          * @param metadataColumns The complete collection of metadata columns in the categorical.

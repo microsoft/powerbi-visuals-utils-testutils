@@ -8,7 +8,7 @@ The ```powerbi.extensibility.utils.test.mocks``` module provides the following f
 
 ## MockIVisualHost
 
-This class implements [IVisualHost](https://github.com/Microsoft/PowerBI-visuals-tools/blob/master/templates/visuals/.api/v1.3.0/PowerBI-visuals.d.ts#L1262) in order to test custom visuals without external dependencies such as Power BI Framework.
+This class implements [IVisualHost](https://github.com/Microsoft/PowerBI-visuals-tools/blob/master/templates/visuals/.api/v1.4.0/PowerBI-visuals.d.ts#L1262) in order to test custom visuals without external dependencies such as Power BI Framework.
 Please note, it's fake implementation of ```IVisualHost```, in other words, it should be used only with unit tests.
 
 ```typescript
@@ -23,6 +23,7 @@ class MockIVisualHost implements IVisualHost {
     createSelectionIdBuilder(): ISelectionIdBuilder;
     createSelectionManager(): ISelectionManager;
     colorPalette: IColorPalette;
+    locale: string;
     persistProperties(changes: VisualObjectInstancesToPersist): void;
 }
 ```

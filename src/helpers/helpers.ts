@@ -121,10 +121,10 @@ module powerbi.extensibility.utils.test.helpers {
         eventType?: ClickEventType,
         button?: number): void {
 
-        let type: ClickEventType = eventType || ClickEventType.Default;
+        let clickEventType: ClickEventType = eventType || ClickEventType.Default;
 
         this.each(function (i, e) {
-            let evt: MouseEvent = createMouseEvent(mouseEventType, type, x, y, button);
+            let evt: MouseEvent = createMouseEvent(mouseEventType, clickEventType, x, y, button);
 
             e.dispatchEvent(evt);
         });
@@ -149,11 +149,11 @@ module powerbi.extensibility.utils.test.helpers {
     }
 
     /**
-     * Creates mouse event 
+     * Creates mouse event
      * @param eventType {ClickEventType}.
      * @param x clientX.
      * @param y clientY.
-     * @param eventName {string} Event name e.g click, mousedown ... 
+     * @param eventName {string} Event name e.g click, mousedown ...
      */
     export function createMouseEvent(
         mouseEventType: MouseEventType,
@@ -162,7 +162,7 @@ module powerbi.extensibility.utils.test.helpers {
         y: number,
         button: number = 0): MouseEvent {
 
-        let type: ClickEventType = eventType || ClickEventType.Default,
+        let clickEventType: ClickEventType = eventType || ClickEventType.Default,
             evt: MouseEvent = document.createEvent("MouseEvents");
 
         evt.initMouseEvent(
@@ -175,10 +175,10 @@ module powerbi.extensibility.utils.test.helpers {
             y,      // screenY
             x,      // clientX
             y,      // clientY
-            !!(type & ClickEventType.CtrlKey),  // ctrlKey
-            !!(type & ClickEventType.AltKey),  // altKey
-            !!(type & ClickEventType.ShiftKey),  // shiftKey
-            !!(type & ClickEventType.MetaKey),  // metaKey
+            !!(clickEventType & ClickEventType.CtrlKey),  // ctrlKey
+            !!(clickEventType & ClickEventType.AltKey),  // altKey
+            !!(clickEventType & ClickEventType.ShiftKey),  // shiftKey
+            !!(clickEventType & ClickEventType.MetaKey),  // metaKey
             button,      // button
             null);  // relatedTarget
 
@@ -286,8 +286,8 @@ module powerbi.extensibility.utils.test.helpers {
 
     /**
      * Forces all D3 transitions to complete.
-     * Normally, zero-delay transitions are executed after an instantaneous delay (<10ms). 
-     * This can cause a brief flicker if the browser renders the page twice: once at the end of the first event loop, 
+     * Normally, zero-delay transitions are executed after an instantaneous delay (<10ms).
+     * This can cause a brief flicker if the browser renders the page twice: once at the end of the first event loop,
      * then again immediately on the first timer callback. By flushing the timer queue at the end of the first event loop,
      * you can run any zero-delay transitions immediately and avoid the flicker.
      *
@@ -310,7 +310,9 @@ module powerbi.extensibility.utils.test.helpers {
         exceptionList?: number[],
         changeResult: (value: any) => number = x => x): number {
 
-        let result = changeResult(Math.random() * (max - min) + min);
+        const cryptoObj = (<any>window).crypto || (<any>window).msCrypto;
+        let randomValue = +("0." + cryptoObj.getRandomValues(new Uint8Array(1)));
+        let result = changeResult(randomValue * (max - min) + min);
 
         if (exceptionList && exceptionList.length && _.includes(exceptionList, result)) {
             return getRandomNumber(min, max, exceptionList);
