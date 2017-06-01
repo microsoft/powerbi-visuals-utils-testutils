@@ -45,13 +45,15 @@ module powerbi.extensibility.utils.test.mocks {
     import MockISelectionManager = powerbi.extensibility.utils.test.mocks.MockISelectionManager;
     import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
     import MockILocale = powerbi.extensibility.utils.test.mocks.MockILocale;
+    import MockIAllowInteractions = powerbi.extensibility.utils.test.mocks.MockIAllowInteractions;
 
-    export function createVisualHost(locale?: Object): IVisualHost {
+    export function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost {
         return new MockVisualHost(
             createColorPalette(),
             createSelectionManager(),
             createTooltipService(true),
-            createLocale(locale));
+            createLocale(locale),
+            createAllowInteractions(allowInteractions));
     }
 
     export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -76,5 +78,9 @@ module powerbi.extensibility.utils.test.mocks {
 
     export function createLocale(locales?: Object): MockILocale {
         return new MockILocale(locales);
+    }
+
+    export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
+        return new MockIAllowInteractions(isEnabled);
     }
 }

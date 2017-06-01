@@ -43,17 +43,20 @@ module powerbi.extensibility.utils.test.mocks {
         private selectionManager: ISelectionManager;
         private tooltipServiceInstance: ITooltipService;
         private localeInstance: MockILocale;
+        private allowInteractionsInstance: MockIAllowInteractions;
 
         constructor(
             colorPalette?: IColorPalette,
             selectionManager?: ISelectionManager,
             tooltipServiceInstance?: ITooltipService,
-            localeInstance?: MockILocale) {
+            localeInstance?: MockILocale,
+            allowInteractionsInstance?: MockIAllowInteractions) {
 
             this.colorPaletteInstance = colorPalette;
             this.selectionManager = selectionManager;
             this.tooltipServiceInstance = tooltipServiceInstance;
             this.localeInstance = localeInstance;
+            this.allowInteractionsInstance = allowInteractionsInstance;
         }
 
         public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -80,6 +83,10 @@ module powerbi.extensibility.utils.test.mocks {
 
         public get tooltipService(): ITooltipService {
             return this.tooltipServiceInstance;
+        }
+
+        public allowInteractions(): boolean {
+            return this.allowInteractionsInstance.isEnabled;
         }
     }
 }

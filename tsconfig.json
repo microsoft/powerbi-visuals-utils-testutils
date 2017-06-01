@@ -11,6 +11,7 @@
     "typings/index.d.ts",
     "src/common.ts",
     "src/mocks/mockILocale.ts",
+    "src/mocks/mockIAllowInteractions.ts",
     "src/mocks/mockIColorPalette.ts",
     "src/mocks/mockISelectionId.ts",
     "src/mocks/mockISelectionIdBuilder.ts",
