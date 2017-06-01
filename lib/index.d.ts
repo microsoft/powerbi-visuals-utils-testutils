@@ -66,6 +66,7 @@ declare module powerbi.extensibility.utils.test.mocks {
         hasSelection(): boolean;
         clear(): IPromise<{}>;
         getSelectionIds(): ISelectionId[];
+        applySelectionFilter(): void;
         containsSelection(id: ISelectionId): boolean;
     }
 }
