@@ -11,6 +11,12 @@ declare module powerbi.extensibility.utils.test.mocks {
     }
 }
 declare module powerbi.extensibility.utils.test.mocks {
+    class MockIAllowInteractions {
+        isEnabled: boolean;
+        constructor(isEnabled?: boolean);
+    }
+}
+declare module powerbi.extensibility.utils.test.mocks {
     import IColorPalette = powerbi.extensibility.IColorPalette;
     class MockIColorPalette implements IColorPalette {
         /**
@@ -60,6 +66,7 @@ declare module powerbi.extensibility.utils.test.mocks {
         hasSelection(): boolean;
         clear(): IPromise<{}>;
         getSelectionIds(): ISelectionId[];
+        applySelectionFilter(): void;
         containsSelection(id: ISelectionId): boolean;
     }
 }
@@ -84,13 +91,15 @@ declare module powerbi.extensibility.utils.test.mocks {
         private selectionManager;
         private tooltipServiceInstance;
         private localeInstance;
-        constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager, tooltipServiceInstance?: ITooltipService, localeInstance?: MockILocale);
+        private allowInteractionsInstance;
+        constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager, tooltipServiceInstance?: ITooltipService, localeInstance?: MockILocale, allowInteractionsInstance?: MockIAllowInteractions);
         createSelectionIdBuilder(): ISelectionIdBuilder;
         createSelectionManager(): ISelectionManager;
         readonly colorPalette: IColorPalette;
         locale: string;
         persistProperties(changes: VisualObjectInstancesToPersist): void;
         readonly tooltipService: ITooltipService;
+        allowInteractions(): boolean;
     }
 }
 declare module powerbi.extensibility.utils.test.mocks {
@@ -101,13 +110,15 @@ declare module powerbi.extensibility.utils.test.mocks {
     import ISelectionManager = powerbi.extensibility.ISelectionManager;
     import IVisualHost = powerbi.extensibility.visual.IVisualHost;
     import MockILocale = powerbi.extensibility.utils.test.mocks.MockILocale;
-    function createVisualHost(locale?: Object): IVisualHost;
+    import MockIAllowInteractions = powerbi.extensibility.utils.test.mocks.MockIAllowInteractions;
+    function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost;
     function createColorPalette(colors?: IColorInfo[]): IColorPalette;
     function createSelectionId(key?: string): ISelectionId;
     function createSelectionIdBuilder(): ISelectionIdBuilder;
     function createSelectionManager(): ISelectionManager;
     function createTooltipService(isEnabled?: boolean): ITooltipService;
     function createLocale(locales?: Object): MockILocale;
+    function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions;
 }
 declare module powerbi.extensibility.utils.test.helpers {
     function testDom(height: number | string, width: number | string): JQuery;
