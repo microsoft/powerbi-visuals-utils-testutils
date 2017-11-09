@@ -49,10 +49,10 @@ module powerbi.extensibility.utils.test.mocks.test {
                 expect(colorPalette.getColor).toBeDefined();
             });
 
-            it("should return red as a first color", () => {
+            it("should return #01B8AA as a first color", () => {
                 const color: IColorInfo = colorPalette.getColor("0");
 
-                expect(color.value).toBe("red");
+                expect(color.value).toBe("#01B8AA");
             });
         });
     });
