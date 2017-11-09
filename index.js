@@ -184,9 +184,11 @@ var powerbi;
                 (function (mocks) {
                     var MockIColorPalette = (function () {
                         function MockIColorPalette(colors) {
-                            if (colors === void 0) { colors = []; }
+                            this.colors = [];
                             this.colorIndex = 0;
-                            this.colors = colors;
+                            if (colors) {
+                                this.colors = colors;
+                            }
                         }
                         MockIColorPalette.prototype.getColor = function (key) {
                             var color = this.colors[key];
@@ -1774,3 +1776,4 @@ var powerbi;
         })(utils = extensibility.utils || (extensibility.utils = {}));
     })(extensibility = powerbi.extensibility || (powerbi.extensibility = {}));
 })(powerbi || (powerbi = {}));
+//# sourceMappingURL=index.js.map

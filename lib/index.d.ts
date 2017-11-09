@@ -24,6 +24,7 @@ declare module powerbi.extensibility.utils.test.mocks {
          */
         private static DefaultColors;
         private colors;
+        private colorIndex;
         constructor(colors?: IColorInfo[]);
         getColor(key: string): IColorInfo;
     }
