@@ -25,7 +25,8 @@
  */
 
 'use strict';
-
+const webpackConfig = require('./webpack.config');
+const webpack = require('webpack');
 const testRecursivePath = 'test/**/*.ts'
     , srcOriginalRecursivePath = 'src/**/*.ts'
     , srcRecursivePath = 'lib/**/*.js'
@@ -73,10 +74,25 @@ module.exports = (config) => {
             [testRecursivePath]: ['typescript'],
             [srcRecursivePath]: ['sourcemap', 'coverage']
         },
+        webpack: {
+            module: {
+                preLoaders: webpackConfig.module.preLoaders,
+                loaders: webpackConfig.module.loaders
+            },
+            resolve: webpackConfig.resolve,
+            externals: [
+                {
+                    sinon: "sinon",
+                    chai: "chai"
+                },
+            ],
+            plugins: webpackConfig.plugins
+        },
         typescriptPreprocessor: {
             options: {
                 sourceMap: false,
-                target: 'ES5',
+                target: "ES5",
+                module: "commonjs",
                 removeComments: false,
                 concatenateOutput: false
             }

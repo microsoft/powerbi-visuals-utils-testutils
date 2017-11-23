@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import {JQueryDeferred, $} from "jquery";
+//module powerbi.extensibility.utils.test.mocks {
     // powerbi
     import IPromise = powerbi.IPromise;
 
@@ -90,4 +90,4 @@ module powerbi.extensibility.utils.test.mocks {
             });
         }
     }
-}
+//}

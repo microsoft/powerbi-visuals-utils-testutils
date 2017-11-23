@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
+//module powerbi.extensibility.utils.test.mocks {
     // powerbi.data
     import Selector = powerbi.data.Selector;
 
@@ -62,4 +62,4 @@ module powerbi.extensibility.utils.test.mocks {
             return true;
         }
     }
-}
+//}

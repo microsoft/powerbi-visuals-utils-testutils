@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import {createSelectionId } from "./mocks";
+//module powerbi.extensibility.utils.test.mocks {
     // powerbi
     import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
     import DataViewValueColumn = powerbi.DataViewValueColumn;
@@ -55,4 +55,4 @@ module powerbi.extensibility.utils.test.mocks {
             return createSelectionId();
         }
     }
-}
+//}

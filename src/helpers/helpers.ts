@@ -23,8 +23,11 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.helpers {
+import { timer } from "d3-timer";
+import {jQuery, $, JQueryCoordinates} from "jquery";
+import {setFixtures} from "jasmine-jquery";
+import { _ } from "lodash";
+//module powerbi.extensibility.utils.test.helpers {
     export function testDom(height: number | string, width: number | string): JQuery {
         let element: JQuery = $("<div></div>")
             .attr("id", "item")
@@ -257,7 +260,7 @@ module powerbi.extensibility.utils.test.helpers {
         return touchesList;
     }
 
-    export function createTouch(x: number, y: number, element: JQuery, id: number = 0): Touch {
+    export function createTouch(x: number, y: number, element: jQuery, id: number = 0): Touch {
         return {
             pageX: x,
             pageY: y,
@@ -270,13 +273,13 @@ module powerbi.extensibility.utils.test.helpers {
         };
     }
 
-    export function clickElement(element: JQuery, ctrlKey: boolean = false): void {
+    export function clickElement(element: jQuery, ctrlKey: boolean = false): void {
         let coordinates: JQueryCoordinates = element.offset(),
             width: number = element.outerWidth(),
             height: number = element.outerHeight(),
             eventType: ClickEventType = ctrlKey
-                ? helpers.ClickEventType.CtrlKey
-                : helpers.ClickEventType.Default;
+                ? ClickEventType.CtrlKey
+                : ClickEventType.Default;
 
         element.d3Click(
             coordinates.left + (width / 2),
@@ -296,7 +299,7 @@ module powerbi.extensibility.utils.test.helpers {
     export function flushAllD3Transitions() {
         let now = Date.now;
         Date.now = function () { return Infinity; };
-        d3.timer.flush();
+        timer.flush();
         Date.now = now;
     }
 
@@ -320,13 +323,13 @@ module powerbi.extensibility.utils.test.helpers {
 
         return result;
     }
-}
 
-declare interface JQuery {
+
+    export declare interface JQuery {
     d3Click(
         x: number,
         y: number,
-        eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType,
+        eventType?: ClickEventType,
         button?: number): void;
     d3TouchStart(touchList?: TouchList): void;
     d3TouchMove(touchList?: TouchList): void;
@@ -335,27 +338,27 @@ declare interface JQuery {
     d3MouseDown(
         x: number,
         y: number,
-        eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType,
+        eventType?: ClickEventType,
         button?: number): void;
     d3MouseUp(
         x: number,
         y: number,
-        eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType,
+        eventType?: ClickEventType,
         button?: number): void;
     d3MouseOver(
         x: number,
         y: number,
-        eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType,
+        eventType?: ClickEventType,
         button?: number): void;
     d3MouseMove(
         x: number,
         y: number,
-        eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType,
+        eventType?: ClickEventType,
         button?: number): void;
     d3MouseOut(
         x: number,
         y: number,
-        eventType?: powerbi.extensibility.utils.test.helpers.ClickEventType,
+        eventType?: ClickEventType,
         button?: number): void;
     d3KeyEvent(typeArg: string, keyArg: string, keyCode: number): void;
 }

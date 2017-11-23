@@ -1,3 +1,4 @@
+"use strict";
 /*
  *  Power BI Visualizations
  *
@@ -23,7 +24,30 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-/// <reference path="../typings/index.d.ts" />
-/// <reference path="../lib/index.d.ts" />
-/// <reference path="../node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.4.0/PowerBI-visuals.d.ts" />
+var lodash_1 = require("lodash");
+//module powerbi.extensibility.utils.test.mocks {
+var MockILocale = (function () {
+    function MockILocale(locales) {
+        if (locales === void 0) { locales = MockILocale.DefaultLocales; }
+        this.locales = locales;
+        this.locale = lodash_1._.keys(locales)[0];
+    }
+    Object.defineProperty(MockILocale.prototype, "locale", {
+        get: function () {
+            return this.currentLocale;
+        },
+        set: function (key) {
+            this.currentLocale = this.locales[key] || MockILocale.DefaultLocales[key] || MockILocale.DefaultLocales["en"];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MockILocale;
+}());
+MockILocale.DefaultLocales = {
+    "en": "en-US",
+    "ru": "ru-RU"
+};
+exports.MockILocale = MockILocale;
+//}
+//# sourceMappingURL=mockILocale.js.map

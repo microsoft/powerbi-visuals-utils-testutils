@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
-
 module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.data
     import Selector = powerbi.data.Selector;

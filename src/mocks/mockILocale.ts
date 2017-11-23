@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import { _ } from "lodash";
+//module powerbi.extensibility.utils.test.mocks {
     export class MockILocale {
         private currentLocale: string;
         private locales: Object;
@@ -46,4 +46,4 @@ module powerbi.extensibility.utils.test.mocks {
             return this.currentLocale;
         }
     }
-}
+//}

@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
-
 module powerbi.extensibility.utils.test.mocks.test {
     // powerbi
     import IColorInfo = powerbi.IColorInfo;

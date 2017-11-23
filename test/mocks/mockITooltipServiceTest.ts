@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
-
 module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.extensibility.utils.test.mocks
     import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;

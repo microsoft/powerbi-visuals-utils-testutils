@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
-
 module powerbi.extensibility.utils.test.helpers.test {
     import testDom = powerbi.extensibility.utils.test.helpers.testDom;
     import getRandomNumber = powerbi.extensibility.utils.test.helpers.getRandomNumber;

@@ -23,12 +23,9 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+import { DefaultWaitForRender } from "../common";
 
-module powerbi.extensibility.utils.test.helpers {
-    // powerbi.extensibility.utils.test
-    import DefaultWaitForRender = powerbi.extensibility.utils.test.DefaultWaitForRender;
-
-    export function renderTimeout(fn: Function, timeout: number = DefaultWaitForRender): number {
-        return setTimeout(fn, timeout);
-    }
+export function renderTimeout(fn: Function, timeout: number = DefaultWaitForRender): number {
+    return setTimeout(fn, timeout);
 }
+

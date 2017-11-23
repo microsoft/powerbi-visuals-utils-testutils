@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import {IColorInfo } from "powerbi-visuals-tools";
+//module powerbi.extensibility.utils.test.mocks {
     // powerbi.extensibility
     import IColorPalette = powerbi.extensibility.IColorPalette;
 
@@ -105,4 +105,4 @@ module powerbi.extensibility.utils.test.mocks {
             return color;
         }
     }
-}
+//}

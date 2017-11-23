@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.helpers.color {
+import {expect} from "jasmine-jquery";
+//module powerbi.extensibility.utils.test.helpers.color {
     export interface RgbColor {
         R: number;
         G: number;
@@ -107,4 +107,4 @@ module powerbi.extensibility.utils.test.helpers.color {
             };
         }
     }
-}
+//}

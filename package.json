@@ -20,8 +20,9 @@
     "lib"
   ],
   "scripts": {
-    "build:map": "tsc --sourceMap",
     "build": "tsc",
+    "build:map": "tsc --sourceMap",
+    "build:bundle": "webpack --display-modules",
     "test": "karma start",
     "pretest": "npm run build:map",
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
@@ -30,8 +31,11 @@
   },
   "devDependencies": {
     "coveralls": "2.11.15",
+    "d3-array": "^1.2.1",
+    "d3-timer": "^1.0.7",
     "jasmine": "2.5.2",
     "karma": "1.3.0",
+    "jquery": "3.2.1",
     "karma-chrome-launcher": "2.0.0",
     "karma-coverage": "1.1.1",
     "karma-jasmine": "1.0.2",
@@ -42,12 +46,12 @@
     "tslint": "4.4.2",
     "tslint-microsoft-contrib": "^4.0.1",
     "typescript": "2.1.4",
-    "typings": "2.0.0"
+    "typings": "2.0.0",
+    "webpack": "^3.8.1",
+    "ts-loader": "^3.1.1"
   },
   "dependencies": {
-    "jquery": "3.1.1",
     "jasmine-jquery": "2.1.1",
-    "lodash": "4.16.2",
-    "d3": "3.5.5"
+    "lodash": "4.16.2"
   }
 }

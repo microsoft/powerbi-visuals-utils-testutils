@@ -24,8 +24,15 @@
  *  THE SOFTWARE.
  */
 
+import {DataView,DataViewObjects,ValueTypeDescriptor, DataViewCategoryColumn, DataViewMetadataColumn,DataViewColumnAggregates, 
+    PrimitiveValue, DataViewScopeIdentity,DataViewValueColumn, DataViewValueColumns,DataViewCategorical,
+    DataViewValueColumnGroup, DataViewCategoricalColumn } from "powerbi-visuals-tools";
+import { DataViewBuilderColumnOptions,DataViewBuilderValuesColumnOptions,DataViewBuilderColumnIdentitySource, IDataViewBuilderCategorical,
+    createCategoricalDataViewBuilder, DataViewBuilderCategoryColumnOptions, DataViewBuilderSeriesData } from "./dataViewBuilder";
+import { _ } from "lodash";
+import { range } from "d3-array";
 
-module powerbi.extensibility.utils.test.dataViewBuilder {
+//module powerbi.extensibility.utils.test.dataViewBuilder {
     export type CustomizeColumnFn = (source: DataViewMetadataColumn) => void;
 
     export interface TestDataViewBuilderColumnOptions extends DataViewBuilderColumnOptions {
@@ -183,7 +190,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
                 // Table.
                 dataView.table = {
                     columns: dataView.categorical.categories.concat(
-                        <powerbi.DataViewCategoricalColumn[]>dataView.categorical.values || []).map(x => x.source),
+                        <DataViewCategoricalColumn[]>dataView.categorical.values || []).map(x => x.source),
                     identityFields: category.identityFields,
                     rows: TestDataViewBuilder.getValuesTable(dataView.categorical.categories, dataView.categorical.values)
                 };
@@ -251,7 +258,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
                         <DataViewBuilderSeriesData>{
                             values: column.values && uniqueCategoryValues
                                 .map(categoryValue => {
-                                    let index = _.findIndex(d3.range(categoryValues.length),
+                                    let index = _.findIndex(range(categoryValues.length),
                                         i => categoryValues[i] === categoryValue && groupedCategory.values[i] === groupedValue);
                                     return column.values[index] === undefined ? null : column.values[index];
                                 }),
@@ -275,4 +282,4 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
 
         public abstract getDataView(columnNames?: string[]): DataView;
     }
-}
+//}

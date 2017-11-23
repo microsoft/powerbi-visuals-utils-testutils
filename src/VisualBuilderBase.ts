@@ -23,8 +23,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test {
+import {jQuery, $, JQueryCoordinates} from "jquery";
+import {renderTimeout} from "./helpers/visualTestHelpers";
+import {testDom, flushAllD3Transitions, JQuery} from "./helpers/helpers";
+import {createVisualHost, createColorPalette} from "./mocks/mocks";
+import { _ } from "lodash";
+import {VisualObjectInstanceEnumeration } from "powerbi-visuals-tools";
+//module powerbi.extensibility.utils.test {
     // powerbi
     import DataView = powerbi.DataView;
     import IViewport = powerbi.IViewport;
@@ -45,16 +50,16 @@ module powerbi.extensibility.utils.test {
     import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
     // powerbitests
-    import testDom = powerbi.extensibility.utils.test.helpers.testDom;
-    import flushAllD3Transitions = powerbi.extensibility.utils.test.helpers.flushAllD3Transitions;
+    //import testDom = testDom;
+   // import flushAllD3Transitions = flushAllD3Transitions;
 
     // powerbitests.customVisuals
-    import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
-    import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
-    import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
+    //import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
+    //import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
+    //import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
 
     export abstract class VisualBuilderBase<T extends IVisual> {
-        public element: JQuery;
+        public element: jQuery;
         public viewport: IViewport;
         public visualHost: IVisualHost;
 
@@ -64,7 +69,7 @@ module powerbi.extensibility.utils.test {
             width: number = 800,
             height: number = 600,
             guid?: string,
-            element: JQuery = testDom(height, width)) {
+            element: jQuery = testDom(height, width)) {
 
             this.element = element;
 
@@ -156,4 +161,4 @@ module powerbi.extensibility.utils.test {
                 : enumeration as VisualObjectInstance[];
         }
     }
-}
+//}

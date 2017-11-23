@@ -24,9 +24,7 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
-
-module powerbi.extensibility.utils.test.dataViewBuilder.test {
+//module powerbi.extensibility.utils.test.dataViewBuilder.test {
     import TestDataViewBuilder = powerbi.extensibility.utils.test.dataViewBuilder.TestDataViewBuilder;
 
     describe("TestDataViewBuilder", () => {
@@ -128,4 +126,4 @@ module powerbi.extensibility.utils.test.dataViewBuilder.test {
                 ], columnNames).build();
         }
     }
-}
+//}

@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import {ITooltipService,TooltipShowOptions,TooltipMoveOptions, TooltipHideOptions } from "powerbi-visuals-tools";
+//module powerbi.extensibility.utils.test.mocks {
     export class MockITooltipService implements ITooltipService {
         private isEnabled: boolean;
 
@@ -40,4 +40,4 @@ module powerbi.extensibility.utils.test.mocks {
         public move(options: TooltipMoveOptions): void { }
         public hide(options: TooltipHideOptions): void { }
     }
-}
+//}

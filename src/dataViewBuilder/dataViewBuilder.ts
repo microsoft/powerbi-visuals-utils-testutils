@@ -23,8 +23,9 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.dataViewBuilder {
+import {DataView,ValueTypeDescriptor, DataViewCategoryColumn, DataViewMetadataColumn,DataViewColumnAggregates, PrimitiveValue, DataViewScopeIdentity,DataViewValueColumn, DataViewValueColumns,DataViewCategorical,DataViewValueColumnGroup } from "powerbi-visuals-tools";
+import { _ } from "lodash";
+//module powerbi.extensibility.utils.test.dataViewBuilder {
     /** Utility for creating a DataView from columns of data. */
     export interface IDataViewBuilderCategorical {
         withCategory(options: DataViewBuilderCategoryColumnOptions): IDataViewBuilderCategorical;
@@ -494,4 +495,4 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
 
         return groups;
     }
-}
+//}

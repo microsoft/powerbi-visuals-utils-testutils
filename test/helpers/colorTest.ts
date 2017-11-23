@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
-
 module powerbi.extensibility.utils.test.helpers.color.test {
     import parseColorString = powerbi.extensibility.utils.test.helpers.color.parseColorString;
 

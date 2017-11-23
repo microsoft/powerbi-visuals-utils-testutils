@@ -23,8 +23,10 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import {ITooltipService, createSelectionIdBuilder } from "powerbi-visuals-tools";
+import {MockILocale } from "./mockILocale";
+import {MockIAllowInteractions } from "./mockIAllowInteractions";
+//module powerbi.extensibility.utils.test.mocks {
     // powerbi
     import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
 
@@ -89,4 +91,4 @@ module powerbi.extensibility.utils.test.mocks {
             return this.allowInteractionsInstance.isEnabled;
         }
     }
-}
+//}

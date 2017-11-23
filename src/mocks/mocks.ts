@@ -23,8 +23,16 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-module powerbi.extensibility.utils.test.mocks {
+import {ITooltipService } from "powerbi-visuals-tools";
+import {MockILocale } from "./mockILocale";
+import {MockIAllowInteractions } from "./mockIAllowInteractions";
+import {MockITooltipService } from "./mockITooltipService";
+import {MockISelectionManager } from "./mockISelectionManager";
+import {MockISelectionIdBuilder } from "./mockISelectionIdBuilder";
+import {MockISelectionId } from "./mockISelectionId";
+import {MockIColorPalette } from "./mockIColorPalette";
+import { MockIVisualHost} from "./mockVisualHost";
+//module powerbi.extensibility.utils.test.mocks {
     // powerbi
     import IColorInfo = powerbi.IColorInfo;
 
@@ -37,18 +45,8 @@ module powerbi.extensibility.utils.test.mocks {
     import ISelectionManager = powerbi.extensibility.ISelectionManager;
     import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-    // powerbi.extensibility.utils.test.mocks
-    import MockVisualHost = powerbi.extensibility.utils.test.mocks.MockIVisualHost;
-    import MockIColorPalette = powerbi.extensibility.utils.test.mocks.MockIColorPalette;
-    import MockISelectionId = powerbi.extensibility.utils.test.mocks.MockISelectionId;
-    import MockISelectionIdBuilder = powerbi.extensibility.utils.test.mocks.MockISelectionIdBuilder;
-    import MockISelectionManager = powerbi.extensibility.utils.test.mocks.MockISelectionManager;
-    import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
-    import MockILocale = powerbi.extensibility.utils.test.mocks.MockILocale;
-    import MockIAllowInteractions = powerbi.extensibility.utils.test.mocks.MockIAllowInteractions;
-
     export function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost {
-        return new MockVisualHost(
+        return new MockIVisualHost(
             createColorPalette(),
             createSelectionManager(),
             createTooltipService(true),
@@ -83,4 +81,4 @@ module powerbi.extensibility.utils.test.mocks {
     export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
         return new MockIAllowInteractions(isEnabled);
     }
-}
+//}
