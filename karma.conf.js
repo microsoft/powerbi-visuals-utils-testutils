@@ -71,7 +71,7 @@ module.exports = (config) => {
             }
         ],
         preprocessors: {
-            [testRecursivePath]: ['typescript'],
+            [testRecursivePath]: ['webpack','typescript'],
             [srcRecursivePath]: ['sourcemap', 'coverage']
         },
         webpack: {

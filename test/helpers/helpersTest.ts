@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.helpers.test {
+//module powerbi.extensibility.utils.test.helpers.test {
     import testDom = powerbi.extensibility.utils.test.helpers.testDom;
     import getRandomNumber = powerbi.extensibility.utils.test.helpers.getRandomNumber;
     import getRandomNumbers = powerbi.extensibility.utils.test.helpers.getRandomNumbers;
@@ -73,4 +73,4 @@ module powerbi.extensibility.utils.test.helpers.test {
             });
         });
     });
-}
+//}

@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks.test {
+//module powerbi.extensibility.utils.test.mocks.test {
     // powerbi
     import IColorInfo = powerbi.IColorInfo;
 
@@ -62,4 +62,4 @@ module powerbi.extensibility.utils.test.mocks.test {
             expect(instance instanceof MockIColorPalette).toBeTruthy();
         });
     });
-}
+//}

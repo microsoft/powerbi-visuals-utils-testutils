@@ -25,8 +25,7 @@
  */
 
 //module powerbi.extensibility.utils.test.dataViewBuilder.test {
-    import TestDataViewBuilder = powerbi.extensibility.utils.test.dataViewBuilder.TestDataViewBuilder;
-
+//import TestDataViewBuilder = powerbi.extensibility.utils.test.dataViewBuilder.TestDataViewBuilder;
     describe("TestDataViewBuilder", () => {
         describe("getDataView", () => {
             let dataView: DataView;

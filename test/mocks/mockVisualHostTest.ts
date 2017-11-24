@@ -24,13 +24,14 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks.test {
+//module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.extensibility.visual
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+    import {IVisualHost } from "powerbi-visuals-tools";
+    import {MockIVisualHost, createVisualHost } from "../../src/mocks/mockVisualHost";
 
     // powerbi.extensibility.utils.test
-    import MockIVisualHost = powerbi.extensibility.utils.test.mocks.MockIVisualHost;
-    import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
+    // import MockIVisualHost = powerbi.extensibility.utils.test.mocks.MockIVisualHost;
+    // import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
 
     describe("MockIVisualHost", () => {
         let visualHost: IVisualHost;
@@ -63,4 +64,4 @@ module powerbi.extensibility.utils.test.mocks.test {
             });
         });
     });
-}
+//}

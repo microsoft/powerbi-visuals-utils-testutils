@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks.test {
+//module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.extensibility.utils.test.mocks
     import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
     import createTooltipService = powerbi.extensibility.utils.test.mocks.createTooltipService;
@@ -70,4 +70,4 @@ module powerbi.extensibility.utils.test.mocks.test {
             });
         });
     });
-}
+//}

@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks.test {
+//module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.visuals
     import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
     import ISelectionId = powerbi.visuals.ISelectionId;
@@ -81,4 +81,4 @@ module powerbi.extensibility.utils.test.mocks.test {
             expect(instance instanceof MockISelectionIdBuilder).toBeTruthy();
         });
     });
-}
+//}

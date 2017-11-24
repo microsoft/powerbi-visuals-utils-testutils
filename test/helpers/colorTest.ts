@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.helpers.color.test {
+//module powerbi.extensibility.utils.test.helpers.color.test {
     import parseColorString = powerbi.extensibility.utils.test.helpers.color.parseColorString;
 
     describe("parseColorString", () => {
@@ -127,4 +127,4 @@ module powerbi.extensibility.utils.test.helpers.color.test {
             });
         });
     });
-}
+//}
