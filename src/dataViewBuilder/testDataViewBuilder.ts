@@ -258,7 +258,7 @@ import { range } from "d3-array";
                         <DataViewBuilderSeriesData>{
                             values: column.values && uniqueCategoryValues
                                 .map(categoryValue => {
-                                    let index = _.findIndex(range(categoryValues.length),
+                                    let index = _.findIndex(_.range(categoryValues.length),
                                         i => categoryValues[i] === categoryValue && groupedCategory.values[i] === groupedValue);
                                     return column.values[index] === undefined ? null : column.values[index];
                                 }),

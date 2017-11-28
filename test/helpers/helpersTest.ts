@@ -23,11 +23,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
+import {JQuery} from "jQuery"
 //module powerbi.extensibility.utils.test.helpers.test {
-    import testDom = powerbi.extensibility.utils.test.helpers.testDom;
-    import getRandomNumber = powerbi.extensibility.utils.test.helpers.getRandomNumber;
-    import getRandomNumbers = powerbi.extensibility.utils.test.helpers.getRandomNumbers;
+    import {testDom, getRandomNumber, getRandomNumbers,} from "../../src/helpers/helpers";
+  //  import testDom = powerbi.extensibility.utils.test.helpers.testDom;
+    // import getRandomNumber = powerbi.extensibility.utils.test.helpers.getRandomNumber;
+    // import getRandomNumbers = powerbi.extensibility.utils.test.helpers.getRandomNumbers;
 
     describe("testDom", () => {
         it("should return an element", () => {

@@ -26,7 +26,6 @@
 "use strict";
 var dataViewBuilder_1 = require("./dataViewBuilder");
 var lodash_1 = require("lodash");
-var d3_array_1 = require("d3-array");
 var TestDataViewBuilder = (function () {
     function TestDataViewBuilder() {
         this.aggregateFunction = lodash_1._.sum;
@@ -174,7 +173,7 @@ var TestDataViewBuilder = (function () {
                     return ({
                         values: column.values && uniqueCategoryValues_1
                             .map(function (categoryValue) {
-                            var index = lodash_1._.findIndex(d3_array_1.range(categoryValues_1.length), function (i) { return categoryValues_1[i] === categoryValue && groupedCategory_1.values[i] === groupedValue; });
+                            var index = lodash_1._.findIndex(lodash_1._.range(categoryValues_1.length), function (i) { return categoryValues_1[i] === categoryValue && groupedCategory_1.values[i] === groupedValue; });
                             return column.values[index] === undefined ? null : column.values[index];
                         }),
                         highlights: column.highlights,

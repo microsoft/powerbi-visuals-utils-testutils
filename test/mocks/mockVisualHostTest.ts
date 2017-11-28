@@ -23,12 +23,12 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
 //module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.extensibility.visual
     import {IVisualHost } from "powerbi-visuals-tools";
-    import {MockIVisualHost, createVisualHost } from "../../src/mocks/mockVisualHost";
-
+    import {MockIVisualHost } from "../../src/mocks/mockVisualHost";
+    import { createVisualHost } from "../../src/mocks/mocks";
     // powerbi.extensibility.utils.test
     // import MockIVisualHost = powerbi.extensibility.utils.test.mocks.MockIVisualHost;
     // import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;

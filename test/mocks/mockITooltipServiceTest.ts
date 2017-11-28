@@ -23,12 +23,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
 //module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.extensibility.utils.test.mocks
-    import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
-    import createTooltipService = powerbi.extensibility.utils.test.mocks.createTooltipService;
-
+    import {MockITooltipService } from "../../src/mocks/mockITooltipService";
+    import {MockIVisualHost } from "../../src/mocks/mockVisualHost";
+    import {ITooltipService } from "powerbi-visuals-tools";
+    import { createVisualHost, createTooltipService,  } from "../../src/mocks/mocks";
     describe("MockITooltipService", () => {
         describe("enabled", () => {
             it("should return true", () => {

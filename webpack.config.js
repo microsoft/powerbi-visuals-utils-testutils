@@ -4,6 +4,9 @@ const ENTRY = "./src/VisualBuilderBase.ts";
 const regex = path.normalize(ENTRY).replace(/\\/g, '\\\\').replace(/\./g, '\\.');
 
 module.exports = {
+    node: {
+        fs: 'empty'
+      },
     entry: ENTRY,
     devtool:'source-map',
     resolve: {

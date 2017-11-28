@@ -23,17 +23,18 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
 //module powerbi.extensibility.utils.test.mocks.test {
     // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    import ISelectionId = powerbi.visuals.ISelectionId;
+    import {Selector, ISelectionId, ISelectionIdBuilder } from "powerbi-visuals-tools";
+    // import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+    // import ISelectionId = powerbi.visuals.ISelectionId;
 
     // powerbi.extensibility.utils.test.mocks
-    import MockISelectionId = powerbi.extensibility.utils.test.mocks.MockISelectionId;
-    import MockISelectionIdBuilder = powerbi.extensibility.utils.test.mocks.MockISelectionIdBuilder;
-    import createSelectionIdBuilder = powerbi.extensibility.utils.test.mocks.createSelectionIdBuilder;
-
+    import { MockISelectionId  } from "../../src/mocks/mockISelectionId";
+    import { createSelectionId, createSelectionIdBuilder } from "../../src/mocks/mocks";
+    import {MockISelectionIdBuilder } from "../../src/mocks/mockISelectionIdBuilder";
+   
     describe("MockISelectionIdBuilder", () => {
         let selectionIdBuilder: ISelectionIdBuilder;
 

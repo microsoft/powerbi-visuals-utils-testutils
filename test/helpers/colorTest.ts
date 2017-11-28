@@ -23,9 +23,10 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
+import {parseColorString} from "../../src/helpers/color"
 //module powerbi.extensibility.utils.test.helpers.color.test {
-    import parseColorString = powerbi.extensibility.utils.test.helpers.color.parseColorString;
+    //import parseColorString = powerbi.extensibility.utils.test.helpers.color.parseColorString;
 
     describe("parseColorString", () => {
         it("invalid hex", () => {

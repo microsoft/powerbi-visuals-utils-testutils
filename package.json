@@ -24,10 +24,8 @@
     "build:map": "tsc --sourceMap",
     "build:bundle": "webpack --display-modules",
     "test": "karma start",
-    "pretest": "npm run build:map",
-    "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
-    "typings": "typings",
-    "typings:install": "typings install"
+    "pretest": "npm run build:bundle",
+    "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\""
   },
   "devDependencies": {
     "coveralls": "2.11.15",

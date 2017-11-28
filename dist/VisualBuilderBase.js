@@ -4,12 +4,12 @@ var helpers_1 = require("./helpers/helpers");
 var mocks_1 = require("./mocks/mocks");
 var lodash_1 = require("lodash");
 // powerbitests
-//import testDom = testDom;
+// import testDom = testDom;
 // import flushAllD3Transitions = flushAllD3Transitions;
 // powerbitests.customVisuals
-//import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
-//import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
-//import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
+// import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
+// import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
+// import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
 var VisualBuilderBase = (function () {
     function VisualBuilderBase(width, height, guid, element) {
         if (width === void 0) { width = 800; }
@@ -74,5 +74,5 @@ var VisualBuilderBase = (function () {
     return VisualBuilderBase;
 }());
 exports.VisualBuilderBase = VisualBuilderBase;
-//}
+// }
 //# sourceMappingURL=VisualBuilderBase.js.map

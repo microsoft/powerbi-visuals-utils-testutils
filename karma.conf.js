@@ -60,7 +60,6 @@ module.exports = (config) => {
         files: [
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/lodash/lodash.min.js',
-            'node_modules/d3/d3.min.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             srcRecursivePath,
             testRecursivePath,
@@ -75,6 +74,7 @@ module.exports = (config) => {
             [srcRecursivePath]: ['sourcemap', 'coverage']
         },
         webpack: {
+            node: webpackConfig.node,
             module: {
                 preLoaders: webpackConfig.module.preLoaders,
                 loaders: webpackConfig.module.loaders

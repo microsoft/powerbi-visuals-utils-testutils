@@ -23,11 +23,11 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import { timer } from "d3-timer";
+import { timer, timerFlush } from "d3-timer";
 import {jQuery, $, JQueryCoordinates} from "jquery";
 import {setFixtures} from "jasmine-jquery";
 import { _ } from "lodash";
-//module powerbi.extensibility.utils.test.helpers {
+// module powerbi.extensibility.utils.test.helpers {
     export function testDom(height: number | string, width: number | string): JQuery {
         let element: JQuery = $("<div></div>")
             .attr("id", "item")
@@ -299,7 +299,8 @@ import { _ } from "lodash";
     export function flushAllD3Transitions() {
         let now = Date.now;
         Date.now = function () { return Infinity; };
-        timer.flush();
+        // timer.flush();
+        timerFlush();
         Date.now = now;
     }
 

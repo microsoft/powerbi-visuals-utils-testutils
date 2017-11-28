@@ -23,17 +23,18 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
 //module powerbi.extensibility.utils.test.mocks.test {
     // powerbi
-    import IColorInfo = powerbi.IColorInfo;
+    import {IColorInfo,IColorPalette  } from "powerbi-visuals-tools";
+    // import IColorInfo = powerbi.IColorInfo;
 
-    // powerbi.extensibility
-    import IColorPalette = powerbi.extensibility.IColorPalette;
+    // // powerbi.extensibility
+    // import IColorPalette = powerbi.extensibility.IColorPalette;
 
     // powerbi.extensibility.utils.test.mocks
-    import MockIColorPalette = powerbi.extensibility.utils.test.mocks.MockIColorPalette;
-    import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
+    import {MockIColorPalette } from "../../src/mocks/mockIColorPalette";
+    import {createColorPalette } from "../../src/mocks/mocks";
 
     describe("MockIColorPalette", () => {
         let colorPalette: IColorPalette;

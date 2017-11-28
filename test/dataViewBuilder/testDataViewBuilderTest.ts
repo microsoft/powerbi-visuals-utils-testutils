@@ -23,7 +23,9 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import {it,describe, expect, beforeEach} from "jasmine"
+import {TestDataViewBuilder} from "../../src/dataViewBuilder/testDataViewBuilder"
+import {DataView } from "powerbi-visuals-tools";
 //module powerbi.extensibility.utils.test.dataViewBuilder.test {
 //import TestDataViewBuilder = powerbi.extensibility.utils.test.dataViewBuilder.TestDataViewBuilder;
     describe("TestDataViewBuilder", () => {

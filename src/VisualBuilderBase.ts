@@ -29,7 +29,7 @@ import {testDom, flushAllD3Transitions, JQuery} from "./helpers/helpers";
 import {createVisualHost, createColorPalette} from "./mocks/mocks";
 import { _ } from "lodash";
 import {VisualObjectInstanceEnumeration } from "powerbi-visuals-tools";
-//module powerbi.extensibility.utils.test {
+// module powerbi.extensibility.utils.test {
     // powerbi
     import DataView = powerbi.DataView;
     import IViewport = powerbi.IViewport;
@@ -50,13 +50,13 @@ import {VisualObjectInstanceEnumeration } from "powerbi-visuals-tools";
     import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
     // powerbitests
-    //import testDom = testDom;
-   // import flushAllD3Transitions = flushAllD3Transitions;
+    // import testDom = testDom;
+    // import flushAllD3Transitions = flushAllD3Transitions;
 
     // powerbitests.customVisuals
-    //import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
-    //import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
-    //import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
+    // import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
+    // import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
+    // import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
 
     export abstract class VisualBuilderBase<T extends IVisual> {
         public element: jQuery;
@@ -161,4 +161,4 @@ import {VisualObjectInstanceEnumeration } from "powerbi-visuals-tools";
                 : enumeration as VisualObjectInstance[];
         }
     }
-//}
+// }

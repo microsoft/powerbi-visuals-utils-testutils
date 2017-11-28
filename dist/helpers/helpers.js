@@ -28,7 +28,7 @@ var d3_timer_1 = require("d3-timer");
 var jquery_1 = require("jquery");
 var jasmine_jquery_1 = require("jasmine-jquery");
 var lodash_1 = require("lodash");
-//module powerbi.extensibility.utils.test.helpers {
+// module powerbi.extensibility.utils.test.helpers {
 function testDom(height, width) {
     var element = jquery_1.$("<div></div>")
         .attr("id", "item")
@@ -240,7 +240,8 @@ exports.clickElement = clickElement;
 function flushAllD3Transitions() {
     var now = Date.now;
     Date.now = function () { return Infinity; };
-    d3_timer_1.timer.flush();
+    // timer.flush();
+    d3_timer_1.timerFlush();
     Date.now = now;
 }
 exports.flushAllD3Transitions = flushAllD3Transitions;
