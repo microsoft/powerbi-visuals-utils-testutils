@@ -24,7 +24,7 @@
 *  THE SOFTWARE.
 */
 "use strict";
-//module powerbi.extensibility.utils.test {
+// module powerbi.extensibility.utils.test {
 exports.DefaultWaitForRender = 10;
-//} 
+// } 
 //# sourceMappingURL=common.js.map
