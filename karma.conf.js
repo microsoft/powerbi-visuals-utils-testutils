@@ -30,7 +30,7 @@ const webpack = require('webpack');
 const testRecursivePath = 'test/**/*.ts'
     , srcOriginalRecursivePath = 'src/**/*.ts'
     , srcRecursivePath = 'lib/**/*.js'
-    , coverageFolder = 'coverage';
+   // , coverageFolder = 'coverage';
 
 module.exports = (config) => {
     let browsers = [];
@@ -53,7 +53,7 @@ module.exports = (config) => {
         frameworks: ['jasmine'],
         reporters: [
             'progress',
-            'coverage',
+         //   'coverage',
             'karma-remap-istanbul'
         ],
         singleRun: true,
@@ -71,7 +71,7 @@ module.exports = (config) => {
         ],
         preprocessors: {
             [testRecursivePath]: ['webpack','typescript'],
-            [srcRecursivePath]: ['sourcemap', 'coverage']
+            [srcRecursivePath]: ['sourcemap']//, 'coverage']
         },
         webpack: {
             node: webpackConfig.node,
@@ -97,18 +97,18 @@ module.exports = (config) => {
                 concatenateOutput: false
             }
         },
-        coverageReporter: {
-            dir: coverageFolder,
-            reporters: [
-                { type: 'html' },
-                { type: 'lcov' }
-            ]
-        },
-        remapIstanbulReporter: {
-            reports: {
-                lcovonly: coverageFolder + '/lcov.info',
-                html: coverageFolder
-            }
-        }
+        // coverageReporter: {
+        //     dir: coverageFolder,
+        //     reporters: [
+        //         { type: 'html' },
+        //         { type: 'lcov' }
+        //     ]
+        // },
+        // remapIstanbulReporter: {
+        //     reports: {
+        //         lcovonly: coverageFolder + '/lcov.info',
+        //         html: coverageFolder
+        //     }
+        // }
     });
 };
