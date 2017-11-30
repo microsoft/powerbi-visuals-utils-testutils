@@ -1,10 +1,36 @@
 "use strict";
-var lodash_1 = require("lodash");
+/*
+ *  Power BI Visualizations
+ *
+ *  Copyright (c) Microsoft Corporation
+ *  All rights reserved.
+ *  MIT License
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the ""Software""), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in
+ *  all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var _ = require("lodash");
 function createCategoricalDataViewBuilder() {
     return new CategoricalDataViewBuilder();
 }
 exports.createCategoricalDataViewBuilder = createCategoricalDataViewBuilder;
-var CategoricalDataViewBuilder = (function () {
+var CategoricalDataViewBuilder = /** @class */ (function () {
     function CategoricalDataViewBuilder() {
         this.categories = [];
         this.staticMeasureColumns = [];
@@ -31,7 +57,7 @@ var CategoricalDataViewBuilder = (function () {
         return this;
     };
     CategoricalDataViewBuilder.prototype.withCategories = function (categories) {
-        if (lodash_1._.isEmpty(this.categories)) {
+        if (_.isEmpty(this.categories)) {
             this.categories = categories;
         }
         else {
@@ -76,7 +102,7 @@ var CategoricalDataViewBuilder = (function () {
         return this;
     };
     CategoricalDataViewBuilder.prototype.fillData = function (dataViewValues) {
-        var categoryColumn = lodash_1._.first(this.categories), categoryLength = (categoryColumn && categoryColumn.values)
+        var categoryColumn = _.first(this.categories), categoryLength = (categoryColumn && categoryColumn.values)
             ? categoryColumn.values.length
             : 0;
         if (this.hasDynamicSeries()) {
@@ -124,7 +150,7 @@ var CategoricalDataViewBuilder = (function () {
                 var seriesIdentity = getScopeIdentity(dynamicSeriesMetadata.identityFrom, seriesIndex, seriesValue, dynamicSeriesMetadata.column.type);
                 for (var _a = 0, _b = this.dynamicMeasureColumns; _a < _b.length; _a++) {
                     var measure = _b[_a];
-                    var column = lodash_1._.toPlainObject(measure);
+                    var column = _.toPlainObject(measure);
                     column.groupName = seriesValue;
                     pushIfNotExists(metadataColumns, column);
                     categorical.values.push({
@@ -138,7 +164,7 @@ var CategoricalDataViewBuilder = (function () {
             if (seriesValues.length === 0) {
                 for (var _c = 0, _d = this.dynamicMeasureColumns; _c < _d.length; _c++) {
                     var measure = _d[_c];
-                    var column = lodash_1._.toPlainObject(measure);
+                    var column = _.toPlainObject(measure);
                     pushIfNotExists(metadataColumns, column);
                     categorical.values.push({ source: column, values: [] });
                 }
@@ -158,7 +184,7 @@ var CategoricalDataViewBuilder = (function () {
             this.appendStaticMeasureColumns(metadataColumns, categorical.values);
         }
         var categories = this.categories;
-        if (!lodash_1._.isEmpty(categories)) {
+        if (!_.isEmpty(categories)) {
             categorical.categories = categories;
         }
         // --- Fill in data point values ---
@@ -174,7 +200,7 @@ var CategoricalDataViewBuilder = (function () {
         }
     };
     CategoricalDataViewBuilder.prototype.appendStaticMeasureColumns = function (metadataColumns, valueColumns) {
-        if (!lodash_1._.isEmpty(this.staticMeasureColumns)) {
+        if (!_.isEmpty(this.staticMeasureColumns)) {
             for (var _i = 0, _a = this.staticMeasureColumns; _i < _a.length; _i++) {
                 var column = _a[_i];
                 pushIfNotExists(metadataColumns, column);
@@ -202,8 +228,8 @@ var CategoricalDataViewBuilder = (function () {
      * @param metadataColumns The complete collection of metadata columns in the categorical.
      */
     CategoricalDataViewBuilder.isVisualDataView = function (metadataColumns) {
-        return !lodash_1._.isEmpty(metadataColumns) &&
-            lodash_1._.some(metadataColumns, function (metadataColumn) { return !!metadataColumn.queryName; });
+        return !_.isEmpty(metadataColumns) &&
+            _.some(metadataColumns, function (metadataColumn) { return !!metadataColumn.queryName; });
     };
     CategoricalDataViewBuilder.prototype.hasDynamicSeries = function () {
         return !!this.dynamicSeriesMetadata; // In Map visual scenarios, you can have dynamic series without measure columns
@@ -224,7 +250,7 @@ function getScopeIdentity(source, index, value, valueType) {
     };
 }
 function pushIfNotExists(items, itemToAdd) {
-    if (lodash_1._.includes(items, itemToAdd)) {
+    if (_.includes(items, itemToAdd)) {
         return;
     }
     items.push(itemToAdd);
@@ -249,7 +275,7 @@ function applySeriesData(target, source, categoryLength) {
     }
     if (aggregates) {
         target.source.aggregates = aggregates;
-        lodash_1._.extend(target, aggregates);
+        _.extend(target, aggregates);
     }
 }
 function createValueColumns(values, valueIdentityFields, source) {
@@ -295,5 +321,4 @@ function groupValues(values) {
     }
     return groups;
 }
-//}
 //# sourceMappingURL=dataViewBuilder.js.map

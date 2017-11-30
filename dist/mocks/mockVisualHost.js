@@ -24,8 +24,9 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-var powerbi_visuals_tools_1 = require("powerbi-visuals-tools");
-var MockIVisualHost = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var mocks_1 = require("./mocks");
+var MockIVisualHost = /** @class */ (function () {
     function MockIVisualHost(colorPalette, selectionManager, tooltipServiceInstance, localeInstance, allowInteractionsInstance) {
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
@@ -34,7 +35,7 @@ var MockIVisualHost = (function () {
         this.allowInteractionsInstance = allowInteractionsInstance;
     }
     MockIVisualHost.prototype.createSelectionIdBuilder = function () {
-        return powerbi_visuals_tools_1.createSelectionIdBuilder();
+        return mocks_1.createSelectionIdBuilder();
     };
     MockIVisualHost.prototype.createSelectionManager = function () {
         return this.selectionManager;
@@ -71,5 +72,4 @@ var MockIVisualHost = (function () {
     return MockIVisualHost;
 }());
 exports.MockIVisualHost = MockIVisualHost;
-//}
 //# sourceMappingURL=mockVisualHost.js.map

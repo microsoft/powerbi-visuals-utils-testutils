@@ -23,72 +23,73 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {ITooltipService, createSelectionIdBuilder } from "powerbi-visuals-tools";
-import {MockILocale } from "./mockILocale";
-import {MockIAllowInteractions } from "./mockIAllowInteractions";
-//module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import ITooltipService = powerbi.extensibility.ITooltipService;
 
-    // powerbi.extensibility
-    import ISelectionManager = powerbi.extensibility.ISelectionManager;
-    import IColorPalette = powerbi.extensibility.IColorPalette;
+import { createSelectionIdBuilder } from "./mocks";
+import { MockILocale } from "./mockILocale";
+import { MockIAllowInteractions } from "./mockIAllowInteractions";
+// powerbi
+import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
 
-    // powerbi.extensibility.visual
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 
-    export class MockIVisualHost implements IVisualHost {
-        private colorPaletteInstance: IColorPalette;
-        private selectionManager: ISelectionManager;
-        private tooltipServiceInstance: ITooltipService;
-        private localeInstance: MockILocale;
-        private allowInteractionsInstance: MockIAllowInteractions;
+// powerbi.extensibility
+import ISelectionManager = powerbi.extensibility.ISelectionManager;
+import IColorPalette = powerbi.extensibility.IColorPalette;
 
-        constructor(
-            colorPalette?: IColorPalette,
-            selectionManager?: ISelectionManager,
-            tooltipServiceInstance?: ITooltipService,
-            localeInstance?: MockILocale,
-            allowInteractionsInstance?: MockIAllowInteractions) {
+// powerbi.extensibility.visual
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-            this.colorPaletteInstance = colorPalette;
-            this.selectionManager = selectionManager;
-            this.tooltipServiceInstance = tooltipServiceInstance;
-            this.localeInstance = localeInstance;
-            this.allowInteractionsInstance = allowInteractionsInstance;
-        }
+export class MockIVisualHost implements IVisualHost {
+    private colorPaletteInstance: IColorPalette;
+    private selectionManager: ISelectionManager;
+    private tooltipServiceInstance: ITooltipService;
+    private localeInstance: MockILocale;
+    private allowInteractionsInstance: MockIAllowInteractions;
 
-        public createSelectionIdBuilder(): ISelectionIdBuilder {
-            return createSelectionIdBuilder();
-        }
+    constructor(
+        colorPalette?: IColorPalette,
+        selectionManager?: ISelectionManager,
+        tooltipServiceInstance?: ITooltipService,
+        localeInstance?: MockILocale,
+        allowInteractionsInstance?: MockIAllowInteractions) {
 
-        public createSelectionManager(): ISelectionManager {
-            return this.selectionManager;
-        }
-
-        public get colorPalette(): IColorPalette {
-            return this.colorPaletteInstance;
-        }
-
-        public get locale(): string{
-            return this.localeInstance.locale;
-        }
-
-        public set locale(language){
-            this.localeInstance.locale = language;
-        }
-
-        public persistProperties(changes: VisualObjectInstancesToPersist) { };
-
-        public get tooltipService(): ITooltipService {
-            return this.tooltipServiceInstance;
-        }
-
-        public allowInteractions(): boolean {
-            return this.allowInteractionsInstance.isEnabled;
-        }
+        this.colorPaletteInstance = colorPalette;
+        this.selectionManager = selectionManager;
+        this.tooltipServiceInstance = tooltipServiceInstance;
+        this.localeInstance = localeInstance;
+        this.allowInteractionsInstance = allowInteractionsInstance;
     }
-//}
+
+    public createSelectionIdBuilder(): ISelectionIdBuilder {
+        return createSelectionIdBuilder();
+    }
+
+    public createSelectionManager(): ISelectionManager {
+        return this.selectionManager;
+    }
+
+    public get colorPalette(): IColorPalette {
+        return this.colorPaletteInstance;
+    }
+
+    public get locale(): string {
+        return this.localeInstance.locale;
+    }
+
+    public set locale(language) {
+        this.localeInstance.locale = language;
+    }
+
+    public persistProperties(changes: VisualObjectInstancesToPersist) { };
+
+    public get tooltipService(): ITooltipService {
+        return this.tooltipServiceInstance;
+    }
+
+    public allowInteractions(): boolean {
+        return this.allowInteractionsInstance.isEnabled;
+    }
+}

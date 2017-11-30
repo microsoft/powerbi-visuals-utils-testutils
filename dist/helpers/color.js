@@ -24,7 +24,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-var jasmine_jquery_1 = require("jasmine-jquery");
+Object.defineProperty(exports, "__esModule", { value: true });
 function getSolidColorStructuralObject(color) {
     return { solid: { color: color } };
 }
@@ -33,9 +33,9 @@ function assertColorsMatch(actual, expected, invert) {
     if (invert === void 0) { invert = false; }
     var rgbActual = parseColorString(actual), rgbExpected = parseColorString(expected);
     if (invert) {
-        return jasmine_jquery_1.expect(rgbActual).not.toEqual(rgbExpected);
+        return expect(rgbActual).not.toEqual(rgbExpected);
     }
-    return jasmine_jquery_1.expect(rgbActual).toEqual(rgbExpected);
+    return expect(rgbActual).toEqual(rgbExpected);
 }
 exports.assertColorsMatch = assertColorsMatch;
 function parseColorString(color) {
@@ -92,5 +92,4 @@ function parseColorString(color) {
     }
 }
 exports.parseColorString = parseColorString;
-//}
 //# sourceMappingURL=color.js.map

@@ -23,27 +23,27 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import { _ } from "lodash";
-//module powerbi.extensibility.utils.test.mocks {
-    export class MockILocale {
-        private currentLocale: string;
-        private locales: Object;
-        private static DefaultLocales: Object = {
-            "en" : "en-US",
-            "ru" : "ru-RU"
-        };
 
-        constructor(locales: Object = MockILocale.DefaultLocales) {
-            this.locales = locales;
-            this.locale = _.keys(locales)[0];
-        }
+import * as _ from "lodash";
 
-        public set locale(key: string) {
-            this.currentLocale = this.locales[key] || MockILocale.DefaultLocales[key] || MockILocale.DefaultLocales["en"];
-        }
+export class MockILocale {
+    private currentLocale: string;
+    private locales: Object;
+    private static DefaultLocales: Object = {
+        "en": "en-US",
+        "ru": "ru-RU"
+    };
 
-        public get locale(): string {
-            return this.currentLocale;
-        }
+    constructor(locales: Object = MockILocale.DefaultLocales) {
+        this.locales = locales;
+        this.locale = _.keys(locales)[0];
     }
-//}
+
+    public set locale(key: string) {
+        this.currentLocale = this.locales[key] || MockILocale.DefaultLocales[key] || MockILocale.DefaultLocales["en"];
+    }
+
+    public get locale(): string {
+        return this.currentLocale;
+    }
+}

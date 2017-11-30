@@ -1,3 +1,4 @@
+"use strict";
 /*
 *  Power BI Visualizations
 *
@@ -23,8 +24,6 @@
 *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 *  THE SOFTWARE.
 */
-"use strict";
-// module powerbi.extensibility.utils.test {
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.DefaultWaitForRender = 10;
-// } 
 //# sourceMappingURL=common.js.map

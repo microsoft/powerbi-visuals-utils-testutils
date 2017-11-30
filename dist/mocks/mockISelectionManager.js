@@ -24,14 +24,14 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-var jquery_1 = require("jquery");
-var MockISelectionManager = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var MockISelectionManager = /** @class */ (function () {
     function MockISelectionManager() {
         this.selectionIds = [];
     }
     MockISelectionManager.prototype.select = function (selectionId, multiSelect) {
         var _this = this;
-        var selectionIds = [].concat(selectionId), deferred = jquery_1.$.Deferred();
+        var selectionIds = [].concat(selectionId), deferred = $.Deferred();
         selectionIds.forEach(function (id) {
             if (_this.containsSelection(id)) {
                 _this.selectionIds = multiSelect
@@ -58,7 +58,7 @@ var MockISelectionManager = (function () {
         return this.selectionIds.length > 0;
     };
     MockISelectionManager.prototype.clear = function () {
-        var deferred = jquery_1.$.Deferred();
+        var deferred = $.Deferred();
         this.selectionIds = [];
         deferred.resolve();
         return deferred;
@@ -76,5 +76,4 @@ var MockISelectionManager = (function () {
     return MockISelectionManager;
 }());
 exports.MockISelectionManager = MockISelectionManager;
-//}
 //# sourceMappingURL=mockISelectionManager.js.map

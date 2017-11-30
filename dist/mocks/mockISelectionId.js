@@ -1,3 +1,4 @@
+"use strict";
 /*
  *  Power BI Visualizations
  *
@@ -23,8 +24,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-"use strict";
-var MockISelectionId = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var MockISelectionId = /** @class */ (function () {
     function MockISelectionId(key) {
         this.key = key;
     }
@@ -49,5 +50,4 @@ var MockISelectionId = (function () {
     return MockISelectionId;
 }());
 exports.MockISelectionId = MockISelectionId;
-//}
 //# sourceMappingURL=mockISelectionId.js.map

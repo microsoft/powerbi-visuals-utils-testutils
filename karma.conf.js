@@ -30,7 +30,7 @@ const webpack = require('webpack');
 const testRecursivePath = 'test/**/*.ts'
     , srcOriginalRecursivePath = 'src/**/*.ts'
     , srcRecursivePath = 'lib/**/*.js'
-   // , coverageFolder = 'coverage';
+    , coverageFolder = 'coverage';
 
 module.exports = (config) => {
     let browsers = [];
@@ -71,7 +71,7 @@ module.exports = (config) => {
         ],
         preprocessors: {
             [testRecursivePath]: ['webpack','typescript'],
-            [srcRecursivePath]: ['sourcemap']//, 'coverage']
+            [srcRecursivePath]: ['sourcemap', 'coverage']
         },
         webpack: {
             node: webpackConfig.node,
@@ -90,25 +90,29 @@ module.exports = (config) => {
         },
         typescriptPreprocessor: {
             options: {
-                sourceMap: false,
-                target: "ES5",
-                module: "commonjs",
-                removeComments: false,
-                concatenateOutput: false
+                "allowJs": true,
+                "emitDecoratorMetadata": true,
+                "experimentalDecorators": true,
+                "target": "ES5",
+                "lib": ["es2016","dom"],
+                "sourceMap": true,
+                "module": "commonjs",
+                "removeComments": false,
+                "concatenateOutput": false
             }
         },
-        // coverageReporter: {
-        //     dir: coverageFolder,
-        //     reporters: [
-        //         { type: 'html' },
-        //         { type: 'lcov' }
-        //     ]
-        // },
-        // remapIstanbulReporter: {
-        //     reports: {
-        //         lcovonly: coverageFolder + '/lcov.info',
-        //         html: coverageFolder
-        //     }
-        // }
+        coverageReporter: {
+            dir: coverageFolder,
+            reporters: [
+                { type: 'html' },
+                { type: 'lcov' }
+            ]
+        },
+        remapIstanbulReporter: {
+            reports: {
+                lcovonly: coverageFolder + '/lcov.info',
+                html: coverageFolder
+            }
+        }
     });
 };

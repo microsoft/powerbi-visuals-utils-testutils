@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
  *  Power BI Visualizations
  *
@@ -25,19 +26,16 @@
  *  THE SOFTWARE.
  */
 var d3_timer_1 = require("d3-timer");
-var jquery_1 = require("jquery");
-var jasmine_jquery_1 = require("jasmine-jquery");
-var lodash_1 = require("lodash");
-// module powerbi.extensibility.utils.test.helpers {
+var _ = require("lodash");
 function testDom(height, width) {
-    var element = jquery_1.$("<div></div>")
+    var element = $("<div></div>")
         .attr("id", "item")
         .css("width", width)
         .css("height", height)
         .css("position", "relative")
         .addClass("visual");
-    jasmine_jquery_1.setFixtures(element[0].outerHTML);
-    return jquery_1.$("#item");
+    setFixtures(element[0].outerHTML);
+    return $("#item");
 }
 exports.testDom = testDom;
 var ClickEventType;
@@ -57,53 +55,62 @@ var MouseEventType;
     MouseEventType[MouseEventType["mousemove"] = 4] = "mousemove";
     MouseEventType[MouseEventType["mouseout"] = 5] = "mouseout";
 })(MouseEventType = exports.MouseEventType || (exports.MouseEventType = {}));
-if (typeof jquery_1.jQuery !== "undefined" && jquery_1.jQuery) {
-    jquery_1.jQuery.fn.d3Click = function (x, y, eventType, button) {
-        mouseEvent.call(this, MouseEventType.click, x, y, eventType, button);
-    };
-    jquery_1.jQuery.fn.d3MouseDown = function (x, y, eventType, button) {
-        mouseEvent.call(this, MouseEventType.mousedown, x, y, eventType, button);
-    };
-    jquery_1.jQuery.fn.d3MouseUp = function (x, y, eventType, button) {
-        mouseEvent.call(this, MouseEventType.mouseup, x, y, eventType);
-    };
-    jquery_1.jQuery.fn.d3MouseOver = function (x, y, eventType, button) {
-        mouseEvent.call(this, MouseEventType.mouseover, x, y, eventType, button);
-    };
-    jquery_1.jQuery.fn.d3MouseMove = function (x, y, eventType, button) {
-        mouseEvent.call(this, MouseEventType.mousemove, x, y, eventType, button);
-    };
-    jquery_1.jQuery.fn.d3MouseOut = function (x, y, eventType, button) {
-        mouseEvent.call(this, MouseEventType.mouseout, x, y, eventType, button);
-    };
-    jquery_1.jQuery.fn.d3KeyEvent = function (typeArg, keyArg, keyCode) {
-        keyEvent.call(this, typeArg, keyArg, keyCode);
-    };
-    jquery_1.jQuery.fn.d3TouchStart = function (touchList) {
-        this.each(function (i, e) {
-            var evt = createTouchStartEvent(touchList);
-            e.dispatchEvent(evt);
-        });
-    };
-    jquery_1.jQuery.fn.d3TouchMove = function (touchList) {
-        this.each(function (i, e) {
-            var evt = createTouchMoveEvent(touchList);
-            e.dispatchEvent(evt);
-        });
-    };
-    jquery_1.jQuery.fn.d3TouchEnd = function (touchList) {
-        this.each(function (i, e) {
-            var evt = createTouchEndEvent(touchList);
-            e.dispatchEvent(evt);
-        });
-    };
-    jquery_1.jQuery.fn.d3ContextMenu = function (x, y) {
-        this.each(function (i, e) {
-            var evt = createContextMenuEvent(x, y);
-            e.dispatchEvent(evt);
-        });
-    };
+function d3Click(element, x, y, eventType, button) {
+    mouseEvent.call(element, MouseEventType.click, x, y, eventType, button);
 }
+exports.d3Click = d3Click;
+function d3MouseDown(element, x, y, eventType, button) {
+    mouseEvent.call(element, MouseEventType.mousedown, x, y, eventType, button);
+}
+exports.d3MouseDown = d3MouseDown;
+function d3MouseUp(element, x, y, eventType, button) {
+    mouseEvent.call(element, MouseEventType.mouseup, x, y, eventType);
+}
+exports.d3MouseUp = d3MouseUp;
+function d3MouseOver(element, x, y, eventType, button) {
+    mouseEvent.call(element, MouseEventType.mouseover, x, y, eventType, button);
+}
+exports.d3MouseOver = d3MouseOver;
+function d3MouseMove(element, x, y, eventType, button) {
+    mouseEvent.call(element, MouseEventType.mousemove, x, y, eventType, button);
+}
+exports.d3MouseMove = d3MouseMove;
+function d3MouseOut(element, x, y, eventType, button) {
+    mouseEvent.call(element, MouseEventType.mouseout, x, y, eventType, button);
+}
+exports.d3MouseOut = d3MouseOut;
+function d3KeyEvent(element, typeArg, keyArg, keyCode) {
+    keyEvent.call(element, typeArg, keyArg, keyCode);
+}
+exports.d3KeyEvent = d3KeyEvent;
+function d3TouchStart(element, touchList) {
+    this.each(function (i, e) {
+        var evt = createTouchStartEvent(touchList);
+        e.dispatchEvent(evt);
+    });
+}
+exports.d3TouchStart = d3TouchStart;
+function d3TouchMove(element, touchList) {
+    this.each(function (i, e) {
+        var evt = createTouchMoveEvent(touchList);
+        e.dispatchEvent(evt);
+    });
+}
+exports.d3TouchMove = d3TouchMove;
+function d3TouchEnd(element, touchList) {
+    this.each(function (i, e) {
+        var evt = createTouchEndEvent(touchList);
+        e.dispatchEvent(evt);
+    });
+}
+exports.d3TouchEnd = d3TouchEnd;
+function d3ContextMenu(element, x, y) {
+    this.each(function (i, e) {
+        var evt = createContextMenuEvent(x, y);
+        e.dispatchEvent(evt);
+    });
+}
+exports.d3ContextMenu = d3ContextMenu;
 // Defining a simulated click event (see http://stackoverflow.com/questions/9063383/how-to-invoke-click-event-programmaticaly-in-d3)
 function mouseEvent(mouseEventType, x, y, eventType, button) {
     var clickEventType = eventType || ClickEventType.Default;
@@ -225,7 +232,13 @@ function clickElement(element, ctrlKey) {
     var coordinates = element.offset(), width = element.outerWidth(), height = element.outerHeight(), eventType = ctrlKey
         ? ClickEventType.CtrlKey
         : ClickEventType.Default;
-    element.d3Click(coordinates.left + (width / 2), coordinates.top + (height / 2), eventType);
+    /*
+    element.d3Click(
+        coordinates.left + (width / 2),
+        coordinates.top + (height / 2),
+        eventType);
+        */
+    d3Click(element, coordinates.left + (width / 2), coordinates.top + (height / 2), eventType);
 }
 exports.clickElement = clickElement;
 /**
@@ -248,7 +261,7 @@ exports.flushAllD3Transitions = flushAllD3Transitions;
 function getRandomNumbers(count, min, max) {
     if (min === void 0) { min = 0; }
     if (max === void 0) { max = 1; }
-    return lodash_1._.range(count).map(function (x) { return getRandomNumber(min, max); });
+    return _.range(count).map(function (x) { return getRandomNumber(min, max); });
 }
 exports.getRandomNumbers = getRandomNumbers;
 function getRandomNumber(min, max, exceptionList, changeResult) {
@@ -256,7 +269,7 @@ function getRandomNumber(min, max, exceptionList, changeResult) {
     var cryptoObj = window.crypto || window.msCrypto;
     var randomValue = +("0." + cryptoObj.getRandomValues(new Uint8Array(1)));
     var result = changeResult(randomValue * (max - min) + min);
-    if (exceptionList && exceptionList.length && lodash_1._.includes(exceptionList, result)) {
+    if (exceptionList && exceptionList.length && _.includes(exceptionList, result)) {
         return getRandomNumber(min, max, exceptionList);
     }
     return result;

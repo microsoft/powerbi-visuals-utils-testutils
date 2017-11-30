@@ -24,13 +24,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-var lodash_1 = require("lodash");
-//module powerbi.extensibility.utils.test.mocks {
-var MockILocale = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var _ = require("lodash");
+var MockILocale = /** @class */ (function () {
     function MockILocale(locales) {
         if (locales === void 0) { locales = MockILocale.DefaultLocales; }
         this.locales = locales;
-        this.locale = lodash_1._.keys(locales)[0];
+        this.locale = _.keys(locales)[0];
     }
     Object.defineProperty(MockILocale.prototype, "locale", {
         get: function () {
@@ -42,12 +42,11 @@ var MockILocale = (function () {
         enumerable: true,
         configurable: true
     });
+    MockILocale.DefaultLocales = {
+        "en": "en-US",
+        "ru": "ru-RU"
+    };
     return MockILocale;
 }());
-MockILocale.DefaultLocales = {
-    "en": "en-US",
-    "ru": "ru-RU"
-};
 exports.MockILocale = MockILocale;
-//}
 //# sourceMappingURL=mockILocale.js.map

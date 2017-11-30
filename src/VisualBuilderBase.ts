@@ -23,142 +23,141 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {jQuery, $, JQueryCoordinates} from "jquery";
-import {renderTimeout} from "./helpers/visualTestHelpers";
-import {testDom, flushAllD3Transitions, JQuery} from "./helpers/helpers";
-import {createVisualHost, createColorPalette} from "./mocks/mocks";
-import { _ } from "lodash";
-import {VisualObjectInstanceEnumeration } from "powerbi-visuals-tools";
-// module powerbi.extensibility.utils.test {
-    // powerbi
-    import DataView = powerbi.DataView;
-    import IViewport = powerbi.IViewport;
-    import VisualObjectInstance = powerbi.VisualObjectInstance;
-    import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
-    import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 
-    // powerbi.data
-    import Selector = powerbi.data.Selector;
+import { renderTimeout } from "./helpers/visualTestHelpers";
+import { testDom, flushAllD3Transitions } from "./helpers/helpers";
+import { createVisualHost, createColorPalette } from "./mocks/mocks";
+import * as _ from "lodash";
 
-    // powerbi.extensibility
-    import IColorPalette = powerbi.extensibility.IColorPalette;
+// powerbi
+import DataView = powerbi.DataView;
+import IViewport = powerbi.IViewport;
+import VisualObjectInstance = powerbi.VisualObjectInstance;
+import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
+import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
+import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 
-    // powerbi.extensibility.visual
-    import IVisual = powerbi.extensibility.visual.IVisual;
-    import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
-    import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+// powerbi.data
+import Selector = powerbi.data.Selector;
 
-    // powerbitests
-    // import testDom = testDom;
-    // import flushAllD3Transitions = flushAllD3Transitions;
+// powerbi.extensibility
+import IColorPalette = powerbi.extensibility.IColorPalette;
 
-    // powerbitests.customVisuals
-    // import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
-    // import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
-    // import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
+// powerbi.extensibility.visual
+import IVisual = powerbi.extensibility.visual.IVisual;
+import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
+import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-    export abstract class VisualBuilderBase<T extends IVisual> {
-        public element: jQuery;
-        public viewport: IViewport;
-        public visualHost: IVisualHost;
+// powerbitests
+// import testDom = testDom;
+// import flushAllD3Transitions = flushAllD3Transitions;
 
-        protected visual: T;
+// powerbitests.customVisuals
+// import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
+// import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
+// import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
 
-        constructor(
-            width: number = 800,
-            height: number = 600,
-            guid?: string,
-            element: jQuery = testDom(height, width)) {
+export abstract class VisualBuilderBase<T extends IVisual> {
+    public element: JQuery;
+    public viewport: IViewport;
+    public visualHost: IVisualHost;
 
-            this.element = element;
+    protected visual: T;
 
-            if (guid) {
-                this.element.addClass(`visual-${guid}`);
-            }
+    constructor(
+        width: number = 800,
+        height: number = 600,
+        guid?: string,
+        element: JQuery = testDom(height, width)) {
 
-            this.visualHost = createVisualHost();
+        this.element = element;
 
-            this.viewport = {
-                height: height,
-                width: width
-            };
-
-            this.init();
+        if (guid) {
+            this.element.addClass(`visual-${guid}`);
         }
 
-        protected abstract build(options: VisualConstructorOptions): T;
+        this.visualHost = createVisualHost();
 
-        public init(): void {
-            this.visual = this.build({
-                element: this.element.get(0),
-                host: this.visualHost
-            });
-        }
+        this.viewport = {
+            height: height,
+            width: width
+        };
 
-        public destroy(): void {
-            if (this.visual && this.visual.destroy) {
-                this.visual.destroy();
-            }
-        }
+        this.init();
+    }
 
-        public update(dataView: DataView[] | DataView): void {
-            this.visual.update({
-                dataViews: _.isArray(dataView) ? dataView : [dataView],
-                viewport: this.viewport
-            } as VisualUpdateOptions);
-        }
+    protected abstract build(options: VisualConstructorOptions): T;
 
-        public updateRenderTimeout(dataViews: DataView[] | DataView, fn: Function, timeout?: number): number {
-            this.update(dataViews);
+    public init(): void {
+        this.visual = this.build({
+            element: this.element.get(0),
+            host: this.visualHost
+        });
+    }
 
-            return renderTimeout(fn, timeout);
-        }
-
-        public updateEnumerateObjectInstancesRenderTimeout(
-            dataViews: DataView[] | DataView,
-            options: EnumerateVisualObjectInstancesOptions,
-            fn: (enumeration: VisualObjectInstance[]) => void,
-            timeout?: number): number {
-
-            this.update(dataViews);
-
-            let enumeration: VisualObjectInstance[] = this.enumerateObjectInstances(options);
-
-            return renderTimeout(() => fn(enumeration), timeout);
-        }
-
-        public updateFlushAllD3Transitions(dataViews: DataView[] | DataView): void {
-            this.update(dataViews);
-
-            flushAllD3Transitions();
-        }
-
-        public updateflushAllD3TransitionsRenderTimeout(
-            dataViews: DataView[] | DataView,
-            fn: Function,
-            timeout?: number): number {
-
-            this.update(dataViews);
-
-            flushAllD3Transitions();
-
-            return renderTimeout(fn, timeout);
-        }
-
-        public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] {
-            let enumeration: VisualObjectInstanceEnumeration = this.visual.enumerateObjectInstances(options);
-
-            if (!enumeration) {
-                return enumeration as VisualObjectInstance[];
-            }
-
-            let enumerationInstances: VisualObjectInstance[] =
-                (enumeration as VisualObjectInstanceEnumerationObject).instances;
-
-            return _.isArray(enumerationInstances)
-                ? enumerationInstances
-                : enumeration as VisualObjectInstance[];
+    public destroy(): void {
+        if (this.visual && this.visual.destroy) {
+            this.visual.destroy();
         }
     }
-// }
+
+    public update(dataView: DataView[] | DataView): void {
+        this.visual.update({
+            dataViews: _.isArray(dataView) ? dataView : [dataView],
+            viewport: this.viewport
+        } as VisualUpdateOptions);
+    }
+
+    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: Function, timeout?: number): number {
+        this.update(dataViews);
+
+        return renderTimeout(fn, timeout);
+    }
+
+    public updateEnumerateObjectInstancesRenderTimeout(
+        dataViews: DataView[] | DataView,
+        options: EnumerateVisualObjectInstancesOptions,
+        fn: (enumeration: VisualObjectInstance[]) => void,
+        timeout?: number): number {
+
+        this.update(dataViews);
+
+        let enumeration: VisualObjectInstance[] = this.enumerateObjectInstances(options);
+
+        return renderTimeout(() => fn(enumeration), timeout);
+    }
+
+    public updateFlushAllD3Transitions(dataViews: DataView[] | DataView): void {
+        this.update(dataViews);
+
+        flushAllD3Transitions();
+    }
+
+    public updateflushAllD3TransitionsRenderTimeout(
+        dataViews: DataView[] | DataView,
+        fn: Function,
+        timeout?: number): number {
+
+        this.update(dataViews);
+
+        flushAllD3Transitions();
+
+        return renderTimeout(fn, timeout);
+    }
+
+    public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] {
+        let enumeration: VisualObjectInstanceEnumeration = this.visual.enumerateObjectInstances(options);
+
+        if (!enumeration) {
+            return enumeration as VisualObjectInstance[];
+        }
+
+        let enumerationInstances: VisualObjectInstance[] =
+            (enumeration as VisualObjectInstanceEnumerationObject).instances;
+
+        return _.isArray(enumerationInstances)
+            ? enumerationInstances
+            : enumeration as VisualObjectInstance[];
+    }
+}

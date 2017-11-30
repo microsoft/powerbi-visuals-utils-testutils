@@ -23,77 +23,69 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {it,describe, expect, beforeEach} from "jasmine"
-//module powerbi.extensibility.utils.test.mocks.test {
-    // powerbi.data
-    import {Selector, ISelectionId } from "powerbi-visuals-tools";
+// powerbi.data
 
-   // import Selector = powerbi.data.Selector;
+import Selector = powerbi.data.Selector;
+import ISelectionId = powerbi.visuals.ISelectionId;
 
-    // powerbi.visuals
-    //import ISelectionId = powerbi.visuals.ISelectionId;
+// powerbi.extensibility.utils.test.mocks
+import { MockISelectionId } from "../../src/mocks/mockISelectionId";
+import { createSelectionId } from "../../src/mocks/mocks";
 
-    // powerbi.extensibility.utils.test.mocks
-    import { MockISelectionId  } from "../../src/mocks/mockISelectionId";
-    import { createSelectionId  } from "../../src/mocks/mocks";
-    // import MockISelectionId = powerbi.extensibility.utils.test.mocks.MockISelectionId;
-    // import createSelectionId = powerbi.extensibility.utils.test.mocks.createSelectionId;
+describe("MockISelectionId", () => {
+    const key: string = "Custom_Key";
 
-    describe("MockISelectionId", () => {
-        const key: string = "Custom_Key";
+    let selectionId: ISelectionId;
 
-        let selectionId: ISelectionId;
+    beforeEach(() => {
+        selectionId = createSelectionId(key);
+    });
 
-        beforeEach(() => {
-            selectionId = createSelectionId(key);
-        });
-
-        describe("equals", () => {
-            it("should return true if the instances are the same", () => {
-                expect(selectionId.equals(selectionId)).toBeTruthy();
-            });
-        });
-
-        describe("includes", () => {
-            it("should return true if the instances are the same", () => {
-                expect(selectionId.includes(selectionId)).toBeTruthy();
-            });
-        });
-
-        describe("getKey", () => {
-            it("should return the given key", () => {
-                expect(selectionId.getKey()).toBe(key);
-            });
-        });
-
-        describe("getSelector", () => {
-            it("should return a plain object", () => {
-                const selector: Selector = selectionId.getSelector();
-
-                expect(Object.keys(selector).length).toBe(0);
-            });
-        });
-
-        describe("getSelectorsByColumn", () => {
-            it("should return a plain object", () => {
-                const selector: Selector = selectionId.getSelectorsByColumn();
-
-                expect(Object.keys(selector).length).toBe(0);
-            });
-        });
-
-        describe("hasIdentity", () => {
-            it("should return true", () => {
-                expect(selectionId.hasIdentity()).toBeTruthy();
-            });
+    describe("equals", () => {
+        it("should return true if the instances are the same", () => {
+            expect(selectionId.equals(selectionId)).toBeTruthy();
         });
     });
 
-    describe("createSelectionId", () => {
-        it("should return an instance of MockISelectionId", () => {
-            const instance: ISelectionId = createSelectionId();
-
-            expect(instance instanceof MockISelectionId).toBeTruthy();
+    describe("includes", () => {
+        it("should return true if the instances are the same", () => {
+            expect(selectionId.includes(selectionId)).toBeTruthy();
         });
     });
-//}
+
+    describe("getKey", () => {
+        it("should return the given key", () => {
+            expect(selectionId.getKey()).toBe(key);
+        });
+    });
+
+    describe("getSelector", () => {
+        it("should return a plain object", () => {
+            const selector: Selector = selectionId.getSelector();
+
+            expect(Object.keys(selector).length).toBe(0);
+        });
+    });
+
+    describe("getSelectorsByColumn", () => {
+        it("should return a plain object", () => {
+            const selector: Selector = selectionId.getSelectorsByColumn();
+
+            expect(Object.keys(selector).length).toBe(0);
+        });
+    });
+
+    describe("hasIdentity", () => {
+        it("should return true", () => {
+            expect(selectionId.hasIdentity()).toBeTruthy();
+        });
+    });
+});
+
+describe("createSelectionId", () => {
+    it("should return an instance of MockISelectionId", () => {
+        const instance: ISelectionId = createSelectionId();
+
+        expect(instance instanceof MockISelectionId).toBeTruthy();
+    });
+});

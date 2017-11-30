@@ -23,62 +23,62 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {ITooltipService } from "powerbi-visuals-tools";
-import {MockILocale } from "./mockILocale";
-import {MockIAllowInteractions } from "./mockIAllowInteractions";
-import {MockITooltipService } from "./mockITooltipService";
-import {MockISelectionManager } from "./mockISelectionManager";
-import {MockISelectionIdBuilder } from "./mockISelectionIdBuilder";
-import {MockISelectionId } from "./mockISelectionId";
-import {MockIColorPalette } from "./mockIColorPalette";
-import { MockIVisualHost} from "./mockVisualHost";
-//module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import IColorInfo = powerbi.IColorInfo;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    import ISelectionId = powerbi.visuals.ISelectionId;
+import ITooltipService = powerbi.extensibility.ITooltipService;
 
-    // powerbi.extensibility
-    import IColorPalette = powerbi.extensibility.IColorPalette;
-    import ISelectionManager = powerbi.extensibility.ISelectionManager;
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import { MockILocale } from "./mockILocale";
+import { MockIAllowInteractions } from "./mockIAllowInteractions";
+import { MockITooltipService } from "./mockITooltipService";
+import { MockISelectionManager } from "./mockISelectionManager";
+import { MockISelectionIdBuilder } from "./mockISelectionIdBuilder";
+import { MockISelectionId } from "./mockISelectionId";
+import { MockIColorPalette } from "./mockIColorPalette";
+import { MockIVisualHost } from "./mockVisualHost";
+// powerbi
+import IColorInfo = powerbi.IColorInfo;
 
-    export function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost {
-        return new MockIVisualHost(
-            createColorPalette(),
-            createSelectionManager(),
-            createTooltipService(true),
-            createLocale(locale),
-            createAllowInteractions(allowInteractions));
-    }
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import ISelectionId = powerbi.visuals.ISelectionId;
 
-    export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
-        return new MockIColorPalette(colors);
-    }
+// powerbi.extensibility
+import IColorPalette = powerbi.extensibility.IColorPalette;
+import ISelectionManager = powerbi.extensibility.ISelectionManager;
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-    export function createSelectionId(key: string = ""): ISelectionId {
-        return new MockISelectionId(key);
-    }
+export function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost {
+    return new MockIVisualHost(
+        createColorPalette(),
+        createSelectionManager(),
+        createTooltipService(true),
+        createLocale(locale),
+        createAllowInteractions(allowInteractions));
+}
 
-    export function createSelectionIdBuilder(): ISelectionIdBuilder {
-        return new MockISelectionIdBuilder();
-    }
+export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
+    return new MockIColorPalette(colors);
+}
 
-    export function createSelectionManager(): ISelectionManager {
-        return new MockISelectionManager();
-    }
+export function createSelectionId(key: string = ""): ISelectionId {
+    return new MockISelectionId(key);
+}
 
-    export function createTooltipService(isEnabled?: boolean): ITooltipService {
-        return new MockITooltipService(isEnabled);
-    }
+export function createSelectionIdBuilder(): ISelectionIdBuilder {
+    return new MockISelectionIdBuilder();
+}
 
-    export function createLocale(locales?: Object): MockILocale {
-        return new MockILocale(locales);
-    }
+export function createSelectionManager(): ISelectionManager {
+    return new MockISelectionManager();
+}
 
-    export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
-        return new MockIAllowInteractions(isEnabled);
-    }
-//}
+export function createTooltipService(isEnabled?: boolean): ITooltipService {
+    return new MockITooltipService(isEnabled);
+}
+
+export function createLocale(locales?: Object): MockILocale {
+    return new MockILocale(locales);
+}
+
+export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
+    return new MockIAllowInteractions(isEnabled);
+}

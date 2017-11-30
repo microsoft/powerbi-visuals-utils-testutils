@@ -1,3 +1,4 @@
+"use strict";
 /*
  *  Power BI Visualizations
  *
@@ -23,9 +24,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-"use strict";
-//module powerbi.extensibility.utils.test.mocks {
-var MockIAllowInteractions = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var MockIAllowInteractions = /** @class */ (function () {
     function MockIAllowInteractions(isEnabled) {
         if (isEnabled === void 0) { isEnabled = false; }
         this.isEnabled = isEnabled;
@@ -33,5 +33,4 @@ var MockIAllowInteractions = (function () {
     return MockIAllowInteractions;
 }());
 exports.MockIAllowInteractions = MockIAllowInteractions;
-//}
 //# sourceMappingURL=mockIAllowInteractions.js.map

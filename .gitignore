@@ -1,4 +1,7 @@
-node_modules
-typings
+node_modules/
+typings/
+dist/
+package-lock.json
 *.log
+lib/dist/
 /coverage

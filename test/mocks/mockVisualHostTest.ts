@@ -23,45 +23,39 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {it,describe, expect, beforeEach} from "jasmine"
-//module powerbi.extensibility.utils.test.mocks.test {
-    // powerbi.extensibility.visual
-    import {IVisualHost } from "powerbi-visuals-tools";
-    import {MockIVisualHost } from "../../src/mocks/mockVisualHost";
-    import { createVisualHost } from "../../src/mocks/mocks";
-    // powerbi.extensibility.utils.test
-    // import MockIVisualHost = powerbi.extensibility.utils.test.mocks.MockIVisualHost;
-    // import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
 
-    describe("MockIVisualHost", () => {
-        let visualHost: IVisualHost;
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import { MockIVisualHost } from "../../src/mocks/mockVisualHost";
+import { createVisualHost, createSelectionIdBuilder } from "../../src/mocks/mocks";
 
-        beforeEach(() => {
-            visualHost = createVisualHost();
-        });
+describe("MockIVisualHost", () => {
+    let visualHost: IVisualHost;
 
-        describe("createSelectionIdBuilder", () => {
-            it("shouldn't return null", () => {
-                expect(visualHost.createSelectionIdBuilder()).not.toBeNull();
-            });
-        });
+    beforeEach(() => {
+        visualHost = createVisualHost();
+    });
 
-        describe("createSelectionManager", () => {
-            it("shouldn't return null", () => {
-                expect(visualHost.createSelectionManager()).not.toBeNull();
-            });
-        });
-
-        describe("colorPalette", () => {
-            it("shouldn't return null", () => {
-                expect(visualHost.colorPalette).not.toBeNull();
-            });
-        });
-
-        describe("locale", () => {
-            it("shouldn't return null", () => {
-                expect(visualHost.locale).not.toBeNull();
-            });
+    describe("createSelectionIdBuilder", () => {
+        it("shouldn't return null", () => {
+            expect(visualHost.createSelectionIdBuilder()).not.toBeNull();
         });
     });
-//}
+
+    describe("createSelectionManager", () => {
+        it("shouldn't return null", () => {
+            expect(visualHost.createSelectionManager()).not.toBeNull();
+        });
+    });
+
+    describe("colorPalette", () => {
+        it("shouldn't return null", () => {
+            expect(visualHost.colorPalette).not.toBeNull();
+        });
+    });
+
+    describe("locale", () => {
+        it("shouldn't return null", () => {
+            expect(visualHost.locale).not.toBeNull();
+        });
+    });
+});

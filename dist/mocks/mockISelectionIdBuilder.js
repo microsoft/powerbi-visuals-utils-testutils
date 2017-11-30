@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
  *  Power BI Visualizations
  *
@@ -25,7 +26,7 @@
  *  THE SOFTWARE.
  */
 var mocks_1 = require("./mocks");
-var MockISelectionIdBuilder = (function () {
+var MockISelectionIdBuilder = /** @class */ (function () {
     function MockISelectionIdBuilder() {
     }
     MockISelectionIdBuilder.prototype.withCategory = function (categoryColumn, index) {
@@ -43,5 +44,4 @@ var MockISelectionIdBuilder = (function () {
     return MockISelectionIdBuilder;
 }());
 exports.MockISelectionIdBuilder = MockISelectionIdBuilder;
-//}
 //# sourceMappingURL=mockISelectionIdBuilder.js.map

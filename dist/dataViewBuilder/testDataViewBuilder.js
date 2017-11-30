@@ -1,3 +1,4 @@
+"use strict";
 /*
  *  Power BI Visualizations
  *
@@ -23,12 +24,12 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var dataViewBuilder_1 = require("./dataViewBuilder");
-var lodash_1 = require("lodash");
-var TestDataViewBuilder = (function () {
+var _ = require("lodash");
+var TestDataViewBuilder = /** @class */ (function () {
     function TestDataViewBuilder() {
-        this.aggregateFunction = lodash_1._.sum;
+        this.aggregateFunction = _.sum;
     }
     TestDataViewBuilder.setDefaultQueryName = function (source) {
         if (!source.queryName) {
@@ -37,10 +38,10 @@ var TestDataViewBuilder = (function () {
         return source;
     };
     TestDataViewBuilder.getDataViewBuilderColumnIdentitySources = function (options) {
-        var optionsArray = (lodash_1._.isArray(options) ? options : [options]);
+        var optionsArray = (_.isArray(options) ? options : [options]);
         var fields = optionsArray.map(function () { }), optionsIdentityExpressions = optionsArray.map(function (opt) { return opt.values; }), identityExpressions = [];
         if (optionsIdentityExpressions.length > 1) {
-            var identityExpressionsLength = optionsIdentityExpressions.length, identityExpressionsValuesLength = lodash_1._.max(lodash_1._.map(optionsIdentityExpressions, function (x) { return x.length; }));
+            var identityExpressionsLength = optionsIdentityExpressions.length, identityExpressionsValuesLength = _.max(_.map(optionsIdentityExpressions, function (x) { return x.length; }));
             for (var vi = 0; vi < identityExpressionsValuesLength; vi++) {
                 var current = optionsIdentityExpressions[0][vi];
                 identityExpressions.push(current);
@@ -55,16 +56,16 @@ var TestDataViewBuilder = (function () {
         }); });
     };
     TestDataViewBuilder.getValuesTable = function (categories, values) {
-        var columns = lodash_1._.sortBy((categories || []).concat(values || []), function (x) { return x.source.index; }), maxLength = lodash_1._.max(columns.map(function (x) { return x.values.length; }));
-        return lodash_1._.range(maxLength).map(function (i) { return columns.map(function (x) { return x.values[i]; }); });
+        var columns = _.sortBy((categories || []).concat(values || []), function (x) { return x.source.index; }), maxLength = _.max(columns.map(function (x) { return x.values.length; }));
+        return _.range(maxLength).map(function (i) { return columns.map(function (x) { return x.values[i]; }); });
     };
     TestDataViewBuilder.createDataViewBuilderColumnOptions = function (categoriesColumns, valuesColumns, filter, customizeColumns) {
         var filterColumns = filter
-            ? function (options) { return lodash_1._.isArray(options.values) && filter(options); }
-            : function (options) { return lodash_1._.isArray(options.values); };
-        var resultCategoriesColumns = lodash_1._.isEmpty(categoriesColumns) ? [] : lodash_1._
+            ? function (options) { return _.isArray(options.values) && filter(options); }
+            : function (options) { return _.isArray(options.values); };
+        var resultCategoriesColumns = _.isEmpty(categoriesColumns) ? [] : _
             .flatten(categoriesColumns).filter(filterColumns);
-        var resultValuesColumns = lodash_1._.isEmpty(valuesColumns) ? [] : lodash_1._
+        var resultValuesColumns = _.isEmpty(valuesColumns) ? [] : _
             .flatten(valuesColumns).filter(filterColumns);
         var allColumns = (resultCategoriesColumns || []).concat(resultValuesColumns || []);
         allColumns.forEach(function (x, i) { return x.source.index = i; });
@@ -85,32 +86,32 @@ var TestDataViewBuilder = (function () {
         };
     };
     TestDataViewBuilder.setUpDataViewBuilderColumnOptions = function (options, aggregateFunction) {
-        var resultOptions = lodash_1._.clone(options);
-        resultOptions.categories = resultOptions.categories && resultOptions.categories.map(function (x) { return lodash_1._.clone(x); });
-        resultOptions.values = resultOptions.values && resultOptions.values.map(function (x) { return lodash_1._.clone(x); });
-        resultOptions.grouped = resultOptions.grouped && resultOptions.grouped.map(function (x) { return lodash_1._.clone(x); });
-        if (!lodash_1._.isEmpty(options.categories)) {
+        var resultOptions = _.clone(options);
+        resultOptions.categories = resultOptions.categories && resultOptions.categories.map(function (x) { return _.clone(x); });
+        resultOptions.values = resultOptions.values && resultOptions.values.map(function (x) { return _.clone(x); });
+        resultOptions.grouped = resultOptions.grouped && resultOptions.grouped.map(function (x) { return _.clone(x); });
+        if (!_.isEmpty(options.categories)) {
             resultOptions.categories.forEach(function (x) { return x.source = TestDataViewBuilder.setDefaultQueryName(x.source); });
             var allRows = TestDataViewBuilder.getValuesTable(options.categories, options.values);
             var categoriesLength_1 = options.categories.length;
-            var grouped_1 = lodash_1._.toArray(lodash_1._.groupBy(allRows, function (x) { return lodash_1._.take(x, categoriesLength_1); }));
+            var grouped_1 = _.toArray(_.groupBy(allRows, function (x) { return _.take(x, categoriesLength_1); }));
             resultOptions.categories.forEach(function (c, i) { return c.values = grouped_1.map(function (x) { return x[0][i] === undefined ? null : x[0][i]; }); });
-            if (!lodash_1._.isEmpty(options.values) && lodash_1._.isEmpty(options.grouped)) {
+            if (!_.isEmpty(options.values) && _.isEmpty(options.grouped)) {
                 resultOptions.values.forEach(function (c, i) {
                     return c.values = grouped_1.map(function (v) { return aggregateFunction(v.map(function (x) { return x[categoriesLength_1 + i] || 0; })); });
                 });
             }
         }
-        if (!lodash_1._.isEmpty(options.values)) {
+        if (!_.isEmpty(options.values)) {
             resultOptions.values.forEach(function (x) { return x.source = TestDataViewBuilder.setDefaultQueryName(x.source); });
         }
-        if (!lodash_1._.isEmpty(options.grouped)) {
+        if (!_.isEmpty(options.grouped)) {
             resultOptions.grouped.forEach(function (x) { return x.source = TestDataViewBuilder.setDefaultQueryName(x.source); });
         }
         return resultOptions;
     };
     TestDataViewBuilder.setUpDataView = function (dataView, options) {
-        if (!lodash_1._.isEmpty(options.categories) && lodash_1._.isEmpty(options.grouped)) {
+        if (!_.isEmpty(options.categories) && _.isEmpty(options.grouped)) {
             var category_1 = dataView.categorical.categories[0];
             // Tree. (completed only for one category)
             dataView.tree = {
@@ -131,7 +132,7 @@ var TestDataViewBuilder = (function () {
                 identityFields: category_1.identityFields,
                 rows: TestDataViewBuilder.getValuesTable(dataView.categorical.categories, dataView.categorical.values)
             };
-            if (lodash_1._.isEmpty(options.values)) {
+            if (_.isEmpty(options.values)) {
                 delete dataView.categorical.values;
             }
         }
@@ -143,9 +144,9 @@ var TestDataViewBuilder = (function () {
     };
     TestDataViewBuilder.prototype.createCategoricalDataViewBuilder = function (categoriesColumns, valuesColumns, columnNames, customizeColumns) {
         var builder = dataViewBuilder_1.createCategoricalDataViewBuilder();
-        var originalOptions = TestDataViewBuilder.createDataViewBuilderColumnOptions(categoriesColumns, valuesColumns, columnNames && (function (options) { return lodash_1._.includes(columnNames, options.source.displayName); }), customizeColumns);
+        var originalOptions = TestDataViewBuilder.createDataViewBuilderColumnOptions(categoriesColumns, valuesColumns, columnNames && (function (options) { return _.includes(columnNames, options.source.displayName); }), customizeColumns);
         var options = TestDataViewBuilder.setUpDataViewBuilderColumnOptions(originalOptions, this.aggregateFunction);
-        if (!lodash_1._.isEmpty(options.categories)) {
+        if (!_.isEmpty(options.categories)) {
             var identityFrom_1 = TestDataViewBuilder.getDataViewBuilderColumnIdentitySources(options.categories);
             builder.withCategories(options.categories.map(function (category, i) { return ({
                 source: category.source,
@@ -155,13 +156,13 @@ var TestDataViewBuilder = (function () {
                 identityFields: identityFrom_1[i].fields
             }); }));
         }
-        if (!lodash_1._.isEmpty(options.grouped)) {
+        if (!_.isEmpty(options.grouped)) {
             var groupedCategory_1 = options.grouped[0]; // Finished only for one category.
             var categoryValues_1 = originalOptions.categories
                 && originalOptions.categories[0]
                 && originalOptions.categories[0].values
                 || [];
-            var uniqueCategoryValues_1 = lodash_1._.uniq(categoryValues_1) || [undefined], uniqueGroupedValues = lodash_1._.uniq(groupedCategory_1.values);
+            var uniqueCategoryValues_1 = _.uniq(categoryValues_1) || [undefined], uniqueGroupedValues = _.uniq(groupedCategory_1.values);
             builder.withGroupedValues({
                 groupColumn: {
                     source: groupedCategory_1.source,
@@ -173,7 +174,7 @@ var TestDataViewBuilder = (function () {
                     return ({
                         values: column.values && uniqueCategoryValues_1
                             .map(function (categoryValue) {
-                            var index = lodash_1._.findIndex(lodash_1._.range(categoryValues_1.length), function (i) { return categoryValues_1[i] === categoryValue && groupedCategory_1.values[i] === groupedValue; });
+                            var index = _.findIndex(_.range(categoryValues_1.length), function (i) { return categoryValues_1[i] === categoryValue && groupedCategory_1.values[i] === groupedValue; });
                             return column.values[index] === undefined ? null : column.values[index];
                         }),
                         highlights: column.highlights,
@@ -183,7 +184,7 @@ var TestDataViewBuilder = (function () {
                 }); })
             });
         }
-        else if (!lodash_1._.isEmpty(options.values)) {
+        else if (!_.isEmpty(options.values)) {
             builder.withValues({ columns: options.values });
         }
         var builderBuild = builder.build.bind(builder);
@@ -192,9 +193,8 @@ var TestDataViewBuilder = (function () {
         };
         return builder;
     };
+    TestDataViewBuilder.DataViewName = "Data";
     return TestDataViewBuilder;
 }());
-TestDataViewBuilder.DataViewName = "Data";
 exports.TestDataViewBuilder = TestDataViewBuilder;
-//}
 //# sourceMappingURL=testDataViewBuilder.js.map

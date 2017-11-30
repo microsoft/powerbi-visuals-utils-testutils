@@ -23,63 +23,58 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {it,describe, expect, beforeEach} from "jasmine"
-//module powerbi.extensibility.utils.test.mocks.test {
-    // powerbi.visuals
-    import {Selector, ISelectionId, ISelectionIdBuilder } from "powerbi-visuals-tools";
-    // import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    // import ISelectionId = powerbi.visuals.ISelectionId;
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import ISelectionId = powerbi.visuals.ISelectionId;
 
-    // powerbi.extensibility.utils.test.mocks
-    import { MockISelectionId  } from "../../src/mocks/mockISelectionId";
-    import { createSelectionId, createSelectionIdBuilder } from "../../src/mocks/mocks";
-    import {MockISelectionIdBuilder } from "../../src/mocks/mockISelectionIdBuilder";
-   
-    describe("MockISelectionIdBuilder", () => {
-        let selectionIdBuilder: ISelectionIdBuilder;
+// powerbi.extensibility.utils.test.mocks
+import { MockISelectionId } from "../../src/mocks/mockISelectionId";
+import { createSelectionId, createSelectionIdBuilder } from "../../src/mocks/mocks";
+import { MockISelectionIdBuilder } from "../../src/mocks/mockISelectionIdBuilder";
 
-        beforeEach(() => {
-            selectionIdBuilder = createSelectionIdBuilder();
-        });
+describe("MockISelectionIdBuilder", () => {
+    let selectionIdBuilder: ISelectionIdBuilder;
 
-        describe("withCategory", () => {
-            it("should return an instance of ISelectionIdBuilder", () => {
-                const result: ISelectionIdBuilder = selectionIdBuilder.withCategory(null, 0);
-
-                expect(result instanceof MockISelectionIdBuilder);
-            });
-        });
-
-        describe("withSeries", () => {
-            it("should return an instance of ISelectionIdBuilder", () => {
-                const result: ISelectionIdBuilder = selectionIdBuilder.withSeries(null, null);
-
-                expect(result instanceof MockISelectionIdBuilder);
-            });
-        });
-
-        describe("withMeasure", () => {
-            it("should return an instance of ISelectionIdBuilder", () => {
-                const result: ISelectionIdBuilder = selectionIdBuilder.withMeasure(null);
-
-                expect(result instanceof MockISelectionIdBuilder);
-            });
-        });
-
-        describe("createSelectionId", () => {
-            it("should return an instance of MockISelectionId", () => {
-                const selectionId: ISelectionId = selectionIdBuilder.createSelectionId();
-
-                expect(selectionId instanceof MockISelectionId).toBeTruthy();
-            });
-        });
+    beforeEach(() => {
+        selectionIdBuilder = createSelectionIdBuilder();
     });
 
-    describe("createSelectionIdBuilder", () => {
+    describe("withCategory", () => {
         it("should return an instance of ISelectionIdBuilder", () => {
-            const instance: ISelectionIdBuilder = createSelectionIdBuilder();
+            const result: ISelectionIdBuilder = selectionIdBuilder.withCategory(null, 0);
 
-            expect(instance instanceof MockISelectionIdBuilder).toBeTruthy();
+            expect(result instanceof MockISelectionIdBuilder);
         });
     });
-//}
+
+    describe("withSeries", () => {
+        it("should return an instance of ISelectionIdBuilder", () => {
+            const result: ISelectionIdBuilder = selectionIdBuilder.withSeries(null, null);
+
+            expect(result instanceof MockISelectionIdBuilder);
+        });
+    });
+
+    describe("withMeasure", () => {
+        it("should return an instance of ISelectionIdBuilder", () => {
+            const result: ISelectionIdBuilder = selectionIdBuilder.withMeasure(null);
+
+            expect(result instanceof MockISelectionIdBuilder);
+        });
+    });
+
+    describe("createSelectionId", () => {
+        it("should return an instance of MockISelectionId", () => {
+            const selectionId: ISelectionId = selectionIdBuilder.createSelectionId();
+
+            expect(selectionId instanceof MockISelectionId).toBeTruthy();
+        });
+    });
+});
+
+describe("createSelectionIdBuilder", () => {
+    it("should return an instance of ISelectionIdBuilder", () => {
+        const instance: ISelectionIdBuilder = createSelectionIdBuilder();
+
+        expect(instance instanceof MockISelectionIdBuilder).toBeTruthy();
+    });
+});

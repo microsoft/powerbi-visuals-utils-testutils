@@ -23,44 +23,40 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {it,describe, expect, beforeEach} from "jasmine"
-//module powerbi.extensibility.utils.test.mocks.test {
-    // powerbi
-    import {IColorInfo,IColorPalette  } from "powerbi-visuals-tools";
-    // import IColorInfo = powerbi.IColorInfo;
+// powerbi
+import IColorInfo = powerbi.IColorInfo;
 
-    // // powerbi.extensibility
-    // import IColorPalette = powerbi.extensibility.IColorPalette;
+// // powerbi.extensibility
+import IColorPalette = powerbi.extensibility.IColorPalette;
 
-    // powerbi.extensibility.utils.test.mocks
-    import {MockIColorPalette } from "../../src/mocks/mockIColorPalette";
-    import {createColorPalette } from "../../src/mocks/mocks";
+// powerbi.extensibility.utils.test.mocks
+import { MockIColorPalette } from "../../src/mocks/mockIColorPalette";
+import { createColorPalette } from "../../src/mocks/mocks";
 
-    describe("MockIColorPalette", () => {
-        let colorPalette: IColorPalette;
+describe("MockIColorPalette", () => {
+    let colorPalette: IColorPalette;
 
-        beforeEach(() => {
-            colorPalette = createColorPalette();
-        });
-
-        describe("getColor", () => {
-            it("the method should be defined", () => {
-                expect(colorPalette.getColor).toBeDefined();
-            });
-
-            it("should return #01B8AA as a first color", () => {
-                const color: IColorInfo = colorPalette.getColor("0");
-
-                expect(color.value).toBe("#01B8AA");
-            });
-        });
+    beforeEach(() => {
+        colorPalette = createColorPalette();
     });
 
-    describe("createColorPalette", () => {
-        it("should return an instance of MockIColorPalette", () => {
-            const instance: IColorPalette = createColorPalette();
+    describe("getColor", () => {
+        it("the method should be defined", () => {
+            expect(colorPalette.getColor).toBeDefined();
+        });
 
-            expect(instance instanceof MockIColorPalette).toBeTruthy();
+        it("should return #01B8AA as a first color", () => {
+            const color: IColorInfo = colorPalette.getColor("0");
+
+            expect(color.value).toBe("#01B8AA");
         });
     });
-//}
+});
+
+describe("createColorPalette", () => {
+    it("should return an instance of MockIColorPalette", () => {
+        const instance: IColorPalette = createColorPalette();
+
+        expect(instance instanceof MockIColorPalette).toBeTruthy();
+    });
+});

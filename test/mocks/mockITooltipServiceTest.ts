@@ -23,52 +23,51 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import {it,describe, expect, beforeEach} from "jasmine"
-//module powerbi.extensibility.utils.test.mocks.test {
-    // powerbi.extensibility.utils.test.mocks
-    import {MockITooltipService } from "../../src/mocks/mockITooltipService";
-    import {MockIVisualHost } from "../../src/mocks/mockVisualHost";
-    import {ITooltipService } from "powerbi-visuals-tools";
-    import { createVisualHost, createTooltipService,  } from "../../src/mocks/mocks";
-    describe("MockITooltipService", () => {
-        describe("enabled", () => {
-            it("should return true", () => {
-                const isEnabled: boolean = true,
-                    tooltipService: ITooltipService = createTooltipService(isEnabled);
 
-                expect(tooltipService.enabled()).toBe(isEnabled);
-            });
+import { MockITooltipService } from "../../src/mocks/mockITooltipService";
+import { MockIVisualHost } from "../../src/mocks/mockVisualHost";
 
-            it("should return false", () => {
-                const isEnabled: boolean = false,
-                    tooltipService: ITooltipService = createTooltipService(isEnabled);
+import ITooltipService = powerbi.extensibility.ITooltipService;
 
-                expect(tooltipService.enabled()).toBe(isEnabled);
-            });
+import { createVisualHost, createTooltipService, } from "../../src/mocks/mocks";
+describe("MockITooltipService", () => {
+    describe("enabled", () => {
+        it("should return true", () => {
+            const isEnabled: boolean = true,
+                tooltipService: ITooltipService = createTooltipService(isEnabled);
+
+            expect(tooltipService.enabled()).toBe(isEnabled);
         });
 
-        describe("show", () => {
-            it("the method should be defined", () => {
-                const tooltipService: ITooltipService = createTooltipService();
+        it("should return false", () => {
+            const isEnabled: boolean = false,
+                tooltipService: ITooltipService = createTooltipService(isEnabled);
 
-                expect(tooltipService.show).toBeDefined();
-            });
-        });
-
-        describe("move", () => {
-            it("the method should be defined", () => {
-                const tooltipService: ITooltipService = createTooltipService();
-
-                expect(tooltipService.move).toBeDefined();
-            });
-        });
-
-        describe("hide", () => {
-            it("the method should be defined", () => {
-                const tooltipService: ITooltipService = createTooltipService();
-
-                expect(tooltipService.hide).toBeDefined();
-            });
+            expect(tooltipService.enabled()).toBe(isEnabled);
         });
     });
-//}
+
+    describe("show", () => {
+        it("the method should be defined", () => {
+            const tooltipService: ITooltipService = createTooltipService();
+
+            expect(tooltipService.show).toBeDefined();
+        });
+    });
+
+    describe("move", () => {
+        it("the method should be defined", () => {
+            const tooltipService: ITooltipService = createTooltipService();
+
+            expect(tooltipService.move).toBeDefined();
+        });
+    });
+
+    describe("hide", () => {
+        it("the method should be defined", () => {
+            const tooltipService: ITooltipService = createTooltipService();
+
+            expect(tooltipService.hide).toBeDefined();
+        });
+    });
+});

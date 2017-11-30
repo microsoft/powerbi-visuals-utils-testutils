@@ -24,10 +24,14 @@
     "build:map": "tsc --sourceMap",
     "build:bundle": "webpack --display-modules",
     "test": "karma start",
-    "pretest": "npm run build:bundle",
+    "pretest": "npm run lint && npm run build:bundle",
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\""
   },
   "devDependencies": {
+    "@types/jasmine": "^2.8.2",
+    "@types/jasmine-jquery": "^1.5.32",
+    "@types/jquery": "^3.2.1",
+    "@types/lodash": "^4.14.86",
     "coveralls": "2.11.15",
     "d3-array": "^1.2.1",
     "d3-timer": "^1.0.7",
@@ -42,15 +46,15 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-typescript-preprocessor": "0.3.1",
     "karma-webpack": "^2.0.6",
-    "powerbi-visuals-tools": "1.6.4",
+    "powerbi-visuals-tools": "^1.9.0",
+    "ts-loader": "^3.1.1",
     "tslint": "4.4.2",
     "tslint-microsoft-contrib": "^4.0.1",
-    "typescript": "2.1.4",
-    "typings": "2.0.0",
-    "webpack": "^3.8.1",
-    "ts-loader": "^3.1.1"
+    "typescript": "2.5.3",
+    "webpack": "^3.8.1"
   },
   "dependencies": {
+    "chalk": "^2.1.0",
     "jasmine-jquery": "2.1.1",
     "lodash": "4.16.2"
   }
