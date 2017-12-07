@@ -3,16 +3,16 @@
     "allowJs": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "ES5",
-    "lib": ["es2016","dom"],
+    "declaration": true,
+    "target": "ES6",
     "sourceMap": true,
     "module": "commonjs",
-    "outDir": "./dist"
+    "outDir": "./"
   },
   "files": [
     "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.6.0/PowerBI-visuals.d.ts"
   ],
   "include": [
-    "src/**/*"
+    "src/index.ts"
   ]
 }

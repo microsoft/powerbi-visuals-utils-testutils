@@ -1,6 +1,7 @@
 const webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 const path = require('path');
-const ENTRY = "./src/VisualBuilderBase.ts";
+const ENTRY = "./src/index.ts";
 // const regex = path.normalize(ENTRY).replace(/\\/g, '\\\\').replace(/\./g, '\\.');
 
 module.exports = {
@@ -9,33 +10,33 @@ module.exports = {
     resolve: {
         extensions: ['.webpack.js', '.web.js', '.js', '.ts', '.tsx']
     },
-    externals: {
-    },
+    externals: [nodeExternals()],
     module: {
-        loaders: [
-           {
-                test:[],
-                loader: "script-loader!uglify",
-                exclude: [
-                    /\/node_modules/
-                 ]
-            },
+        rules: [
             {
-                  test: /\.tsx?$/,
-                  loader: 'ts-loader',
-                  exclude: [
-                    /\/node_modules/
-                 ]
-             },
+                test: /\.js/,
+                exclude: /node_modules/,
+                use: {
+                  loader: "script-loader!uglify",
+                  options: {
+                  }
+                }
+              },
+          {
+            test: /\.tsx?$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'ts-loader',
+              options: {
+              }
+            }
+          }
         ]
-    },
+      },
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, 'lib')
     },
     plugins: [
-        new webpack.LoaderOptionsPlugin({
-            debug: true
-        })
     ]
 };

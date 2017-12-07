@@ -77,7 +77,15 @@ module.exports = (config) => {
             node: webpackConfig.node,
             module: {
                 preLoaders: webpackConfig.module.preLoaders,
-                loaders: webpackConfig.module.loaders
+                loaders:  [
+                    {
+                          test: /\.tsx?$/,
+                          loader: 'ts-loader',
+                          exclude: [
+                            /\/node_modules/
+                         ]
+                     },
+                ]
             },
             resolve: webpackConfig.resolve,
             externals: [
