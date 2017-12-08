@@ -1,3 +1,7 @@
-import {testDom} from "./helpers/helpers";
+import { testDom } from "./helpers/helpers";
 
-export {testDom};
+export function d3_test() {
+    console.log("d3_test");
+};
+
+export { testDom };

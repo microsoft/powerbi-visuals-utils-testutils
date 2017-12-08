@@ -23,6 +23,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+
 import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 import ISelectionId = powerbi.visuals.ISelectionId;
 
@@ -57,7 +58,6 @@ describe("MockISelectionIdBuilder", () => {
     describe("withMeasure", () => {
         it("should return an instance of ISelectionIdBuilder", () => {
             const result: ISelectionIdBuilder = selectionIdBuilder.withMeasure(null);
-
             expect(result instanceof MockISelectionIdBuilder);
         });
     });

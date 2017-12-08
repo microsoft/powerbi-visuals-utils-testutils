@@ -24,43 +24,46 @@
  *  THE SOFTWARE.
  */
 
-'use strict';
-const webpackConfig = require('./webpack.config');
-const webpack = require('webpack');
-const testRecursivePath = 'test/**/*.ts'
-    , srcOriginalRecursivePath = 'src/**/*.ts'
-    , srcRecursivePath = 'lib/**/*.js'
-    , coverageFolder = 'coverage';
+"use strict";
 
-module.exports = (config) => {
+import * as webpack from "webpack";
+
+import { Config, ConfigOptions } from "karma";
+
+const testRecursivePath = "test/**/*.ts"
+    , srcOriginalRecursivePath = "src/**/*.ts"
+    , srcRecursivePath = "lib/**/*.js"
+    , coverageFolder = "coverage";
+
+module.exports = (config: Config) => {
     let browsers = [];
 
     if (process.env.TRAVIS) {
-        browsers.push('ChromeTravisCI');
+        browsers.push("ChromeTravisCI");
     } else {
-        browsers.push('Chrome');
+        browsers.push("Chrome");
     }
 
-    config.set({
+    config.set(<ConfigOptions>{
         customLaunchers: {
             ChromeTravisCI: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
+                base: "Chrome",
+                flags: ["--no-sandbox"]
             }
         },
         browsers: browsers,
         colors: true,
-        frameworks: ['jasmine'],
+        frameworks: ["jasmine"],
         reporters: [
-            'progress',
-         //   'coverage',
-            'karma-remap-istanbul'
+            "progress",
+            // "coverage",
+            "karma-remap-istanbul"
         ],
         singleRun: true,
         files: [
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/lodash/lodash.min.js',
-            'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+            "node_modules/jquery/dist/jquery.min.js",
+            "node_modules/lodash/lodash.min.js",
+            "node_modules/jasmine-jquery/lib/jasmine-jquery.js",
             srcRecursivePath,
             testRecursivePath,
             {
@@ -70,55 +73,47 @@ module.exports = (config) => {
             }
         ],
         preprocessors: {
-            [testRecursivePath]: ['webpack','typescript'],
-            [srcRecursivePath]: ['sourcemap', 'coverage']
+            [testRecursivePath]: ["typescript", "webpack", "sourcemap"],
+            [srcRecursivePath]: ["webpack", "sourcemap", "coverage"]
         },
-        webpack: {
-            node: webpackConfig.node,
-            module: {
-                preLoaders: webpackConfig.module.preLoaders,
-                loaders:  [
-                    {
-                          test: /\.tsx?$/,
-                          loader: 'ts-loader',
-                          exclude: [
-                            /\/node_modules/
-                         ]
-                     },
-                ]
+        webpack: <webpack.Configuration>{
+            target: "web",
+            devtool: "inline-source-map",
+            resolve: {
+                extensions: [".webpack.js", ".web.js", ".js", ".ts", ".tsx"]
             },
-            resolve: webpackConfig.resolve,
             externals: [
                 {
                     sinon: "sinon",
                     chai: "chai"
                 },
             ],
-            plugins: webpackConfig.plugins
-        },
-        typescriptPreprocessor: {
-            options: {
-                "allowJs": true,
-                "emitDecoratorMetadata": true,
-                "experimentalDecorators": true,
-                "target": "ES5",
-                "lib": ["es2016","dom"],
-                "sourceMap": true,
-                "module": "commonjs",
-                "removeComments": false,
-                "concatenateOutput": false
-            }
+            module: {
+                rules: [
+                    {
+                        test: /\.tsx?$/,
+                        loader: "ts-loader",
+                    }
+                ]
+            },
+            output: {
+                filename: "index.build.js",
+                // path: path.resolve(__dirname, "lib")
+                path: "./lib"
+            },
+            plugins: [
+            ]
         },
         coverageReporter: {
             dir: coverageFolder,
             reporters: [
-                { type: 'html' },
-                { type: 'lcov' }
+                { type: "html" },
+                { type: "lcov" }
             ]
         },
         remapIstanbulReporter: {
             reports: {
-                lcovonly: coverageFolder + '/lcov.info',
+                lcovonly: coverageFolder + "/lcov.info",
                 html: coverageFolder
             }
         }
