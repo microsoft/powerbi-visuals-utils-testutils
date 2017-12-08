@@ -24,42 +24,40 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi.data
-    import Selector = powerbi.data.Selector;
+// powerbi.data
+import Selector = powerbi.data.Selector;
 
-    // powerbi.visuals
-    import ISelectionId = powerbi.visuals.ISelectionId;
+// powerbi.visuals
+import ISelectionId = powerbi.visuals.ISelectionId;
 
-    export class MockISelectionId implements ISelectionId {
-        private key: string;
+export class MockISelectionId implements ISelectionId {
+    private key: string;
 
-        constructor(key: string) {
-            this.key = key;
-        }
+    constructor(key: string) {
+        this.key = key;
+    }
 
-        public equals(other: ISelectionId): boolean {
-            return this === other;
-        }
+    public equals(other: ISelectionId): boolean {
+        return this === other;
+    }
 
-        public includes(other: ISelectionId, ignoreHighlight?: boolean): boolean {
-            return this === other;
-        }
+    public includes(other: ISelectionId, ignoreHighlight?: boolean): boolean {
+        return this === other;
+    }
 
-        public getKey(): string {
-            return this.key;
-        }
+    public getKey(): string {
+        return this.key;
+    }
 
-        public getSelector(): Selector {
-            return {};
-        }
+    public getSelector(): Selector {
+        return {};
+    }
 
-        public getSelectorsByColumn(): Selector {
-            return {};
-        }
+    public getSelectorsByColumn(): Selector {
+        return {};
+    }
 
-        public hasIdentity(): boolean {
-            return true;
-        }
+    public hasIdentity(): boolean {
+        return true;
     }
 }

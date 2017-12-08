@@ -1,3 +1,4 @@
+"use strict";
 /*
  *  Power BI Visualizations
  *
@@ -23,7 +24,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-/// <reference path="../typings/index.d.ts" />
-/// <reference path="../lib/index.d.ts" />
-/// <reference path="../node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.4.0/PowerBI-visuals.d.ts" />
+Object.defineProperty(exports, "__esModule", { value: true });
+var MockIAllowInteractions = /** @class */ (function () {
+    function MockIAllowInteractions(isEnabled) {
+        if (isEnabled === void 0) { isEnabled = false; }
+        this.isEnabled = isEnabled;
+    }
+    return MockIAllowInteractions;
+}());
+exports.MockIAllowInteractions = MockIAllowInteractions;
+//# sourceMappingURL=mockIAllowInteractions.js.map
