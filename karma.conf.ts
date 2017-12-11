@@ -56,7 +56,7 @@ module.exports = (config: Config) => {
         frameworks: ["jasmine"],
         reporters: [
             "progress",
-            // "coverage",
+            "coverage",
             "karma-remap-istanbul"
         ],
         singleRun: true,
