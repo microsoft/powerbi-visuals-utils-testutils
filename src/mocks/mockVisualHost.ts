@@ -24,69 +24,72 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
+import ITooltipService = powerbi.extensibility.ITooltipService;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import { createSelectionIdBuilder } from "./mocks";
+import { MockILocale } from "./mockILocale";
+import { MockIAllowInteractions } from "./mockIAllowInteractions";
+// powerbi
+import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
 
-    // powerbi.extensibility
-    import ISelectionManager = powerbi.extensibility.ISelectionManager;
-    import IColorPalette = powerbi.extensibility.IColorPalette;
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 
-    // powerbi.extensibility.visual
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+// powerbi.extensibility
+import ISelectionManager = powerbi.extensibility.ISelectionManager;
+import IColorPalette = powerbi.extensibility.IColorPalette;
 
-    export class MockIVisualHost implements IVisualHost {
-        private colorPaletteInstance: IColorPalette;
-        private selectionManager: ISelectionManager;
-        private tooltipServiceInstance: ITooltipService;
-        private localeInstance: MockILocale;
-        private allowInteractionsInstance: MockIAllowInteractions;
+// powerbi.extensibility.visual
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-        constructor(
-            colorPalette?: IColorPalette,
-            selectionManager?: ISelectionManager,
-            tooltipServiceInstance?: ITooltipService,
-            localeInstance?: MockILocale,
-            allowInteractionsInstance?: MockIAllowInteractions) {
+export class MockIVisualHost implements IVisualHost {
+    private colorPaletteInstance: IColorPalette;
+    private selectionManager: ISelectionManager;
+    private tooltipServiceInstance: ITooltipService;
+    private localeInstance: MockILocale;
+    private allowInteractionsInstance: MockIAllowInteractions;
 
-            this.colorPaletteInstance = colorPalette;
-            this.selectionManager = selectionManager;
-            this.tooltipServiceInstance = tooltipServiceInstance;
-            this.localeInstance = localeInstance;
-            this.allowInteractionsInstance = allowInteractionsInstance;
-        }
+    constructor(
+        colorPalette?: IColorPalette,
+        selectionManager?: ISelectionManager,
+        tooltipServiceInstance?: ITooltipService,
+        localeInstance?: MockILocale,
+        allowInteractionsInstance?: MockIAllowInteractions) {
 
-        public createSelectionIdBuilder(): ISelectionIdBuilder {
-            return createSelectionIdBuilder();
-        }
+        this.colorPaletteInstance = colorPalette;
+        this.selectionManager = selectionManager;
+        this.tooltipServiceInstance = tooltipServiceInstance;
+        this.localeInstance = localeInstance;
+        this.allowInteractionsInstance = allowInteractionsInstance;
+    }
 
-        public createSelectionManager(): ISelectionManager {
-            return this.selectionManager;
-        }
+    public createSelectionIdBuilder(): ISelectionIdBuilder {
+        return createSelectionIdBuilder();
+    }
 
-        public get colorPalette(): IColorPalette {
-            return this.colorPaletteInstance;
-        }
+    public createSelectionManager(): ISelectionManager {
+        return this.selectionManager;
+    }
 
-        public get locale(): string{
-            return this.localeInstance.locale;
-        }
+    public get colorPalette(): IColorPalette {
+        return this.colorPaletteInstance;
+    }
 
-        public set locale(language){
-            this.localeInstance.locale = language;
-        }
+    public get locale(): string {
+        return this.localeInstance.locale;
+    }
 
-        public persistProperties(changes: VisualObjectInstancesToPersist) { };
+    public set locale(language) {
+        this.localeInstance.locale = language;
+    }
 
-        public get tooltipService(): ITooltipService {
-            return this.tooltipServiceInstance;
-        }
+    public persistProperties(changes: VisualObjectInstancesToPersist) { };
 
-        public allowInteractions(): boolean {
-            return this.allowInteractionsInstance.isEnabled;
-        }
+    public get tooltipService(): ITooltipService {
+        return this.tooltipServiceInstance;
+    }
+
+    public allowInteractions(): boolean {
+        return this.allowInteractionsInstance.isEnabled;
     }
 }

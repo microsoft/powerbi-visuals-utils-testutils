@@ -24,55 +24,48 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
+import { testDom, getRandomNumber, getRandomNumbers } from "../../src/helpers/helpers";
+describe("testDom", () => {
+    it("should return an element", () => {
+        let element: JQuery = testDom(500, 500);
 
-module powerbi.extensibility.utils.test.helpers.test {
-    import testDom = powerbi.extensibility.utils.test.helpers.testDom;
-    import getRandomNumber = powerbi.extensibility.utils.test.helpers.getRandomNumber;
-    import getRandomNumbers = powerbi.extensibility.utils.test.helpers.getRandomNumbers;
+        expect(element.get(0)).toBeDefined();
+    });
+});
 
-    describe("testDom", () => {
-        it("should return an element", () => {
-            let element: JQuery = testDom(500, 500);
+describe("getRandomNumber", () => {
+    it("should return a number between min and max", () => {
+        const min: number = 150,
+            max: number = 300;
 
-            expect(element.get(0)).toBeDefined();
-        });
+        let result: number = getRandomNumber(min, max);
+
+        expect(result).toBeGreaterThan(min);
+        expect(result).toBeLessThan(max);
+    });
+});
+
+describe("getRandomNumbers", () => {
+    it("should return an array with given length", () => {
+        const min: number = 150,
+            max: number = 300,
+            length: number = 15;
+
+        let result: number[] = getRandomNumbers(length, min, max);
+
+        expect(result.length).toBe(length);
     });
 
-    describe("getRandomNumber", () => {
-        it("should return a number between min and max", () => {
-            const min: number = 150,
-                max: number = 300;
+    it("should return an array of number that are between min and max", () => {
+        const min: number = 150,
+            max: number = 300,
+            length: number = 15;
 
-            let result: number = getRandomNumber(min, max);
+        let result: number[] = getRandomNumbers(length, min, max);
 
-            expect(result).toBeGreaterThan(min);
-            expect(result).toBeLessThan(max);
+        result.forEach((value: number) => {
+            expect(value).toBeGreaterThan(min);
+            expect(value).toBeLessThan(max);
         });
     });
-
-    describe("getRandomNumbers", () => {
-        it("should return an array with given length", () => {
-            const min: number = 150,
-                max: number = 300,
-                length: number = 15;
-
-            let result: number[] = getRandomNumbers(length, min, max);
-
-            expect(result.length).toBe(length);
-        });
-
-        it("should return an array of number that are between min and max", () => {
-            const min: number = 150,
-                max: number = 300,
-                length: number = 15;
-
-            let result: number[] = getRandomNumbers(length, min, max);
-
-            result.forEach((value: number) => {
-                expect(value).toBeGreaterThan(min);
-                expect(value).toBeLessThan(max);
-            });
-        });
-    });
-}
+});
