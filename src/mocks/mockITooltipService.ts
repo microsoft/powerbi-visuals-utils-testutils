@@ -24,20 +24,23 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    export class MockITooltipService implements ITooltipService {
-        private isEnabled: boolean;
+import ITooltipService = powerbi.extensibility.ITooltipService;
+import TooltipShowOptions = powerbi.extensibility.TooltipShowOptions;
+import TooltipMoveOptions = powerbi.extensibility.TooltipMoveOptions;
+import TooltipHideOptions = powerbi.extensibility.TooltipHideOptions;
 
-        constructor(isEnabled: boolean = true) {
-            this.isEnabled = isEnabled;
-        }
+export class MockITooltipService implements ITooltipService {
+    private isEnabled: boolean;
 
-        public enabled(): boolean {
-            return this.isEnabled;
-        }
-
-        public show(options: TooltipShowOptions): void { }
-        public move(options: TooltipMoveOptions): void { }
-        public hide(options: TooltipHideOptions): void { }
+    constructor(isEnabled: boolean = true) {
+        this.isEnabled = isEnabled;
     }
+
+    public enabled(): boolean {
+        return this.isEnabled;
+    }
+
+    public show(options: TooltipShowOptions): void { }
+    public move(options: TooltipMoveOptions): void { }
+    public hide(options: TooltipHideOptions): void { }
 }

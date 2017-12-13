@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    export class MockIAllowInteractions {
-        constructor(public isEnabled: boolean = false) {}
-    }
+export class MockIAllowInteractions {
+    constructor(public isEnabled: boolean = false) { }
 }
