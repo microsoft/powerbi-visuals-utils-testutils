@@ -1,3 +1,3 @@
 import { testDom } from "./helpers/helpers";
-export declare function d3_test(): void;
-export { testDom };
+import { createVisualHost, createSelectionId } from "./mocks/mocks";
+export { testDom, createVisualHost, createSelectionId };
