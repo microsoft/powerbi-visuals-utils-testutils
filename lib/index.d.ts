@@ -94,7 +94,7 @@ declare module powerbi.extensibility.utils.test.mocks {
     import ITelemetryService = powerbi.extensibility.ITelemetryService;
     class MockITelemetryService implements ITelemetryService {
         instanceId: string;
-        trace(type: VisualEventType, payload?: string): void;
+        trace(veType: VisualEventType, payload?: string): void;
     }
 }
 declare module powerbi.extensibility.utils.test.mocks {
