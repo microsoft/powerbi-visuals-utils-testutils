@@ -7,7 +7,7 @@
     "outFile": "./lib/index.js"
   },
   "files": [
-    "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.4.0/PowerBI-visuals.d.ts",
+    "node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.10.0/PowerBI-visuals.d.ts",
     "typings/index.d.ts",
     "src/common.ts",
     "src/mocks/mockILocale.ts",
@@ -17,6 +17,9 @@
     "src/mocks/mockISelectionIdBuilder.ts",
     "src/mocks/mockISelectionManager.ts",
     "src/mocks/mockITooltipService.ts",
+    "src/mocks/mockILocalizationManager.ts",
+    "src/mocks/mockITelemetryService.ts",
+    "src/mocks/mockIAuthenticationService.ts",
     "src/mocks/mockVisualHost.ts",
     "src/mocks/mocks.ts",
     "src/helpers/helpers.ts",
