@@ -81,7 +81,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
             });
         }
 
-        static getValuesTable(categories?: DataViewCategoryColumn[], values?: DataViewValueColumn[]): any[][] {            
+        static getValuesTable(categories?: DataViewCategoryColumn[], values?: DataViewValueColumn[]): any[][] {
             let columns: any[] = _.sortBy((categories || [] as DataViewCategoricalColumn[]).concat(<DataViewCategoricalColumn[]>values || []), x => x.source.index),
                 maxLength: number = _.max(columns.map(x => x.values.length));
 
