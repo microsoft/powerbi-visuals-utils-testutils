@@ -82,7 +82,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
         }
 
         static getValuesTable(categories?: DataViewCategoryColumn[], values?: DataViewValueColumn[]): any[][] {
-            let columns = _.sortBy((categories || []).concat(<DataViewCategoricalColumn[]>values || []), x => x.source.index),
+            let columns: any[] = _.sortBy((categories || [] as DataViewCategoricalColumn[]).concat(<DataViewCategoricalColumn[]>values || []), x => x.source.index),
                 maxLength: number = _.max(columns.map(x => x.values.length));
 
             return _.range(maxLength).map(i => columns.map(x => x.values[i]));
@@ -104,7 +104,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
             let resultValuesColumns = _.isEmpty(valuesColumns) ? [] : (<DataViewBuilderValuesColumnOptions[]>_
                 .flatten(valuesColumns)).filter(filterColumns);
 
-            let allColumns = (resultCategoriesColumns || []).concat(<DataViewCategoricalColumn[]>resultValuesColumns || []);
+            let allColumns = (resultCategoriesColumns || [] as DataViewCategoricalColumn[]).concat(<DataViewCategoricalColumn[]>resultValuesColumns || []);
 
             allColumns.forEach((x: DataViewCategoricalColumn, i) => x.source.index = i);
 
@@ -182,7 +182,7 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
 
                 // Table.
                 dataView.table = {
-                    columns: dataView.categorical.categories.concat(
+                    columns: (dataView.categorical.categories as DataViewCategoricalColumn[]).concat(
                         <powerbi.DataViewCategoricalColumn[]>dataView.categorical.values || []).map(x => x.source),
                     identityFields: category.identityFields,
                     rows: TestDataViewBuilder.getValuesTable(dataView.categorical.categories, dataView.categorical.values)

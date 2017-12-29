@@ -24,6 +24,12 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../typings/index.d.ts" />
-/// <reference path="../lib/index.d.ts" />
-/// <reference path="../node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.10.0/PowerBI-visuals.d.ts" />
+module powerbi.extensibility.utils.test.mocks {
+    // powerbi.extensibility
+    import ITelemetryService = powerbi.extensibility.ITelemetryService;
+
+    export class MockITelemetryService implements ITelemetryService {
+        instanceId: string;
+        trace(veType: VisualEventType, payload?: string) { }
+    }
+}

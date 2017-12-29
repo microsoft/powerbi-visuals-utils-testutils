@@ -35,6 +35,9 @@ module powerbi.extensibility.utils.test.mocks {
     // powerbi.extensibility
     import IColorPalette = powerbi.extensibility.IColorPalette;
     import ISelectionManager = powerbi.extensibility.ISelectionManager;
+    import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
+    import ITelemetryService = powerbi.extensibility.ITelemetryService;
+    import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
     import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
     // powerbi.extensibility.utils.test.mocks
@@ -46,14 +49,20 @@ module powerbi.extensibility.utils.test.mocks {
     import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
     import MockILocale = powerbi.extensibility.utils.test.mocks.MockILocale;
     import MockIAllowInteractions = powerbi.extensibility.utils.test.mocks.MockIAllowInteractions;
+    import MockILocalizationManager = powerbi.extensibility.utils.test.mocks.MockILocalizationManager;
+    import MockITelemetryService = powerbi.extensibility.utils.test.mocks.MockITelemetryService;
+    import MockIAuthenticationService = powerbi.extensibility.utils.test.mocks.MockIAuthenticationService;
 
-    export function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost {
+    export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
         return new MockVisualHost(
-            createColorPalette(),
+            createColorPalette(colors),
             createSelectionManager(),
-            createTooltipService(true),
+            createTooltipService(isEnabled),
             createLocale(locale),
-            createAllowInteractions(allowInteractions));
+            createAllowInteractions(allowInteractions),
+            createLocalizationManager(displayNames),
+            createTelemetryService(),
+            createAuthenticationService(token));
     }
 
     export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -82,5 +91,17 @@ module powerbi.extensibility.utils.test.mocks {
 
     export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
         return new MockIAllowInteractions(isEnabled);
+    }
+
+    export function createLocalizationManager(displayNames?: any): ILocalizationManager {
+        return new MockILocalizationManager(displayNames);
+    }
+
+    export function createTelemetryService(): ITelemetryService {
+        return new MockITelemetryService();
+    }
+
+    export function createAuthenticationService(token?: string): IAuthenticationService {
+        return new MockIAuthenticationService(token);
     }
 }

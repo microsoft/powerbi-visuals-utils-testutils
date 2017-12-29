@@ -388,7 +388,8 @@ module powerbi.extensibility.utils.test.dataViewBuilder {
 
         return {
             expr: {},
-            key: ""
+            key: "",
+            kind: DataRepetitionKind.ScopeIdentity
         };
     }
 

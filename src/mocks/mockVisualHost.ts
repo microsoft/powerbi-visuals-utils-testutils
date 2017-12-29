@@ -34,6 +34,9 @@ module powerbi.extensibility.utils.test.mocks {
     // powerbi.extensibility
     import ISelectionManager = powerbi.extensibility.ISelectionManager;
     import IColorPalette = powerbi.extensibility.IColorPalette;
+    import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
+    import ITelemetryService = powerbi.extensibility.ITelemetryService;
+    import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
 
     // powerbi.extensibility.visual
     import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -44,19 +47,27 @@ module powerbi.extensibility.utils.test.mocks {
         private tooltipServiceInstance: ITooltipService;
         private localeInstance: MockILocale;
         private allowInteractionsInstance: MockIAllowInteractions;
+        private localizationManager: ILocalizationManager;
+        private telemetryService: ITelemetryService;
+        private authService: IAuthenticationService;
 
         constructor(
             colorPalette?: IColorPalette,
             selectionManager?: ISelectionManager,
             tooltipServiceInstance?: ITooltipService,
             localeInstance?: MockILocale,
-            allowInteractionsInstance?: MockIAllowInteractions) {
+            allowInteractionsInstance?: MockIAllowInteractions,
+            localizationManager?: ILocalizationManager,
+            telemetryService?: ITelemetryService,
+            authService?: IAuthenticationService) {
 
             this.colorPaletteInstance = colorPalette;
             this.selectionManager = selectionManager;
             this.tooltipServiceInstance = tooltipServiceInstance;
             this.localeInstance = localeInstance;
             this.allowInteractionsInstance = allowInteractionsInstance;
+            this.telemetryService = telemetryService;
+            this.authService = authService;
         }
 
         public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -85,8 +96,30 @@ module powerbi.extensibility.utils.test.mocks {
             return this.tooltipServiceInstance;
         }
 
-        public allowInteractions(): boolean {
+        public get allowInteractions(): boolean {
             return this.allowInteractionsInstance.isEnabled;
+        }
+
+        public applyJsonFilter(filter: IFilter, objectName: string, propertyName: string, action: FilterAction) { };
+
+        public launchUrl(url: string) { };
+
+        public refreshHostData() { };
+
+        public createLocalizationManager(): ILocalizationManager {
+            return this.localizationManager;
+        }
+
+        public get telemetry(): ITelemetryService {
+            return this.telemetryService;
+        }
+
+        public get authenticationService(): IAuthenticationService {
+            return this.authService;
+        }
+
+        public get instanceId(): string {
+            return this.instanceId;
         }
     }
 }

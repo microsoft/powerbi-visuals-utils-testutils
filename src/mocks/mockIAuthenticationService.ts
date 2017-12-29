@@ -24,6 +24,23 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../typings/index.d.ts" />
-/// <reference path="../lib/index.d.ts" />
-/// <reference path="../node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.10.0/PowerBI-visuals.d.ts" />
+module powerbi.extensibility.utils.test.mocks {
+    // powerbi.extensibility
+    import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
+
+    export class MockIAuthenticationService implements IAuthenticationService  {
+        private token;
+
+        constructor(token: string) {
+            this.token = token;
+        }
+
+        getAADToken(visualId?: string): IPromise<string> {
+            let deferred: JQueryDeferred<any> = $.Deferred();
+
+            deferred.resolve(this.token);
+
+            return deferred as any;
+        }
+    }
+}
