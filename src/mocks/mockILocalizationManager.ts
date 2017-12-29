@@ -29,7 +29,7 @@ module powerbi.extensibility.utils.test.mocks {
     import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
 
     export class MockILocalizationManager implements ILocalizationManager  {
-        private displayNames;
+        private displayNames: {[key: string]: string} = {};
 
         private static DefaultDispalyNames = {
             "Visual_General": "General",
@@ -66,12 +66,12 @@ module powerbi.extensibility.utils.test.mocks {
         }
 
         getDisplayName(key: string): string {
-            let displayName = this.displayNames[key];
+            let displayName: string = this.displayNames[key];
             if (displayName) {
                 return displayName;
             }
 
-            let defaultDisplayNames = MockILocalizationManager.DefaultDispalyNames;
+            let defaultDisplayNames: {[key: string]: string} = MockILocalizationManager.DefaultDispalyNames;
             displayName = defaultDisplayNames[key];
 
             return displayName;
