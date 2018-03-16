@@ -63,6 +63,7 @@ declare module powerbi.extensibility.utils.test.mocks {
     import ISelectionManager = powerbi.extensibility.ISelectionManager;
     class MockISelectionManager implements ISelectionManager {
         private selectionIds;
+        registerOnSelectCallback(callback: (ids: extensibility.ISelectionId[]) => void): void;
         select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]>;
         hasSelection(): boolean;
         clear(): IPromise<{}>;

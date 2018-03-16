@@ -37,6 +37,9 @@ module powerbi.extensibility.utils.test.mocks {
     export class MockISelectionManager implements ISelectionManager {
         private selectionIds: ISelectionId[] = [];
 
+        public registerOnSelectCallback(callback: (ids: extensibility.ISelectionId[]) => void): void {
+        }
+
         public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
             let selectionIds: ISelectionId[] = [].concat(selectionId),
                 deferred: JQueryDeferred<any> = $.Deferred();
