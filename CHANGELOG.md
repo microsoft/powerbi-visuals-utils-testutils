@@ -1,3 +1,6 @@
+## 1.2.0
+* Added support of API 1.11
+
 ## 1.1.0
 * Added support of API 1.10
 
