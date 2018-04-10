@@ -68,6 +68,7 @@ module powerbi.extensibility.utils.test.mocks {
             this.allowInteractionsInstance = allowInteractionsInstance;
             this.telemetryService = telemetryService;
             this.authService = authService;
+            this.localizationManager = localizationManager;
         }
 
         public createSelectionIdBuilder(): ISelectionIdBuilder {

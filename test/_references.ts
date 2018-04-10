@@ -26,4 +26,4 @@
 
 /// <reference path="../typings/index.d.ts" />
 /// <reference path="../lib/index.d.ts" />
-/// <reference path="../node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.10.0/PowerBI-visuals.d.ts" />
+/// <reference path="../node_modules/powerbi-visuals-tools/templates/visuals/.api/v1.11.0/PowerBI-visuals.d.ts" />

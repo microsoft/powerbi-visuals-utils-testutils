@@ -1,3 +1,6 @@
+## 1.2.1
+* Fixed issue with mock of LocalizationManager
+
 ## 1.2.0
 * Added support of API 1.11
 
