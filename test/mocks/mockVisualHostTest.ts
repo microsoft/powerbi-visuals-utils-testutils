@@ -64,5 +64,11 @@ module powerbi.extensibility.utils.test.mocks.test {
                 expect(visualHost.locale).not.toBeNull();
             });
         });
+
+        describe("createLocalizationManager", () => {
+            it("shouldn't return null", () => {
+                expect(visualHost.createLocalizationManager()).not.toBeNull();
+            });
+        });
     });
 }

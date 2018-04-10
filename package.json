@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "TestUtils",
   "main": "lib/index.js",
   "repository": {
