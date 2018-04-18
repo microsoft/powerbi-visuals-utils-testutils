@@ -1,3 +1,4 @@
+/// <reference types="powerbi-visuals-tools" />
 import Selector = powerbi.data.Selector;
 import ISelectionId = powerbi.visuals.ISelectionId;
 export declare class MockISelectionId implements ISelectionId {

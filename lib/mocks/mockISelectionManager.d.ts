@@ -1,3 +1,4 @@
+/// <reference types="powerbi-visuals-tools" />
 import IPromise = powerbi.IPromise;
 import ISelectionId = powerbi.visuals.ISelectionId;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
