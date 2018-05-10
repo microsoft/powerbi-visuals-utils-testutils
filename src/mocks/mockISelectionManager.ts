@@ -25,6 +25,7 @@
  */
 
 // powerbi
+import powerbi from "powerbi-visuals-tools";
 import IPromise = powerbi.IPromise;
 
 // powerbi.visuals

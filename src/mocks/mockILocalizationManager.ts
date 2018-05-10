@@ -24,6 +24,7 @@
 *  THE SOFTWARE.
 */
 // powerbi.extensibility
+import powerbi from "powerbi-visuals-tools";
 import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
 
 export class MockILocalizationManager implements ILocalizationManager {

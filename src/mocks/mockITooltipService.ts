@@ -23,7 +23,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
+import powerbi from "powerbi-visuals-tools";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 import TooltipShowOptions = powerbi.extensibility.TooltipShowOptions;
 import TooltipMoveOptions = powerbi.extensibility.TooltipMoveOptions;
