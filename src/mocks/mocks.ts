@@ -31,6 +31,9 @@ import { MockIAllowInteractions } from "./mockIAllowInteractions";
 import { MockITooltipService } from "./mockITooltipService";
 import { MockISelectionManager } from "./mockISelectionManager";
 import { MockISelectionIdBuilder } from "./mockISelectionIdBuilder";
+import { MockIAuthenticationService } from "./mockIAuthenticationService";
+import { MockITelemetryService } from "./mockITelemetryService";
+import { MockILocalizationManager } from "./mockILocalizationManager";
 import { MockISelectionId } from "./mockISelectionId";
 import { MockIColorPalette } from "./mockIColorPalette";
 import { MockIVisualHost } from "./mockVisualHost";
@@ -46,13 +49,16 @@ import IColorPalette = powerbi.extensibility.IColorPalette;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-export function createVisualHost(locale?: Object, allowInteractions?: boolean): IVisualHost {
+export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
     return new MockIVisualHost(
-        createColorPalette(),
+        createColorPalette(colors),
         createSelectionManager(),
-        createTooltipService(true),
+        createTooltipService(isEnabled),
         createLocale(locale),
-        createAllowInteractions(allowInteractions));
+        createAllowInteractions(allowInteractions),
+        createLocalizationManager(displayNames),
+        createTelemetryService(),
+        createAuthenticationService(token));
 }
 
 export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -81,4 +87,16 @@ export function createLocale(locales?: Object): MockILocale {
 
 export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
     return new MockIAllowInteractions(isEnabled);
+}
+
+export function createLocalizationManager(displayNames?: any): powerbi.extensibility.ILocalizationManager {
+    return new MockILocalizationManager(displayNames);
+}
+
+export function createTelemetryService(): powerbi.extensibility.ITelemetryService {
+    return new MockITelemetryService();
+}
+
+export function createAuthenticationService(token?: string): powerbi.extensibility.IAuthenticationService {
+    return new MockIAuthenticationService(token);
 }

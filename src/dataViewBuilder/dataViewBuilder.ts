@@ -401,7 +401,8 @@ function getScopeIdentity(
 
     return {
         expr: {},
-        key: ""
+        key: "",
+        kind: 0
     };
 }
 

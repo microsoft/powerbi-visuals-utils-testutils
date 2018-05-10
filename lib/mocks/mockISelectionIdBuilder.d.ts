@@ -1,3 +1,4 @@
+/// <reference types="powerbi-visuals-tools" />
 import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
 import DataViewValueColumn = powerbi.DataViewValueColumn;
 import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;

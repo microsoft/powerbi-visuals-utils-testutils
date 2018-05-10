@@ -36,6 +36,8 @@ import ISelectionManager = powerbi.extensibility.ISelectionManager;
 export class MockISelectionManager implements ISelectionManager {
     private selectionIds: ISelectionId[] = [];
 
+    private callback: (ids: ISelectionId[]) => void;
+
     public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
         let selectionIds: ISelectionId[] = [].concat(selectionId),
             deferred: JQueryDeferred<any> = $.Deferred();
@@ -87,5 +89,13 @@ export class MockISelectionManager implements ISelectionManager {
         return this.selectionIds.some((selectionId: ISelectionId) => {
             return selectionId.equals(id);
         });
+    }
+
+    public registerOnSelectCallback(callback: (ids: ISelectionId[]) => void): void {
+        this.callback = callback;
+    }
+
+    public simutateSelection(selections: ISelectionId[]): void {
+        this.callback(selections);
     }
 }

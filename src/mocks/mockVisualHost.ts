@@ -48,19 +48,28 @@ export class MockIVisualHost implements IVisualHost {
     private tooltipServiceInstance: ITooltipService;
     private localeInstance: MockILocale;
     private allowInteractionsInstance: MockIAllowInteractions;
+    private localizationManager: powerbi.extensibility.ILocalizationManager;
+    private telemetryService: powerbi.extensibility.ITelemetryService;
+    private authService: powerbi.extensibility.IAuthenticationService;
 
     constructor(
         colorPalette?: IColorPalette,
         selectionManager?: ISelectionManager,
         tooltipServiceInstance?: ITooltipService,
         localeInstance?: MockILocale,
-        allowInteractionsInstance?: MockIAllowInteractions) {
+        allowInteractionsInstance?: MockIAllowInteractions,
+        localizationManager?: powerbi.extensibility.ILocalizationManager,
+        telemetryService?: powerbi.extensibility.ITelemetryService,
+        authService?: powerbi.extensibility.IAuthenticationService) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
         this.tooltipServiceInstance = tooltipServiceInstance;
         this.localeInstance = localeInstance;
         this.allowInteractionsInstance = allowInteractionsInstance;
+        this.telemetryService = telemetryService;
+        this.authService = authService;
+        this.localizationManager = localizationManager;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -83,13 +92,42 @@ export class MockIVisualHost implements IVisualHost {
         this.localeInstance.locale = language;
     }
 
+    public applyJsonFilter (filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
+
+    }
+
+    public get telemetry() {
+        return this.telemetryService;
+    }
+
+    public get authenticationService() {
+        return this.authenticationService;
+    }
+
     public persistProperties(changes: VisualObjectInstancesToPersist) { };
 
     public get tooltipService(): ITooltipService {
         return this.tooltipServiceInstance;
     }
 
-    public allowInteractions(): boolean {
+    public get allowInteractions(): boolean {
         return this.allowInteractionsInstance.isEnabled;
+    }
+
+    public launchUrl(url: string) {
+        window.open(url);
+    }
+
+    public get instanceId() {
+        return "instanceId";
+    }
+
+    public refreshHostData() {
+    }
+
+    public createLocalizationManager(): powerbi.extensibility.ILocalizationManager {
+        return {
+            getDisplayName: (key: string) => ""
+        }
     }
 }

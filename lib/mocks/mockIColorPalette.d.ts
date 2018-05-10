@@ -1,3 +1,4 @@
+/// <reference types="powerbi-visuals-tools" />
 import IColorPalette = powerbi.extensibility.IColorPalette;
 import IColorInfo = powerbi.IColorInfo;
 export declare class MockIColorPalette implements IColorPalette {

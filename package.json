@@ -28,6 +28,7 @@
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\""
   },
   "devDependencies": {
+    "@types/powerbi-visuals-tools": "1.11.0",
     "@types/d3-timer": "^1.0.6",
     "@types/jasmine": "^2.8.2",
     "@types/jasmine-jquery": "^1.5.32",

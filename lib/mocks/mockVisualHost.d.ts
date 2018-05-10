@@ -1,3 +1,4 @@
+/// <reference types="powerbi-visuals-tools" />
 import ITooltipService = powerbi.extensibility.ITooltipService;
 import { MockILocale } from "./mockILocale";
 import { MockIAllowInteractions } from "./mockIAllowInteractions";
@@ -12,12 +13,22 @@ export declare class MockIVisualHost implements IVisualHost {
     private tooltipServiceInstance;
     private localeInstance;
     private allowInteractionsInstance;
-    constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager, tooltipServiceInstance?: ITooltipService, localeInstance?: MockILocale, allowInteractionsInstance?: MockIAllowInteractions);
+    private localizationManager;
+    private telemetryService;
+    private authService;
+    constructor(colorPalette?: IColorPalette, selectionManager?: ISelectionManager, tooltipServiceInstance?: ITooltipService, localeInstance?: MockILocale, allowInteractionsInstance?: MockIAllowInteractions, localizationManager?: powerbi.extensibility.ILocalizationManager, telemetryService?: powerbi.extensibility.ITelemetryService, authService?: powerbi.extensibility.IAuthenticationService);
     createSelectionIdBuilder(): ISelectionIdBuilder;
     createSelectionManager(): ISelectionManager;
     readonly colorPalette: IColorPalette;
     locale: string;
+    applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction): void;
+    readonly telemetry: powerbi.extensibility.ITelemetryService;
+    readonly authenticationService: any;
     persistProperties(changes: VisualObjectInstancesToPersist): void;
     readonly tooltipService: ITooltipService;
-    allowInteractions(): boolean;
+    readonly allowInteractions: boolean;
+    launchUrl(url: string): void;
+    readonly instanceId: string;
+    refreshHostData(): void;
+    createLocalizationManager(): powerbi.extensibility.ILocalizationManager;
 }
