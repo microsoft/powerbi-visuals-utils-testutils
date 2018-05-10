@@ -25,6 +25,7 @@
  */
 
 // powerbi.extensibility
+import powerbi from "powerbi-visuals-tools";
 import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
 
 export class MockIAuthenticationService implements IAuthenticationService  {

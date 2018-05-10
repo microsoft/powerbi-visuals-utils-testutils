@@ -25,6 +25,7 @@
  */
 
 // powerbi.extensibility
+import powerbi from "powerbi-visuals-tools";
 import ITelemetryService = powerbi.extensibility.ITelemetryService;
 
 export class MockITelemetryService implements ITelemetryService {

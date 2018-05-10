@@ -25,6 +25,7 @@
  */
 
 // powerbi.extensibility
+import powerbi from "powerbi-visuals-tools";
 import IColorPalette = powerbi.extensibility.IColorPalette;
 import IColorInfo = powerbi.IColorInfo;
 

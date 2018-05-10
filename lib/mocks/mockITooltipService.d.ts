@@ -1,4 +1,5 @@
 /// <reference types="powerbi-visuals-tools" />
+import powerbi from "powerbi-visuals-tools";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 import TooltipShowOptions = powerbi.extensibility.TooltipShowOptions;
 import TooltipMoveOptions = powerbi.extensibility.TooltipMoveOptions;

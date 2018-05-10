@@ -1,4 +1,5 @@
 /// <reference types="powerbi-visuals-tools" />
+import powerbi from "powerbi-visuals-tools";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 import { MockILocale } from "./mockILocale";
 import { MockIAllowInteractions } from "./mockIAllowInteractions";
