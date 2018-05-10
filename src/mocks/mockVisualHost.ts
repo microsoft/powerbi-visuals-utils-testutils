@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 
+import powerbi from "powerbi-visuals-tools";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
 import { createSelectionIdBuilder } from "./mocks";

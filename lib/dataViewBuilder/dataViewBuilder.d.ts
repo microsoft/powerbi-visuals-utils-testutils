@@ -1,4 +1,5 @@
 /// <reference types="powerbi-visuals-tools" />
+import powerbi from "powerbi-visuals-tools";
 import DataView = powerbi.DataView;
 import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
 import DataViewMetadataColumn = powerbi.DataViewMetadataColumn;

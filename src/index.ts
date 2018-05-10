@@ -19,6 +19,8 @@ import {
     createTooltipService
 } from "./mocks/mocks";
 import { setGrouped, createValueColumns, createCategoricalDataViewBuilder } from "./dataViewBuilder/dataViewBuilder";
+import * as visualBuilderBase from "./VisualBuilderBase";
+import VisualBuilderBase = visualBuilderBase.VisualBuilderBase;
 
 export {
     testDom,
@@ -39,5 +41,6 @@ export {
     createTooltipService,
     setGrouped,
     createValueColumns,
-    createCategoricalDataViewBuilder
+    createCategoricalDataViewBuilder,
+    VisualBuilderBase
 };

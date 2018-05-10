@@ -25,7 +25,9 @@
  */
 
 // powerbi.data
+import powerbi from "powerbi-visuals-tools";
 import Selector = powerbi.data.Selector;
+import SelectorsByColumn = powerbi.data.SelectorsByColumn;
 
 // powerbi.visuals
 import ISelectionId = powerbi.visuals.ISelectionId;
@@ -53,7 +55,7 @@ export class MockISelectionId implements ISelectionId {
         return {};
     }
 
-    public getSelectorsByColumn(): Selector {
+    public getSelectorsByColumn(): SelectorsByColumn {
         return {};
     }
 
