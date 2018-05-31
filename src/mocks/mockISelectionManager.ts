@@ -27,6 +27,7 @@
 // powerbi
 import powerbi from "powerbi-visuals-tools";
 import IPromise = powerbi.IPromise;
+import * as $ from "jquery";
 
 // powerbi.visuals
 import ISelectionId = powerbi.visuals.ISelectionId;

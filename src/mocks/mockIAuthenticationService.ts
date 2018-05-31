@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 
+import * as $ from "jquery";
 // powerbi.extensibility
 import powerbi from "powerbi-visuals-tools";
 import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
