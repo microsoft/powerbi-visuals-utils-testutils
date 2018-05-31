@@ -25,6 +25,7 @@
  */
 import { timer, timerFlush } from "d3-timer";
 import * as _ from "lodash";
+import * as $ from "jquery";
 
 export function testDom(height: number | string, width: number | string): JQuery {
     let element: JQuery = $("<div></div>")
