@@ -6,7 +6,9 @@ import {
     createTouchesList,
     createTouchEndEvent,
     createTouchMoveEvent,
-    createTouchStartEvent
+    createTouchStartEvent,
+    getRandomNumber,
+    getRandomNumbers
 } from "./helpers/helpers";
 import {
     createVisualHost,
@@ -19,6 +21,7 @@ import {
     createTooltipService
 } from "./mocks/mocks";
 import { setGrouped, createValueColumns, createCategoricalDataViewBuilder } from "./dataViewBuilder/dataViewBuilder";
+import * as testDataViewBuilder from "./dataViewBuilder/testDataViewBuilder";
 import * as visualBuilderBase from "./VisualBuilderBase";
 import VisualBuilderBase = visualBuilderBase.VisualBuilderBase;
 
@@ -42,5 +45,8 @@ export {
     setGrouped,
     createValueColumns,
     createCategoricalDataViewBuilder,
-    VisualBuilderBase
+    VisualBuilderBase,
+    testDataViewBuilder,
+    getRandomNumber,
+    getRandomNumbers
 };
