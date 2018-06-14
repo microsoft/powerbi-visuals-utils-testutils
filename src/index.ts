@@ -1,3 +1,15 @@
+import { MockILocale } from "./mocks/mockILocale";
+import { MockIAllowInteractions } from "./mocks/mockIAllowInteractions";
+import { MockITooltipService } from "./mocks/mockITooltipService";
+import { MockISelectionManager } from "./mocks/mockISelectionManager";
+import { MockISelectionIdBuilder } from "./mocks/mockISelectionIdBuilder";
+import { MockIAuthenticationService } from "./mocks/mockIAuthenticationService";
+import { MockITelemetryService } from "./mocks/mockITelemetryService";
+import { MockILocalizationManager } from "./mocks/mockILocalizationManager";
+import { MockISelectionId } from "./mocks/mockISelectionId";
+import { MockIColorPalette } from "./mocks/mockIColorPalette";
+import { MockIVisualHost } from "./mocks/mockVisualHost";
+
 import {
     testDom,
     createContextMenuEvent,
@@ -8,8 +20,21 @@ import {
     createTouchMoveEvent,
     createTouchStartEvent,
     getRandomNumber,
-    getRandomNumbers
+    getRandomNumbers,
+    clickElement
 } from "./helpers/helpers";
+
+import {
+    assertColorsMatch,
+    getSolidColorStructuralObject,
+    RgbColor,
+    parseColorString
+} from "./helpers/color";
+
+import {
+    renderTimeout
+} from "./helpers/visualTestHelpers";
+
 import {
     createVisualHost,
     createSelectionId,
@@ -34,6 +59,7 @@ export {
     createTouchEndEvent,
     createTouchMoveEvent,
     createTouchStartEvent,
+    clickElement,
     createVisualHost,
     createSelectionId,
     createAllowInteractions,
@@ -48,5 +74,21 @@ export {
     VisualBuilderBase,
     testDataViewBuilder,
     getRandomNumber,
-    getRandomNumbers
+    getRandomNumbers,
+    MockILocale,
+    MockIAllowInteractions,
+    MockITooltipService,
+    MockISelectionManager,
+    MockISelectionIdBuilder,
+    MockIAuthenticationService,
+    MockITelemetryService,
+    MockILocalizationManager,
+    MockISelectionId,
+    MockIColorPalette,
+    MockIVisualHost,
+    renderTimeout,
+    assertColorsMatch,
+    getSolidColorStructuralObject,
+    RgbColor,
+    parseColorString
 };
