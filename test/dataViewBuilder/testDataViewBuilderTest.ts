@@ -25,6 +25,7 @@
  */
 
 import { TestDataViewBuilder } from "../../src/dataViewBuilder/testDataViewBuilder";
+import powerbi from "powerbi-visuals-tools";
 
 import DataView = powerbi.DataView;
 

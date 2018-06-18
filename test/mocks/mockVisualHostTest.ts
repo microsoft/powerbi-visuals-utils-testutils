@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 
+import powerbi from "powerbi-visuals-tools";
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import { MockIVisualHost } from "../../src/mocks/mockVisualHost";
 import { createVisualHost, createSelectionIdBuilder } from "../../src/mocks/mocks";

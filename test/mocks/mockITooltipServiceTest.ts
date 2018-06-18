@@ -27,6 +27,7 @@
 import { MockITooltipService } from "../../src/mocks/mockITooltipService";
 import { MockIVisualHost } from "../../src/mocks/mockVisualHost";
 
+import powerbi from "powerbi-visuals-tools";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
 import { createVisualHost, createTooltipService, } from "../../src/mocks/mocks";

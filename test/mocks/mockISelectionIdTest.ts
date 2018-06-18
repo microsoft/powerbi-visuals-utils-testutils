@@ -25,7 +25,9 @@
  */
 // powerbi.data
 
+import powerbi from "powerbi-visuals-tools";
 import Selector = powerbi.data.Selector;
+import SelectorsByColumn = powerbi.data.SelectorsByColumn;
 import ISelectionId = powerbi.visuals.ISelectionId;
 
 // powerbi.extensibility.utils.test.mocks
@@ -69,7 +71,7 @@ describe("MockISelectionId", () => {
 
     describe("getSelectorsByColumn", () => {
         it("should return a plain object", () => {
-            const selector: Selector = selectionId.getSelectorsByColumn();
+            const selector: SelectorsByColumn = selectionId.getSelectorsByColumn();
 
             expect(Object.keys(selector).length).toBe(0);
         });
