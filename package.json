@@ -28,7 +28,6 @@
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\""
   },
   "devDependencies": {
-    "@types/powerbi-visuals-tools": "1.11.0",
     "@types/d3-timer": "^1.0.6",
     "@types/jasmine": "^2.8.2",
     "@types/jasmine-jquery": "1.5.32",
@@ -36,6 +35,7 @@
     "@types/karma": "^1.7.2",
     "@types/lodash": "^4.14.86",
     "@types/node": "^8.0.56",
+    "@types/powerbi-visuals-tools": "1.11.0",
     "@types/webpack": "^3.8.1",
     "chalk": "^2.1.0",
     "coveralls": "2.11.15",
@@ -48,7 +48,8 @@
     "karma-jasmine": "1.1.0",
     "karma-remap-istanbul": "0.6.0",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-typescript-preprocessor": "0.3.1",
+    "karma-typescript": "^3.0.12",
+    "karma-typescript-preprocessor": "^0.3.1",
     "karma-webpack": "^2.0.6",
     "powerbi-visuals-tools": "^1.9.0",
     "ts-loader": "^3.1.1",

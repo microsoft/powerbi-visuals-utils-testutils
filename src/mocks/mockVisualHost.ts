@@ -129,6 +129,6 @@ export class MockIVisualHost implements IVisualHost {
     public createLocalizationManager(): powerbi.extensibility.ILocalizationManager {
         return {
             getDisplayName: (key: string) => ""
-        }
+        };
     }
 }

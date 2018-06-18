@@ -25,6 +25,7 @@
  */
 
 import { testDom, getRandomNumber, getRandomNumbers } from "../../src/helpers/helpers";
+
 describe("testDom", () => {
     it("should return an element", () => {
         let element: JQuery = testDom(500, 500);

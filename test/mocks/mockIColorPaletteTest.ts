@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 // powerbi
+import powerbi from "powerbi-visuals-tools";
 import IColorInfo = powerbi.IColorInfo;
 
 // // powerbi.extensibility
