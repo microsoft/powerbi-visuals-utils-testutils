@@ -32,6 +32,20 @@ import {
 } from "./helpers/color";
 
 import {
+    d3Click,
+    d3TouchStart,
+    d3TouchMove,
+    d3TouchEnd,
+    d3ContextMenu,
+    d3MouseDown,
+    d3MouseUp,
+    d3MouseOver,
+    d3MouseMove,
+    d3MouseOut,
+    d3KeyEvent
+} from "./helpers/helpers";
+
+import {
     renderTimeout
 } from "./helpers/visualTestHelpers";
 
@@ -90,5 +104,17 @@ export {
     assertColorsMatch,
     getSolidColorStructuralObject,
     RgbColor,
-    parseColorString
+    parseColorString,
+
+    d3Click,
+    d3TouchStart,
+    d3TouchMove,
+    d3TouchEnd,
+    d3ContextMenu,
+    d3MouseDown,
+    d3MouseUp,
+    d3MouseOver,
+    d3MouseMove,
+    d3MouseOut,
+    d3KeyEvent
 };
