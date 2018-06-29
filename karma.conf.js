@@ -26,28 +26,16 @@
 
 'use strict';
 
-const testRecursivePath = 'test/**/*.ts'
-    , srcOriginalRecursivePath = 'src/**/*.ts'
-    , srcRecursivePath = 'lib/**/*.js'
-    , coverageFolder = 'coverage';
+const testRecursivePath = 'test/**/*.ts';
+const srcOriginalRecursivePath = 'src/**/*.ts';
+const srcRecursivePath = 'lib/**/*.js';
+const coverageFolder = 'coverage';
+
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = (config) => {
-    let browsers = [];
-
-    if (process.env.TRAVIS) {
-        browsers.push('ChromeTravisCI');
-    } else {
-        browsers.push('Chrome');
-    }
-
     config.set({
-        customLaunchers: {
-            ChromeTravisCI: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
-            }
-        },
-        browsers: browsers,
+        browsers: ['ChromeHeadless'],
         colors: true,
         frameworks: ['jasmine'],
         reporters: [
@@ -83,15 +71,19 @@ module.exports = (config) => {
         },
         coverageReporter: {
             dir: coverageFolder,
-            reporters: [
-                { type: 'html' },
-                { type: 'lcov' }
+            reporters: [{
+                    type: 'html'
+                },
+                {
+                    type: 'lcov'
+                }
             ]
         },
         remapIstanbulReporter: {
             reports: {
                 lcovonly: coverageFolder + '/lcov.info',
-                html: coverageFolder
+                html: coverageFolder,
+                'text-summary': null
             }
         }
     });
