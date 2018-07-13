@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index",
   "types": "lib/index",
@@ -35,8 +35,8 @@
     "@types/karma": "^1.7.2",
     "@types/lodash": "^4.14.86",
     "@types/node": "^8.0.56",
-    "@types/powerbi-visuals-tools": "1.11.0",
     "@types/webpack": "^3.8.1",
+    "powerbi-visuals-api": "1.13.0",
     "chalk": "^2.1.0",
     "coveralls": "2.11.15",
     "jasmine": "3.1.0",
@@ -51,14 +51,14 @@
     "karma-typescript": "^3.0.12",
     "karma-typescript-preprocessor": "^0.3.1",
     "karma-webpack": "^2.0.6",
-    "powerbi-visuals-tools": "^1.9.0",
     "ts-loader": "^3.1.1",
     "ts-node": "^3.3.0",
     "tslint": "4.4.2",
     "tslint-microsoft-contrib": "^4.0.1",
     "typescript": "^2.5.3",
     "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "puppeteer": "^1.5.0"
   },
   "dependencies": {
     "d3-array": "^1.2.1",

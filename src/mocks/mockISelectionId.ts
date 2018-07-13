@@ -25,7 +25,7 @@
  */
 
 // powerbi.data
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 import Selector = powerbi.data.Selector;
 import SelectorsByColumn = powerbi.data.SelectorsByColumn;
 

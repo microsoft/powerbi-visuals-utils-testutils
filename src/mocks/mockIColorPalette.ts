@@ -25,8 +25,8 @@
  */
 
 // powerbi.extensibility
-import powerbi from "powerbi-visuals-tools";
-import IColorPalette = powerbi.extensibility.IColorPalette;
+import powerbi from "powerbi-visuals-api";
+import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import IColorInfo = powerbi.IColorInfo;
 
 export class MockIColorPalette implements IColorPalette {
@@ -104,5 +104,36 @@ export class MockIColorPalette implements IColorPalette {
         }
 
         return color;
+    }
+
+    isHighContrast: true;
+    foreground: {value: "#333333" };
+    foregroundLight: {value: "#FFF" };
+    foregroundDark: {value: "#000" };
+    foregroundNeutralLight: {value: "#EAEAEA" };
+    foregroundNeutralDark: {value: "#212121" };
+    foregroundNeutralSecondary: {value: "#666666" };
+    foregroundNeutralSecondaryAlt: {value: "#777777" };
+    foregroundNeutralSecondaryAlt2: {value: "#888888" };
+    foregroundNeutralTertiary: {value: "#A6A6A6" };
+    foregroundNeutralTertiaryAlt: {value: "#C8C8C8" };
+    foregroundSelected: {value: "#333333" };
+    foregroundButton: {value: "#666666" };
+    background: {value: "#FFF" };
+    backgroundLight: {value: "#EAEAEA" };
+    backgroundNeutral: {value: "#C8C8C8" };
+    backgroundDark: {value: "#000" };
+    hyperlink: {value: "#1F3A93" };
+    visitedHyperlink: {value: "#551A8B" };
+    mapPushpin: {value: "#FF5F00" };
+    shapeStroke: {value: "#01B8AA" };
+    selection: {value: undefined };
+    separator: {value: undefined };
+    negative: {value: undefined };
+    neutral: {value: undefined };
+    positive: {value: undefined };
+
+    public reset(): IColorPalette {
+        return this;
     }
 }

@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
 import { createSelectionIdBuilder } from "./mocks";
@@ -38,7 +38,7 @@ import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 
 // powerbi.extensibility
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
-import IColorPalette = powerbi.extensibility.IColorPalette;
+import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -121,6 +121,10 @@ export class MockIVisualHost implements IVisualHost {
 
     public get instanceId() {
         return "instanceId";
+    }
+
+    public fetchMoreData() {
+        return true;
     }
 
     public refreshHostData() {

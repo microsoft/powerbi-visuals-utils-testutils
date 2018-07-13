@@ -30,7 +30,7 @@ import { createVisualHost, createColorPalette } from "./mocks/mocks";
 import * as _ from "lodash";
 
 // powerbi
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 import DataView = powerbi.DataView;
 import IViewport = powerbi.IViewport;
 import VisualObjectInstance = powerbi.VisualObjectInstance;
