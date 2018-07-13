@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 import { createSelectionId } from "./mocks";
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 // powerbi
 import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
 import DataViewValueColumn = powerbi.DataViewValueColumn;

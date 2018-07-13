@@ -26,7 +26,7 @@
 
 import * as $ from "jquery";
 // powerbi.extensibility
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
 
 export class MockIAuthenticationService implements IAuthenticationService  {

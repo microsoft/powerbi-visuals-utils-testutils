@@ -23,7 +23,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
 import { MockILocale } from "./mockILocale";
@@ -45,7 +45,7 @@ import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 import ISelectionId = powerbi.visuals.ISelectionId;
 
 // powerbi.extensibility
-import IColorPalette = powerbi.extensibility.IColorPalette;
+import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
