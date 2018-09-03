@@ -26,16 +26,10 @@
 import powerbi from "powerbi-visuals-api";
 import DataView = powerbi.DataView;
 import DataViewObjects = powerbi.DataViewObjects;
-import ValueTypeDescriptor = powerbi.ValueTypeDescriptor;
 import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
 import DataViewMetadataColumn = powerbi.DataViewMetadataColumn;
-import DataViewColumnAggregates = powerbi.DataViewColumnAggregates;
 import PrimitiveValue = powerbi.PrimitiveValue;
-import DataViewScopeIdentity = powerbi.DataViewScopeIdentity;
 import DataViewValueColumn = powerbi.DataViewValueColumn;
-import DataViewValueColumns = powerbi.DataViewValueColumns;
-import DataViewCategorical = powerbi.DataViewCategorical;
-import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;
 import DataViewCategoricalColumn = powerbi.DataViewCategoricalColumn;
 
 import {
@@ -46,7 +40,6 @@ import {
 } from "./dataViewBuilder";
 
 import * as _ from "lodash";
-import { range } from "d3-array";
 
 export type CustomizeColumnFn = (source: DataViewMetadataColumn) => void;
 
