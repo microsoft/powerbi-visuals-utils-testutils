@@ -32,11 +32,18 @@ import SelectorsByColumn = powerbi.data.SelectorsByColumn;
 // powerbi.visuals
 import ISelectionId = powerbi.visuals.ISelectionId;
 
+let measureId: number = 0;
+
 export class MockISelectionId implements ISelectionId {
     private key: string;
-
+    private measures: number[];
     constructor(key: string) {
+        this.measures = [measureId++];
         this.key = key;
+    }
+
+    public compareMeasures = (current, others) => {
+        return current === others;
     }
 
     public equals(other: ISelectionId): boolean {

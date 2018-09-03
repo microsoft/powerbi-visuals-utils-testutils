@@ -21,7 +21,9 @@ import {
     createTouchStartEvent,
     getRandomNumber,
     getRandomNumbers,
-    clickElement
+    clickElement,
+    ClickEventType,
+    MouseEventType
 } from "./helpers/helpers";
 
 import {
@@ -116,5 +118,8 @@ export {
     d3MouseOver,
     d3MouseMove,
     d3MouseOut,
-    d3KeyEvent
+    d3KeyEvent,
+
+    ClickEventType,
+    MouseEventType
 };

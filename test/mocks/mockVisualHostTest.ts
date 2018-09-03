@@ -24,10 +24,9 @@
  *  THE SOFTWARE.
  */
 
-import powerbi from "powerbi-visuals-tools";
+import powerbi from "powerbi-visuals-api";
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
-import { MockIVisualHost } from "../../src/mocks/mockVisualHost";
-import { createVisualHost, createSelectionIdBuilder } from "../../src/mocks/mocks";
+import { createVisualHost } from "../../src/mocks/mocks";
 
 describe("MockIVisualHost", () => {
     let visualHost: IVisualHost;

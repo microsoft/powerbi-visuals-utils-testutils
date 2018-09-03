@@ -32,9 +32,9 @@ import ValueTypeDescriptor = powerbi.ValueTypeDescriptor;
 import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
 import DataViewMetadataColumn = powerbi.DataViewMetadataColumn;
 import DataViewColumnAggregates = powerbi.DataViewColumnAggregates;
+import DataRepetitionSelector = powerbi.data.DataRepetitionSelector;
 import PrimitiveValue = powerbi.PrimitiveValue;
 import DataViewCategorical = powerbi.DataViewCategorical;
-import DataViewScopeIdentity = powerbi.DataViewScopeIdentity;
 import DataViewValueColumn = powerbi.DataViewValueColumn;
 import DataViewValueColumns = powerbi.DataViewValueColumns;
 import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;
@@ -72,7 +72,7 @@ export interface DataViewBuilderCategoryColumnOptions extends DataViewBuilderCol
 /** Indicates the source set of identities. */
 export interface DataViewBuilderColumnIdentitySource {
     fields: any[];
-    identities?: DataViewScopeIdentity[];
+    identities?: DataRepetitionSelector[];
 }
 
 export interface DataViewBuilderValuesColumnOptions extends
@@ -392,9 +392,9 @@ function getScopeIdentity(
     source: DataViewBuilderColumnIdentitySource,
     index: number,
     value: PrimitiveValue,
-    valueType: ValueTypeDescriptor): DataViewScopeIdentity {
+    valueType: ValueTypeDescriptor): DataRepetitionSelector {
 
-    let identities: DataViewScopeIdentity[] = source.identities;
+    let identities: DataRepetitionSelector[] = source.identities;
 
     if (identities) {
         return identities[index];
