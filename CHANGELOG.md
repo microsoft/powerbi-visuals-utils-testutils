@@ -1,3 +1,6 @@
+## 2.1.0
+ * Injector for CreateSelectionId function
+
 ## 2.0.0
  * Moved to webpack 3, commonjs style.
 
