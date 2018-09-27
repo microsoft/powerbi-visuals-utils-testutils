@@ -42,6 +42,9 @@ import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import { MockISelectionIdBuilder } from "..";
+
+import ISelectionId = powerbi.visuals.ISelectionId;
 
 export class MockIVisualHost implements IVisualHost {
     private colorPaletteInstance: IColorPalette;
@@ -52,6 +55,7 @@ export class MockIVisualHost implements IVisualHost {
     private localizationManager: powerbi.extensibility.ILocalizationManager;
     private telemetryService: powerbi.extensibility.ITelemetryService;
     private authService: powerbi.extensibility.IAuthenticationService;
+    public createSelectionIdInjection: () => ISelectionId;
 
     constructor(
         colorPalette?: IColorPalette,
@@ -74,7 +78,11 @@ export class MockIVisualHost implements IVisualHost {
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
-        return createSelectionIdBuilder();
+        const selectionIdBuilder: MockISelectionIdBuilder = <MockISelectionIdBuilder>createSelectionIdBuilder();
+        selectionIdBuilder.getSelectionIdInjection = () => {
+            return this.createSelectionIdInjection;
+        };
+        return selectionIdBuilder;
     }
 
     public createSelectionManager(): ISelectionManager {
@@ -93,7 +101,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localeInstance.locale = language;
     }
 
-    public applyJsonFilter (filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
+    public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
 
     }
 

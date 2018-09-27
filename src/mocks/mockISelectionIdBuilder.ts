@@ -36,6 +36,8 @@ import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 import ISelectionId = powerbi.visuals.ISelectionId;
 
 export class MockISelectionIdBuilder implements ISelectionIdBuilder {
+    public getSelectionIdInjection: () => () => ISelectionId;
+
     public withCategory(categoryColumn: DataViewCategoryColumn, index: number): this {
         return this;
     }
@@ -52,6 +54,13 @@ export class MockISelectionIdBuilder implements ISelectionIdBuilder {
     }
 
     public createSelectionId(): ISelectionId {
+        if (this.getSelectionIdInjection) {
+            const injectedFunc: () => ISelectionId = this.getSelectionIdInjection();
+            if (injectedFunc) {
+                return injectedFunc();
+            }
+        }
+
         return createSelectionId();
     }
 }

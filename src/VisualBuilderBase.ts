@@ -49,15 +49,9 @@ import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import { MockIVisualHost } from ".";
 
-// powerbitests
-// import testDom = testDom;
-// import flushAllD3Transitions = flushAllD3Transitions;
-
-// powerbitests.customVisuals
-// import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
-// import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
-// import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
+import ISelectionId = powerbi.visuals.ISelectionId;
 
 export abstract class VisualBuilderBase<T extends IVisual> {
     public element: JQuery;
@@ -86,6 +80,10 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         };
 
         this.init();
+    }
+
+    public injectCreateSelectionId(injectionFunc: () => ISelectionId) {
+        (<MockIVisualHost>this.visualHost).createSelectionIdInjection = injectionFunc;
     }
 
     protected abstract build(options: VisualConstructorOptions): T;
