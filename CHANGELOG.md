@@ -1,3 +1,6 @@
+## 1.3.1
+* Update packages to fix vulnerabilities
+
 ## 1.2.1
 * Fixed issue with mock of LocalizationManager
 
