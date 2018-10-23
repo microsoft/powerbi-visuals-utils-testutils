@@ -265,7 +265,14 @@ export function createTouch(x: number, y: number, element: JQuery, id: number = 
         clientX: x,
         clientY: y,
         target: element.get(0),
-        identifier: id
+        identifier: id,
+        altitudeAngle: 1.5708,
+        azimuthAngle: 1.5708,
+        force: 1,
+        radiusX: 1,
+        radiusY: 1,
+        rotationAngle: 0,
+        touchType: "direct"
     };
 }
 
