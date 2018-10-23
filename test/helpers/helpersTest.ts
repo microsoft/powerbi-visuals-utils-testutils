@@ -70,8 +70,8 @@ module powerbi.extensibility.utils.test.helpers.test {
             let result: number[] = getRandomNumbers(length, min, max);
 
             result.forEach((value: number) => {
-                expect(value).toBeGreaterThan(min);
-                expect(value).toBeLessThan(max);
+                expect(value).toBeGreaterThanOrEqual(min);
+                expect(value).toBeLessThanOrEqual(max);
             });
         });
     });
