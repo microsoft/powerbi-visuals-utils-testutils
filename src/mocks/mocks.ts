@@ -52,6 +52,9 @@ module powerbi.extensibility.utils.test.mocks {
     import MockILocalizationManager = powerbi.extensibility.utils.test.mocks.MockILocalizationManager;
     import MockITelemetryService = powerbi.extensibility.utils.test.mocks.MockITelemetryService;
     import MockIAuthenticationService = powerbi.extensibility.utils.test.mocks.MockIAuthenticationService;
+    import MockIStorageService = powerbi.extensibility.utils.test.mocks.MockIStorageService;
+
+    import ILocalVisualStorageService = powerbi.extensibility.utils.test.mocks.ILocalVisualStorageService;
 
     export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
         return new MockVisualHost(
@@ -62,7 +65,8 @@ module powerbi.extensibility.utils.test.mocks {
             createAllowInteractions(allowInteractions),
             createLocalizationManager(displayNames),
             createTelemetryService(),
-            createAuthenticationService(token));
+            createAuthenticationService(token),
+            createStorageService());
     }
 
     export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -103,5 +107,9 @@ module powerbi.extensibility.utils.test.mocks {
 
     export function createAuthenticationService(token?: string): IAuthenticationService {
         return new MockIAuthenticationService(token);
+    }
+
+    export function  createStorageService(): ILocalVisualStorageService {
+        return new MockIStorageService();
     }
 }

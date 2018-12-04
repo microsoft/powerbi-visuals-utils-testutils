@@ -20,6 +20,7 @@
     "src/mocks/mockITelemetryService.ts",
     "src/mocks/mockIAuthenticationService.ts",
     "src/mocks/mockVisualHost.ts",
+    "src/mocks/mockIStorageService.ts",
     "src/mocks/mocks.ts",
     "src/helpers/helpers.ts",
     "src/helpers/color.ts",

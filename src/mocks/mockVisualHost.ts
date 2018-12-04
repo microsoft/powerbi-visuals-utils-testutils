@@ -50,6 +50,7 @@ module powerbi.extensibility.utils.test.mocks {
         private localizationManager: ILocalizationManager;
         private telemetryService: ITelemetryService;
         private authService: IAuthenticationService;
+        private localStorageService: ILocalVisualStorageService;
 
         constructor(
             colorPalette?: IColorPalette,
@@ -59,7 +60,8 @@ module powerbi.extensibility.utils.test.mocks {
             allowInteractionsInstance?: MockIAllowInteractions,
             localizationManager?: ILocalizationManager,
             telemetryService?: ITelemetryService,
-            authService?: IAuthenticationService) {
+            authService?: IAuthenticationService,
+            storageService?: ILocalVisualStorageService) {
 
             this.colorPaletteInstance = colorPalette;
             this.selectionManager = selectionManager;
@@ -69,6 +71,7 @@ module powerbi.extensibility.utils.test.mocks {
             this.telemetryService = telemetryService;
             this.authService = authService;
             this.localizationManager = localizationManager;
+            this.localStorageService = storageService;
         }
 
         public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -83,11 +86,11 @@ module powerbi.extensibility.utils.test.mocks {
             return this.colorPaletteInstance;
         }
 
-        public get locale(): string{
+        public get locale(): string {
             return this.localeInstance.locale;
         }
 
-        public set locale(language){
+        public set locale(language) {
             this.localeInstance.locale = language;
         }
 
@@ -117,6 +120,10 @@ module powerbi.extensibility.utils.test.mocks {
 
         public get authenticationService(): IAuthenticationService {
             return this.authService;
+        }
+
+        public get storageService(): ILocalVisualStorageService {
+            return this.localStorageService;
         }
 
         public get instanceId(): string {
