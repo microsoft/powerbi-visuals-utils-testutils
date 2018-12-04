@@ -47,20 +47,36 @@ module powerbi.extensibility.utils.test.mocks.test {
 
     describe("MockIStorageService", () => {
         let mockStorageService: ILocalVisualStorageService;
-        beforeEach(() => {
+        const objectToBeStoredStringifyed: string = JSON.stringify(objectToBeStored);
+
+        beforeAll(() => {
             mockStorageService = createStorageService();
         });
 
-        describe("MockIStorageService.set method test", () => {
-            mockStorageService.set(keyToBeStored, JSON.stringify(objectToBeStored)).then();
+        it("MockIStorageService.remove method test", () => {
+            localStorage.setItem(keyToBeStored, objectToBeStoredStringifyed);
+            let localStorageItem: string = localStorage.getItem(keyToBeStored);
+            expect(localStorageItem).toBeTruthy();
+
+            mockStorageService.remove(keyToBeStored);
+            localStorageItem = localStorage.getItem(keyToBeStored);
+            expect(localStorageItem).toBeNull();
         });
 
-        describe("MockIStorageService.get method test", () => {
-
+        it("MockIStorageService.set method test", () => {
+            mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: number) => {
+                const localStorageItem: string = localStorage.getItem(keyToBeStored);
+                expect(localStorageItem).toBeTruthy();
+                expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
+                expect(data).toEqual(objectToBeStoredStringifyed.length);
+            });
         });
 
-        describe("MockIStorageService.remove method test", () => {
-
+        it("MockIStorageService.get method test", () => {
+            const localStorageItem: string = localStorage.getItem(keyToBeStored);
+            mockStorageService.get(keyToBeStored).then((data: string) => {
+                expect(data).toEqual(localStorageItem);
+            });
         });
     });
 }

@@ -35,9 +35,6 @@ module powerbi.extensibility.utils.test.mocks {
     }
 
     export class MockIStorageService implements ILocalVisualStorageService {
-        constructor() {
-
-        }
 
         public get(key: string): IPromise<string> {
             let deferred: JQueryDeferred<any> = $.Deferred();
@@ -51,7 +48,7 @@ module powerbi.extensibility.utils.test.mocks {
         public set(key: string, data: string): IPromise<number> {
             let deferred: JQueryDeferred<any> = $.Deferred();
 
-            localStorage.setItem(key, data)
+            localStorage.setItem(key, data);
             deferred.resolve(data.length);
 
             return deferred as any;
