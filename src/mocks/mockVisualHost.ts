@@ -27,6 +27,7 @@
 import powerbi from "powerbi-visuals-api";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
+import { ILocalVisualStorageService } from "./mockIStorageService";
 import { createSelectionIdBuilder } from "./mocks";
 import { MockILocale } from "./mockILocale";
 import { MockIAllowInteractions } from "./mockIAllowInteractions";
@@ -52,6 +53,7 @@ export class MockIVisualHost implements IVisualHost {
     private localizationManager: powerbi.extensibility.ILocalizationManager;
     private telemetryService: powerbi.extensibility.ITelemetryService;
     private authService: powerbi.extensibility.IAuthenticationService;
+    private localStorageService: ILocalVisualStorageService;
 
     constructor(
         colorPalette?: IColorPalette,
@@ -61,7 +63,8 @@ export class MockIVisualHost implements IVisualHost {
         allowInteractionsInstance?: MockIAllowInteractions,
         localizationManager?: powerbi.extensibility.ILocalizationManager,
         telemetryService?: powerbi.extensibility.ITelemetryService,
-        authService?: powerbi.extensibility.IAuthenticationService) {
+        authService?: powerbi.extensibility.IAuthenticationService,
+        storageService?: ILocalVisualStorageService) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
@@ -93,7 +96,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localeInstance.locale = language;
     }
 
-    public applyJsonFilter (filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
+    public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
 
     }
 
@@ -117,6 +120,10 @@ export class MockIVisualHost implements IVisualHost {
 
     public launchUrl(url: string) {
         window.open(url);
+    }
+
+    public get storageService(): ILocalVisualStorageService {
+        return this.localStorageService;
     }
 
     public get instanceId() {

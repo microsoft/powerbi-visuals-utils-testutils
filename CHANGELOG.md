@@ -1,3 +1,6 @@
+## 2.1.5
+* Added StorageService mock 
+
 ## 2.1.4
 * Update packages to fix vulnerabilities
 
