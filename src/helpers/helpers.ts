@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
-import * as _ from "lodash";
+import { range, includes } from "lodash-es";
 import * as $ from "jquery";
 
 export function testDom(height: number | string, width: number | string): JQuery {
@@ -314,7 +314,7 @@ export function flushAllD3Transitions() {
 }
 
 export function getRandomNumbers(count: number, min: number = 0, max: number = 1): number[] {
-    return _.range(count).map(x => getRandomNumber(min, max));
+    return range(count).map(x => getRandomNumber(min, max));
 }
 
 export function getRandomNumber(
@@ -327,7 +327,7 @@ export function getRandomNumber(
     let randomValue = +("0." + cryptoObj.getRandomValues(new Uint8Array(1)));
     let result = changeResult(randomValue * (max - min) + min);
 
-    if (exceptionList && exceptionList.length && _.includes(exceptionList, result)) {
+    if (exceptionList && exceptionList.length && includes(exceptionList, result)) {
         return getRandomNumber(min, max, exceptionList);
     }
 

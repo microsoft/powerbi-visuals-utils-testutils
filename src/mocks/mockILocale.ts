@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-import * as _ from "lodash";
+import { keys } from "lodash-es";
 
 export class MockILocale {
     private currentLocale: string;
@@ -36,7 +36,7 @@ export class MockILocale {
 
     constructor(locales: Object = MockILocale.DefaultLocales) {
         this.locales = locales;
-        this.locale = _.keys(locales)[0];
+        this.locale = keys(locales)[0];
     }
 
     public set locale(key: string) {

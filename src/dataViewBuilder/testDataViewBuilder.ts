@@ -39,7 +39,7 @@ import {
     DataViewBuilderSeriesData
 } from "./dataViewBuilder";
 
-import * as _ from "lodash";
+import { uniq, sum, isArray, map, max, sortBy, range, isEmpty, clone, toArray, groupBy, flatten, take, includes, findIndex } from "lodash-es";
 
 export type CustomizeColumnFn = (source: DataViewMetadataColumn) => void;
 
@@ -60,7 +60,7 @@ export interface DataViewBuilderAllColumnOptions {
 
 export abstract class TestDataViewBuilder {
     static DataViewName: string = "Data";
-    private aggregateFunction: (array: number[]) => number = _.sum;
+    private aggregateFunction: (array: number[]) => number = sum;
 
     static setDefaultQueryName(source: DataViewMetadataColumn): DataViewMetadataColumn {
         if (!source.queryName) {
@@ -71,7 +71,7 @@ export abstract class TestDataViewBuilder {
     }
 
     static getDataViewBuilderColumnIdentitySources(options: TestDataViewBuilderColumnOptions[] | TestDataViewBuilderColumnOptions): DataViewBuilderColumnIdentitySource[] {
-        let optionsArray: TestDataViewBuilderColumnOptions[] = <any>(_.isArray(options) ? options : [options]);
+        let optionsArray: TestDataViewBuilderColumnOptions[] = <any>(isArray(options) ? options : [options]);
 
         let fields = optionsArray.map(() => { }),
             optionsIdentityExpressions: any[][] = optionsArray.map((opt) => opt.values),
@@ -79,7 +79,7 @@ export abstract class TestDataViewBuilder {
 
         if (optionsIdentityExpressions.length > 1) {
             let identityExpressionsLength = optionsIdentityExpressions.length,
-                identityExpressionsValuesLength = _.max(_.map(optionsIdentityExpressions, x => x.length));
+                identityExpressionsValuesLength = max(map(optionsIdentityExpressions, x => x.length));
 
             for (let vi = 0; vi < identityExpressionsValuesLength; vi++) {
                 let current: any = optionsIdentityExpressions[0][vi];
@@ -97,10 +97,10 @@ export abstract class TestDataViewBuilder {
     }
 
     static getValuesTable(categories?: DataViewCategoryColumn[], values?: DataViewValueColumn[]): any[][] {
-        let columns = _.sortBy((categories || []).concat(<any>values || []), x => x.source.index),
-            maxLength: number = _.max(columns.map(x => x.values.length));
+        let columns = sortBy((categories || []).concat(<any>values || []), x => x.source.index),
+            maxLength: number = max(columns.map(x => x.values.length));
 
-        return _.range(maxLength).map(i => columns.map(x => x.values[i]));
+        return range(maxLength).map(i => columns.map(x => x.values[i]));
     }
 
     static createDataViewBuilderColumnOptions(
@@ -110,14 +110,12 @@ export abstract class TestDataViewBuilder {
         customizeColumns?: CustomizeColumnFn): DataViewBuilderAllColumnOptions {
 
         let filterColumns = filter
-            ? (options) => _.isArray(options.values) && filter(options)
-            : (options) => _.isArray(options.values);
+            ? (options) => isArray(options.values) && filter(options)
+            : (options) => isArray(options.values);
 
-        let resultCategoriesColumns = _.isEmpty(categoriesColumns) ? [] : (<TestDataViewBuilderCategoryColumnOptions[]>_
-            .flatten(categoriesColumns)).filter(filterColumns);
+        let resultCategoriesColumns = isEmpty(categoriesColumns) ? [] : (<TestDataViewBuilderCategoryColumnOptions[]>flatten(categoriesColumns)).filter(filterColumns);
 
-        let resultValuesColumns = _.isEmpty(valuesColumns) ? [] : (<DataViewBuilderValuesColumnOptions[]>_
-            .flatten(valuesColumns)).filter(filterColumns);
+        let resultValuesColumns = isEmpty(valuesColumns) ? [] : (<DataViewBuilderValuesColumnOptions[]>flatten(valuesColumns)).filter(filterColumns);
 
         let allColumns = (resultCategoriesColumns || []).concat(resultValuesColumns || []);
 
@@ -147,30 +145,30 @@ export abstract class TestDataViewBuilder {
         options: DataViewBuilderAllColumnOptions,
         aggregateFunction: (array: number[]) => number): DataViewBuilderAllColumnOptions {
 
-        let resultOptions = _.clone(options);
+        let resultOptions = clone(options);
 
-        resultOptions.categories = resultOptions.categories && resultOptions.categories.map(x => _.clone(x));
-        resultOptions.values = resultOptions.values && resultOptions.values.map(x => _.clone(x));
-        resultOptions.grouped = resultOptions.grouped && resultOptions.grouped.map(x => _.clone(x));
+        resultOptions.categories = resultOptions.categories && resultOptions.categories.map(x => clone(x));
+        resultOptions.values = resultOptions.values && resultOptions.values.map(x => clone(x));
+        resultOptions.grouped = resultOptions.grouped && resultOptions.grouped.map(x => clone(x));
 
-        if (!_.isEmpty(options.categories)) {
+        if (!isEmpty(options.categories)) {
             resultOptions.categories.forEach(x => x.source = TestDataViewBuilder.setDefaultQueryName(x.source));
             let allRows: any[][] = TestDataViewBuilder.getValuesTable(options.categories, options.values);
             let categoriesLength = options.categories.length;
-            let grouped = _.toArray(_.groupBy(allRows, x => _.take(x, categoriesLength)));
+            let grouped = toArray(groupBy(allRows, x => take(x, categoriesLength)));
             resultOptions.categories.forEach((c, i) => c.values = grouped.map(x => x[0][i] === undefined ? null : x[0][i]));
 
-            if (!_.isEmpty(options.values) && _.isEmpty(options.grouped)) { // Not completed for group categories
+            if (!isEmpty(options.values) && isEmpty(options.grouped)) { // Not completed for group categories
                 resultOptions.values.forEach((c, i) =>
                     c.values = grouped.map(v => aggregateFunction(v.map(x => x[categoriesLength + i] || 0))));
             }
         }
 
-        if (!_.isEmpty(options.values)) {
+        if (!isEmpty(options.values)) {
             resultOptions.values.forEach(x => x.source = TestDataViewBuilder.setDefaultQueryName(x.source));
         }
 
-        if (!_.isEmpty(options.grouped)) {
+        if (!isEmpty(options.grouped)) {
             resultOptions.grouped.forEach(x => x.source = TestDataViewBuilder.setDefaultQueryName(x.source));
         }
 
@@ -178,7 +176,7 @@ export abstract class TestDataViewBuilder {
     }
 
     static setUpDataView(dataView: DataView, options: DataViewBuilderAllColumnOptions): DataView {
-        if (!_.isEmpty(options.categories) && _.isEmpty(options.grouped)) {
+        if (!isEmpty(options.categories) && isEmpty(options.grouped)) {
             let category = dataView.categorical.categories[0];
 
             // Tree. (completed only for one category)
@@ -203,7 +201,7 @@ export abstract class TestDataViewBuilder {
                 rows: TestDataViewBuilder.getValuesTable(dataView.categorical.categories, dataView.categorical.values)
             };
 
-            if (_.isEmpty(options.values)) {
+            if (isEmpty(options.values)) {
                 delete dataView.categorical.values;
             }
         }
@@ -227,12 +225,12 @@ export abstract class TestDataViewBuilder {
         let originalOptions = TestDataViewBuilder.createDataViewBuilderColumnOptions(
             categoriesColumns,
             valuesColumns,
-            columnNames && (options => _.includes(columnNames, options.source.displayName)),
+            columnNames && (options => includes(columnNames, options.source.displayName)),
             customizeColumns);
 
         let options = TestDataViewBuilder.setUpDataViewBuilderColumnOptions(originalOptions, this.aggregateFunction);
 
-        if (!_.isEmpty(options.categories)) {
+        if (!isEmpty(options.categories)) {
             let identityFrom = TestDataViewBuilder.getDataViewBuilderColumnIdentitySources(options.categories);
 
             builder.withCategories(options.categories.map((category, i) => <DataViewCategoryColumn>{
@@ -244,7 +242,7 @@ export abstract class TestDataViewBuilder {
             }));
         }
 
-        if (!_.isEmpty(options.grouped)) {
+        if (!isEmpty(options.grouped)) {
             let groupedCategory = options.grouped[0]; // Finished only for one category.
 
             let categoryValues = originalOptions.categories
@@ -252,8 +250,8 @@ export abstract class TestDataViewBuilder {
                 && originalOptions.categories[0].values
                 || [];
 
-            let uniqueCategoryValues = _.uniq(categoryValues) || [undefined],
-                uniqueGroupedValues = _.uniq(groupedCategory.values);
+            let uniqueCategoryValues = uniq(categoryValues) || [undefined],
+                uniqueGroupedValues = uniq(groupedCategory.values);
 
             builder.withGroupedValues({
                 groupColumn: {
@@ -266,7 +264,7 @@ export abstract class TestDataViewBuilder {
                     <DataViewBuilderSeriesData>{
                         values: column.values && uniqueCategoryValues
                             .map(categoryValue => {
-                                let index = _.findIndex(_.range(categoryValues.length),
+                                let index = findIndex(range(categoryValues.length),
                                     i => categoryValues[i] === categoryValue && groupedCategory.values[i] === groupedValue);
                                 return column.values[index] === undefined ? null : column.values[index];
                             }),
@@ -275,7 +273,7 @@ export abstract class TestDataViewBuilder {
                         maxLocal: column.maxLocal
                     }))
             });
-        } else if (!_.isEmpty(options.values)) {
+        } else if (!isEmpty(options.values)) {
             builder.withValues({ columns: options.values });
         }
 
