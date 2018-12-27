@@ -1,3 +1,7 @@
+### 2.1.6
+* Added EventService mock
+* Updated SelectionManager mock
+
 ## 2.1.5
 * Added StorageService mock 
 
