@@ -25,6 +25,7 @@
  */
 import powerbi from "powerbi-visuals-api";
 import ITooltipService = powerbi.extensibility.ITooltipService;
+import IVisualEventService = powerbi.extensibility.IVisualEventService;
 
 import { MockILocale } from "./mockILocale";
 import { MockIAllowInteractions } from "./mockIAllowInteractions";
@@ -37,6 +38,7 @@ import { MockILocalizationManager } from "./mockILocalizationManager";
 import { MockISelectionId } from "./mockISelectionId";
 import { MockIColorPalette } from "./mockIColorPalette";
 import { MockIVisualHost } from "./mockVisualHost";
+import { MockIEventService } from "./mockIEventService";
 import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageService";
 // powerbi
 import IColorInfo = powerbi.IColorInfo;
@@ -60,7 +62,8 @@ export function createVisualHost(locale?: Object, allowInteractions?: boolean, c
         createLocalizationManager(displayNames),
         createTelemetryService(),
         createAuthenticationService(token),
-        createStorageService());
+        createStorageService(),
+        createEventService());
 }
 
 export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -105,4 +108,8 @@ export function createAuthenticationService(token?: string): powerbi.extensibili
 
 export function createStorageService(): ILocalVisualStorageService {
     return new MockIStorageService();
+}
+
+export function createEventService(): IVisualEventService {
+    return new MockIEventService();
 }

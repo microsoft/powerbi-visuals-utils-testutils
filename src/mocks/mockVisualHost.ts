@@ -40,6 +40,7 @@ import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 // powerbi.extensibility
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
+import IVisualEventService = powerbi.extensibility.IVisualEventService;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -54,6 +55,7 @@ export class MockIVisualHost implements IVisualHost {
     private telemetryService: powerbi.extensibility.ITelemetryService;
     private authService: powerbi.extensibility.IAuthenticationService;
     private localStorageService: ILocalVisualStorageService;
+    private visualEventService: IVisualEventService;
 
     constructor(
         colorPalette?: IColorPalette,
@@ -64,7 +66,8 @@ export class MockIVisualHost implements IVisualHost {
         localizationManager?: powerbi.extensibility.ILocalizationManager,
         telemetryService?: powerbi.extensibility.ITelemetryService,
         authService?: powerbi.extensibility.IAuthenticationService,
-        storageService?: ILocalVisualStorageService) {
+        storageService?: ILocalVisualStorageService,
+        eventService?: IVisualEventService) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
@@ -74,6 +77,8 @@ export class MockIVisualHost implements IVisualHost {
         this.telemetryService = telemetryService;
         this.authService = authService;
         this.localizationManager = localizationManager;
+        this.localStorageService = storageService;
+        this.visualEventService = eventService;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -124,6 +129,10 @@ export class MockIVisualHost implements IVisualHost {
 
     public get storageService(): ILocalVisualStorageService {
         return this.localStorageService;
+    }
+
+    public get eventService(): IVisualEventService {
+        return this.visualEventService;
     }
 
     public get instanceId() {

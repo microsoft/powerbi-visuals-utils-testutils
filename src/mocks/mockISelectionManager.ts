@@ -31,6 +31,7 @@ import * as $ from "jquery";
 
 // powerbi.visuals
 import ISelectionId = powerbi.visuals.ISelectionId;
+import IPoint = powerbi.extensibility.IPoint;
 
 // powerbi.extensibility
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
@@ -39,6 +40,14 @@ export class MockISelectionManager implements ISelectionManager {
     private selectionIds: ISelectionId[] = [];
 
     private callback: (ids: ISelectionId[]) => void;
+
+    public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
+        let deferred: JQueryDeferred<any> = $.Deferred();
+
+        deferred.resolve();
+
+        return deferred as any;
+    }
 
     public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
         let selectionIds: ISelectionId[] = [].concat(selectionId),
