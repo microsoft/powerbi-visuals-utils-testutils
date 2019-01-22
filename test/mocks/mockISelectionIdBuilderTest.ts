@@ -30,7 +30,7 @@ import ISelectionId = powerbi.visuals.ISelectionId;
 
 // powerbi.extensibility.utils.test.mocks
 import { MockISelectionId } from "../../src/mocks/mockISelectionId";
-import { createSelectionId, createSelectionIdBuilder } from "../../src/mocks/mocks";
+import { createSelectionIdBuilder } from "../../src/mocks/mocks";
 import { MockISelectionIdBuilder } from "../../src/mocks/mockISelectionIdBuilder";
 
 describe("MockISelectionIdBuilder", () => {

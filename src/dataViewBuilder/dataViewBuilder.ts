@@ -25,7 +25,14 @@
  */
 
 import powerbi from "powerbi-visuals-api";
-import * as _ from "lodash";
+import {
+    isEmpty,
+    first,
+    toPlainObject,
+    some,
+    includes,
+    extend
+} from "lodash-es";
 
 import DataView = powerbi.DataView;
 import ValueTypeDescriptor = powerbi.ValueTypeDescriptor;
@@ -151,7 +158,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
     }
 
     public withCategories(categories: DataViewCategoryColumn[]): IDataViewBuilderCategorical {
-        if (_.isEmpty(this.categories)) {
+        if (isEmpty(this.categories)) {
             this.categories = categories;
         }
         else {
@@ -205,7 +212,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
     }
 
     private fillData(dataViewValues: DataViewValueColumns) {
-        let categoryColumn = _.first(this.categories),
+        let categoryColumn = first(this.categories),
             categoryLength = (categoryColumn && categoryColumn.values)
                 ? categoryColumn.values.length
                 : 0;
@@ -279,7 +286,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
                 let seriesIdentity = getScopeIdentity(dynamicSeriesMetadata.identityFrom, seriesIndex, seriesValue, dynamicSeriesMetadata.column.type);
 
                 for (let measure of this.dynamicMeasureColumns) {
-                    let column = _.toPlainObject(measure);
+                    let column = toPlainObject(measure);
 
                     column.groupName = <string>seriesValue;
 
@@ -295,7 +302,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
             // If there is no data we should add a column that contains a pointer to the dynamic measure columns, for consistency with the dsrReader
             if (seriesValues.length === 0) {
                 for (let measure of this.dynamicMeasureColumns) {
-                    let column: DataViewMetadataColumn = _.toPlainObject(measure);
+                    let column: DataViewMetadataColumn = toPlainObject(measure);
 
                     pushIfNotExists(metadataColumns, column);
 
@@ -322,7 +329,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
         }
 
         let categories = this.categories;
-        if (!_.isEmpty(categories)) {
+        if (!isEmpty(categories)) {
             categorical.categories = categories;
         }
 
@@ -345,7 +352,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
         metadataColumns: DataViewMetadataColumn[],
         valueColumns: DataViewValueColumns): void {
 
-        if (!_.isEmpty(this.staticMeasureColumns)) {
+        if (!isEmpty(this.staticMeasureColumns)) {
             for (let column of this.staticMeasureColumns) {
                 pushIfNotExists(metadataColumns, column);
                 valueColumns.push({
@@ -375,8 +382,8 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
      * @param metadataColumns The complete collection of metadata columns in the categorical.
      */
     private static isVisualDataView(metadataColumns: DataViewMetadataColumn[]): boolean {
-        return !_.isEmpty(metadataColumns) &&
-            _.some(metadataColumns, (metadataColumn) => !!metadataColumn.queryName);
+        return !isEmpty(metadataColumns) &&
+            some(metadataColumns, (metadataColumn) => !!metadataColumn.queryName);
     }
 
     private hasDynamicSeries(): boolean {
@@ -408,7 +415,7 @@ function getScopeIdentity(
 }
 
 function pushIfNotExists(items: DataViewMetadataColumn[], itemToAdd: DataViewMetadataColumn): void {
-    if (_.includes(items, itemToAdd)) {
+    if (includes(items, itemToAdd)) {
         return;
     }
 
@@ -447,7 +454,7 @@ function applySeriesData(
 
     if (aggregates) {
         target.source.aggregates = aggregates;
-        _.extend(target, aggregates);
+        extend(target, aggregates);
     }
 }
 

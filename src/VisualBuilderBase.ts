@@ -26,8 +26,8 @@
 
 import { renderTimeout } from "./helpers/visualTestHelpers";
 import { testDom, flushAllD3Transitions } from "./helpers/helpers";
-import { createVisualHost, createColorPalette } from "./mocks/mocks";
-import * as _ from "lodash";
+import { createVisualHost } from "./mocks/mocks";
+import { isArray } from "lodash-es";
 
 // powerbi
 import powerbi from "powerbi-visuals-api";
@@ -38,26 +38,11 @@ import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInst
 import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
 import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 
-// powerbi.data
-import Selector = powerbi.data.Selector;
-
-// powerbi.extensibility
-import IColorPalette = powerbi.extensibility.IColorPalette;
-
 // powerbi.extensibility.visual
 import IVisual = powerbi.extensibility.visual.IVisual;
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
-
-// powerbitests
-// import testDom = testDom;
-// import flushAllD3Transitions = flushAllD3Transitions;
-
-// powerbitests.customVisuals
-// import renderTimeout = powerbi.extensibility.utils.test.helpers.renderTimeout;
-// import createVisualHost = powerbi.extensibility.utils.test.mocks.createVisualHost;
-// import createColorPalette = powerbi.extensibility.utils.test.mocks.createColorPalette;
 
 export abstract class VisualBuilderBase<T extends IVisual> {
     public element: JQuery;
@@ -105,7 +90,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
 
     public update(dataView: DataView[] | DataView): void {
         this.visual.update({
-            dataViews: _.isArray(dataView) ? dataView : [dataView],
+            dataViews: isArray(dataView) ? dataView : [dataView],
             viewport: this.viewport
         } as VisualUpdateOptions);
     }
@@ -157,7 +142,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         let enumerationInstances: VisualObjectInstance[] =
             (enumeration as VisualObjectInstanceEnumerationObject).instances;
 
-        return _.isArray(enumerationInstances)
+        return isArray(enumerationInstances)
             ? enumerationInstances
             : enumeration as VisualObjectInstance[];
     }

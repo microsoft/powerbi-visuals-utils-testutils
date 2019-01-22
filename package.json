@@ -2,8 +2,11 @@
   "name": "powerbi-visuals-utils-testutils",
   "version": "2.1.6",
   "description": "powerbi-visuals-utils-testutils",
-  "main": "lib/index",
-  "types": "lib/index",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "jsnext:main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Microsoft/powerbi-visuals-utils-testutils.git"
@@ -33,7 +36,7 @@
     "@types/jasmine-jquery": "1.5.32",
     "@types/jquery": "^3.2.1",
     "@types/karma": "^1.7.2",
-    "@types/lodash": "^4.14.86",
+    "@types/lodash-es": "4.17.1",
     "@types/node": "^8.0.56",
     "@types/webpack": "^3.8.1",
     "chalk": "^2.1.0",
@@ -41,13 +44,13 @@
     "jasmine": "3.1.0",
     "jasmine-jquery": "2.1.1",
     "jquery": "3.2.1",
-    "karma": "^3.0.0",
+    "karma": "3.1.3",
     "karma-chrome-launcher": "2.1.1",
     "karma-coverage": "^1.1.2",
     "karma-jasmine": "1.1.0",
     "karma-remap-istanbul": "0.6.0",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-typescript": "^2.1.7",
+    "karma-typescript": "2.1.7",
     "karma-typescript-preprocessor": "^0.3.1",
     "karma-webpack": "^2.0.6",
     "powerbi-visuals-api": "^2.3.1",
@@ -58,10 +61,14 @@
     "tslint-microsoft-contrib": "^4.0.1",
     "typescript": "^3.0.1",
     "webpack": "^3.8.1",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "karma-coverage-istanbul-reporter": "^2.0.4"
   },
   "dependencies": {
     "d3-array": "^1.2.1",
-    "d3-timer": "^1.0.7"
+    "d3-timer": "^1.0.7",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "jquery": "3.3.1",
+    "lodash-es": "4.17.11"
   }
 }

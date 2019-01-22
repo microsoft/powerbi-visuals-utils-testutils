@@ -45,9 +45,13 @@ module.exports = (config: Config) => {
         frameworks: ["jasmine"],
         reporters: [
             "progress",
-            "coverage",
-            "karma-remap-istanbul"
+            "coverage-istanbul"
         ],
+        coverageIstanbulReporter: {
+            reports: ["html", "lcovonly", "text-summary"],
+            combineBrowserReports: true,
+            fixWebpackSourcePaths: true
+        },
         singleRun: true,
         plugins: [
             "karma-remap-istanbul",
@@ -56,11 +60,12 @@ module.exports = (config: Config) => {
             "karma-webpack",
             "karma-jasmine",
             "karma-sourcemap-loader",
-            "karma-chrome-launcher"
+            "karma-chrome-launcher",
+            "karma-coverage-istanbul-reporter"
         ],
         files: [
-            "node_modules/jquery/dist/jquery.min.js", 
-            "node_modules/jasmine-jquery/lib/jasmine-jquery.js", 
+            "node_modules/jquery/dist/jquery.min.js",
+            "node_modules/jasmine-jquery/lib/jasmine-jquery.js",
             srcCssRecursivePath,
             srcRecursivePath,
             testRecursivePath,
@@ -97,6 +102,6 @@ module.exports = (config: Config) => {
         webpack: webpackConfig,
         webpackMiddleware: {
             stats: "errors-only"
-          }
+        }
     });
 };
