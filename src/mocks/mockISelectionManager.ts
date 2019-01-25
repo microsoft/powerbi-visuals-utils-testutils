@@ -27,7 +27,6 @@
 // powerbi
 import powerbi from "powerbi-visuals-api";
 import IPromise = powerbi.IPromise;
-import IPoint = powerbi.extensibility.IPoint;
 import * as $ from "jquery";
 
 // powerbi.visuals
@@ -110,13 +109,5 @@ export class MockISelectionManager implements ISelectionManager {
 
     public simutateSelection(selections: ISelectionId[]): void {
         this.callback(selections);
-    }
-
-    public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
-
-        deferred.resolve();
-
-        return deferred as any;
     }
 }
