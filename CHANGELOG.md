@@ -1,7 +1,10 @@
-### 2.1.6
+## 2.1.7
+* Fix select method of MockISelectionManager.
+Selection manager should select all passed selections if multiselect is false
+
+## 2.1.6
 * Added EventService mock
 * Updated SelectionManager mock
-
 ## 2.1.5
 * Added StorageService mock 
 
