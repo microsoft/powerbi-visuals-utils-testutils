@@ -33,8 +33,6 @@ import { Config, ConfigOptions } from "karma";
 
 const testRecursivePath = "test/**/*.ts";
 const srcOriginalRecursivePath = "src/**/*.ts";
-const srcRecursivePath = "lib/**/*.js";
-const srcCssRecursivePath = "lib/**/*.css";
 const coverageFolder = "coverage";
 
 process.env.CHROME_BIN = require("puppeteer").executablePath();
@@ -66,8 +64,6 @@ module.exports = (config: Config) => {
         files: [
             "node_modules/jquery/dist/jquery.min.js",
             "node_modules/jasmine-jquery/lib/jasmine-jquery.js",
-            srcCssRecursivePath,
-            srcRecursivePath,
             testRecursivePath,
             {
                 pattern: srcOriginalRecursivePath,
@@ -76,8 +72,7 @@ module.exports = (config: Config) => {
             }
         ],
         preprocessors: {
-            [testRecursivePath]: ["webpack"],
-            [srcRecursivePath]: ["webpack", "coverage"]
+            [testRecursivePath]: ["webpack"]
         },
         typescriptPreprocessor: {
             options: tsconfig.compilerOptions
