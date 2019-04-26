@@ -94,7 +94,7 @@ module powerbi.extensibility.utils.test.mocks {
             this.localeInstance.locale = language;
         }
 
-        public persistProperties(changes: VisualObjectInstancesToPersist) { };
+        public persistProperties(changes: VisualObjectInstancesToPersist) { }
 
         public get tooltipService(): ITooltipService {
             return this.tooltipServiceInstance;
@@ -104,11 +104,11 @@ module powerbi.extensibility.utils.test.mocks {
             return this.allowInteractionsInstance.isEnabled;
         }
 
-        public applyJsonFilter(filter: IFilter, objectName: string, propertyName: string, action: FilterAction) { };
+        public applyJsonFilter(filter: IFilter, objectName: string, propertyName: string, action: FilterAction) { }
 
-        public launchUrl(url: string) { };
+        public launchUrl(url: string) { }
 
-        public refreshHostData() { };
+        public refreshHostData() { }
 
         public createLocalizationManager(): ILocalizationManager {
             return this.localizationManager;

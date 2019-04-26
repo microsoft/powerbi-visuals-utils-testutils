@@ -43,7 +43,7 @@ module powerbi.extensibility.utils.test.mocks {
             deferred.resolve(data);
 
             return deferred as any;
-        };
+        }
 
         public set(key: string, data: string): IPromise<number> {
             let deferred: JQueryDeferred<any> = $.Deferred();
@@ -52,10 +52,10 @@ module powerbi.extensibility.utils.test.mocks {
             deferred.resolve(data.length);
 
             return deferred as any;
-        };
+        }
 
         public remove(key: string): void {
             localStorage.removeItem(key);
-        };
+        }
     }
 }
