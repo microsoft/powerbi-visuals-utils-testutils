@@ -44,23 +44,24 @@ module powerbi.extensibility.utils.test.mocks {
             let selectionIds: ISelectionId[] = [].concat(selectionId),
                 deferred: JQueryDeferred<any> = $.Deferred();
 
-            selectionIds.forEach((id: ISelectionId) => {
-                if (this.containsSelection(id)) {
-                    this.selectionIds = multiSelect
-                        ? this.selectionIds.filter((selectedId: ISelectionId) => {
-                            return selectedId.equals(id);
-                        })
-                        : this.selectionIds.length > 1
-                            ? [id]
-                            : [];
-                } else {
-                    if (multiSelect) {
-                        this.selectionIds.push(id);
+            // if no multiselect reset current selection and save new passed selections;
+            if (!multiSelect) {
+                this.selectionIds = selectionIds;
+            } else {
+                // if multiselect then check all passed selections
+                selectionIds.forEach( (id: ISelectionId) => {
+                    // if selectionManager has passed selection in list of current selections
+                    if (this.containsSelection(id)) {
+                        // need to exclude from selection (selection of selected element should deselect element)
+                        this.selectionIds = this.selectionIds.filter((selectedId: ISelectionId) => {
+                            return !selectedId.equals(id);
+                        });
                     } else {
-                        this.selectionIds = [id];
+                        // otherwise include the new selection into current selections
+                        this.selectionIds.push(id);
                     }
-                }
-            });
+                });
+            }
 
             deferred.resolve(this.selectionIds);
 

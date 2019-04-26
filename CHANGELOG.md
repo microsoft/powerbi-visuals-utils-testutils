@@ -1,3 +1,8 @@
+## 1.3.3
+* Fix select method of MockISelectionManager.
+Selection manager should select all passed selections if multiselect is false
+* Update packages to fix vulnerabilities
+
 ## 1.3.2
 * Added StorageService mock 
 

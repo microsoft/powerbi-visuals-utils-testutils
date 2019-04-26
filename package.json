@@ -34,23 +34,23 @@
     "@types/lodash": "4.14.30",
     "coveralls": "3.0.1",
     "jasmine": "2.5.2",
-    "karma": "^3.1.0",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.2",
     "karma-jasmine": "1.1.2",
     "karma-remap-istanbul": "0.6.0",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-typescript-preprocessor": "0.3.0",
-    "powerbi-visuals-tools": "^2.1.2",
-    "puppeteer": "^1.5.0",
-    "tslint": "4.4.2",
-    "tslint-microsoft-contrib": "^4.0.1",
+    "karma-typescript-preprocessor": "0.4.0",
+    "powerbi-visuals-tools": "2.5.0",
+    "puppeteer": "1.15.0",
+    "tslint": "5.16.0",
+    "tslint-microsoft-contrib": "6.1.1",
     "typescript": "2.1.4"
   },
   "dependencies": {
     "d3": "3.5.5",
     "jasmine-jquery": "2.1.1",
-    "jquery": "3.1.1",
+    "jquery": "^3.4.0",
     "lodash": "^4.17.11"
   }
 }
