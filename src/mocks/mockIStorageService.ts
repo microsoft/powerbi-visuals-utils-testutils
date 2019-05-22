@@ -43,7 +43,7 @@ export class MockIStorageService implements ILocalVisualStorageService {
         deferred.resolve(data);
 
         return deferred as any;
-    };
+    }
 
     public set(key: string, data: string): IPromise<number> {
         let deferred: JQueryDeferred<any> = $.Deferred();
@@ -52,9 +52,9 @@ export class MockIStorageService implements ILocalVisualStorageService {
         deferred.resolve(data.length);
 
         return deferred as any;
-    };
+    }
 
     public remove(key: string): void {
         localStorage.removeItem(key);
-    };
+    }
 }

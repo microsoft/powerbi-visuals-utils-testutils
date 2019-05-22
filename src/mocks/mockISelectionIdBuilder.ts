@@ -34,6 +34,9 @@ import DataViewValueColumns = powerbi.DataViewValueColumns;
 // powerbi.visuals
 import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 import ISelectionId = powerbi.visuals.ISelectionId;
+import DataViewTable = powerbi.DataViewTable;
+import DataViewMatrixNode = powerbi.DataViewMatrixNode;
+import DataViewHierarchyLevel = powerbi.DataViewHierarchyLevel;
 
 export class MockISelectionIdBuilder implements ISelectionIdBuilder {
     public withCategory(categoryColumn: DataViewCategoryColumn, index: number): this {
@@ -53,5 +56,13 @@ export class MockISelectionIdBuilder implements ISelectionIdBuilder {
 
     public createSelectionId(): ISelectionId {
         return createSelectionId();
+    }
+
+    public withMatrixNode(matrixNode: DataViewMatrixNode, levels: DataViewHierarchyLevel[]): this {
+        return this;
+    }
+
+    public withTable(table: DataViewTable, rowIndex: number): this {
+        return this;
     }
 }

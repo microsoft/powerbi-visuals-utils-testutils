@@ -1,3 +1,8 @@
+## 2.2.0
+* Update packages to fix vulnerabilities.
+* Update powerbi-visual-api to 2.5.0
+* Update MockSelectionBuilder (add withTable, withMatrixNode methods)
+
 ## 2.1.7
 * Fix select method of MockISelectionManager.
 Selection manager should select all passed selections if multiselect is false

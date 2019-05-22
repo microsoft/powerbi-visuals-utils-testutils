@@ -95,7 +95,7 @@ export class MockISelectionManager implements ISelectionManager {
         return this.selectionIds;
     }
 
-    public applySelectionFilter(): void { };
+    public applySelectionFilter(): void { }
 
     public containsSelection(id: ISelectionId) {
         return this.selectionIds.some((selectionId: ISelectionId) => {
