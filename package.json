@@ -52,7 +52,7 @@
     "karma-typescript": "4.0.0",
     "karma-typescript-preprocessor": "0.4.0",
     "karma-webpack": "3.0.5",
-    "powerbi-visuals-api": "2.5.0",
+    "powerbi-visuals-api": "2.6.0",
     "puppeteer": "1.16.0",
     "ts-loader": "6.0.1",
     "ts-node": "^3.3.0",

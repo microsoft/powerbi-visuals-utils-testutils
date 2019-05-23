@@ -151,4 +151,6 @@ export class MockIVisualHost implements IVisualHost {
             getDisplayName: (key: string) => ""
         };
     }
+
+    public switchFocusModeState: (on: boolean) => void;
 }
