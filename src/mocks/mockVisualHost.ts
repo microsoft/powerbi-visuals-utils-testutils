@@ -113,7 +113,7 @@ export class MockIVisualHost implements IVisualHost {
         return this.authenticationService;
     }
 
-    public persistProperties(changes: VisualObjectInstancesToPersist) { };
+    public persistProperties(changes: VisualObjectInstancesToPersist) { }
 
     public get tooltipService(): ITooltipService {
         return this.tooltipServiceInstance;
@@ -151,4 +151,6 @@ export class MockIVisualHost implements IVisualHost {
             getDisplayName: (key: string) => ""
         };
     }
+
+    public switchFocusModeState: (on: boolean) => void;
 }
