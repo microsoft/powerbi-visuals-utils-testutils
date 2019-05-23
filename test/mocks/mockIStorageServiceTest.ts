@@ -59,19 +59,21 @@ describe("MockIStorageService", () => {
         expect(localStorageItem).toBeNull();
     });
 
-    it("MockIStorageService.set method test", () => {
+    it("MockIStorageService.set method test", (done) => {
         mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: number) => {
             const localStorageItem: string = localStorage.getItem(keyToBeStored);
             expect(localStorageItem).toBeTruthy();
             expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
             expect(data).toEqual(objectToBeStoredStringifyed.length);
+            done();
         });
     });
 
-    it("MockIStorageService.get method test", () => {
+    it("MockIStorageService.get method test", (done) => {
         const localStorageItem: string = localStorage.getItem(keyToBeStored);
         mockStorageService.get(keyToBeStored).then((data: string) => {
             expect(data).toEqual(localStorageItem);
+            done();
         });
     });
 });
