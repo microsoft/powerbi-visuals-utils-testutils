@@ -24,42 +24,49 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi.data
-    import Selector = powerbi.data.Selector;
+// powerbi.data
+import powerbi from "powerbi-visuals-api";
+import Selector = powerbi.data.Selector;
+import SelectorsByColumn = powerbi.data.SelectorsByColumn;
 
-    // powerbi.visuals
-    import ISelectionId = powerbi.visuals.ISelectionId;
+// powerbi.visuals
+import ISelectionId = powerbi.visuals.ISelectionId;
 
-    export class MockISelectionId implements ISelectionId {
-        private key: string;
+let measureId: number = 0;
 
-        constructor(key: string) {
-            this.key = key;
-        }
+export class MockISelectionId implements ISelectionId {
+    private key: string;
+    private measures: number[];
+    constructor(key: string) {
+        this.measures = [measureId++];
+        this.key = key;
+    }
 
-        public equals(other: ISelectionId): boolean {
-            return this === other;
-        }
+    public compareMeasures = (current, others) => {
+        return current === others;
+    }
 
-        public includes(other: ISelectionId, ignoreHighlight?: boolean): boolean {
-            return this === other;
-        }
+    public equals(other: ISelectionId): boolean {
+        return this === other;
+    }
 
-        public getKey(): string {
-            return this.key;
-        }
+    public includes(other: ISelectionId, ignoreHighlight?: boolean): boolean {
+        return this === other;
+    }
 
-        public getSelector(): Selector {
-            return {};
-        }
+    public getKey(): string {
+        return this.key;
+    }
 
-        public getSelectorsByColumn(): Selector {
-            return {};
-        }
+    public getSelector(): Selector {
+        return {};
+    }
 
-        public hasIdentity(): boolean {
-            return true;
-        }
+    public getSelectorsByColumn(): SelectorsByColumn {
+        return {};
+    }
+
+    public hasIdentity(): boolean {
+        return true;
     }
 }

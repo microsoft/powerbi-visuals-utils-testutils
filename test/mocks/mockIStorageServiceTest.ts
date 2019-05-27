@@ -24,59 +24,56 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
+import { ILocalVisualStorageService } from "../../src/mocks/mockIStorageService";
+import { createStorageService } from "../../src/mocks/mocks";
 
-module powerbi.extensibility.utils.test.mocks.test {
-    // powerbi.extensibility.utils.test.mocks
-    import ILocalVisualStorageService = powerbi.extensibility.utils.test.mocks.ILocalVisualStorageService;
-    import createStorageService = powerbi.extensibility.utils.test.mocks.createStorageService;
-
-    const keyToBeStored: string = "LS_KEY";
-    const objectToBeStored = {
-        keyDigit: 1,
-        keyString: "Hello",
-        keyArray: [1, "s4", false],
-        keyObject: {
-            key0: 11,
-            key1: "Hello",
-            key2: {
-                a: 13
-            }
+const keyToBeStored: string = "LS_KEY";
+const objectToBeStored = {
+    keyDigit: 1,
+    keyString: "Hello",
+    keyArray: [1, "s4", false],
+    keyObject: {
+        key0: 11,
+        key1: "Hello",
+        key2: {
+            a: 13
         }
-    };
+    }
+};
 
-    describe("MockIStorageService", () => {
-        let mockStorageService: ILocalVisualStorageService;
-        const objectToBeStoredStringifyed: string = JSON.stringify(objectToBeStored);
+describe("MockIStorageService", () => {
+    let mockStorageService: ILocalVisualStorageService;
+    const objectToBeStoredStringifyed: string = JSON.stringify(objectToBeStored);
 
-        beforeAll(() => {
-            mockStorageService = createStorageService();
-        });
+    beforeAll(() => {
+        mockStorageService = createStorageService();
+    });
 
-        it("MockIStorageService.remove method test", () => {
-            localStorage.setItem(keyToBeStored, objectToBeStoredStringifyed);
-            let localStorageItem: string = localStorage.getItem(keyToBeStored);
-            expect(localStorageItem).toBeTruthy();
+    it("MockIStorageService.remove method test", () => {
+        localStorage.setItem(keyToBeStored, objectToBeStoredStringifyed);
+        let localStorageItem: string = localStorage.getItem(keyToBeStored);
+        expect(localStorageItem).toBeTruthy();
 
-            mockStorageService.remove(keyToBeStored);
-            localStorageItem = localStorage.getItem(keyToBeStored);
-            expect(localStorageItem).toBeNull();
-        });
+        mockStorageService.remove(keyToBeStored);
+        localStorageItem = localStorage.getItem(keyToBeStored);
+        expect(localStorageItem).toBeNull();
+    });
 
-        it("MockIStorageService.set method test", () => {
-            mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: number) => {
-                const localStorageItem: string = localStorage.getItem(keyToBeStored);
-                expect(localStorageItem).toBeTruthy();
-                expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
-                expect(data).toEqual(objectToBeStoredStringifyed.length);
-            });
-        });
-
-        it("MockIStorageService.get method test", () => {
+    it("MockIStorageService.set method test", (done) => {
+        mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: number) => {
             const localStorageItem: string = localStorage.getItem(keyToBeStored);
-            mockStorageService.get(keyToBeStored).then((data: string) => {
-                expect(data).toEqual(localStorageItem);
-            });
+            expect(localStorageItem).toBeTruthy();
+            expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
+            expect(data).toEqual(objectToBeStoredStringifyed.length);
+            done();
         });
     });
-}
+
+    it("MockIStorageService.get method test", (done) => {
+        const localStorageItem: string = localStorage.getItem(keyToBeStored);
+        mockStorageService.get(keyToBeStored).then((data: string) => {
+            expect(data).toEqual(localStorageItem);
+            done();
+        });
+    });
+});

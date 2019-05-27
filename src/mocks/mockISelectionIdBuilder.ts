@@ -23,36 +23,46 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+import { createSelectionId } from "./mocks";
+import powerbi from "powerbi-visuals-api";
+// powerbi
+import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
+import DataViewValueColumn = powerbi.DataViewValueColumn;
+import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;
+import DataViewValueColumns = powerbi.DataViewValueColumns;
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
-    import DataViewValueColumn = powerbi.DataViewValueColumn;
-    import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;
-    import DataViewValueColumns = powerbi.DataViewValueColumns;
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import ISelectionId = powerbi.visuals.ISelectionId;
+import DataViewTable = powerbi.DataViewTable;
+import DataViewMatrixNode = powerbi.DataViewMatrixNode;
+import DataViewHierarchyLevel = powerbi.DataViewHierarchyLevel;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    import ISelectionId = powerbi.visuals.ISelectionId;
+export class MockISelectionIdBuilder implements ISelectionIdBuilder {
+    public withCategory(categoryColumn: DataViewCategoryColumn, index: number): this {
+        return this;
+    }
 
-    export class MockISelectionIdBuilder implements ISelectionIdBuilder {
-        public withCategory(categoryColumn: DataViewCategoryColumn, index: number): this {
-            return this;
-        }
+    public withSeries(
+        seriesColumn: DataViewValueColumns,
+        valueColumn: DataViewValueColumn | DataViewValueColumnGroup): this {
 
-        public withSeries(
-            seriesColumn: DataViewValueColumns,
-            valueColumn: DataViewValueColumn | DataViewValueColumnGroup): this {
+        return this;
+    }
 
-            return this;
-        }
+    public withMeasure(measureId: string): this {
+        return this;
+    }
 
-        public withMeasure(measureId: string): this {
-            return this;
-        }
+    public createSelectionId(): ISelectionId {
+        return createSelectionId();
+    }
 
-        public createSelectionId(): ISelectionId {
-            return createSelectionId();
-        }
+    public withMatrixNode(matrixNode: DataViewMatrixNode, levels: DataViewHierarchyLevel[]): this {
+        return this;
+    }
+
+    public withTable(table: DataViewTable, rowIndex: number): this {
+        return this;
     }
 }

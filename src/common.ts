@@ -24,6 +24,4 @@
 *  THE SOFTWARE.
 */
 
-module powerbi.extensibility.utils.test {
-    export const DefaultWaitForRender = 10;
-}
+export const DefaultWaitForRender = 10;

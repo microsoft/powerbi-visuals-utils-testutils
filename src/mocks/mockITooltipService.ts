@@ -23,21 +23,24 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+import powerbi from "powerbi-visuals-api";
+import ITooltipService = powerbi.extensibility.ITooltipService;
+import TooltipShowOptions = powerbi.extensibility.TooltipShowOptions;
+import TooltipMoveOptions = powerbi.extensibility.TooltipMoveOptions;
+import TooltipHideOptions = powerbi.extensibility.TooltipHideOptions;
 
-module powerbi.extensibility.utils.test.mocks {
-    export class MockITooltipService implements ITooltipService {
-        private isEnabled: boolean;
+export class MockITooltipService implements ITooltipService {
+    private isEnabled: boolean;
 
-        constructor(isEnabled: boolean = true) {
-            this.isEnabled = isEnabled;
-        }
-
-        public enabled(): boolean {
-            return this.isEnabled;
-        }
-
-        public show(options: TooltipShowOptions): void { }
-        public move(options: TooltipMoveOptions): void { }
-        public hide(options: TooltipHideOptions): void { }
+    constructor(isEnabled: boolean = true) {
+        this.isEnabled = isEnabled;
     }
+
+    public enabled(): boolean {
+        return this.isEnabled;
+    }
+
+    public show(options: TooltipShowOptions): void { }
+    public move(options: TooltipMoveOptions): void { }
+    public hide(options: TooltipHideOptions): void { }
 }

@@ -1,22 +1,23 @@
-## 1.3.3
+## 2.2.0
+* Update packages to fix vulnerabilities.
+* Update powerbi-visual-api to 2.6.0
+* Update MockSelectionBuilder (add withTable, withMatrixNode methods)
+
+## 2.1.7
 * Fix select method of MockISelectionManager.
 Selection manager should select all passed selections if multiselect is false
-* Update packages to fix vulnerabilities
 
-## 1.3.2
+## 2.1.6
+* Added EventService mock
+* Updated SelectionManager mock
+## 2.1.5
 * Added StorageService mock 
 
-## 1.3.1
+## 2.1.4
 * Update packages to fix vulnerabilities
 
-## 1.2.1
-* Fixed issue with mock of LocalizationManager
-
-## 1.2.0
-* Added support of API 1.11
-
-## 1.1.0
-* Added support of API 1.10
+## 2.0.0
+ * Moved to webpack 3, commonjs style.
 
 ## 1.0.2
  * Added multiple colors logic to mock palette. Only red color was available.

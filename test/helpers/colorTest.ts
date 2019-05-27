@@ -24,109 +24,105 @@
  *  THE SOFTWARE.
  */
 
-/// <reference path="../_references.ts" />
+import { parseColorString } from "../../src/helpers/color";
 
-module powerbi.extensibility.utils.test.helpers.color.test {
-    import parseColorString = powerbi.extensibility.utils.test.helpers.color.parseColorString;
+describe("parseColorString", () => {
+    it("invalid hex", () => {
+        let invalidStrings: string[] = [
+            "#",
+            "#12",
+            "#1234",
+            "#12345",
+            "#12345",
+            "#1234567",
+            "#xxx",
+            "#xxxxxx",
+        ];
 
-    describe("parseColorString", () => {
-        it("invalid hex", () => {
-            let invalidStrings: string[] = [
-                "#",
-                "#12",
-                "#1234",
-                "#12345",
-                "#12345",
-                "#1234567",
-                "#xxx",
-                "#xxxxxx",
-            ];
-
-            invalidStrings.forEach((invalidString: string) => {
-                expect(parseColorString(invalidString)).toBeUndefined();
-            });
-        });
-
-        it("valid hex", () => {
-            expect(parseColorString("#09f")).toEqual({
-                R: 0,
-                G: parseInt("99", 16),
-                B: parseInt("ff", 16),
-            });
-
-            expect(parseColorString("#09afAa")).toEqual({
-                R: parseInt("09", 16),
-                G: parseInt("af", 16),
-                B: parseInt("aa", 16),
-            });
-        });
-
-        it("invalid rgb()", () => {
-            let invalidStrings: string[] = [
-                "rgb()",
-                "rgb(1)",
-                "rgb(1, 2)",
-                "rgb(1, 2, 3, 4)",
-                "rgb(1.0, 2, 3)",
-                "rgb(aa, 2, 3)",
-            ];
-
-            invalidStrings.forEach((invalidString: string) => {
-                expect(parseColorString(invalidString)).toBeUndefined();
-            });
-        });
-
-        it("valid rgb()", () => {
-            expect(parseColorString("rgb(1, 2, 3)")).toEqual({
-                R: 1,
-                G: 2,
-                B: 3,
-            });
-        });
-
-        it("invalid rgba()", () => {
-            let invalidStrings: string[] = [
-                "rgba()",
-                "rgba(1)",
-                "rgba(1, 2)",
-                "rgba(1, 2, 3)",
-                "rgba(1.0, 2, 3)",
-                "rgba(aa, 2, 3)",
-            ];
-
-            invalidStrings.forEach((invalidString: string) => {
-                expect(parseColorString(invalidString)).toBeUndefined();
-            });
-        });
-
-        it("valid rgba()", () => {
-            expect(parseColorString("rgba(1, 2, 3, 1.0)")).toEqual({
-                R: 1,
-                G: 2,
-                B: 3,
-                A: 1.0,
-            });
-
-            expect(parseColorString("rgba(1, 2, 3, 0.19)")).toEqual({
-                R: 1,
-                G: 2,
-                B: 3,
-                A: 0.19,
-            });
-
-            expect(parseColorString("rgba(1, 2, 3, .19)")).toEqual({
-                R: 1,
-                G: 2,
-                B: 3,
-                A: 0.19,
-            });
-
-            expect(parseColorString("rgba(1, 2, 3, 1)")).toEqual({
-                R: 1,
-                G: 2,
-                B: 3,
-                A: 1.0,
-            });
+        invalidStrings.forEach((invalidString: string) => {
+            expect(parseColorString(invalidString)).toBeUndefined();
         });
     });
-}
+
+    it("valid hex", () => {
+        expect(parseColorString("#09f")).toEqual({
+            R: 0,
+            G: parseInt("99", 16),
+            B: parseInt("ff", 16),
+        });
+
+        expect(parseColorString("#09afAa")).toEqual({
+            R: parseInt("09", 16),
+            G: parseInt("af", 16),
+            B: parseInt("aa", 16),
+        });
+    });
+
+    it("invalid rgb()", () => {
+        let invalidStrings: string[] = [
+            "rgb()",
+            "rgb(1)",
+            "rgb(1, 2)",
+            "rgb(1, 2, 3, 4)",
+            "rgb(1.0, 2, 3)",
+            "rgb(aa, 2, 3)",
+        ];
+
+        invalidStrings.forEach((invalidString: string) => {
+            expect(parseColorString(invalidString)).toBeUndefined();
+        });
+    });
+
+    it("valid rgb()", () => {
+        expect(parseColorString("rgb(1, 2, 3)")).toEqual({
+            R: 1,
+            G: 2,
+            B: 3,
+        });
+    });
+
+    it("invalid rgba()", () => {
+        let invalidStrings: string[] = [
+            "rgba()",
+            "rgba(1)",
+            "rgba(1, 2)",
+            "rgba(1, 2, 3)",
+            "rgba(1.0, 2, 3)",
+            "rgba(aa, 2, 3)",
+        ];
+
+        invalidStrings.forEach((invalidString: string) => {
+            expect(parseColorString(invalidString)).toBeUndefined();
+        });
+    });
+
+    it("valid rgba()", () => {
+        expect(parseColorString("rgba(1, 2, 3, 1.0)")).toEqual({
+            R: 1,
+            G: 2,
+            B: 3,
+            A: 1.0,
+        });
+
+        expect(parseColorString("rgba(1, 2, 3, 0.19)")).toEqual({
+            R: 1,
+            G: 2,
+            B: 3,
+            A: 0.19,
+        });
+
+        expect(parseColorString("rgba(1, 2, 3, .19)")).toEqual({
+            R: 1,
+            G: 2,
+            B: 3,
+            A: 0.19,
+        });
+
+        expect(parseColorString("rgba(1, 2, 3, 1)")).toEqual({
+            R: 1,
+            G: 2,
+            B: 3,
+            A: 1.0,
+        });
+    });
+});
