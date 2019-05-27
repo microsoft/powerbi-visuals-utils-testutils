@@ -24,26 +24,26 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    export class MockILocale {
-        private currentLocale: string;
-        private locales: Object;
-        private static DefaultLocales: Object = {
-            "en" : "en-US",
-            "ru" : "ru-RU"
-        };
+import { keys } from "lodash-es";
 
-        constructor(locales: Object = MockILocale.DefaultLocales) {
-            this.locales = locales;
-            this.locale = _.keys(locales)[0];
-        }
+export class MockILocale {
+    private currentLocale: string;
+    private locales: Object;
+    private static DefaultLocales: Object = {
+        "en": "en-US",
+        "ru": "ru-RU"
+    };
 
-        public set locale(key: string) {
-            this.currentLocale = this.locales[key] || MockILocale.DefaultLocales[key] || MockILocale.DefaultLocales["en"];
-        }
+    constructor(locales: Object = MockILocale.DefaultLocales) {
+        this.locales = locales;
+        this.locale = keys(locales)[0];
+    }
 
-        public get locale(): string {
-            return this.currentLocale;
-        }
+    public set locale(key: string) {
+        this.currentLocale = this.locales[key] || MockILocale.DefaultLocales[key] || MockILocale.DefaultLocales["en"];
+    }
+
+    public get locale(): string {
+        return this.currentLocale;
     }
 }

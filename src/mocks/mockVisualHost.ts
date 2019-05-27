@@ -24,110 +24,133 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
+import powerbi from "powerbi-visuals-api";
+import ITooltipService = powerbi.extensibility.ITooltipService;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import { ILocalVisualStorageService } from "./mockIStorageService";
+import { createSelectionIdBuilder } from "./mocks";
+import { MockILocale } from "./mockILocale";
+import { MockIAllowInteractions } from "./mockIAllowInteractions";
+// powerbi
+import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
 
-    // powerbi.extensibility
-    import ISelectionManager = powerbi.extensibility.ISelectionManager;
-    import IColorPalette = powerbi.extensibility.IColorPalette;
-    import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
-    import ITelemetryService = powerbi.extensibility.ITelemetryService;
-    import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 
-    // powerbi.extensibility.visual
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+// powerbi.extensibility
+import ISelectionManager = powerbi.extensibility.ISelectionManager;
+import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
+import IVisualEventService = powerbi.extensibility.IVisualEventService;
 
-    export class MockIVisualHost implements IVisualHost {
-        private colorPaletteInstance: IColorPalette;
-        private selectionManager: ISelectionManager;
-        private tooltipServiceInstance: ITooltipService;
-        private localeInstance: MockILocale;
-        private allowInteractionsInstance: MockIAllowInteractions;
-        private localizationManager: ILocalizationManager;
-        private telemetryService: ITelemetryService;
-        private authService: IAuthenticationService;
-        private localStorageService: ILocalVisualStorageService;
+// powerbi.extensibility.visual
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-        constructor(
-            colorPalette?: IColorPalette,
-            selectionManager?: ISelectionManager,
-            tooltipServiceInstance?: ITooltipService,
-            localeInstance?: MockILocale,
-            allowInteractionsInstance?: MockIAllowInteractions,
-            localizationManager?: ILocalizationManager,
-            telemetryService?: ITelemetryService,
-            authService?: IAuthenticationService,
-            storageService?: ILocalVisualStorageService) {
+export class MockIVisualHost implements IVisualHost {
+    private colorPaletteInstance: IColorPalette;
+    private selectionManager: ISelectionManager;
+    private tooltipServiceInstance: ITooltipService;
+    private localeInstance: MockILocale;
+    private allowInteractionsInstance: MockIAllowInteractions;
+    private localizationManager: powerbi.extensibility.ILocalizationManager;
+    private telemetryService: powerbi.extensibility.ITelemetryService;
+    private authService: powerbi.extensibility.IAuthenticationService;
+    private localStorageService: ILocalVisualStorageService;
+    private visualEventService: IVisualEventService;
 
-            this.colorPaletteInstance = colorPalette;
-            this.selectionManager = selectionManager;
-            this.tooltipServiceInstance = tooltipServiceInstance;
-            this.localeInstance = localeInstance;
-            this.allowInteractionsInstance = allowInteractionsInstance;
-            this.telemetryService = telemetryService;
-            this.authService = authService;
-            this.localizationManager = localizationManager;
-            this.localStorageService = storageService;
-        }
+    constructor(
+        colorPalette?: IColorPalette,
+        selectionManager?: ISelectionManager,
+        tooltipServiceInstance?: ITooltipService,
+        localeInstance?: MockILocale,
+        allowInteractionsInstance?: MockIAllowInteractions,
+        localizationManager?: powerbi.extensibility.ILocalizationManager,
+        telemetryService?: powerbi.extensibility.ITelemetryService,
+        authService?: powerbi.extensibility.IAuthenticationService,
+        storageService?: ILocalVisualStorageService,
+        eventService?: IVisualEventService) {
 
-        public createSelectionIdBuilder(): ISelectionIdBuilder {
-            return createSelectionIdBuilder();
-        }
-
-        public createSelectionManager(): ISelectionManager {
-            return this.selectionManager;
-        }
-
-        public get colorPalette(): IColorPalette {
-            return this.colorPaletteInstance;
-        }
-
-        public get locale(): string {
-            return this.localeInstance.locale;
-        }
-
-        public set locale(language) {
-            this.localeInstance.locale = language;
-        }
-
-        public persistProperties(changes: VisualObjectInstancesToPersist) { }
-
-        public get tooltipService(): ITooltipService {
-            return this.tooltipServiceInstance;
-        }
-
-        public get allowInteractions(): boolean {
-            return this.allowInteractionsInstance.isEnabled;
-        }
-
-        public applyJsonFilter(filter: IFilter, objectName: string, propertyName: string, action: FilterAction) { }
-
-        public launchUrl(url: string) { }
-
-        public refreshHostData() { }
-
-        public createLocalizationManager(): ILocalizationManager {
-            return this.localizationManager;
-        }
-
-        public get telemetry(): ITelemetryService {
-            return this.telemetryService;
-        }
-
-        public get authenticationService(): IAuthenticationService {
-            return this.authService;
-        }
-
-        public get storageService(): ILocalVisualStorageService {
-            return this.localStorageService;
-        }
-
-        public get instanceId(): string {
-            return this.instanceId;
-        }
+        this.colorPaletteInstance = colorPalette;
+        this.selectionManager = selectionManager;
+        this.tooltipServiceInstance = tooltipServiceInstance;
+        this.localeInstance = localeInstance;
+        this.allowInteractionsInstance = allowInteractionsInstance;
+        this.telemetryService = telemetryService;
+        this.authService = authService;
+        this.localizationManager = localizationManager;
+        this.localStorageService = storageService;
+        this.visualEventService = eventService;
     }
+
+    public createSelectionIdBuilder(): ISelectionIdBuilder {
+        return createSelectionIdBuilder();
+    }
+
+    public createSelectionManager(): ISelectionManager {
+        return this.selectionManager;
+    }
+
+    public get colorPalette(): IColorPalette {
+        return this.colorPaletteInstance;
+    }
+
+    public get locale(): string {
+        return this.localeInstance.locale;
+    }
+
+    public set locale(language) {
+        this.localeInstance.locale = language;
+    }
+
+    public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
+
+    }
+
+    public get telemetry() {
+        return this.telemetryService;
+    }
+
+    public get authenticationService() {
+        return this.authenticationService;
+    }
+
+    public persistProperties(changes: VisualObjectInstancesToPersist) { }
+
+    public get tooltipService(): ITooltipService {
+        return this.tooltipServiceInstance;
+    }
+
+    public get allowInteractions(): boolean {
+        return this.allowInteractionsInstance.isEnabled;
+    }
+
+    public launchUrl(url: string) {
+        window.open(url);
+    }
+
+    public get storageService(): ILocalVisualStorageService {
+        return this.localStorageService;
+    }
+
+    public get eventService(): IVisualEventService {
+        return this.visualEventService;
+    }
+
+    public get instanceId() {
+        return "instanceId";
+    }
+
+    public fetchMoreData() {
+        return true;
+    }
+
+    public refreshHostData() {
+    }
+
+    public createLocalizationManager(): powerbi.extensibility.ILocalizationManager {
+        return {
+            getDisplayName: (key: string) => ""
+        };
+    }
+
+    public switchFocusModeState: (on: boolean) => void;
 }

@@ -26,35 +26,28 @@
 
 // powerbi
 import powerbi from "powerbi-visuals-api";
-import IPromise = powerbi.IPromise;
+import IVisualEventService = powerbi.extensibility.IVisualEventService;
+import VisualUpdateOptions = powerbi.extensibility.VisualUpdateOptions;
 
-export interface ILocalVisualStorageService {
-    get(key: string): IPromise<string>;
-    set(key: string, data: string): IPromise<number>;
-    remove(key: string): void;
-}
+export class MockIEventService implements IVisualEventService {
+    /**
+ * Called just before the actual rendering was started.
+ */
+    renderingStarted(options: VisualUpdateOptions): void {
 
-export class MockIStorageService implements ILocalVisualStorageService {
-
-    public get(key: string): IPromise<string> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
-
-        const data: string = localStorage.getItem(key);
-        deferred.resolve(data);
-
-        return deferred as any;
     }
 
-    public set(key: string, data: string): IPromise<number> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
+    /**
+     * Called immediately after finishing rendering successfully
+     */
+    renderingFinished(options: VisualUpdateOptions): void {
 
-        localStorage.setItem(key, data);
-        deferred.resolve(data.length);
-
-        return deferred as any;
     }
 
-    public remove(key: string): void {
-        localStorage.removeItem(key);
+    /**
+     * Called when rendering failed with optional reason string
+     */
+    renderingFailed(options: VisualUpdateOptions, reason?: string): void {
+
     }
 }

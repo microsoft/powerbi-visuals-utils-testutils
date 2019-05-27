@@ -30,6 +30,12 @@ After that, you should install dependencies by using the following command:
 npm install
 ```
 
+The final step is installation of necessary type declarations by using the following command:
+
+```bash
+npm run typings:install
+```
+
 The repository is ready for development now.
 
 ## How to build

@@ -23,93 +23,93 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+import powerbi from "powerbi-visuals-api";
+import ITooltipService = powerbi.extensibility.ITooltipService;
+import IVisualEventService = powerbi.extensibility.IVisualEventService;
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi
-    import IColorInfo = powerbi.IColorInfo;
+import { MockILocale } from "./mockILocale";
+import { MockIAllowInteractions } from "./mockIAllowInteractions";
+import { MockITooltipService } from "./mockITooltipService";
+import { MockISelectionManager } from "./mockISelectionManager";
+import { MockISelectionIdBuilder } from "./mockISelectionIdBuilder";
+import { MockIAuthenticationService } from "./mockIAuthenticationService";
+import { MockITelemetryService } from "./mockITelemetryService";
+import { MockILocalizationManager } from "./mockILocalizationManager";
+import { MockISelectionId } from "./mockISelectionId";
+import { MockIColorPalette } from "./mockIColorPalette";
+import { MockIVisualHost } from "./mockVisualHost";
+import { MockIEventService } from "./mockIEventService";
+import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageService";
+// powerbi
+import IColorInfo = powerbi.IColorInfo;
 
-    // powerbi.visuals
-    import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-    import ISelectionId = powerbi.visuals.ISelectionId;
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import ISelectionId = powerbi.visuals.ISelectionId;
 
-    // powerbi.extensibility
-    import IColorPalette = powerbi.extensibility.IColorPalette;
-    import ISelectionManager = powerbi.extensibility.ISelectionManager;
-    import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
-    import ITelemetryService = powerbi.extensibility.ITelemetryService;
-    import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
-    import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+// powerbi.extensibility
+import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
+import ISelectionManager = powerbi.extensibility.ISelectionManager;
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
-    // powerbi.extensibility.utils.test.mocks
-    import MockVisualHost = powerbi.extensibility.utils.test.mocks.MockIVisualHost;
-    import MockIColorPalette = powerbi.extensibility.utils.test.mocks.MockIColorPalette;
-    import MockISelectionId = powerbi.extensibility.utils.test.mocks.MockISelectionId;
-    import MockISelectionIdBuilder = powerbi.extensibility.utils.test.mocks.MockISelectionIdBuilder;
-    import MockISelectionManager = powerbi.extensibility.utils.test.mocks.MockISelectionManager;
-    import MockITooltipService = powerbi.extensibility.utils.test.mocks.MockITooltipService;
-    import MockILocale = powerbi.extensibility.utils.test.mocks.MockILocale;
-    import MockIAllowInteractions = powerbi.extensibility.utils.test.mocks.MockIAllowInteractions;
-    import MockILocalizationManager = powerbi.extensibility.utils.test.mocks.MockILocalizationManager;
-    import MockITelemetryService = powerbi.extensibility.utils.test.mocks.MockITelemetryService;
-    import MockIAuthenticationService = powerbi.extensibility.utils.test.mocks.MockIAuthenticationService;
-    import MockIStorageService = powerbi.extensibility.utils.test.mocks.MockIStorageService;
+export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
+    return new MockIVisualHost(
+        createColorPalette(colors),
+        createSelectionManager(),
+        createTooltipService(isEnabled),
+        createLocale(locale),
+        createAllowInteractions(allowInteractions),
+        createLocalizationManager(displayNames),
+        createTelemetryService(),
+        createAuthenticationService(token),
+        createStorageService(),
+        createEventService());
+}
 
-    import ILocalVisualStorageService = powerbi.extensibility.utils.test.mocks.ILocalVisualStorageService;
+export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
+    return new MockIColorPalette(colors);
+}
 
-    export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
-        return new MockVisualHost(
-            createColorPalette(colors),
-            createSelectionManager(),
-            createTooltipService(isEnabled),
-            createLocale(locale),
-            createAllowInteractions(allowInteractions),
-            createLocalizationManager(displayNames),
-            createTelemetryService(),
-            createAuthenticationService(token),
-            createStorageService());
-    }
+export function createSelectionId(key: string = ""): ISelectionId {
+    return new MockISelectionId(key);
+}
 
-    export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
-        return new MockIColorPalette(colors);
-    }
+export function createSelectionIdBuilder(): ISelectionIdBuilder {
+    return new MockISelectionIdBuilder();
+}
 
-    export function createSelectionId(key: string = ""): ISelectionId {
-        return new MockISelectionId(key);
-    }
+export function createSelectionManager(): ISelectionManager {
+    return new MockISelectionManager();
+}
 
-    export function createSelectionIdBuilder(): ISelectionIdBuilder {
-        return new MockISelectionIdBuilder();
-    }
+export function createTooltipService(isEnabled?: boolean): ITooltipService {
+    return new MockITooltipService(isEnabled);
+}
 
-    export function createSelectionManager(): ISelectionManager {
-        return new MockISelectionManager();
-    }
+export function createLocale(locales?: Object): MockILocale {
+    return new MockILocale(locales);
+}
 
-    export function createTooltipService(isEnabled?: boolean): ITooltipService {
-        return new MockITooltipService(isEnabled);
-    }
+export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
+    return new MockIAllowInteractions(isEnabled);
+}
 
-    export function createLocale(locales?: Object): MockILocale {
-        return new MockILocale(locales);
-    }
+export function createLocalizationManager(displayNames?: any): powerbi.extensibility.ILocalizationManager {
+    return new MockILocalizationManager(displayNames);
+}
 
-    export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
-        return new MockIAllowInteractions(isEnabled);
-    }
+export function createTelemetryService(): powerbi.extensibility.ITelemetryService {
+    return new MockITelemetryService();
+}
 
-    export function createLocalizationManager(displayNames?: any): ILocalizationManager {
-        return new MockILocalizationManager(displayNames);
-    }
+export function createAuthenticationService(token?: string): powerbi.extensibility.IAuthenticationService {
+    return new MockIAuthenticationService(token);
+}
 
-    export function createTelemetryService(): ITelemetryService {
-        return new MockITelemetryService();
-    }
+export function createStorageService(): ILocalVisualStorageService {
+    return new MockIStorageService();
+}
 
-    export function createAuthenticationService(token?: string): IAuthenticationService {
-        return new MockIAuthenticationService(token);
-    }
-
-    export function  createStorageService(): ILocalVisualStorageService {
-        return new MockIStorageService();
-    }
+export function createEventService(): IVisualEventService {
+    return new MockIEventService();
 }

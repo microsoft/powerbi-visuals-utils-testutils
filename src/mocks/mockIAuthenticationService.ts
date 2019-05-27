@@ -24,23 +24,23 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi.extensibility
-    import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
+import * as $ from "jquery";
+// powerbi.extensibility
+import powerbi from "powerbi-visuals-api";
+import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
 
-    export class MockIAuthenticationService implements IAuthenticationService  {
-        private token;
+export class MockIAuthenticationService implements IAuthenticationService  {
+    private token;
 
-        constructor(token: string) {
-            this.token = token;
-        }
+    constructor(token: string) {
+        this.token = token;
+    }
 
-        getAADToken(visualId?: string): IPromise<string> {
-            let deferred: JQueryDeferred<any> = $.Deferred();
+    getAADToken(visualId?: string): powerbi.IPromise<string> {
+        let deferred: JQueryDeferred<any> = $.Deferred();
 
-            deferred.resolve(this.token);
+        deferred.resolve(this.token);
 
-            return deferred as any;
-        }
+        return deferred as any;
     }
 }

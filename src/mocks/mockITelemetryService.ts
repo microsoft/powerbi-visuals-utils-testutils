@@ -24,12 +24,12 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.utils.test.mocks {
-    // powerbi.extensibility
-    import ITelemetryService = powerbi.extensibility.ITelemetryService;
+// powerbi.extensibility
+import powerbi from "powerbi-visuals-api";
+import ITelemetryService = powerbi.extensibility.ITelemetryService;
 
-    export class MockITelemetryService implements ITelemetryService {
-        instanceId: string;
-        trace(veType: VisualEventType, payload?: string) { }
+export class MockITelemetryService implements ITelemetryService {
+    instanceId: string;
+    trace(veType: powerbi.VisualEventType, payload?: string) {
     }
 }
