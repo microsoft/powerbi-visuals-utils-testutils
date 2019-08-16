@@ -24,8 +24,10 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
-import { range, includes } from "lodash-es";
 import * as $ from "jquery";
+
+import range from "lodash-es/range";
+import includes from "lodash-es/includes";
 
 export function testDom(height: number | string, width: number | string): JQuery {
     let element: JQuery = $("<div></div>")
