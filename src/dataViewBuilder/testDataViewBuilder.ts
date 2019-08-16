@@ -39,7 +39,20 @@ import {
     DataViewBuilderSeriesData
 } from "./dataViewBuilder";
 
-import { uniq, sum, isArray, map, max, sortBy, range, isEmpty, clone, toArray, groupBy, flatten, take, includes, findIndex } from "lodash-es";
+import isEmpty from "lodash-es/isEmpty";
+import includes from "lodash-es/includes";
+import uniq from "lodash-es/uniq";
+import sum from "lodash-es/sum";
+import map from "lodash-es/map";
+import max from "lodash-es/max";
+import sortBy from "lodash-es/sortBy";
+import range from "lodash-es/range";
+import clone from "lodash-es/clone";
+import toArray from "lodash-es/toArray";
+import groupBy from "lodash-es/groupBy";
+import flatten from "lodash-es/flatten";
+import take from "lodash-es/take";
+import findIndex from "lodash-es/findIndex";
 
 export type CustomizeColumnFn = (source: DataViewMetadataColumn) => void;
 
@@ -71,7 +84,7 @@ export abstract class TestDataViewBuilder {
     }
 
     static getDataViewBuilderColumnIdentitySources(options: TestDataViewBuilderColumnOptions[] | TestDataViewBuilderColumnOptions): DataViewBuilderColumnIdentitySource[] {
-        let optionsArray: TestDataViewBuilderColumnOptions[] = <any>(isArray(options) ? options : [options]);
+        let optionsArray: TestDataViewBuilderColumnOptions[] = <any>(Array.isArray(options) ? options : [options]);
 
         let fields = optionsArray.map(() => { }),
             optionsIdentityExpressions: any[][] = optionsArray.map((opt) => opt.values),
@@ -110,8 +123,8 @@ export abstract class TestDataViewBuilder {
         customizeColumns?: CustomizeColumnFn): DataViewBuilderAllColumnOptions {
 
         let filterColumns = filter
-            ? (options) => isArray(options.values) && filter(options)
-            : (options) => isArray(options.values);
+            ? (options) => Array.isArray(options.values) && filter(options)
+            : (options) => Array.isArray(options.values);
 
         let resultCategoriesColumns = isEmpty(categoriesColumns) ? [] : (<TestDataViewBuilderCategoryColumnOptions[]>flatten(categoriesColumns)).filter(filterColumns);
 

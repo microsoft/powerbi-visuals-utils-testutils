@@ -25,14 +25,13 @@
  */
 
 import powerbi from "powerbi-visuals-api";
-import {
-    isEmpty,
-    first,
-    toPlainObject,
-    some,
-    includes,
-    extend
-} from "lodash-es";
+
+import isEmpty from "lodash-es/isEmpty";
+import first from "lodash-es/first";
+import toPlainObject from "lodash-es/toPlainObject";
+import some from "lodash-es/some";
+import includes from "lodash-es/includes";
+import extend from "lodash-es/extend";
 
 import DataView = powerbi.DataView;
 import ValueTypeDescriptor = powerbi.ValueTypeDescriptor;

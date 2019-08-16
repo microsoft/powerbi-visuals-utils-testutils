@@ -27,7 +27,6 @@
 import { renderTimeout } from "./helpers/visualTestHelpers";
 import { testDom, flushAllD3Transitions } from "./helpers/helpers";
 import { createVisualHost } from "./mocks/mocks";
-import { isArray } from "lodash-es";
 
 // powerbi
 import powerbi from "powerbi-visuals-api";
@@ -90,7 +89,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
 
     public update(dataView: DataView[] | DataView): void {
         this.visual.update({
-            dataViews: isArray(dataView) ? dataView : [dataView],
+            dataViews: Array.isArray(dataView) ? dataView : [dataView],
             viewport: this.viewport
         } as VisualUpdateOptions);
     }
@@ -142,7 +141,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         let enumerationInstances: VisualObjectInstance[] =
             (enumeration as VisualObjectInstanceEnumerationObject).instances;
 
-        return isArray(enumerationInstances)
+        return Array.isArray(enumerationInstances)
             ? enumerationInstances
             : enumeration as VisualObjectInstance[];
     }

@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-import { keys } from "lodash-es";
+import keys from "lodash-es/keys";
 
 export class MockILocale {
     private currentLocale: string;
