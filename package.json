@@ -28,7 +28,9 @@
     "build:map": "tsc --sourceMap",
     "test": "karma start",
     "pretest": "npm run lint",
-    "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\""
+    "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "@types/d3-timer": "1.0.9",
@@ -66,7 +68,9 @@
     "d3-array": "2.2.0",
     "d3-timer": "1.0.9",
     "istanbul-instrumenter-loader": "3.0.1",
-    "jquery": "3.4.1",
-    "lodash-es": "4.17.15"
-  }
+    "jquery": "3.5.0",
+    "lodash-es": "4.17.15",
+    "snyk": "^1.342.2"
+  },
+  "snyk": true
 }
