@@ -28,7 +28,9 @@
     "build:map": "tsc --sourceMap",
     "test": "karma start",
     "pretest": "npm run lint",
-    "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\""
+    "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "@types/d3-timer": "1.0.9",
@@ -42,9 +44,10 @@
     "coveralls": "3.0.6",
     "jasmine": "3.4.0",
     "jasmine-jquery": "2.1.1",
-    "karma": "4.2.0",
+    "karma": "^5.1.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "1.1.2",
+    "karma-coverage-istanbul-reporter": "2.1.0",
     "karma-jasmine": "2.0.1",
     "karma-remap-istanbul": "0.6.0",
     "karma-sourcemap-loader": "0.3.7",
@@ -59,14 +62,15 @@
     "tslint-microsoft-contrib": "6.2.0",
     "typescript": "3.5.3",
     "webpack": "4.39.2",
-    "webpack-node-externals": "1.7.2",
-    "karma-coverage-istanbul-reporter": "2.1.0"
+    "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
     "d3-array": "2.2.0",
     "d3-timer": "1.0.9",
     "istanbul-instrumenter-loader": "3.0.1",
-    "jquery": "3.4.1",
-    "lodash-es": "4.17.15"
-  }
+    "jquery": "3.5.0",
+    "lodash-es": "4.17.15",
+    "snyk": "^1.342.2"
+  },
+  "snyk": true
 }
