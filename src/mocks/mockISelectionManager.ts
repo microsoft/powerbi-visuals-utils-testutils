@@ -41,9 +41,6 @@ export class MockISelectionManager implements ISelectionManager {
     private callback: (ids: ISelectionId[]) => void;
 
     public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
-        // let deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
-        // deferred.resolve(); //TODO:REMOVE
-        // return deferred as any; //TODO:REMOVE
         return new Promise((resolve, reject) => {
             resolve();
         }) as any;
@@ -51,7 +48,6 @@ export class MockISelectionManager implements ISelectionManager {
 
     public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
         let selectionIds: ISelectionId[] = [].concat(selectionId);
-            // deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
 
         // if no multiselect reset current selection and save new passed selections;
         if (!multiSelect) {
@@ -72,8 +68,6 @@ export class MockISelectionManager implements ISelectionManager {
             });
         }
 
-        // deferred.resolve(this.selectionIds); // TODO:REMOVE
-        // return deferred as any; // TODO:REMOVE
         return new Promise((resolve, reject) => {
             resolve(this.selectionIds);
         }) as any;
@@ -84,12 +78,8 @@ export class MockISelectionManager implements ISelectionManager {
     }
 
     public clear(): IPromise<{}> {
-        // let deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
-
         this.selectionIds = [];
 
-        // deferred.resolve(); // TODO:REMOVE
-        // return deferred as any; // TODO:REMOVE
         return new Promise((resolve, reject) => {
             resolve();
         }) as any;

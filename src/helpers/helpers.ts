@@ -40,11 +40,6 @@ export function testDom(height: number | string, width: number | string): HTMLEl
     element.style.position = "relative";
     element.className = "visual";
 
-    // const fixtures = jasmine.getFixtures(); // TODO:REMOVE
-    // fixtures.set(element.outerHTML); // TODO:REMOVE
-
-    // setFixtures(element.outerHTML); // TODO:REMOVE
-
     document.body.appendChild(element);
     return document.getElementById("item");
 }
@@ -343,43 +338,4 @@ export function getRandomNumber(
     }
 
     return result;
-}
-
-
-export declare interface JQuery3dClicks extends JQuery {
-    d3Click(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3TouchStart(touchList?: TouchList): void;
-    d3TouchMove(touchList?: TouchList): void;
-    d3TouchEnd(touchList?: TouchList): void;
-    d3ContextMenu(x: number, y: number): void;
-    d3MouseDown(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseUp(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseOver(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseMove(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseOut(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3KeyEvent(typeArg: string, keyArg: string, keyCode: number): void;
 }

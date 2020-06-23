@@ -36,9 +36,6 @@ export class MockIAuthenticationService implements IAuthenticationService  {
     }
 
     getAADToken(visualId?: string): powerbi.IPromise<string> {
-        // let deferred: JQueryDeferred<any> = $.Deferred();//TODO:REMOVE
-        // deferred.resolve(this.token);//TODO:REMOVE
-        // return deferred as any;//TODO:REMOVE
 
         return new Promise((resolve, reject) => {
             resolve(this.token);
