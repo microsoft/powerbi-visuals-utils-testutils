@@ -37,21 +37,27 @@ export interface ILocalVisualStorageService {
 export class MockIStorageService implements ILocalVisualStorageService {
 
     public get(key: string): IPromise<string> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
+        // let deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
 
         const data: string = localStorage.getItem(key);
-        deferred.resolve(data);
+        // deferred.resolve(data);// TODO:REMOVE
 
-        return deferred as any;
+        // return deferred as any; // TODO:REMOVE
+        return new Promise((resolve, reject) => {
+            resolve(data);
+        }) as any;
     }
 
     public set(key: string, data: string): IPromise<number> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
+        // let deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
 
         localStorage.setItem(key, data);
-        deferred.resolve(data.length);
+        // deferred.resolve(data.length); // TODO:REMOVE
 
-        return deferred as any;
+        // return deferred as any; // TODO:REMOVE
+        return new Promise((resolve, reject) => {
+            resolve(data.length);
+        }) as any;
     }
 
     public remove(key: string): void {

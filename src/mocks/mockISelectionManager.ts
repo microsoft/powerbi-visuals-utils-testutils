@@ -27,7 +27,6 @@
 // powerbi
 import powerbi from "powerbi-visuals-api";
 import IPromise = powerbi.IPromise;
-import * as $ from "jquery";
 
 // powerbi.visuals
 import ISelectionId = powerbi.visuals.ISelectionId;
@@ -42,16 +41,17 @@ export class MockISelectionManager implements ISelectionManager {
     private callback: (ids: ISelectionId[]) => void;
 
     public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
-
-        deferred.resolve();
-
-        return deferred as any;
+        // let deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
+        // deferred.resolve(); //TODO:REMOVE
+        // return deferred as any; //TODO:REMOVE
+        return new Promise((resolve, reject) => {
+            resolve();
+        }) as any;
     }
 
     public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
-        let selectionIds: ISelectionId[] = [].concat(selectionId),
-            deferred: JQueryDeferred<any> = $.Deferred();
+        let selectionIds: ISelectionId[] = [].concat(selectionId);
+            // deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
 
         // if no multiselect reset current selection and save new passed selections;
         if (!multiSelect) {
@@ -72,9 +72,11 @@ export class MockISelectionManager implements ISelectionManager {
             });
         }
 
-        deferred.resolve(this.selectionIds);
-
-        return deferred as any;
+        // deferred.resolve(this.selectionIds); // TODO:REMOVE
+        // return deferred as any; // TODO:REMOVE
+        return new Promise((resolve, reject) => {
+            resolve(this.selectionIds);
+        }) as any;
     }
 
     public hasSelection(): boolean {
@@ -82,13 +84,15 @@ export class MockISelectionManager implements ISelectionManager {
     }
 
     public clear(): IPromise<{}> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
+        // let deferred: JQueryDeferred<any> = $.Deferred(); // TODO:REMOVE
 
         this.selectionIds = [];
 
-        deferred.resolve();
-
-        return deferred as any;
+        // deferred.resolve(); // TODO:REMOVE
+        // return deferred as any; // TODO:REMOVE
+        return new Promise((resolve, reject) => {
+            resolve();
+        }) as any;
     }
 
     public getSelectionIds(): ISelectionId[] {

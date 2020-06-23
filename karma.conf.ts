@@ -62,8 +62,8 @@ module.exports = (config: Config) => {
             "karma-coverage-istanbul-reporter"
         ],
         files: [
-            "node_modules/jquery/dist/jquery.min.js",
-            "node_modules/jasmine-jquery/lib/jasmine-jquery.js",
+            // "node_modules/jquery/dist/jquery.min.js", // TODO:REMOVE
+            // "node_modules/jasmine-jquery/lib/jasmine-jquery.js", // TODO:REMOVE
             testRecursivePath,
             {
                 pattern: srcOriginalRecursivePath,
