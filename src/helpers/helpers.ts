@@ -61,61 +61,62 @@ export enum MouseEventType {
     mouseout,
 }
 
-export function d3Click(element: HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3Click(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.click, x, y, eventType, button);
 }
 
-export function d3MouseDown(element: HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseDown(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mousedown, x, y, eventType, button);
 }
 
-export function d3MouseUp(element: HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseUp(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mouseup, x, y, eventType);
 }
 
-export function d3MouseOver(element: HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseOver(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mouseover, x, y, eventType, button);
 }
 
-export function d3MouseMove(element: HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseMove(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mousemove, x, y, eventType, button);
 }
 
-export function d3MouseOut(element: HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseOut(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mouseout, x, y, eventType, button);
 }
 
-export function d3KeyEvent(element: HTMLElement, typeArg: string, keyArg: string, keyCode: number): void {
+export function d3KeyEvent(element: JQuery, typeArg: string, keyArg: string, keyCode: number): void {
     keyEvent.call(element, typeArg, keyArg, keyCode);
 }
 
-export function d3TouchStart(element: HTMLElement, touchList?: TouchList): void {
+export function d3TouchStart(element: JQuery, touchList?: TouchList): void {
     this.each(function (i, e) {
         let evt = createTouchStartEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
-export function d3TouchMove(element: HTMLElement, touchList?: TouchList): void {
+export function d3TouchMove(element: JQuery, touchList?: TouchList): void {
     this.each(function (i, e) {
         let evt = createTouchMoveEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
-export function d3TouchEnd(element: HTMLElement, touchList?: TouchList): void {
+export function d3TouchEnd(element: JQuery, touchList?: TouchList): void {
     this.each(function (i, e) {
         let evt = createTouchEndEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
-export function d3ContextMenu(element: HTMLElement, x: number, y: number): void {
+export function d3ContextMenu(element: JQuery, x: number, y: number): void {
     this.each(function (i, e) {
         let evt = createContextMenuEvent(x, y);
         e.dispatchEvent(evt);
     });
 }
+
 // Defining a simulated click event (see http://stackoverflow.com/questions/9063383/how-to-invoke-click-event-programmaticaly-in-d3)
 function mouseEvent(
     mouseEventType: MouseEventType,
