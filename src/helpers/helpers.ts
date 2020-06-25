@@ -281,21 +281,15 @@ export function createTouch(x: number, y: number, element: HTMLElement, id: numb
     };
 }
 
-export function clickElement(element: HTMLElement, ctrlKey: boolean = false): void {
-    let rect = element.getBoundingClientRect(),
+export function clickElement(element: JQuery, ctrlKey: boolean = false): void {
+    let rect = element.get(0).getBoundingClientRect(),
         coordinatesTop: number = rect.top + document.body.scrollTop,
         coordinatesLeft: number = rect.left + document.body.scrollLeft,
-        width: number = element.offsetWidth,
-        height: number = element.offsetHeight,
+        width: number = element.get(0).offsetWidth,
+        height: number = element.get(0).offsetHeight,
         eventType: ClickEventType = ctrlKey
             ? ClickEventType.CtrlKey
             : ClickEventType.Default;
-    /*
-    element.d3Click(
-        coordinates.left + (width / 2),
-        coordinates.top + (height / 2),
-        eventType);
-        */
 
     d3Click(element,
         coordinatesLeft + (width / 2),
