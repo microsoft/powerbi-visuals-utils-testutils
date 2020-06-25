@@ -261,7 +261,7 @@ export function createTouchesList(touches: Touch[]): TouchList {
     return touchesList;
 }
 
-export function createTouch(x: number, y: number, element: HTMLElement, id: number = 0): Touch {
+export function createTouch(x: number, y: number, element: JQuery, id: number = 0): Touch {
     return {
         pageX: x,
         pageY: y,
@@ -269,7 +269,7 @@ export function createTouch(x: number, y: number, element: HTMLElement, id: numb
         screenY: y,
         clientX: x,
         clientY: y,
-        target: element,
+        target: element.get(0),
         identifier: id,
         altitudeAngle: 1.5708,
         azimuthAngle: 1.5708,
