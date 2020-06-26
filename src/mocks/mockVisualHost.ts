@@ -153,4 +153,6 @@ export class MockIVisualHost implements IVisualHost {
     }
 
     public switchFocusModeState: (on: boolean) => void;
+
+    public hostEnv: powerbi.common.CustomVisualHostEnv = 1;
 }

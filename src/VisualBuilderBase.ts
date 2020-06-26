@@ -59,7 +59,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         this.element = element;
 
         if (guid) {
-            this.element.className += `visual-${guid}`;
+            this.element.classList.add(`visual-${guid}`);
         }
 
         this.visualHost = createVisualHost();
