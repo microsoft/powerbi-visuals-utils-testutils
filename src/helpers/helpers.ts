@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
+import { uuid } from "uuidv4";
 
 import range from "lodash-es/range";
 import includes from "lodash-es/includes";
@@ -32,16 +33,17 @@ import includes from "lodash-es/includes";
 export function testDom(height: number | string, width: number | string): HTMLElement {
     let element: HTMLElement = document.createElement("div"),
         heightWithUnits: string = isFinite( Number(height) ) ? `${Number(height)}px` : String(height),
-        widthWithUnits: string = isFinite( Number(width) ) ? `${Number(width)}px` : String(width);
+        widthWithUnits: string = isFinite( Number(width) ) ? `${Number(width)}px` : String(width),
+        id = "item" + uuid();
 
-    element.id = "item";
+    element.id = id;
     element.style.height = heightWithUnits;
     element.style.width = widthWithUnits;
     element.style.position = "relative";
     element.className = "visual";
 
     document.body.appendChild(element);
-    return document.getElementById("item");
+    return document.getElementById(id);
 }
 
 export enum ClickEventType {
