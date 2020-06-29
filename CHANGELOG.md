@@ -1,3 +1,7 @@
+## 2.3.0
+* JQuery and Jasmine-Jquery removed.
+* JQuery3dClicks interface is not supported any more.
+
 ## 2.2.1
 * Packages update
 
@@ -13,6 +17,7 @@ Selection manager should select all passed selections if multiselect is false
 ## 2.1.6
 * Added EventService mock
 * Updated SelectionManager mock
+
 ## 2.1.5
 * Added StorageService mock 
 

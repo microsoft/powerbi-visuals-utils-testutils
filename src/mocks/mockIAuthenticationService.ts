@@ -24,7 +24,6 @@
  *  THE SOFTWARE.
  */
 
-import * as $ from "jquery";
 // powerbi.extensibility
 import powerbi from "powerbi-visuals-api";
 import IAuthenticationService = powerbi.extensibility.IAuthenticationService;
@@ -37,10 +36,9 @@ export class MockIAuthenticationService implements IAuthenticationService  {
     }
 
     getAADToken(visualId?: string): powerbi.IPromise<string> {
-        let deferred: JQueryDeferred<any> = $.Deferred();
 
-        deferred.resolve(this.token);
-
-        return deferred as any;
+        return new Promise((resolve, reject) => {
+            resolve(this.token);
+        }) as any;
     }
 }

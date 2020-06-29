@@ -24,22 +24,26 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
-import * as $ from "jquery";
+import { uuid } from "uuidv4";
 
 import range from "lodash-es/range";
 import includes from "lodash-es/includes";
 
-export function testDom(height: number | string, width: number | string): JQuery {
-    let element: JQuery = $("<div></div>")
-        .attr("id", "item")
-        .css("width", width)
-        .css("height", height)
-        .css("position", "relative")
-        .addClass("visual");
 
-    setFixtures(element[0].outerHTML);
+export function testDom(height: number | string, width: number | string): HTMLElement {
+    let element: HTMLElement = document.createElement("div"),
+        heightWithUnits: string = isFinite( Number(height) ) ? `${Number(height)}px` : String(height),
+        widthWithUnits: string = isFinite( Number(width) ) ? `${Number(width)}px` : String(width),
+        id = "item" + uuid();
 
-    return $("#item");
+    element.id = id;
+    element.style.height = heightWithUnits;
+    element.style.width = widthWithUnits;
+    element.style.position = "relative";
+    element.className = "visual";
+
+    document.body.appendChild(element);
+    return document.getElementById(id);
 }
 
 export enum ClickEventType {
@@ -59,61 +63,62 @@ export enum MouseEventType {
     mouseout,
 }
 
-export function d3Click(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3Click(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.click, x, y, eventType, button);
 }
 
-export function d3MouseDown(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseDown(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mousedown, x, y, eventType, button);
 }
 
-export function d3MouseUp(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseUp(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mouseup, x, y, eventType);
 }
 
-export function d3MouseOver(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseOver(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mouseover, x, y, eventType, button);
 }
 
-export function d3MouseMove(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseMove(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mousemove, x, y, eventType, button);
 }
 
-export function d3MouseOut(element: JQuery, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3MouseOut(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.mouseout, x, y, eventType, button);
 }
 
-export function d3KeyEvent(element: JQuery, typeArg: string, keyArg: string, keyCode: number): void {
+export function d3KeyEvent(element: JQuery | HTMLElement, typeArg: string, keyArg: string, keyCode: number): void {
     keyEvent.call(element, typeArg, keyArg, keyCode);
 }
 
-export function d3TouchStart(element: JQuery, touchList?: TouchList): void {
+export function d3TouchStart(element: JQuery | HTMLElement, touchList?: TouchList): void {
     this.each(function (i, e) {
         let evt = createTouchStartEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
-export function d3TouchMove(element: JQuery, touchList?: TouchList): void {
+export function d3TouchMove(element: JQuery | HTMLElement, touchList?: TouchList): void {
     this.each(function (i, e) {
         let evt = createTouchMoveEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
-export function d3TouchEnd(element: JQuery, touchList?: TouchList): void {
+export function d3TouchEnd(element: JQuery | HTMLElement, touchList?: TouchList): void {
     this.each(function (i, e) {
         let evt = createTouchEndEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
-export function d3ContextMenu(element: JQuery, x: number, y: number): void {
+export function d3ContextMenu(element: JQuery | HTMLElement, x: number, y: number): void {
     this.each(function (i, e) {
         let evt = createContextMenuEvent(x, y);
         e.dispatchEvent(evt);
     });
 }
+
 // Defining a simulated click event (see http://stackoverflow.com/questions/9063383/how-to-invoke-click-event-programmaticaly-in-d3)
 function mouseEvent(
     mouseEventType: MouseEventType,
@@ -133,18 +138,15 @@ function mouseEvent(
 
 function keyEvent(typeArg: string, keyArg: string, keyCode: number): void {
     this.each(function (i, e) {
-        let evt: KeyboardEvent = document.createEvent("KeyboardEvent");
-
-        evt.initKeyboardEvent(
-            typeArg,
-            true,
-            true,
-            window,
-            keyArg,
-            KeyboardEvent.DOM_KEY_LOCATION_STANDARD,
-            null,
-            false,
-            null);
+        let evt: KeyboardEvent = new KeyboardEvent(typeArg,
+        {
+            key: keyArg,
+            bubbles: true,
+            cancelable: true,
+            location: KeyboardEvent.DOM_KEY_LOCATION_STANDARD,
+            repeat: false,
+            view: window,
+        } as KeyboardEventInit);
         e.dispatchEvent(evt);
     });
 }
@@ -190,7 +192,7 @@ export function createTouchStartEvent(touchList?: TouchList): UIEvent {
     // NOTE: phantomjs does not support TouchEvent
     let evt: UIEvent = document.createEvent("UIEvent");
 
-    evt.initUIEvent("touchstart", true, true, window, 1);
+    evt.initEvent("touchstart", true, true);
 
     if (touchList) {
         (<any>evt).touches = touchList;
@@ -203,7 +205,7 @@ export function createTouchMoveEvent(touchList?: TouchList): UIEvent {
     // NOTE: phantomjs does not support TouchEvent
     let evt: UIEvent = document.createEvent("UIEvent");
 
-    evt.initUIEvent("touchmove", true, true, window, 1);
+    evt.initEvent("touchmove", true, true);
 
     if (touchList) {
         (<any>evt).touches = touchList;
@@ -216,7 +218,7 @@ export function createTouchEndEvent(touchList?: TouchList): UIEvent {
     // NOTE: phantomjs does not support TouchEvent
     let evt: UIEvent = document.createEvent("UIEvent");
 
-    evt.initUIEvent("touchend", true, true, window, 1);
+    evt.initEvent("touchend", true, true);
 
     if (touchList) {
         (<any>evt).touches = touchList;
@@ -258,7 +260,12 @@ export function createTouchesList(touches: Touch[]): TouchList {
     return touchesList;
 }
 
-export function createTouch(x: number, y: number, element: JQuery, id: number = 0): Touch {
+export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): Touch {
+    element = ((element instanceof jQuery)
+        ? (element as JQuery).get(0)
+        : element
+    ) as HTMLElement;
+
     return {
         pageX: x,
         pageY: y,
@@ -266,7 +273,7 @@ export function createTouch(x: number, y: number, element: JQuery, id: number = 
         screenY: y,
         clientX: x,
         clientY: y,
-        target: element.get(0),
+        target: element,
         identifier: id,
         altitudeAngle: 1.5708,
         azimuthAngle: 1.5708,
@@ -278,23 +285,20 @@ export function createTouch(x: number, y: number, element: JQuery, id: number = 
     };
 }
 
-export function clickElement(element: JQuery, ctrlKey: boolean = false): void {
-    let coordinates: JQueryCoordinates = element.offset(),
-        width: number = element.outerWidth(),
-        height: number = element.outerHeight(),
+export function clickElement(element: JQuery | HTMLElement, ctrlKey: boolean = false): void {
+    element = ((element instanceof jQuery) ? (element as JQuery).get(0) : element) as HTMLElement;
+    let rect = element.getBoundingClientRect(),
+        coordinatesTop: number = rect.top + document.body.scrollTop,
+        coordinatesLeft: number = rect.left + document.body.scrollLeft,
+        width: number = element.offsetWidth,
+        height: number = element.offsetHeight,
         eventType: ClickEventType = ctrlKey
             ? ClickEventType.CtrlKey
             : ClickEventType.Default;
-    /*
-    element.d3Click(
-        coordinates.left + (width / 2),
-        coordinates.top + (height / 2),
-        eventType);
-        */
 
     d3Click(element,
-        coordinates.left + (width / 2),
-        coordinates.top + (height / 2),
+        coordinatesLeft + (width / 2),
+        coordinatesTop + (height / 2),
         eventType);
 }
 
@@ -334,43 +338,4 @@ export function getRandomNumber(
     }
 
     return result;
-}
-
-
-export declare interface JQuery3dClicks extends JQuery {
-    d3Click(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3TouchStart(touchList?: TouchList): void;
-    d3TouchMove(touchList?: TouchList): void;
-    d3TouchEnd(touchList?: TouchList): void;
-    d3ContextMenu(x: number, y: number): void;
-    d3MouseDown(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseUp(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseOver(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseMove(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3MouseOut(
-        x: number,
-        y: number,
-        eventType?: ClickEventType,
-        button?: number): void;
-    d3KeyEvent(typeArg: string, keyArg: string, keyCode: number): void;
 }

@@ -44,7 +44,7 @@ import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 
 export abstract class VisualBuilderBase<T extends IVisual> {
-    public element: JQuery;
+    public element: HTMLElement;
     public viewport: IViewport;
     public visualHost: IVisualHost;
 
@@ -54,12 +54,12 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         width: number = 800,
         height: number = 600,
         guid?: string,
-        element: JQuery = testDom(height, width)) {
+        element: HTMLElement = testDom(height, width)) {
 
         this.element = element;
 
         if (guid) {
-            this.element.addClass(`visual-${guid}`);
+            this.element.classList.add(`visual-${guid}`);
         }
 
         this.visualHost = createVisualHost();
@@ -76,7 +76,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
 
     public init(): void {
         this.visual = this.build({
-            element: this.element.get(0),
+            element: this.element,
             host: this.visualHost
         });
     }

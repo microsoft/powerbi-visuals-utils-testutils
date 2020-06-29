@@ -28,9 +28,9 @@ import { testDom, getRandomNumber, getRandomNumbers } from "../../src/helpers/he
 
 describe("testDom", () => {
     it("should return an element", () => {
-        let element: JQuery = testDom(500, 500);
+        let element: HTMLElement = testDom(500, 500);
 
-        expect(element.get(0)).toBeDefined();
+        expect(element).toBeDefined();
     });
 });
 
