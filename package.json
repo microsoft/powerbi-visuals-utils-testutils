@@ -30,7 +30,7 @@
     "pretest": "npm run lint",
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "postinstall": "npm run snyk-protect"
   },
   "devDependencies": {
     "@types/d3-timer": "1.0.9",
