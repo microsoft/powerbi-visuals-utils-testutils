@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -29,8 +29,7 @@
     "test": "karma start",
     "pretest": "npm run lint",
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
-    "snyk-protect": "snyk protect",
-    "postinstall": "npm run snyk-protect"
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@types/d3-timer": "1.0.9",
@@ -54,6 +53,7 @@
     "karma-webpack": "4.0.2",
     "powerbi-visuals-api": "3.2.0",
     "puppeteer": "4.0.1",
+    "snyk": "^1.356.0",
     "ts-loader": "7.0.5",
     "ts-node": "8.10.2",
     "tslint": "6.1.2",
@@ -67,7 +67,6 @@
     "d3-timer": "1.0.10",
     "istanbul-instrumenter-loader": "3.0.1",
     "lodash-es": "4.17.15",
-    "snyk": "^1.349.0",
     "uuidv4": "^6.1.1"
   },
   "snyk": true

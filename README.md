@@ -6,6 +6,20 @@
 ## Usage
 * [Usage Guide](https://docs.microsoft.com/en-us/power-bi/developer/visuals/utils-test)
 
+## 2.3.0 Migration note
+
+From version 2.3.0 `testDom` function returns `HTMLElement` instead of `JQuery` object. If you are using JQuery in tests, wrap the `testDom` calls with `$(...)` for compatibility:
+
+```typescript
+    // 2.2.1 and below
+    let element: JQuery = testDom("100", "100");
+    // 2.3.0 and above
+    let element: JQuery = $(testDom("100", "100"));
+```
+
+The motivation is not to force JQuery usage. It might be not necessary in tests. In lots of cases `element.get(0)` is the next operation after receiving an element with `testDom`. Now JQuery is not required to use powerbi-visuals-utils-testutils, so you can drop this dependency. If you keep it, you can easily migrate your code to 2.3.* version using the example above.
+
+
 ## Contributing
 * Read our [contribution guideline](./CONTRIBUTING.md) to find out how to contribute bugs fixes and improvements
 * [Issue Tracker](https://github.com/Microsoft/powerbi-visuals-utils-testutils/issues)

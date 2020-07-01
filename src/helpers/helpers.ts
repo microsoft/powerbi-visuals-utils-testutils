@@ -29,6 +29,14 @@ import { uuid } from "uuidv4";
 import range from "lodash-es/range";
 import includes from "lodash-es/includes";
 
+function each(element: JQuery | HTMLElement, fn: (i: number, el: HTMLElement) => any) {
+    if (element instanceof jQuery) {
+        (element as JQuery).each(fn);
+    } else {
+        fn(0, element as HTMLElement);
+    }
+}
+
 
 export function testDom(height: number | string, width: number | string): HTMLElement {
     let element: HTMLElement = document.createElement("div"),
@@ -92,28 +100,28 @@ export function d3KeyEvent(element: JQuery | HTMLElement, typeArg: string, keyAr
 }
 
 export function d3TouchStart(element: JQuery | HTMLElement, touchList?: TouchList): void {
-    this.each(function (i, e) {
+    each(this, function (i, e) {
         let evt = createTouchStartEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
 export function d3TouchMove(element: JQuery | HTMLElement, touchList?: TouchList): void {
-    this.each(function (i, e) {
+    each(this, function (i, e) {
         let evt = createTouchMoveEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
 export function d3TouchEnd(element: JQuery | HTMLElement, touchList?: TouchList): void {
-    this.each(function (i, e) {
+    each(this, function (i, e) {
         let evt = createTouchEndEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
 export function d3ContextMenu(element: JQuery | HTMLElement, x: number, y: number): void {
-    this.each(function (i, e) {
+    each(this, function (i, e) {
         let evt = createContextMenuEvent(x, y);
         e.dispatchEvent(evt);
     });
@@ -129,7 +137,7 @@ function mouseEvent(
 
     let clickEventType: ClickEventType = eventType || ClickEventType.Default;
 
-    this.each(function (i, e) {
+    each(this, function (i, e) {
         let evt: MouseEvent = createMouseEvent(mouseEventType, clickEventType, x, y, button);
 
         e.dispatchEvent(evt);
@@ -137,7 +145,7 @@ function mouseEvent(
 }
 
 function keyEvent(typeArg: string, keyArg: string, keyCode: number): void {
-    this.each(function (i, e) {
+    each(this, function (i, e) {
         let evt: KeyboardEvent = new KeyboardEvent(typeArg,
         {
             key: keyArg,
