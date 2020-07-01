@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -29,8 +29,7 @@
     "test": "karma start",
     "pretest": "npm run lint",
     "lint": "tslint -r \"node_modules/tslint-microsoft-contrib\"  \"+(src|test)/**/*.ts\"",
-    "snyk-protect": "snyk protect",
-    "postinstall": "npm run snyk-protect"
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@types/d3-timer": "1.0.9",

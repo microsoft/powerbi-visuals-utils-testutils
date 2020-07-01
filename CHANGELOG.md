@@ -1,3 +1,6 @@
+## 2.3.1
+* JQuery.each bugfix
+
 ## 2.3.0
 * JQuery and Jasmine-Jquery removed.
 * JQuery3dClicks interface is not supported any more.
