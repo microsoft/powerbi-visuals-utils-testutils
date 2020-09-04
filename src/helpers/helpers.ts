@@ -30,10 +30,10 @@ import range from "lodash-es/range";
 import includes from "lodash-es/includes";
 
 function each(element: JQuery | HTMLElement, fn: (i: number, el: HTMLElement) => any) {
-    if (element instanceof jQuery) {
-        (element as JQuery).each(fn);
-    } else {
+    if (element instanceof HTMLElement) {
         fn(0, element as HTMLElement);
+    } else {
+        element.each(fn);
     }
 }
 
@@ -269,9 +269,9 @@ export function createTouchesList(touches: Touch[]): TouchList {
 }
 
 export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): Touch {
-    element = ((element instanceof jQuery)
-        ? (element as JQuery).get(0)
-        : element
+    element = ((element instanceof HTMLElement)
+        ? element
+        : element.get(0)
     ) as HTMLElement;
 
     return {
@@ -294,12 +294,16 @@ export function createTouch(x: number, y: number, element: JQuery | HTMLElement,
 }
 
 export function clickElement(element: JQuery | HTMLElement, ctrlKey: boolean = false): void {
-    element = ((element instanceof jQuery) ? (element as JQuery).get(0) : element) as HTMLElement;
-    let rect = element.getBoundingClientRect(),
+    const newElement = ((element instanceof HTMLElement)
+        ? element
+        : element.get(0)
+    ) as HTMLElement;
+
+    let rect = newElement.getBoundingClientRect(),
         coordinatesTop: number = rect.top + document.body.scrollTop,
         coordinatesLeft: number = rect.left + document.body.scrollLeft,
-        width: number = element.offsetWidth,
-        height: number = element.offsetHeight,
+        width: number = newElement.offsetWidth,
+        height: number = newElement.offsetHeight,
         eventType: ClickEventType = ctrlKey
             ? ClickEventType.CtrlKey
             : ClickEventType.Default;
