@@ -1,3 +1,6 @@
+## 2.3.2
+* jQuery object usage removed
+
 ## 2.3.1
 * JQuery.each bugfix
 
