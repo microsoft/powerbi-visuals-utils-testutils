@@ -1,3 +1,6 @@
+## 2.3.3
+* d3 dependencies updated
+
 ## 2.3.2
 * jQuery object usage removed
 
