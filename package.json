@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -63,7 +63,7 @@
     "webpack-node-externals": "2.5.2"
   },
   "dependencies": {
-    "d3-array": "2.7.1",
+    "d3-array": "2.8.0",
     "d3-timer": "2.0.0",
     "istanbul-instrumenter-loader": "3.0.1",
     "lodash-es": "4.17.15",
