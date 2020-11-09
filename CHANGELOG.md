@@ -1,3 +1,6 @@
+## 2.3.4
+* fixed Jquery "each" method usage
+
 ## 2.3.3
 * d3 dependencies updated
 
