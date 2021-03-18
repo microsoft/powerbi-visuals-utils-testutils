@@ -1,6 +1,7 @@
 debugger;
 
 import powerbi from "powerbi-visuals-api";
+import { ValueType } from "powerbi-visuals-utils-typeutils/lib/valueType";
 const _ = require("lodash");
 // import DataView = powerbi.DataView;
 // import DataViewMetadata = powerbi.DataViewMetadata;
@@ -31,7 +32,6 @@ export interface ResourceTableMetadata {
 export interface ResourceColumnMetadata {
     name: string;
     displayName: string;
-    // expr?: powerbi.data.SQExpr;
     type: powerbi.ValueTypeDescriptor;
     format?: string;
 }
@@ -87,8 +87,6 @@ export class DataTable {
     }
     public getColumnIndex(name: string): number {
         let index = this.columnNames.findIndex((c) => c === name);
-        // let index = _.findIndex(this.columnNames, (c) => c === name);
-        // debug.assert(index >= 0, 'Cannot find column named "' + name + '"');
         return index;
     }
     public forEachRow(iterator: (row: any[]) => void): void {
@@ -99,12 +97,10 @@ export class DataTable {
 }
 
 export class ColumnMetadataBuilder {
-    // private entity: powerbi.data.SQEntityExpr;
 
     constructor(tableMetadata?: ResourceTableMetadata) {
         const tableName = tableMetadata?.name ?? "table";
         const schemaName = tableMetadata?.schemaName ?? undefined;
-        // this.entity = SQExprBuilder.entity(schemaName, tableName);
     }
 
     public buildCategoryColumnMetadata(columnOptions: DataViewBuilderBaseColumnOptions): DataViewMetadataColumn {
@@ -113,7 +109,6 @@ export class ColumnMetadataBuilder {
         let column = this.buildBasicColumnMetadata(columnOptions);
 
         column.isMeasure = false;
-        // column.expr = metadata.expr ?? SQExprBuilder.columnRef(this.entity, metadata.name);
         column.identityExprs = [column.expr];
 
         return column;
@@ -125,20 +120,19 @@ export class ColumnMetadataBuilder {
         let column = this.buildBasicColumnMetadata(columnOptions);
 
         column.isMeasure = true;
-        // column.expr = metadata.expr ?? SQExprBuilder.measureRef(this.entity, metadata.name);
 
         return column;
     }
 
     private buildBasicColumnMetadata(columnOptions: DataViewBuilderBaseColumnOptions): DataViewMetadataColumn {
         const column = columnOptions.metadata;
-        // const columnType = ValueTypeDescriptor.fromDescriptor(column.type);
+        const columnType = ValueType.fromDescriptor(column.type);
 
         const columnMetadata: DataViewMetadataColumn = {
             displayName: column.displayName,
             queryName: columnOptions.queryName ?? column.name,
             index: columnOptions.index,
-            // type: columnType,
+            type: columnType,
             roles: { [columnOptions.role]: true },
             format: column.format,
         };
@@ -153,13 +147,6 @@ export class ColumnMetadataBuilder {
     }
 }
 
-
-// export interface IDataViewBuilderMatrix {
-//     // withMatrix(options): IDataViewBuilderMatrix;
-//     withRowGroup(options: DataViewBuilderCompositeColumnOptions[]): IDataViewBuilderMatrix;
-//     withValues(options: DataViewBuilderCompositeColumnOptions[]): IDataViewBuilderMatrix;
-//     build(): DataView;
-// }
 
 export class MatrixDataViewBuilder {
     private highlights: PrimitiveValue[][];
@@ -278,7 +265,6 @@ export class MatrixDataViewBuilder {
     }
 
     private sequenceEqual<T, U>(left: T[], right: U[], comparison: (x: T, y: U) => boolean): boolean {
-        // debug.assertValue(comparison, 'comparison');
 
         // Normalize falsy to null
         if (!left) { left = null; }
@@ -674,17 +660,4 @@ export class MatrixDataViewBuilder {
         }
         return dataViewMatrix;
     }
-
-    // public buildd(): DataView {
-    //     debugger;
-    //     let metadata: DataViewMetadata = {
-    //         columns: [this.levelColumn, ...this.valueColumns]
-    //     };
-
-    //     let dataview: powerbi.DataView = {
-    //         metadata: metadata,
-    //         matrix: this.buildMatrix(),
-    //     };
-    //     return dataview;
-    // }
 }

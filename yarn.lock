@@ -1899,7 +1899,7 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-coveralls@3.1.0:
+coveralls@3.1.0, coveralls@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-3.1.0.tgz#13c754d5e7a2dd8b44fe5269e21ca394fb4d615b"
   integrity sha512-sHxOu2ELzW8/NC1UP5XVLbZDzO4S3VxfFye3XYCznopHy02YjNkHcj5bKaVw2O7hVaBdBjEdQGpie4II1mWhuQ==
@@ -4499,6 +4499,11 @@ lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
 log-driver@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/log-driver/-/log-driver-1.2.7.tgz#63b95021f0702fedfa2c9bb0a24e7797d71871d8"
@@ -5409,6 +5414,13 @@ powerbi-visuals-api@3.2.0:
   integrity sha512-YI0ztuMEhtMBGs34rHze2Xx1b0r2P2Ge/SYGUZims/BS1nSnWJK1RsnsQVcCrT6dWLMaYF1HkR32XWYJAPg7qw==
   dependencies:
     semver "^7.3.2"
+
+powerbi-visuals-utils-typeutils@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/powerbi-visuals-utils-typeutils/-/powerbi-visuals-utils-typeutils-2.3.1.tgz#b5bcc4764513a9afcd8a1a090f7fd11ae26c6855"
+  integrity sha512-mO2MCTR/nqbQjtZDZTP7k80Sr/oNNIR6a2t5s6fmn9yGoRS4ne7ZNJRhNnyBbyz9Frapvqnr1/OeBuRUYnU1jw==
+  dependencies:
+    coveralls "^3.1.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"

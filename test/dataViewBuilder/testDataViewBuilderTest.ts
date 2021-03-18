@@ -124,25 +124,21 @@ describe("test MatrixDataViewBuilder ", () => {
                     name: "Revenue Budget",
                     displayName: "Revenue Budget",
                     type: { numeric: true },
-                    // expr: measureSource1Expr,
                 },
                 Measure2: {
                     name: "Total COGS",
                     displayName: "Total COGS",
                     type: { numeric: true },
-                    // expr: measureSource2Expr,
                 },
                 RowGroup1: {
                     name: "Division",
                     displayName: "Division",
                     type: { text: true },
-                    // expr: rowGroupSource1Expr,
                 },
                 RowGroup2: {
                     name: "Region",
                     displayName: "Region",
                     type: { text: true },
-                    // expr: rowGroupSource2Expr,
                 },
             };
             let tableMetadata = {
@@ -269,13 +265,11 @@ describe("test MatrixDataViewBuilder ", () => {
                     name: "Division",
                     displayName: "Division",
                     type: { text: true },
-                    // expr: rowGroupSource1Expr,
                 },
                 RowGroup2: {
                     name: "Region",
                     displayName: "Region",
                     type: { text: true },
-                    // expr: rowGroupSource2Expr,
                 },
             };
             let tableMetadata = {
@@ -302,278 +296,6 @@ describe("test MatrixDataViewBuilder ", () => {
                 .build();
         });
 
-        it("2 row groups", () => {
-
-            const rowGroupSource1: powerbi.DataViewMetadataColumn = {
-                displayName: "Division",
-                queryName: "Division",
-                isMeasure: false,
-                // type: textValueType,
-                roles: { ["Rows"]: true },
-                index: 0,
-            };
-            const rowGroupSource2: powerbi.DataViewMetadataColumn = {
-                displayName: "Region",
-                queryName: "Region",
-                isMeasure: false,
-                // type: textValueType,
-                roles: { ["Rows"]: true },
-                index: 1,
-            };
-            const matrixTwoRowGroupsNoColumnGroupsNoMeasuresDataView: powerbi.DataView = {
-                metadata: {
-                    columns:
-                        [
-                            rowGroupSource1,
-                            rowGroupSource2,
-                        ]
-                },
-                matrix: {
-                    rows: {
-                        levels: [
-                            {
-                                sources: [
-                                    rowGroupSource1
-                                ]
-                            },
-                            {
-                                sources: [
-                                    rowGroupSource2
-                                ]
-                            }
-                        ],
-                        root: {
-                            children: [
-                                {
-                                    level: 0,
-                                    levelValues: [
-                                        {
-                                            value: "Core",
-                                            levelSourceIndex: 0
-                                        }
-                                    ],
-                                    value: "Core",
-                                    children: [
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: null,
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: null,
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "CENTRAL",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "CENTRAL",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "EAST",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "EAST",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "NORTH",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "NORTH",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "SOUTH",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "SOUTH",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "WEST",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "WEST",
-                                        }
-                                    ]
-                                },
-                                {
-                                    level: 0,
-                                    levelValues: [
-                                        {
-                                            value: "Growth",
-                                            levelSourceIndex: 0
-                                        }
-                                    ],
-                                    value: "Growth",
-                                    children: [
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: null,
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: null,
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "CENTRAL",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "CENTRAL",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "EAST",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "EAST",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "NORTH",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "NORTH",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "SOUTH",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "SOUTH",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "WEST",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "WEST",
-                                        }
-                                    ]
-                                },
-                                {
-                                    level: 0,
-                                    levelValues: [
-                                        {
-                                            value: "Minor",
-                                            levelSourceIndex: 0
-                                        }
-                                    ],
-                                    value: "Minor",
-                                    children: [
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: null,
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: null,
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "CENTRAL",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "CENTRAL",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "EAST",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "EAST",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "NORTH",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "NORTH",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "SOUTH",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "SOUTH",
-                                        },
-                                        {
-                                            level: 1,
-                                            levelValues: [
-                                                {
-                                                    value: "WEST",
-                                                    levelSourceIndex: 0
-                                                }
-                                            ],
-                                            value: "WEST",
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    },
-                    columns: {
-                        root: {
-                            children: []
-                        },
-                        levels: []
-                    },
-                    valueSources: []
-                }
-            };
-            // expect(dataView).toEqualDeep(matrixTwoRowGroupsNoColumnGroupsNoMeasuresDataView);
-        });
 
 
 
