@@ -1,27 +1,18 @@
-debugger;
 
 import powerbi from "powerbi-visuals-api";
 import { ValueType } from "powerbi-visuals-utils-typeutils/lib/valueType";
-const _ = require("lodash");
-// import DataView = powerbi.DataView;
-// import DataViewMetadata = powerbi.DataViewMetadata;
-import DataViewMatrix = powerbi.DataViewMatrix;
-// import DataViewHierarchyLevel = powerbi.DataViewHierarchyLevel;
-// import DataViewHierarchy = powerbi.DataViewHierarchy;
 
-// import ValueTypeDescriptor = powerbi.ValueTypeDescriptor;
-// import DataViewCategoryColumn = powerbi.DataViewCategoryColumn;
+import every from "lodash-es/every";
+import map from "lodash-es/map";
+import last from "lodash-es/last";
+import range from "lodash-es/range";
+import flatMap from "lodash-es/flatMap";
+
+import DataViewMatrix = powerbi.DataViewMatrix;
 import DataViewMetadataColumn = powerbi.DataViewMetadataColumn;
-// import DataViewColumnAggregates = powerbi.DataViewColumnAggregates;
-// import CustomVisualOpaqueIdentity = powerbi.visuals.CustomVisualOpaqueIdentity;
 import PrimitiveValue = powerbi.PrimitiveValue;
-// import DataViewCategorical = powerbi.DataViewCategorical;
-// import DataViewValueColumn = powerbi.DataViewValueColumn;
-// import DataViewValueColumns = powerbi.DataViewValueColumns;
-// import DataViewValueColumnGroup = powerbi.DataViewValueColumnGroup;
 import DataViewMatrixNode = powerbi.DataViewMatrixNode;
 import DataViewObjects = powerbi.DataViewObjects;
-// import DataViewCategoricalColumn = powerbi.DataViewCategoricalColumn;
 
 
 export interface ResourceTableMetadata {
@@ -346,8 +337,8 @@ export class MatrixDataViewBuilder {
             const isLeafLevel = levelIdx === hierarchy.levels.length - 1;
 
             // TODO: describe the difference here, or create value nodes separately
-            if (isLeafLevel && _.every(level.sources, (source) => source.isMeasure)) {
-                node.children = _.map(level.sources, (source, i) => {
+            if (isLeafLevel && every(level.sources, (source) => source.isMeasure)) {
+                node.children = map(level.sources, (source, i) => {
                     let child: powerbi.DataViewMatrixNode = {
                         level: levelIdx,
                     };
@@ -379,7 +370,7 @@ export class MatrixDataViewBuilder {
                     };
 
                     // DEPRECATED: these values are deprecated
-                    child.value = _.last(columnValues);
+                    child.value = last(columnValues);
 
                     // let levelSourceIndex = columnValues.length - 1;
                     // if (levelSourceIndex !== 0)
@@ -423,7 +414,7 @@ export class MatrixDataViewBuilder {
                     || isMatch(node, level));
 
             if (!atLeaf) {
-                stack.unshift(..._.map(node.children, (child) => ({
+                stack.unshift(...map(node.children, (child) => ({
                     partialMatch: match,
                     level: level + 1,
                     node: child,
@@ -522,7 +513,7 @@ export class MatrixDataViewBuilder {
                 matrix.rows.root,
                 (leafNode) => {
                     leafNode.values =
-                        _.range(0, leafCount)
+                        range(0, leafCount)
                             .reduce((bag, i) => {
                                 // @ts-ignore: No Implicit Any
                                 bag[i] = <powerbi.DataViewMatrixNodeValue>{ value: null };
@@ -604,8 +595,8 @@ export class MatrixDataViewBuilder {
         return {
             metadata: {
                 columns: [
-                    ..._.flatMap(rowHierarchyMetadata.levels, (level) => level.sources),
-                    ..._.flatMap(columnHierarchyMetadata.levels, (level) => level.sources),
+                    ...flatMap(rowHierarchyMetadata.levels, (level) => level.sources),
+                    ...flatMap(columnHierarchyMetadata.levels, (level) => level.sources),
                     // ...measureMetadata.sources,
                 ],
                 objects: this.objects,

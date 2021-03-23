@@ -32,7 +32,7 @@ import PrimitiveValue = powerbi.PrimitiveValue;
 import DataViewValueColumn = powerbi.DataViewValueColumn;
 import DataViewCategoricalColumn = powerbi.DataViewCategoricalColumn;
 
-import { DataTable, MatrixDataViewBuilder, ResourceColumnMetadata } from "../../src/dataViewBuilder/matrixBuilder";
+import { DataTable, MatrixDataViewBuilder, ResourceColumnMetadata } from "../dataViewBuilder/matrixBuilder";
 
 import {
     DataViewBuilderColumnOptions, DataViewBuilderValuesColumnOptions,
