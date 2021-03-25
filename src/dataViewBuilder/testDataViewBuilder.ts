@@ -77,7 +77,7 @@ export abstract class TestDataViewBuilder {
     static DataViewName: string = "Data";
     private aggregateFunction: (array: number[]) => number = sum;
 
-    createMatrixDataViewBuilder(table: DataTable) {
+    protected static createMatrixDataViewBuilder(table: DataTable) {
         const tableMetadata = {
             name: "table"
         };
