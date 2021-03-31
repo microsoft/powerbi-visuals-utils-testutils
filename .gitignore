@@ -5,3 +5,5 @@ dist/
 *.log
 /coverage
 /lib
+*.lock
+.vscode/

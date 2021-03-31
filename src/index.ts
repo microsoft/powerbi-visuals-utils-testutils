@@ -62,11 +62,14 @@ import {
     createTooltipService
 } from "./mocks/mocks";
 import { setGrouped, createValueColumns, createCategoricalDataViewBuilder } from "./dataViewBuilder/dataViewBuilder";
+import { MatrixDataViewBuilder} from "./dataViewBuilder/matrixBuilder";
 import * as testDataViewBuilder from "./dataViewBuilder/testDataViewBuilder";
 import * as visualBuilderBase from "./VisualBuilderBase";
 import VisualBuilderBase = visualBuilderBase.VisualBuilderBase;
 
 export {
+    MatrixDataViewBuilder,
+
     testDom,
     createContextMenuEvent,
     createMouseEvent,

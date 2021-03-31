@@ -1,3 +1,6 @@
+## 2.4.0
+* added support for matrix dataview
+
 ## 2.3.4
 * fixed Jquery "each" method usage
 

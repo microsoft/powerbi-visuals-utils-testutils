@@ -32,6 +32,8 @@ import PrimitiveValue = powerbi.PrimitiveValue;
 import DataViewValueColumn = powerbi.DataViewValueColumn;
 import DataViewCategoricalColumn = powerbi.DataViewCategoricalColumn;
 
+import { DataTable, MatrixDataViewBuilder, ResourceColumnMetadata } from "../dataViewBuilder/matrixBuilder";
+
 import {
     DataViewBuilderColumnOptions, DataViewBuilderValuesColumnOptions,
     DataViewBuilderColumnIdentitySource, IDataViewBuilderCategorical,
@@ -74,6 +76,13 @@ export interface DataViewBuilderAllColumnOptions {
 export abstract class TestDataViewBuilder {
     static DataViewName: string = "Data";
     private aggregateFunction: (array: number[]) => number = sum;
+
+    protected static createMatrixDataViewBuilder(table: DataTable) {
+        const tableMetadata = {
+            name: "table"
+        };
+        return new MatrixDataViewBuilder(table, tableMetadata);
+    }
 
     static setDefaultQueryName(source: DataViewMetadataColumn): DataViewMetadataColumn {
         if (!source.queryName) {
