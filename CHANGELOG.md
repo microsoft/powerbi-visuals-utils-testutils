@@ -1,3 +1,6 @@
+## 2.4.1
+* fixed issue with clickElement() when its argument is SVGElement 
+
 ## 2.4.0
 * added support for matrix dataview
 
