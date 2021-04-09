@@ -1,3 +1,6 @@
+## 2.4.1
+* fixed issue with SVGElement failure
+
 ## 2.4.0
 * added support for matrix dataview
 
