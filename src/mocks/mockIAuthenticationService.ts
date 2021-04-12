@@ -34,7 +34,7 @@ export class MockIAuthenticationService implements IAuthenticationService  {
     constructor(token: string) {
         this.token = token;
     }
-    
+
     getResourceUrl(visualId?: string): powerbi.IPromise<string> {
         throw new Error("Method not implemented.");
     }
