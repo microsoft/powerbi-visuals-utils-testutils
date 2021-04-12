@@ -269,10 +269,7 @@ export function createTouchesList(touches: Touch[]): TouchList {
 }
 
 export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): Touch {
-    element = ((element instanceof HTMLElement)
-        ? element
-        : element.get(0)
-    ) as HTMLElement;
+    const newElement: HTMLElement = element.hasOwnProperty("get") ? (<any>element).get(0) : element;
 
     return {
         pageX: x,
@@ -281,7 +278,7 @@ export function createTouch(x: number, y: number, element: JQuery | HTMLElement,
         screenY: y,
         clientX: x,
         clientY: y,
-        target: element,
+        target: newElement,
         identifier: id,
         altitudeAngle: 1.5708,
         azimuthAngle: 1.5708,
@@ -294,10 +291,8 @@ export function createTouch(x: number, y: number, element: JQuery | HTMLElement,
 }
 
 export function clickElement(element: JQuery | HTMLElement, ctrlKey: boolean = false): void {
-    const newElement = ((element instanceof HTMLElement)
-        ? element
-        : element.get(0)
-    ) as HTMLElement;
+    const newElement: HTMLElement = element.hasOwnProperty("get") ? (<any>element).get(0) : element;
+
 
     let rect = newElement.getBoundingClientRect(),
         coordinatesTop: number = rect.top + document.body.scrollTop,
