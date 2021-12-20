@@ -71,7 +71,7 @@ export enum MouseEventType {
     mouseout,
 }
 
-export function d3Click(element: JQuery | HTMLElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
+export function d3Click(element: JQuery | HTMLElement | SVGElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
     mouseEvent.call(element, MouseEventType.click, x, y, eventType, button);
 }
 
