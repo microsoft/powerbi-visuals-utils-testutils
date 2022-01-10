@@ -41,7 +41,7 @@ export class MockISelectionManager implements ISelectionManager {
     private callback: (ids: ISelectionId[]) => void;
 
     public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             resolve();
         }) as any;
     }
@@ -80,7 +80,7 @@ export class MockISelectionManager implements ISelectionManager {
     public clear(): IPromise<{}> {
         this.selectionIds = [];
 
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             resolve();
         }) as any;
     }

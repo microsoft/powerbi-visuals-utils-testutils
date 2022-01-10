@@ -24,6 +24,33 @@
  *  THE SOFTWARE.
  */
 
-export class MockIAllowInteractions {
-    constructor(public isEnabled: boolean = false) { }
+// powerbi
+import powerbi from "powerbi-visuals-api";
+
+// powerbi.extensibility
+import HostCapabilities = powerbi.extensibility.HostCapabilities;
+
+export class MockHostCapabilities implements HostCapabilities {
+  public allowInteractions: boolean;
+  public allowModalDialog: boolean;
+
+  constructor(
+    allowInteractions: boolean = false,
+    allowModalDialog: boolean = false
+  ) {
+    this.allowInteractions = allowInteractions;
+    this.allowModalDialog = allowModalDialog;
+  }
+
+  public set hostCapabilities(capabilities: HostCapabilities) {
+    this.allowInteractions = capabilities.allowInteractions;
+    this.allowModalDialog = capabilities.allowModalDialog;
+  }
+
+  public get hostCapabilities(): HostCapabilities {
+    return {
+      allowInteractions: this.allowModalDialog,
+      allowModalDialog: this.allowModalDialog,
+    };
+  }
 }

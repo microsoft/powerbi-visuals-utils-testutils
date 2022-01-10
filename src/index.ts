@@ -1,5 +1,4 @@
 import { MockILocale } from "./mocks/mockILocale";
-import { MockIAllowInteractions } from "./mocks/mockIAllowInteractions";
 import { MockITooltipService } from "./mocks/mockITooltipService";
 import { MockISelectionManager } from "./mocks/mockISelectionManager";
 import { MockISelectionIdBuilder } from "./mocks/mockISelectionIdBuilder";
@@ -9,6 +8,7 @@ import { MockILocalizationManager } from "./mocks/mockILocalizationManager";
 import { MockISelectionId } from "./mocks/mockISelectionId";
 import { MockIColorPalette } from "./mocks/mockIColorPalette";
 import { MockIVisualHost } from "./mocks/mockVisualHost";
+import { MockHostCapabilities } from "./mocks/mockHostCapabilities";
 
 import {
     testDom,
@@ -54,12 +54,12 @@ import {
 import {
     createVisualHost,
     createSelectionId,
-    createAllowInteractions,
     createColorPalette,
     createLocale,
     createSelectionIdBuilder,
     createSelectionManager,
-    createTooltipService
+    createTooltipService,
+    createHostCapabilities,
 } from "./mocks/mocks";
 import { setGrouped, createValueColumns, createCategoricalDataViewBuilder } from "./dataViewBuilder/dataViewBuilder";
 import { MatrixDataViewBuilder} from "./dataViewBuilder/matrixBuilder";
@@ -81,12 +81,12 @@ export {
     clickElement,
     createVisualHost,
     createSelectionId,
-    createAllowInteractions,
     createColorPalette,
     createLocale,
     createSelectionIdBuilder,
     createSelectionManager,
     createTooltipService,
+    createHostCapabilities,
     setGrouped,
     createValueColumns,
     createCategoricalDataViewBuilder,
@@ -95,7 +95,6 @@ export {
     getRandomNumber,
     getRandomNumbers,
     MockILocale,
-    MockIAllowInteractions,
     MockITooltipService,
     MockISelectionManager,
     MockISelectionIdBuilder,
@@ -105,6 +104,7 @@ export {
     MockISelectionId,
     MockIColorPalette,
     MockIVisualHost,
+    MockHostCapabilities,
     renderTimeout,
     assertColorsMatch,
     getSolidColorStructuralObject,

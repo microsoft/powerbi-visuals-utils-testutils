@@ -30,7 +30,6 @@ import ITooltipService = powerbi.extensibility.ITooltipService;
 import { ILocalVisualStorageService } from "./mockIStorageService";
 import { createSelectionIdBuilder } from "./mocks";
 import { MockILocale } from "./mockILocale";
-import { MockIAllowInteractions } from "./mockIAllowInteractions";
 // powerbi
 import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
 
@@ -41,6 +40,7 @@ import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
+import HostCapabilities = powerbi.extensibility.HostCapabilities;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -50,35 +50,35 @@ export class MockIVisualHost implements IVisualHost {
     private selectionManager: ISelectionManager;
     private tooltipServiceInstance: ITooltipService;
     private localeInstance: MockILocale;
-    private allowInteractionsInstance: MockIAllowInteractions;
     private localizationManager: powerbi.extensibility.ILocalizationManager;
     private telemetryService: powerbi.extensibility.ITelemetryService;
     private authService: powerbi.extensibility.IAuthenticationService;
     private localStorageService: ILocalVisualStorageService;
     private visualEventService: IVisualEventService;
+    public hostCapabilities: HostCapabilities;
 
     constructor(
         colorPalette?: IColorPalette,
         selectionManager?: ISelectionManager,
         tooltipServiceInstance?: ITooltipService,
         localeInstance?: MockILocale,
-        allowInteractionsInstance?: MockIAllowInteractions,
         localizationManager?: powerbi.extensibility.ILocalizationManager,
         telemetryService?: powerbi.extensibility.ITelemetryService,
         authService?: powerbi.extensibility.IAuthenticationService,
         storageService?: ILocalVisualStorageService,
-        eventService?: IVisualEventService) {
+        eventService?: IVisualEventService,
+        hostCapabilities?: HostCapabilities) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
         this.tooltipServiceInstance = tooltipServiceInstance;
         this.localeInstance = localeInstance;
-        this.allowInteractionsInstance = allowInteractionsInstance;
         this.telemetryService = telemetryService;
         this.authService = authService;
         this.localizationManager = localizationManager;
         this.localStorageService = storageService;
         this.visualEventService = eventService;
+        this.hostCapabilities = hostCapabilities;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -119,10 +119,6 @@ export class MockIVisualHost implements IVisualHost {
         return this.tooltipServiceInstance;
     }
 
-    public get allowInteractions(): boolean {
-        return this.allowInteractionsInstance.isEnabled;
-    }
-
     public launchUrl(url: string) {
         window.open(url);
     }
@@ -155,4 +151,8 @@ export class MockIVisualHost implements IVisualHost {
     public switchFocusModeState: (on: boolean) => void;
 
     public hostEnv: powerbi.common.CustomVisualHostEnv = 1;
+
+    public displayWarningIcon: (hoverText: string, detailedText: string) => void;
+
+    public openModalDialog: (dialogId: string, options?: powerbi.extensibility.visual.DialogOpenOptions, initialState?: object) => powerbi.IPromise<powerbi.extensibility.visual.ModalDialogResult>;
 }
