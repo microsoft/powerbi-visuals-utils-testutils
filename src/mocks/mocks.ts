@@ -28,7 +28,6 @@ import ITooltipService = powerbi.extensibility.ITooltipService;
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
 
 import { MockILocale } from "./mockILocale";
-import { MockIAllowInteractions } from "./mockIAllowInteractions";
 import { MockITooltipService } from "./mockITooltipService";
 import { MockISelectionManager } from "./mockISelectionManager";
 import { MockISelectionIdBuilder } from "./mockISelectionIdBuilder";
@@ -40,6 +39,7 @@ import { MockIColorPalette } from "./mockIColorPalette";
 import { MockIVisualHost } from "./mockVisualHost";
 import { MockIEventService } from "./mockIEventService";
 import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageService";
+import { MockHostCapabilities } from "./mockHostCapabilities";
 // powerbi
 import IColorInfo = powerbi.IColorInfo;
 
@@ -51,6 +51,7 @@ import ISelectionId = powerbi.visuals.ISelectionId;
 import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import HostCapabilities = powerbi.extensibility.HostCapabilities;
 
 export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
     return new MockIVisualHost(
@@ -58,12 +59,12 @@ export function createVisualHost(locale?: Object, allowInteractions?: boolean, c
         createSelectionManager(),
         createTooltipService(isEnabled),
         createLocale(locale),
-        createAllowInteractions(allowInteractions),
         createLocalizationManager(displayNames),
         createTelemetryService(),
         createAuthenticationService(token),
         createStorageService(),
-        createEventService());
+        createEventService(),
+        createHostCapabilities());
 }
 
 export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -90,10 +91,6 @@ export function createLocale(locales?: Object): MockILocale {
     return new MockILocale(locales);
 }
 
-export function createAllowInteractions(isEnabled?: boolean): MockIAllowInteractions {
-    return new MockIAllowInteractions(isEnabled);
-}
-
 export function createLocalizationManager(displayNames?: any): powerbi.extensibility.ILocalizationManager {
     return new MockILocalizationManager(displayNames);
 }
@@ -112,4 +109,8 @@ export function createStorageService(): ILocalVisualStorageService {
 
 export function createEventService(): IVisualEventService {
     return new MockIEventService();
+}
+
+export function createHostCapabilities(): HostCapabilities {
+    return new MockHostCapabilities();
 }

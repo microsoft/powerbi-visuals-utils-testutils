@@ -268,7 +268,7 @@ export function createTouchesList(touches: Touch[]): TouchList {
     return touchesList;
 }
 
-export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): Touch {
+export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): TouchInit {
     const newElement: HTMLElement = element.hasOwnProperty("get") ? (<any>element).get(0) : element;
 
     return {
