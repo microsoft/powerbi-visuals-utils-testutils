@@ -1,3 +1,6 @@
+## 2.4.4
+* updated dependencies to fix vulnerabilities
+
 ## 2.4.1
 * fixed issue with SVGElement failure
 
