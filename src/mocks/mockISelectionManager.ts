@@ -40,6 +40,12 @@ export class MockISelectionManager implements ISelectionManager {
 
     private callback: (ids: ISelectionId[]) => void;
 
+    public toggleExpandCollapse(selectionId: ISelectionId): IPromise<{}> {
+        return new Promise<void>((resolve, reject) => {
+            resolve();
+        }) as any;
+    }
+
     public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
         return new Promise<void>((resolve, reject) => {
             resolve();

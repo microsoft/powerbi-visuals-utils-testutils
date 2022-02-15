@@ -40,6 +40,7 @@ import { MockIVisualHost } from "./mockVisualHost";
 import { MockIEventService } from "./mockIEventService";
 import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageService";
 import { MockHostCapabilities } from "./mockHostCapabilities";
+import { MockDownloadService } from "./mockDownloadService";
 // powerbi
 import IColorInfo = powerbi.IColorInfo;
 
@@ -51,6 +52,7 @@ import ISelectionId = powerbi.visuals.ISelectionId;
 import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
 
 export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
@@ -113,4 +115,8 @@ export function createEventService(): IVisualEventService {
 
 export function createHostCapabilities(): HostCapabilities {
     return new MockHostCapabilities();
+}
+
+export function createDownloadService(): IDownloadService {
+    return new MockDownloadService();
 }
