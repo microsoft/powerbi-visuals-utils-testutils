@@ -24,7 +24,6 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
-import { uuid } from "uuidv4";
 
 import range from "lodash-es/range";
 import includes from "lodash-es/includes";
@@ -35,6 +34,12 @@ function each(element: JQuery | HTMLElement, fn: (i: number, el: HTMLElement) =>
     } else {
         element.each(fn);
     }
+}
+
+function uuid() {
+    const buf = new Uint8Array(1);
+    window.crypto.getRandomValues(buf);
+    return buf[0];
 }
 
 

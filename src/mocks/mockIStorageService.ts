@@ -29,12 +29,33 @@ import powerbi from "powerbi-visuals-api";
 import IPromise = powerbi.IPromise;
 
 export interface ILocalVisualStorageService {
+    enabled(): IPromise<boolean>;
     get(key: string): IPromise<string>;
     set(key: string, data: string): IPromise<number>;
     remove(key: string): void;
 }
 
+function localStorageEnabled() {
+    try {
+        const testVar = "test";
+        localStorage.setItem(testVar, testVar);
+        localStorage.removeItem(testVar);
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
+}
+
 export class MockIStorageService implements ILocalVisualStorageService {
+
+    public enabled(): IPromise<boolean> {
+        const enabled: boolean = localStorageEnabled();
+
+        return new Promise((resolve, reject) => {
+            resolve(enabled);
+        }) as any;
+    }
 
     public get(key: string): IPromise<string> {
         const data: string = localStorage.getItem(key);

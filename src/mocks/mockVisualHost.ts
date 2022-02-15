@@ -40,6 +40,7 @@ import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
+import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
 
 // powerbi.extensibility.visual
@@ -56,6 +57,7 @@ export class MockIVisualHost implements IVisualHost {
     private localStorageService: ILocalVisualStorageService;
     private visualEventService: IVisualEventService;
     public hostCapabilities: HostCapabilities;
+    public downloadService: IDownloadService;
 
     constructor(
         colorPalette?: IColorPalette,
@@ -67,7 +69,8 @@ export class MockIVisualHost implements IVisualHost {
         authService?: powerbi.extensibility.IAuthenticationService,
         storageService?: ILocalVisualStorageService,
         eventService?: IVisualEventService,
-        hostCapabilities?: HostCapabilities) {
+        hostCapabilities?: HostCapabilities,
+        downloadService?: IDownloadService) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
@@ -79,6 +82,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localStorageService = storageService;
         this.visualEventService = eventService;
         this.hostCapabilities = hostCapabilities;
+        this.downloadService = downloadService;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
