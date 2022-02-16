@@ -1,3 +1,7 @@
+## 2.5.0
+* powerbi-visual-api updated to 4.2.0
+* uuid package functionality replaced with crypto method
+
 ## 2.4.4
 * updated dependencies to fix vulnerabilities
 
