@@ -36,10 +36,9 @@ function each(element: JQuery | HTMLElement, fn: (i: number, el: HTMLElement) =>
     }
 }
 
-function uuid() {
-    const buf = new Uint8Array(1);
-    window.crypto.getRandomValues(buf);
-    return buf[0];
+export function getUuid() {
+    const uuid = (window.crypto as any).randomUUID();
+    return uuid;
 }
 
 
@@ -47,7 +46,7 @@ export function testDom(height: number | string, width: number | string): HTMLEl
     let element: HTMLElement = document.createElement("div"),
         heightWithUnits: string = isFinite( Number(height) ) ? `${Number(height)}px` : String(height),
         widthWithUnits: string = isFinite( Number(width) ) ? `${Number(width)}px` : String(width),
-        id = "item" + uuid();
+        id = "item_" + getUuid();
 
     element.id = id;
     element.style.height = heightWithUnits;

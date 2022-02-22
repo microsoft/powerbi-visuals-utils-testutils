@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
