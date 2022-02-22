@@ -24,13 +24,28 @@
  *  THE SOFTWARE.
  */
 
-import { testDom, getRandomNumber, getRandomNumbers } from "../../src/helpers/helpers";
+import { testDom, getRandomNumber, getRandomNumbers, getUuid } from "../../src/helpers/helpers";
 
 describe("testDom", () => {
     it("should return an element", () => {
         let element: HTMLElement = testDom(500, 500);
 
         expect(element).toBeDefined();
+    });
+});
+
+describe("uuid", () => {
+    it("should be unique across multiple tests", () => {
+        const uuids = [];
+        const testsAmount = 1000;
+
+        for (let i = 0; i < testsAmount; i++) {
+            uuids.push(getUuid());
+        }
+
+        const uniqueUUids = [...new Set(uuids)];
+
+        expect(uuids.length).toEqual(uniqueUUids.length);
     });
 });
 
