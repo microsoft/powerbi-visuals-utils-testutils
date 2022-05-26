@@ -24,6 +24,8 @@
  *  THE SOFTWARE.
  */
 
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 // powerbi
 import powerbi from "powerbi-visuals-api";
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
@@ -33,21 +35,15 @@ export class MockIEventService implements IVisualEventService {
     /**
  * Called just before the actual rendering was started.
  */
-    renderingStarted(options: VisualUpdateOptions): void {
-
-    }
+    renderingStarted(options: VisualUpdateOptions): void { }
 
     /**
      * Called immediately after finishing rendering successfully
      */
-    renderingFinished(options: VisualUpdateOptions): void {
-
-    }
+    renderingFinished(options: VisualUpdateOptions): void { }
 
     /**
      * Called when rendering failed with optional reason string
      */
-    renderingFailed(options: VisualUpdateOptions, reason?: string): void {
-
-    }
+    renderingFailed(options: VisualUpdateOptions, reason?: string): void { }
 }

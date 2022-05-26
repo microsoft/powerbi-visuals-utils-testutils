@@ -50,7 +50,7 @@ export function parseColorString(color: string): RgbColor {
     if (color.indexOf("#") >= 0) {
         if (color.length === 7) {
             // #RRGGBB
-            let result: RegExpExecArray = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+            const result: RegExpExecArray = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
 
             if (result == null || result.length < 4) {
                 return;
@@ -63,7 +63,7 @@ export function parseColorString(color: string): RgbColor {
             };
         } else if (color.length === 4) {
             // #RGB
-            let result: RegExpExecArray = /^#?([a-f\d])([a-f\d])([a-f\d])$/i.exec(color);
+            const result: RegExpExecArray = /^#?([a-f\d])([a-f\d])([a-f\d])$/i.exec(color);
 
             if (result == null || result.length < 4) {
                 return;
@@ -78,7 +78,7 @@ export function parseColorString(color: string): RgbColor {
     }
     else if (color.indexOf("rgb(") >= 0) {
         // rgb(R, G, B)
-        let result: RegExpExecArray = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/.exec(color);
+        const result: RegExpExecArray = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/.exec(color);
 
         if (result == null || result.length < 4) {
             return;
@@ -92,7 +92,7 @@ export function parseColorString(color: string): RgbColor {
     }
     else if (color.indexOf("rgba(") >= 0) {
         // rgba(R, G, B, A)
-        let result: RegExpExecArray = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/.exec(color);
+        const result: RegExpExecArray = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/.exec(color);
 
         if (result == null || result.length < 5) {
             return;

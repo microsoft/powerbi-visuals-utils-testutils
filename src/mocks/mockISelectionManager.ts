@@ -40,12 +40,14 @@ export class MockISelectionManager implements ISelectionManager {
 
     private callback: (ids: ISelectionId[]) => void;
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     public toggleExpandCollapse(selectionId: ISelectionId): IPromise<{}> {
         return new Promise<void>((resolve, reject) => {
             resolve();
         }) as any;
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
         return new Promise<void>((resolve, reject) => {
             resolve();
@@ -53,7 +55,7 @@ export class MockISelectionManager implements ISelectionManager {
     }
 
     public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
-        let selectionIds: ISelectionId[] = [].concat(selectionId);
+        const selectionIds: ISelectionId[] = [].concat(selectionId);
 
         // if no multiselect reset current selection and save new passed selections;
         if (!multiSelect) {
@@ -83,6 +85,7 @@ export class MockISelectionManager implements ISelectionManager {
         return this.selectionIds.length > 0;
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     public clear(): IPromise<{}> {
         this.selectionIds = [];
 
@@ -95,6 +98,7 @@ export class MockISelectionManager implements ISelectionManager {
         return this.selectionIds;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public applySelectionFilter(): void { }
 
     public containsSelection(id: ISelectionId) {

@@ -94,7 +94,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         } as VisualUpdateOptions);
     }
 
-    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: Function, timeout?: number): number {
+    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: (() => any), timeout?: number): NodeJS.Timeout {
         this.update(dataViews);
 
         return renderTimeout(fn, timeout);
@@ -104,11 +104,11 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         dataViews: DataView[] | DataView,
         options: EnumerateVisualObjectInstancesOptions,
         fn: (enumeration: VisualObjectInstance[]) => void,
-        timeout?: number): number {
+        timeout?: number): NodeJS.Timeout {
 
         this.update(dataViews);
 
-        let enumeration: VisualObjectInstance[] = this.enumerateObjectInstances(options);
+        const enumeration: VisualObjectInstance[] = this.enumerateObjectInstances(options);
 
         return renderTimeout(() => fn(enumeration), timeout);
     }
@@ -121,8 +121,8 @@ export abstract class VisualBuilderBase<T extends IVisual> {
 
     public updateflushAllD3TransitionsRenderTimeout(
         dataViews: DataView[] | DataView,
-        fn: Function,
-        timeout?: number): number {
+        fn: () => any,
+        timeout?: number): NodeJS.Timeout {
 
         this.update(dataViews);
 
@@ -132,13 +132,13 @@ export abstract class VisualBuilderBase<T extends IVisual> {
     }
 
     public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] {
-        let enumeration: VisualObjectInstanceEnumeration = this.visual.enumerateObjectInstances(options);
+        const enumeration: VisualObjectInstanceEnumeration = this.visual.enumerateObjectInstances(options);
 
         if (!enumeration) {
             return enumeration as VisualObjectInstance[];
         }
 
-        let enumerationInstances: VisualObjectInstance[] =
+        const enumerationInstances: VisualObjectInstance[] =
             (enumeration as VisualObjectInstanceEnumerationObject).instances;
 
         return Array.isArray(enumerationInstances)

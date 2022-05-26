@@ -30,6 +30,7 @@ import ITelemetryService = powerbi.extensibility.ITelemetryService;
 
 export class MockITelemetryService implements ITelemetryService {
     instanceId: string;
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     trace(veType: powerbi.VisualEventType, payload?: string) {
     }
 }

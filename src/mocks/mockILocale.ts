@@ -28,13 +28,13 @@ import keys from "lodash-es/keys";
 
 export class MockILocale {
     private currentLocale: string;
-    private locales: Object;
-    private static DefaultLocales: Object = {
+    private locales: object;
+    private static DefaultLocales: object = {
         "en": "en-US",
         "ru": "ru-RU"
     };
 
-    constructor(locales: Object = MockILocale.DefaultLocales) {
+    constructor(locales: object = MockILocale.DefaultLocales) {
         this.locales = locales;
         this.locale = keys(locales)[0];
     }

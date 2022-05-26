@@ -25,7 +25,7 @@
  */
 import { DefaultWaitForRender } from "../common";
 
-export function renderTimeout(fn: Function, timeout: number = DefaultWaitForRender): number {
+export function renderTimeout(fn: () => any, timeout: number = DefaultWaitForRender):  NodeJS.Timeout {
     return setTimeout(fn, timeout);
 }
 

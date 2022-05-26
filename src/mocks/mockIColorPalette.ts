@@ -96,7 +96,7 @@ export class MockIColorPalette implements IColorPalette {
             return color;
         }
 
-        let colors = MockIColorPalette.DefaultColors;
+        const colors = MockIColorPalette.DefaultColors;
         color = this.colors[key] = colors[this.colorIndex++];
 
         if (this.colorIndex >= colors.length) {

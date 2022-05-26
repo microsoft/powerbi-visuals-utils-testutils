@@ -105,6 +105,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localeInstance.locale = language;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
 
     }
@@ -117,6 +118,7 @@ export class MockIVisualHost implements IVisualHost {
         return this.authenticationService;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public persistProperties(changes: VisualObjectInstancesToPersist) { }
 
     public get tooltipService(): ITooltipService {
@@ -143,6 +145,7 @@ export class MockIVisualHost implements IVisualHost {
         return true;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public refreshHostData() {
     }
 

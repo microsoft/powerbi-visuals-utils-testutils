@@ -43,7 +43,7 @@ export function getUuid() {
 
 
 export function testDom(height: number | string, width: number | string): HTMLElement {
-    let element: HTMLElement = document.createElement("div"),
+    const element: HTMLElement = document.createElement("div"),
         heightWithUnits: string = isFinite( Number(height) ) ? `${Number(height)}px` : String(height),
         widthWithUnits: string = isFinite( Number(width) ) ? `${Number(width)}px` : String(width),
         id = "item_" + getUuid();
@@ -105,28 +105,28 @@ export function d3KeyEvent(element: JQuery | HTMLElement, typeArg: string, keyAr
 
 export function d3TouchStart(element: JQuery | HTMLElement, touchList?: TouchList): void {
     each(this, function (i, e) {
-        let evt = createTouchStartEvent(touchList);
+        const evt = createTouchStartEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
 export function d3TouchMove(element: JQuery | HTMLElement, touchList?: TouchList): void {
     each(this, function (i, e) {
-        let evt = createTouchMoveEvent(touchList);
+        const evt = createTouchMoveEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
 export function d3TouchEnd(element: JQuery | HTMLElement, touchList?: TouchList): void {
     each(this, function (i, e) {
-        let evt = createTouchEndEvent(touchList);
+        const evt = createTouchEndEvent(touchList);
         e.dispatchEvent(evt);
     });
 }
 
 export function d3ContextMenu(element: JQuery | HTMLElement, x: number, y: number): void {
     each(this, function (i, e) {
-        let evt = createContextMenuEvent(x, y);
+        const evt = createContextMenuEvent(x, y);
         e.dispatchEvent(evt);
     });
 }
@@ -139,10 +139,10 @@ function mouseEvent(
     eventType?: ClickEventType,
     button?: number): void {
 
-    let clickEventType: ClickEventType = eventType || ClickEventType.Default;
+    const clickEventType: ClickEventType = eventType || ClickEventType.Default;
 
     each(this, function (i, e) {
-        let evt: MouseEvent = createMouseEvent(mouseEventType, clickEventType, x, y, button);
+        const evt: MouseEvent = createMouseEvent(mouseEventType, clickEventType, x, y, button);
 
         e.dispatchEvent(evt);
     });
@@ -150,7 +150,7 @@ function mouseEvent(
 
 function keyEvent(typeArg: string, keyArg: string, keyCode: number): void {
     each(this, function (i, e) {
-        let evt: KeyboardEvent = new KeyboardEvent(typeArg,
+        const evt: KeyboardEvent = new KeyboardEvent(typeArg,
         {
             key: keyArg,
             bubbles: true,
@@ -177,7 +177,7 @@ export function createMouseEvent(
     y: number,
     button: number = 0): MouseEvent {
 
-    let clickEventType: ClickEventType = eventType || ClickEventType.Default,
+    const clickEventType: ClickEventType = eventType || ClickEventType.Default,
         evt: MouseEvent = document.createEvent("MouseEvents");
 
     evt.initMouseEvent(
@@ -202,7 +202,7 @@ export function createMouseEvent(
 
 export function createTouchStartEvent(touchList?: TouchList): UIEvent {
     // NOTE: phantomjs does not support TouchEvent
-    let evt: UIEvent = document.createEvent("UIEvent");
+    const evt: UIEvent = document.createEvent("UIEvent");
 
     evt.initEvent("touchstart", true, true);
 
@@ -215,7 +215,7 @@ export function createTouchStartEvent(touchList?: TouchList): UIEvent {
 
 export function createTouchMoveEvent(touchList?: TouchList): UIEvent {
     // NOTE: phantomjs does not support TouchEvent
-    let evt: UIEvent = document.createEvent("UIEvent");
+    const evt: UIEvent = document.createEvent("UIEvent");
 
     evt.initEvent("touchmove", true, true);
 
@@ -228,7 +228,7 @@ export function createTouchMoveEvent(touchList?: TouchList): UIEvent {
 
 export function createTouchEndEvent(touchList?: TouchList): UIEvent {
     // NOTE: phantomjs does not support TouchEvent
-    let evt: UIEvent = document.createEvent("UIEvent");
+    const evt: UIEvent = document.createEvent("UIEvent");
 
     evt.initEvent("touchend", true, true);
 
@@ -240,7 +240,7 @@ export function createTouchEndEvent(touchList?: TouchList): UIEvent {
 }
 
 export function createContextMenuEvent(x: number, y: number): MouseEvent {
-    let evt: MouseEvent = document.createEvent("MouseEvents");
+    const evt: MouseEvent = document.createEvent("MouseEvents");
 
     evt.initMouseEvent(
         "contextmenu", // type
@@ -273,7 +273,7 @@ export function createTouchesList(touches: Touch[]): TouchList {
 }
 
 export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): TouchInit {
-    const newElement: HTMLElement = element.hasOwnProperty("get") ? (<any>element).get(0) : element;
+    const newElement: HTMLElement = Object.prototype.hasOwnProperty.call(element, "get") ? (<any>element).get(0) : element;
 
     return {
         pageX: x,
@@ -295,10 +295,10 @@ export function createTouch(x: number, y: number, element: JQuery | HTMLElement,
 }
 
 export function clickElement(element: JQuery | HTMLElement, ctrlKey: boolean = false): void {
-    const newElement: HTMLElement = element.hasOwnProperty("get") ? (<any>element).get(0) : element;
+    const newElement: HTMLElement = Object.prototype.hasOwnProperty.call(element, "get") ? (<any>element).get(0) : element;
 
 
-    let rect = newElement.getBoundingClientRect(),
+    const rect = newElement.getBoundingClientRect(),
         coordinatesTop: number = rect.top + document.body.scrollTop,
         coordinatesLeft: number = rect.left + document.body.scrollLeft,
         width: number = newElement.offsetWidth,
@@ -323,7 +323,7 @@ export function clickElement(element: JQuery | HTMLElement, ctrlKey: boolean = f
  * These flickers are noticable on IE, and with a large number of webviews(not recommend you ever do this) on iOS.
  */
 export function flushAllD3Transitions() {
-    let now = Date.now;
+    const now = Date.now;
     Date.now = function () { return Infinity; };
     // timer.flush();
     timerFlush();
@@ -341,8 +341,8 @@ export function getRandomNumber(
     changeResult: (value: any) => number = x => x): number {
 
     const cryptoObj = (<any>window).crypto || (<any>window).msCrypto;
-    let randomValue = +("0." + cryptoObj.getRandomValues(new Uint8Array(1)));
-    let result = changeResult(randomValue * (max - min) + min);
+    const randomValue = +("0." + cryptoObj.getRandomValues(new Uint8Array(1)));
+    const result = changeResult(randomValue * (max - min) + min);
 
     if (exceptionList && exceptionList.length && includes(exceptionList, result)) {
         return getRandomNumber(min, max, exceptionList);

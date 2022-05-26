@@ -70,7 +70,7 @@ export class MockILocalizationManager implements ILocalizationManager {
             return displayName;
         }
 
-        let defaultDisplayNames: {[key: string]: string} = MockILocalizationManager.DefaultDispalyNames;
+        const defaultDisplayNames: {[key: string]: string} = MockILocalizationManager.DefaultDispalyNames;
         displayName = defaultDisplayNames[key];
 
         return displayName || key;
