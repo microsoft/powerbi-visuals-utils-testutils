@@ -5,5 +5,4 @@ test
 .eslintrc.js
 karma.conf.ts
 webpack.config.js
-lib/src/mocks
-lib/src/common.d.ts
+lib
