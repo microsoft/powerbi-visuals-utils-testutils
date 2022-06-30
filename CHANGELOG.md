@@ -1,3 +1,9 @@
+## 2.7.0
+* moved to `eslint` from `tslint`
+* updated dependencies to fix vulnerabilities
+
+## 2.6.0
+* fix for `uuid`
 ## 2.5.0
 * powerbi-visual-api updated to 4.2.0
 * uuid package functionality replaced with crypto method
