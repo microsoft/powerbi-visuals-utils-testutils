@@ -1,5 +1,7 @@
-## 2.7.0
+## 3.0.0
+* added `pointerEvent` method to test pointer events
 * moved to `eslint` from `tslint`
+* switched to usage of 'uuidv4' instead of Node.js crypto method, to be less dependent from Node version
 * updated dependencies to fix vulnerabilities
 
 ## 2.6.0

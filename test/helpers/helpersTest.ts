@@ -44,7 +44,6 @@ describe("uuid", () => {
         }
 
         const uniqueUUids = [...new Set(uuids)];
-
         expect(uuids.length).toEqual(uniqueUUids.length);
     });
 });

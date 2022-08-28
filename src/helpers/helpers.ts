@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
+import { uuid } from 'uuidv4';
 
 import range from "lodash-es/range";
 import includes from "lodash-es/includes";
@@ -37,16 +38,15 @@ function each(element: JQuery | HTMLElement, fn: (i: number, el: HTMLElement) =>
 }
 
 export function getUuid() {
-    const uuid = (window.crypto as any).randomUUID();
-    return uuid;
+    return uuid();
 }
 
 
 export function testDom(height: number | string, width: number | string): HTMLElement {
     const element: HTMLElement = document.createElement("div"),
-        heightWithUnits: string = isFinite( Number(height) ) ? `${Number(height)}px` : String(height),
-        widthWithUnits: string = isFinite( Number(width) ) ? `${Number(width)}px` : String(width),
-        id = "item_" + getUuid();
+        heightWithUnits: string = isFinite(Number(height)) ? `${Number(height)}px` : String(height),
+        widthWithUnits: string = isFinite(Number(width)) ? `${Number(width)}px` : String(width),
+        id = "item_" + uuid();
 
     element.id = id;
     element.style.height = heightWithUnits;
@@ -73,6 +73,25 @@ export enum MouseEventType {
     mouseover,
     mousemove,
     mouseout,
+}
+
+export enum PointerEventType {
+    pointerover = "pointerover",
+    pointerenter = "pointerenter",
+    pointerdown = "pointerdown",
+    pointermove = "pointermove",
+    pointerup = "pointerup",
+    pointercancel = "pointercancel",
+    pointerout = "pointerout",
+    pointerleave = "pointerleave",
+    gotpointercapture = "gotpointercapture",
+    lostpointercapture = "lostpointercapture"
+}
+
+export enum PointerType {
+    mouse = "mouse",
+    pen = "pen",
+    touch = "touch"
 }
 
 export function d3Click(element: JQuery | HTMLElement | SVGElement, x: number, y: number, eventType?: ClickEventType, button?: number): void {
@@ -124,6 +143,13 @@ export function d3TouchEnd(element: JQuery | HTMLElement, touchList?: TouchList)
     });
 }
 
+export function pointerEvent(element: JQuery | HTMLElement, pointerEventType: PointerEventType, pointerType: PointerType, x: number, y: number): void {
+    each(this, function (i, e) {
+        const evt = createPointerEvent(pointerEventType, pointerType, x, y);
+        e.dispatchEvent(evt);
+    });
+}
+
 export function d3ContextMenu(element: JQuery | HTMLElement, x: number, y: number): void {
     each(this, function (i, e) {
         const evt = createContextMenuEvent(x, y);
@@ -151,14 +177,14 @@ function mouseEvent(
 function keyEvent(typeArg: string, keyArg: string, keyCode: number): void {
     each(this, function (i, e) {
         const evt: KeyboardEvent = new KeyboardEvent(typeArg,
-        {
-            key: keyArg,
-            bubbles: true,
-            cancelable: true,
-            location: KeyboardEvent.DOM_KEY_LOCATION_STANDARD,
-            repeat: false,
-            view: window,
-        } as KeyboardEventInit);
+            {
+                key: keyArg,
+                bubbles: true,
+                cancelable: true,
+                location: KeyboardEvent.DOM_KEY_LOCATION_STANDARD,
+                repeat: false,
+                view: window,
+            } as KeyboardEventInit);
         e.dispatchEvent(evt);
     });
 }
@@ -239,6 +265,21 @@ export function createTouchEndEvent(touchList?: TouchList): UIEvent {
     return evt;
 }
 
+export function createPointerEvent(eventType, pointerType, x: number, y: number): PointerEvent {
+    const evt: PointerEvent = new PointerEvent(eventType, {
+        pointerId: 1,
+        bubbles: true,
+        cancelable: true,
+        pointerType: pointerType,
+        width: 1,
+        height: 1,
+        isPrimary: true,
+        clientX: x,
+        clientY: y
+       });
+    return evt;
+}
+
 export function createContextMenuEvent(x: number, y: number): MouseEvent {
     const evt: MouseEvent = document.createEvent("MouseEvents");
 
@@ -272,7 +313,7 @@ export function createTouchesList(touches: Touch[]): TouchList {
     return touchesList;
 }
 
-export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): TouchInit {
+export function createTouch(x: number, y: number, element: JQuery | HTMLElement, id: number = 0): Touch {
     const newElement: HTMLElement = Object.prototype.hasOwnProperty.call(element, "get") ? (<any>element).get(0) : element;
 
     return {
@@ -284,13 +325,10 @@ export function createTouch(x: number, y: number, element: JQuery | HTMLElement,
         clientY: y,
         target: newElement,
         identifier: id,
-        altitudeAngle: 1.5708,
-        azimuthAngle: 1.5708,
         force: 1,
         radiusX: 1,
         radiusY: 1,
         rotationAngle: 0,
-        touchType: "direct"
     };
 }
 
