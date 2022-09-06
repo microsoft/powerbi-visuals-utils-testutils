@@ -265,8 +265,8 @@ export function createTouchEndEvent(touchList?: TouchList): UIEvent {
     return evt;
 }
 
-export function createPointerEvent(eventType, pointerType, x: number, y: number): PointerEvent {
-    const evt: PointerEvent = new PointerEvent(eventType, {
+export function createPointerEvent(pointerEventType: PointerEventType, pointerType: PointerType, x: number, y: number): PointerEvent {
+    const evt: PointerEvent = new PointerEvent(pointerEventType, {
         pointerId: 1,
         bubbles: true,
         cancelable: true,

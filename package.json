@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "2.7.0",
+  "version": "3.0.0",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -35,7 +35,7 @@
     "@types/d3-timer": "3.0.0",
     "@types/jasmine": "3.10.2",
     "@types/jquery": "^3.5.10",
-    "@types/karma": "6.3.1",
+    "@types/karma": "^6.3.3",
     "@types/node": "16.11.12",
     "@types/webpack": "5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
@@ -68,7 +68,7 @@
     "istanbul-instrumenter-loader": "^2.0.0",
     "lodash-es": "4.17.21",
     "powerbi-visuals-api": "^4.2.0",
-    "powerbi-visuals-utils-typeutils": "^2.3.1",
+    "powerbi-visuals-utils-typeutils": "^2.4.1",
     "uuidv4": "^6.2.13"
   },
   "snyk": true
