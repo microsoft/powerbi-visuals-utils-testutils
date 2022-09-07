@@ -68,8 +68,7 @@
     "istanbul-instrumenter-loader": "^2.0.0",
     "lodash-es": "4.17.21",
     "powerbi-visuals-api": "^4.2.0",
-    "powerbi-visuals-utils-typeutils": "^2.4.1",
-    "uuidv4": "^6.2.13"
+    "powerbi-visuals-utils-typeutils": "^2.4.1"
   },
   "snyk": true
 }

@@ -24,7 +24,6 @@
  *  THE SOFTWARE.
  */
 import { timerFlush } from "d3-timer";
-import { uuid } from 'uuidv4';
 
 import range from "lodash-es/range";
 import includes from "lodash-es/includes";
@@ -38,7 +37,9 @@ function each(element: JQuery | HTMLElement, fn: (i: number, el: HTMLElement) =>
 }
 
 export function getUuid() {
-    return uuid();
+    const array = new Uint16Array(1)
+    const uuid = window.crypto.getRandomValues(array);
+    return uuid;
 }
 
 
@@ -46,7 +47,7 @@ export function testDom(height: number | string, width: number | string): HTMLEl
     const element: HTMLElement = document.createElement("div"),
         heightWithUnits: string = isFinite(Number(height)) ? `${Number(height)}px` : String(height),
         widthWithUnits: string = isFinite(Number(width)) ? `${Number(width)}px` : String(width),
-        id = "item_" + uuid();
+        id = "item_" + getUuid();
 
     element.id = id;
     element.style.height = heightWithUnits;
@@ -276,7 +277,7 @@ export function createPointerEvent(pointerEventType: PointerEventType, pointerTy
         isPrimary: true,
         clientX: x,
         clientY: y
-       });
+    });
     return evt;
 }
 
