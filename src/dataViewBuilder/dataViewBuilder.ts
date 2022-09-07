@@ -123,11 +123,11 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
     }
 
     public withCategory(options: DataViewBuilderCategoryColumnOptions): IDataViewBuilderCategorical {
-        let categoryValues = options.values,
+        const categoryValues = options.values,
             identityFrom = options.identityFrom,
             sourceType = options.source.type;
 
-        let categoryColumn: DataViewCategoryColumn = {
+        const categoryColumn: DataViewCategoryColumn = {
             source: options.source,
             identityFields: options.identityFrom.fields,
             identity: options.identityFrom.identities || [],
@@ -174,9 +174,9 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
      * a query DataViewCategorical, where DataViewTransform is expected to split them up into separate visual DataViewCategorical objects.
      */
     public withValues(options: DataViewBuilderValuesOptions): IDataViewBuilderCategorical {
-        let columns = options.columns;
+        const columns = options.columns;
 
-        for (let column of columns) {
+        for (const column of columns) {
             this.staticMeasureColumns.push(column.source);
         }
 
@@ -192,7 +192,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
      * a query DataViewCategorical, where DataViewTransform is expected to split them up into separate visual DataViewCategorical objects.
      */
     public withGroupedValues(options: DataViewBuilderGroupedValuesOptions): IDataViewBuilderCategorical {
-        let groupColumn = options.groupColumn;
+        const groupColumn = options.groupColumn;
 
         this.dynamicSeriesMetadata = {
             column: groupColumn.source,
@@ -200,8 +200,8 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
             values: groupColumn.values,
         };
 
-        let valueColumns = options.valueColumns;
-        for (let valueColumn of valueColumns) {
+        const valueColumns = options.valueColumns;
+        for (const valueColumn of valueColumns) {
             this.dynamicMeasureColumns.push(valueColumn.source);
         }
 
@@ -211,7 +211,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
     }
 
     private fillData(dataViewValues: DataViewValueColumns) {
-        let categoryColumn = first(this.categories),
+        const categoryColumn = first(this.categories),
             categoryLength = (categoryColumn && categoryColumn.values)
                 ? categoryColumn.values.length
                 : 0;
@@ -221,13 +221,13 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
                 seriesIndex < seriesLength;
                 seriesIndex++) {
 
-                let seriesMeasures = this.dynamicSeriesValues[seriesIndex];
+                const seriesMeasures = this.dynamicSeriesValues[seriesIndex];
 
                 for (let measureIndex = 0, measuresLen = this.dynamicMeasureColumns.length;
                     measureIndex < measuresLen;
                     measureIndex++) {
 
-                    let groupIndex: number = seriesIndex * measuresLen + measureIndex;
+                    const groupIndex: number = seriesIndex * measuresLen + measureIndex;
 
                     applySeriesData(
                         dataViewValues[groupIndex],
@@ -239,7 +239,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
 
         if (this.hasStaticSeries()) {
             // Note: when the target categorical has both dynamic and static series, append static measures at the end of the values array.
-            let staticColumnsStartingIndex = this.hasDynamicSeries()
+            const staticColumnsStartingIndex = this.hasDynamicSeries()
                 ? (this.dynamicSeriesValues.length * this.dynamicMeasureColumns.length)
                 : 0;
 
@@ -260,14 +260,14 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
      * Returns undefined if the combination of parameters is illegal, such as having both dynamic series and static series when building a visual DataView.
      */
     public build(): DataView {
-        let metadataColumns: DataViewMetadataColumn[] = [];
-        let categorical: DataViewCategorical = {};
+        const metadataColumns: DataViewMetadataColumn[] = [];
+        const categorical: DataViewCategorical = {};
 
-        let categoryMetadata = this.categories;
-        let dynamicSeriesMetadata = this.dynamicSeriesMetadata;
+        const categoryMetadata = this.categories;
+        const dynamicSeriesMetadata = this.dynamicSeriesMetadata;
 
         // --- Build metadata columns and value groups ---
-        for (let columnMetadata of categoryMetadata) {
+        for (const columnMetadata of categoryMetadata) {
             pushIfNotExists(metadataColumns, columnMetadata.source);
         }
 
@@ -279,13 +279,13 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
             categorical.values = createValueColumns([], dynamicSeriesMetadata.identityFrom.fields, dynamicSeriesMetadata.column);
 
             // For each series value we will make one column per measure
-            let seriesValues = dynamicSeriesMetadata.values;
+            const seriesValues = dynamicSeriesMetadata.values;
             for (let seriesIndex = 0; seriesIndex < seriesValues.length; seriesIndex++) {
-                let seriesValue = seriesValues[seriesIndex];
-                let seriesIdentity = getScopeIdentity(dynamicSeriesMetadata.identityFrom, seriesIndex, seriesValue, dynamicSeriesMetadata.column.type);
+                const seriesValue = seriesValues[seriesIndex];
+                const seriesIdentity = getScopeIdentity(dynamicSeriesMetadata.identityFrom, seriesIndex, seriesValue, dynamicSeriesMetadata.column.type);
 
-                for (let measure of this.dynamicMeasureColumns) {
-                    let column = toPlainObject(measure);
+                for (const measure of this.dynamicMeasureColumns) {
+                    const column = toPlainObject(measure);
 
                     column.groupName = <string>seriesValue;
 
@@ -300,8 +300,8 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
 
             // If there is no data we should add a column that contains a pointer to the dynamic measure columns, for consistency with the dsrReader
             if (seriesValues.length === 0) {
-                for (let measure of this.dynamicMeasureColumns) {
-                    let column: DataViewMetadataColumn = toPlainObject(measure);
+                for (const measure of this.dynamicMeasureColumns) {
+                    const column: DataViewMetadataColumn = toPlainObject(measure);
 
                     pushIfNotExists(metadataColumns, column);
 
@@ -313,7 +313,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
                 // IMPORTANT: In the Dynamic & Static series case, the groups array shall not include any static group. This is to match the behavior of production code that creates query DataView objects.
                 // Get the current return value of grouped() before adding static measure columns, an use that as the return value of this categorical.
                 // Otherwise, the default behavior of DataViewValueColumns.grouped() from DataViewTransform.createValueColumns() is to create series groups from all measure columns.
-                let dynamicSeriesGroups: DataViewValueColumnGroup[] = categorical.values.grouped();
+                const dynamicSeriesGroups: DataViewValueColumnGroup[] = categorical.values.grouped();
 
                 categorical.values.grouped = () => dynamicSeriesGroups;
 
@@ -327,7 +327,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
             this.appendStaticMeasureColumns(metadataColumns, categorical.values);
         }
 
-        let categories = this.categories;
+        const categories = this.categories;
         if (!isEmpty(categories)) {
             categorical.categories = categories;
         }
@@ -335,7 +335,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
         // --- Fill in data point values ---
         this.fillData(categorical.values);
 
-        let dataView: DataView = {
+        const dataView: DataView = {
             metadata: {
                 columns: metadataColumns,
             },
@@ -352,7 +352,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
         valueColumns: DataViewValueColumns): void {
 
         if (!isEmpty(this.staticMeasureColumns)) {
-            for (let column of this.staticMeasureColumns) {
+            for (const column of this.staticMeasureColumns) {
                 pushIfNotExists(metadataColumns, column);
                 valueColumns.push({
                     source: column,
@@ -400,7 +400,7 @@ function getScopeIdentity(
     value: PrimitiveValue,
     valueType: ValueTypeDescriptor): CustomVisualOpaqueIdentity {
 
-    let identities: CustomVisualOpaqueIdentity[] = source.identities;
+    const identities: CustomVisualOpaqueIdentity[] = source.identities;
 
     if (identities) {
         return identities[index];
@@ -426,11 +426,11 @@ function applySeriesData(
     source: DataViewBuilderSeriesData,
     categoryLength: number): void {
 
-    let values: PrimitiveValue[] = source.values;
+    const values: PrimitiveValue[] = source.values;
 
     target.values = values;
 
-    let highlights: PrimitiveValue[] = source.highlights;
+    const highlights: PrimitiveValue[] = source.highlights;
 
     if (highlights) {
         target.highlights = highlights;
@@ -462,7 +462,7 @@ export function createValueColumns(
     valueIdentityFields?: any[],
     source?: DataViewMetadataColumn): DataViewValueColumns {
 
-    let result = <DataViewValueColumns>values;
+    const result = <DataViewValueColumns>values;
     setGrouped(result);
 
     if (valueIdentityFields) {
@@ -484,11 +484,11 @@ export function setGrouped(values: DataViewValueColumns, groupedResult?: DataVie
 
 /** Group together the values with a common identity. */
 function groupValues(values: DataViewValueColumn[]): DataViewValueColumnGroup[] {
-    let groups: DataViewValueColumnGroup[] = [],
-        currentGroup: DataViewValueColumnGroup;
+    const groups: DataViewValueColumnGroup[] = [];
+    let currentGroup: DataViewValueColumnGroup;
 
     for (let i = 0, len = values.length; i < len; i++) {
-        let value = values[i];
+        const value = values[i];
 
         if (!currentGroup || currentGroup.identity !== value.identity) {
             currentGroup = {
@@ -498,7 +498,7 @@ function groupValues(values: DataViewValueColumn[]): DataViewValueColumnGroup[] 
             if (value.identity) {
                 currentGroup.identity = value.identity;
 
-                let source = value.source;
+                const source = value.source;
 
                 // allow null, which will be formatted as (Blank).
                 if (source.groupName !== undefined)

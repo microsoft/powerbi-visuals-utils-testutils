@@ -7,3 +7,4 @@ dist/
 /lib
 *.lock
 .vscode/
+.tmp

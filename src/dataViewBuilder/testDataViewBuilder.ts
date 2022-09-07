@@ -93,18 +93,19 @@ export abstract class TestDataViewBuilder {
     }
 
     static getDataViewBuilderColumnIdentitySources(options: TestDataViewBuilderColumnOptions[] | TestDataViewBuilderColumnOptions): DataViewBuilderColumnIdentitySource[] {
-        let optionsArray: TestDataViewBuilderColumnOptions[] = <any>(Array.isArray(options) ? options : [options]);
+        const optionsArray: TestDataViewBuilderColumnOptions[] = <any>(Array.isArray(options) ? options : [options]);
 
-        let fields = optionsArray.map(() => { }),
-            optionsIdentityExpressions: any[][] = optionsArray.map((opt) => opt.values),
-            identityExpressions: any[] = [];
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        const fields = optionsArray.map(() => { }),
+            optionsIdentityExpressions: any[][] = optionsArray.map((opt) => opt.values)
+        let identityExpressions: any[] = [];
 
         if (optionsIdentityExpressions.length > 1) {
-            let identityExpressionsLength = optionsIdentityExpressions.length,
+            const identityExpressionsLength = optionsIdentityExpressions.length,
                 identityExpressionsValuesLength = max(map(optionsIdentityExpressions, x => x.length));
 
             for (let vi = 0; vi < identityExpressionsValuesLength; vi++) {
-                let current: any = optionsIdentityExpressions[0][vi];
+                const current: any = optionsIdentityExpressions[0][vi];
 
                 identityExpressions.push(current);
             }
@@ -119,7 +120,7 @@ export abstract class TestDataViewBuilder {
     }
 
     static getValuesTable(categories?: DataViewCategoryColumn[], values?: DataViewValueColumn[]): any[][] {
-        let columns = sortBy((categories || []).concat(<any>values || []), x => x.source.index),
+        const columns = sortBy((categories || []).concat(<any>values || []), x => x.source.index),
             maxLength: number = max(columns.map(x => x.values.length));
 
         return range(maxLength).map(i => columns.map(x => x.values[i]));
@@ -131,15 +132,15 @@ export abstract class TestDataViewBuilder {
         filter?: (options: TestDataViewBuilderColumnOptions) => boolean,
         customizeColumns?: CustomizeColumnFn): DataViewBuilderAllColumnOptions {
 
-        let filterColumns = filter
+        const filterColumns = filter
             ? (options) => Array.isArray(options.values) && filter(options)
             : (options) => Array.isArray(options.values);
 
-        let resultCategoriesColumns = isEmpty(categoriesColumns) ? [] : (<TestDataViewBuilderCategoryColumnOptions[]>flatten(categoriesColumns)).filter(filterColumns);
+        const resultCategoriesColumns = isEmpty(categoriesColumns) ? [] : (<TestDataViewBuilderCategoryColumnOptions[]>flatten(categoriesColumns)).filter(filterColumns);
 
-        let resultValuesColumns = isEmpty(valuesColumns) ? [] : (<DataViewBuilderValuesColumnOptions[]>flatten(valuesColumns)).filter(filterColumns);
+        const resultValuesColumns = isEmpty(valuesColumns) ? [] : (<DataViewBuilderValuesColumnOptions[]>flatten(valuesColumns)).filter(filterColumns);
 
-        let allColumns = (resultCategoriesColumns || []).concat(resultValuesColumns || []);
+        const allColumns = (resultCategoriesColumns || []).concat(resultValuesColumns || []);
 
         allColumns.forEach((x: DataViewCategoricalColumn, i) => x.source.index = i);
 
@@ -149,7 +150,7 @@ export abstract class TestDataViewBuilder {
 
         allColumns.forEach((column: TestDataViewBuilderColumnOptions) => {
             if (column.source.format) {
-                let objects = column.source.objects = (<any>column.source.objects || {});
+                const objects = column.source.objects = (<any>column.source.objects || {});
 
                 objects.general = objects.general || {};
                 objects.general.formatString = objects.general.formatString || column.source.format;
@@ -167,7 +168,7 @@ export abstract class TestDataViewBuilder {
         options: DataViewBuilderAllColumnOptions,
         aggregateFunction: (array: number[]) => number): DataViewBuilderAllColumnOptions {
 
-        let resultOptions = clone(options);
+        const resultOptions = clone(options);
 
         resultOptions.categories = resultOptions.categories && resultOptions.categories.map(x => clone(x));
         resultOptions.values = resultOptions.values && resultOptions.values.map(x => clone(x));
@@ -175,9 +176,9 @@ export abstract class TestDataViewBuilder {
 
         if (!isEmpty(options.categories)) {
             resultOptions.categories.forEach(x => x.source = TestDataViewBuilder.setDefaultQueryName(x.source));
-            let allRows: any[][] = TestDataViewBuilder.getValuesTable(options.categories, options.values);
-            let categoriesLength = options.categories.length;
-            let grouped = toArray(groupBy(allRows, x => take(x, categoriesLength)));
+            const allRows: any[][] = TestDataViewBuilder.getValuesTable(options.categories, options.values);
+            const categoriesLength = options.categories.length;
+            const grouped = toArray(groupBy(allRows, x => take(x, categoriesLength)));
             resultOptions.categories.forEach((c, i) => c.values = grouped.map(x => x[0][i] === undefined ? null : x[0][i]));
 
             if (!isEmpty(options.values) && isEmpty(options.grouped)) { // Not completed for group categories
@@ -199,7 +200,7 @@ export abstract class TestDataViewBuilder {
 
     static setUpDataView(dataView: DataView, options: DataViewBuilderAllColumnOptions): DataView {
         if (!isEmpty(options.categories) && isEmpty(options.grouped)) {
-            let category = dataView.categorical.categories[0];
+            const category = dataView.categorical.categories[0];
 
             // Tree. (completed only for one category)
             dataView.tree = {
@@ -229,7 +230,7 @@ export abstract class TestDataViewBuilder {
         }
 
         if (dataView.categorical.values) {
-            let grouped = dataView.categorical.values.grouped();
+            const grouped = dataView.categorical.values.grouped();
             dataView.categorical.values.grouped = () => grouped;
         }
 
@@ -242,18 +243,18 @@ export abstract class TestDataViewBuilder {
         columnNames: string[],
         customizeColumns?: CustomizeColumnFn): IDataViewBuilderCategorical {
 
-        let builder = createCategoricalDataViewBuilder();
+        const builder = createCategoricalDataViewBuilder();
 
-        let originalOptions = TestDataViewBuilder.createDataViewBuilderColumnOptions(
+        const originalOptions = TestDataViewBuilder.createDataViewBuilderColumnOptions(
             categoriesColumns,
             valuesColumns,
             columnNames && (options => includes(columnNames, options.source.displayName)),
             customizeColumns);
 
-        let options = TestDataViewBuilder.setUpDataViewBuilderColumnOptions(originalOptions, this.aggregateFunction);
+        const options = TestDataViewBuilder.setUpDataViewBuilderColumnOptions(originalOptions, this.aggregateFunction);
 
         if (!isEmpty(options.categories)) {
-            let identityFrom = TestDataViewBuilder.getDataViewBuilderColumnIdentitySources(options.categories);
+            const identityFrom = TestDataViewBuilder.getDataViewBuilderColumnIdentitySources(options.categories);
 
             builder.withCategories(options.categories.map((category, i) => <DataViewCategoryColumn>{
                 source: category.source,
@@ -265,14 +266,14 @@ export abstract class TestDataViewBuilder {
         }
 
         if (!isEmpty(options.grouped)) {
-            let groupedCategory = options.grouped[0]; // Finished only for one category.
+            const groupedCategory = options.grouped[0]; // Finished only for one category.
 
-            let categoryValues = originalOptions.categories
+            const categoryValues = originalOptions.categories
                 && originalOptions.categories[0]
                 && originalOptions.categories[0].values
                 || [];
 
-            let uniqueCategoryValues = uniq(categoryValues) || [undefined],
+            const uniqueCategoryValues = uniq(categoryValues) || [undefined],
                 uniqueGroupedValues = uniq(groupedCategory.values);
 
             builder.withGroupedValues({
@@ -286,7 +287,7 @@ export abstract class TestDataViewBuilder {
                     <DataViewBuilderSeriesData>{
                         values: column.values && uniqueCategoryValues
                             .map(categoryValue => {
-                                let index = findIndex(range(categoryValues.length),
+                                const index = findIndex(range(categoryValues.length),
                                     i => categoryValues[i] === categoryValue && groupedCategory.values[i] === groupedValue);
                                 return column.values[index] === undefined ? null : column.values[index];
                             }),
@@ -299,7 +300,7 @@ export abstract class TestDataViewBuilder {
             builder.withValues({ columns: options.values });
         }
 
-        let builderBuild = builder.build.bind(builder);
+        const builderBuild = builder.build.bind(builder);
 
         builder.build = () => {
             return TestDataViewBuilder.setUpDataView(builderBuild(), options);
