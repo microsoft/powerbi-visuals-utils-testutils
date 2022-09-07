@@ -55,7 +55,8 @@ import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
 
-export function createVisualHost(locale?: object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
     return new MockIVisualHost(
         createColorPalette(colors),
         createSelectionManager(),
@@ -89,7 +90,8 @@ export function createTooltipService(isEnabled?: boolean): ITooltipService {
     return new MockITooltipService(isEnabled);
 }
 
-export function createLocale(locales?: object): MockILocale {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function createLocale(locales?: Object): MockILocale {
     return new MockILocale(locales);
 }
 

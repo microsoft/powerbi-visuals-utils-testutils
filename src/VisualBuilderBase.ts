@@ -94,7 +94,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         } as VisualUpdateOptions);
     }
 
-    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: (() => any), timeout?: number): NodeJS.Timeout {
+    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: (() => any), timeout?: number): number {
         this.update(dataViews);
 
         return renderTimeout(fn, timeout);
@@ -104,7 +104,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         dataViews: DataView[] | DataView,
         options: EnumerateVisualObjectInstancesOptions,
         fn: (enumeration: VisualObjectInstance[]) => void,
-        timeout?: number): NodeJS.Timeout {
+        timeout?: number): number {
 
         this.update(dataViews);
 
@@ -122,7 +122,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
     public updateflushAllD3TransitionsRenderTimeout(
         dataViews: DataView[] | DataView,
         fn: () => any,
-        timeout?: number): NodeJS.Timeout {
+        timeout?: number): number {
 
         this.update(dataViews);
 

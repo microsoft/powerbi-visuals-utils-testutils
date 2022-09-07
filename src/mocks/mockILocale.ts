@@ -28,13 +28,16 @@ import keys from "lodash-es/keys";
 
 export class MockILocale {
     private currentLocale: string;
-    private locales: object;
-    private static DefaultLocales: object = {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    private locales: Object;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    private static DefaultLocales: Object = {
         "en": "en-US",
         "ru": "ru-RU"
     };
 
-    constructor(locales: object = MockILocale.DefaultLocales) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    constructor(locales: Object = MockILocale.DefaultLocales) {
         this.locales = locales;
         this.locale = keys(locales)[0];
     }
