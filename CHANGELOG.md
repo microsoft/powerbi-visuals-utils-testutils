@@ -1,3 +1,7 @@
+## 3.1.0
+* updated `powerbi-visual-api` to 5.1.0
+* accordingly to PowerBI API v5.1.0, removed `enumerateObjectInstances` method support. Details are availble in [DOC article](https://learn.microsoft.com/en-us/power-bi/developer/visuals/format-pane); 
+
 ## 3.0.0
 * added `pointerEvent` method to test pointer events
 * moved to `eslint` from `tslint`

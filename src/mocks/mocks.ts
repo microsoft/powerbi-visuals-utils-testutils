@@ -41,6 +41,8 @@ import { MockIEventService } from "./mockIEventService";
 import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageService";
 import { MockHostCapabilities } from "./mockHostCapabilities";
 import { MockDownloadService } from "./mockDownloadService";
+import { MockIVisualLicenseManager } from "./mockIVisualLicenseManager";
+import { MockIWebAccessService } from "./MockIWebAccessService";
 // powerbi
 import IColorInfo = powerbi.IColorInfo;
 
@@ -54,6 +56,8 @@ import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
+import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
+import IWebAccessService = powerbi.extensibility.IWebAccessService;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
@@ -67,7 +71,11 @@ export function createVisualHost(locale?: Object, allowInteractions?: boolean, c
         createAuthenticationService(token),
         createStorageService(),
         createEventService(),
-        createHostCapabilities());
+        createHostCapabilities(),
+        createDownloadService(),
+        licenseManager(),
+        webAccessService()
+    )
 }
 
 export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -121,4 +129,12 @@ export function createHostCapabilities(): HostCapabilities {
 
 export function createDownloadService(): IDownloadService {
     return new MockDownloadService();
+}
+
+export function licenseManager(): IVisualLicenseManager {
+    return new MockIVisualLicenseManager();
+}
+
+export function webAccessService(): IWebAccessService {
+    return new MockIWebAccessService();
 }
