@@ -42,7 +42,7 @@ import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageS
 import { MockHostCapabilities } from "./mockHostCapabilities";
 import { MockDownloadService } from "./mockDownloadService";
 import { MockIVisualLicenseManager } from "./mockIVisualLicenseManager";
-import { MockIWebAccessService } from "./MockIWebAccessService";
+import { MockIWebAccessService } from "./mockIWebAccessService";
 // powerbi
 import IColorInfo = powerbi.IColorInfo;
 
