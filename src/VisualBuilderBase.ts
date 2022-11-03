@@ -100,19 +100,6 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         return renderTimeout(fn, timeout);
     }
 
-    public updateEnumerateObjectInstancesRenderTimeout(
-        dataViews: DataView[] | DataView,
-        options: EnumerateVisualObjectInstancesOptions,
-        fn: (enumeration: VisualObjectInstance[]) => void,
-        timeout?: number): number {
-
-        this.update(dataViews);
-
-        const enumeration: VisualObjectInstance[] = this.enumerateObjectInstances(options);
-
-        return renderTimeout(() => fn(enumeration), timeout);
-    }
-
     public updateFlushAllD3Transitions(dataViews: DataView[] | DataView): void {
         this.update(dataViews);
 
@@ -131,18 +118,4 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         return renderTimeout(fn, timeout);
     }
 
-    public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] {
-        const enumeration: VisualObjectInstanceEnumeration = this.visual.enumerateObjectInstances(options);
-
-        if (!enumeration) {
-            return enumeration as VisualObjectInstance[];
-        }
-
-        const enumerationInstances: VisualObjectInstance[] =
-            (enumeration as VisualObjectInstanceEnumerationObject).instances;
-
-        return Array.isArray(enumerationInstances)
-            ? enumerationInstances
-            : enumeration as VisualObjectInstance[];
-    }
 }
