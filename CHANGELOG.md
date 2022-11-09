@@ -1,3 +1,6 @@
+## 3.2.0
+* migrated to `coverage-istanbul-loader` from `istanbul-instrumenter-loader`
+
 ## 3.1.0
 * updated `powerbi-visual-api` to 5.1.0
 * accordingly to PowerBI API v5.1.0, removed `enumerateObjectInstances` method support. Details are available here: [DOC article](https://learn.microsoft.com/en-us/power-bi/developer/visuals/format-pane); 
