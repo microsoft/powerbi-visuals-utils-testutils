@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "3.0.0",
+  "version": "3.2.0",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -41,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "chalk": "5.0.0",
+    "coverage-istanbul-loader": "^3.0.5",
     "coveralls": "3.1.1",
     "eslint": "^8.16.0",
     "eslint-plugin-powerbi-visuals": "^0.8.1",
@@ -65,10 +66,10 @@
   "dependencies": {
     "d3-array": "3.1.1",
     "d3-timer": "3.0.1",
-    "istanbul-instrumenter-loader": "^2.0.0",
     "lodash-es": "4.17.21",
-    "powerbi-visuals-api": "^4.2.0",
-    "powerbi-visuals-utils-typeutils": "^2.4.1"
+    "powerbi-visuals-api": "^5.1.0",
+    "powerbi-visuals-utils-formattingmodel": "^5.0.0",
+    "powerbi-visuals-utils-typeutils": "^3.0.1"
   },
   "snyk": true
 }

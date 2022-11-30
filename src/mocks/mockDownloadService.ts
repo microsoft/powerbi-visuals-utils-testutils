@@ -27,6 +27,7 @@
 // powerbi
 import powerbi from "powerbi-visuals-api";
 import IPromise = powerbi.IPromise;
+import PrivilegeStatus = powerbi.PrivilegeStatus;
 
 // powerbi.extensibility
 import IDownloadService = powerbi.extensibility.IDownloadService;
@@ -35,6 +36,11 @@ export class MockDownloadService implements IDownloadService {
   public exportVisualsContent(content: string, fileName: string, fileType: string, fileDescription: string): IPromise<boolean> {
     return new Promise<void>((resolve, reject) => {
       resolve();
+    }) as any;
+  }
+  public exportStatus(): IPromise<PrivilegeStatus> {
+    return new Promise<PrivilegeStatus>((resolve, reject) => {
+      resolve(PrivilegeStatus.Allowed);
     }) as any;
   }
 }
