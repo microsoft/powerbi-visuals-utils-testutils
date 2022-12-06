@@ -32,10 +32,6 @@ import { createVisualHost } from "./mocks/mocks";
 import powerbi from "powerbi-visuals-api";
 import DataView = powerbi.DataView;
 import IViewport = powerbi.IViewport;
-import VisualObjectInstance = powerbi.VisualObjectInstance;
-import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
-import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
-import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 
 // powerbi.extensibility.visual
 import IVisual = powerbi.extensibility.visual.IVisual;
