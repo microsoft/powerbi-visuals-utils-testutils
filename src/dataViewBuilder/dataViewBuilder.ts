@@ -111,7 +111,6 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
     private staticMeasureColumns: DataViewMetadataColumn[];
     private dynamicMeasureColumns: DataViewMetadataColumn[];
     private dynamicSeriesMetadata: ColumnMetadata;
-    private columnIndex: number;
     private staticSeriesValues: DataViewBuilderValuesColumnOptions[];
     private dynamicSeriesValues: DataViewBuilderSeriesData[][];
 
@@ -119,7 +118,6 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
         this.categories = [];
         this.staticMeasureColumns = [];
         this.dynamicMeasureColumns = [];
-        this.columnIndex = 0;
     }
 
     public withCategory(options: DataViewBuilderCategoryColumnOptions): IDataViewBuilderCategorical {
