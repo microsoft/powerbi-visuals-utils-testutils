@@ -1,3 +1,7 @@
+## 6.0.0
+* Packages update
+* Vulnerabilities patched
+
 ## 3.2.0
 * migrated to `coverage-istanbul-loader` from `istanbul-instrumenter-loader`
 
