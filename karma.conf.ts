@@ -33,7 +33,7 @@ const testRecursivePath = "test/**/*.ts";
 const srcOriginalRecursivePath = "src/**/*.ts";
 const coverageFolder = "coverage";
 
-process.env.CHROME_BIN = require("puppeteer").executablePath();
+process.env.CHROME_BIN = require('playwright-chromium').chromium.executablePath();
 module.exports = (config) => {
     config.set({
         browsers: ["ChromeHeadless"],

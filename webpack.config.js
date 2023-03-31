@@ -1,6 +1,6 @@
 const path = require('path');
 
-var webpack = require( "webpack" );
+var webpack = require("webpack");
 module.exports = {
     entry: './src/index.ts',
     devtool: 'source-map',
@@ -16,13 +16,13 @@ module.exports = {
                 enforce: 'post',
                 include: /(src)/,
                 exclude: /(node_modules|resources\/js\/vendor)/,
-                loader: 'istanbul-instrumenter-loader',
+                loader: 'coverage-istanbul-loader',
                 options: { esModules: true }
             },
             {
                 test: /\.json$/,
                 loader: 'json-loader'
-              }
+            }
         ]
     },
     externals: {
@@ -35,8 +35,8 @@ module.exports = {
         path: path.resolve(__dirname, ".tmp")
     },
     plugins: [
-      new webpack.ProvidePlugin({
-        process: "process/browser"
-      })
+        new webpack.ProvidePlugin({
+            process: "process/browser"
+        })
     ]
 };

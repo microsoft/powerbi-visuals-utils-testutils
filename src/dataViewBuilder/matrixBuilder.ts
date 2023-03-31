@@ -77,7 +77,7 @@ export class DataTable {
         this.table = table.slice(1);
     }
     public getColumnIndex(name: string): number {
-        let index = this.columnNames.findIndex((c) => c === name);
+        const index = this.columnNames.findIndex((c) => c === name);
         return index;
     }
     public forEachRow(iterator: (row: any[]) => void): void {
@@ -95,9 +95,9 @@ export class ColumnMetadataBuilder {
     }
 
     public buildCategoryColumnMetadata(columnOptions: DataViewBuilderBaseColumnOptions): DataViewMetadataColumn {
-        let metadata = columnOptions.metadata;
+        const metadata = columnOptions.metadata;
 
-        let column = this.buildBasicColumnMetadata(columnOptions);
+        const column = this.buildBasicColumnMetadata(columnOptions);
 
         column.isMeasure = false;
         column.identityExprs = [column.expr];
@@ -106,9 +106,9 @@ export class ColumnMetadataBuilder {
     }
 
     public buildValueColumnMetadata(columnOptions: DataViewBuilderBaseColumnOptions): DataViewMetadataColumn {
-        let metadata = columnOptions.metadata;
+        const metadata = columnOptions.metadata;
 
-        let column = this.buildBasicColumnMetadata(columnOptions);
+        const column = this.buildBasicColumnMetadata(columnOptions);
 
         column.isMeasure = true;
 
@@ -187,7 +187,7 @@ export class MatrixDataViewBuilder {
 
 
     public createRootMatrixNode(rows: string[][], rowNames: string[], columns?: [][], columnNames?: string[]): DataViewMatrixNode {
-        let root = {
+        const root = {
             children: []
         };
         const length = rows[0].length;
@@ -207,7 +207,7 @@ export class MatrixDataViewBuilder {
                 } else if (foundNode.length === 1) {
                     currentRoot = foundNode.pop();
                 } else if (foundNode.length === 0) {
-                    let newNode: DataViewMatrixNode = {
+                    const newNode: DataViewMatrixNode = {
                         children: [],
                         identity: {
                             identityIndex: identityIndexIterator++
@@ -226,9 +226,9 @@ export class MatrixDataViewBuilder {
     }
 
     private buildLevelMetadata(columns: DataViewBuilderBaseColumnOptions[], isMeasure: boolean): LevelMetadata {
-        let sources: powerbi.DataViewMetadataColumn[] = [];
-        let tableIndices: number[] = [];
-        for (let columnOptions of columns) {
+        const sources: powerbi.DataViewMetadataColumn[] = [];
+        const tableIndices: number[] = [];
+        for (const columnOptions of columns) {
             const sourceColumn = isMeasure
                 ? this.columnMetadataBuilder.buildValueColumnMetadata(columnOptions)
                 : this.columnMetadataBuilder.buildCategoryColumnMetadata(columnOptions);
@@ -243,12 +243,12 @@ export class MatrixDataViewBuilder {
     }
 
     private buildHierarchyMetadata(options: DataViewBuilderCompositeColumnOptions[]): HierarchyMetadata {
-        let hierarchy: HierarchyMetadata = {
+        const hierarchy: HierarchyMetadata = {
             levels: []
         };
 
-        for (let levelOptions of options) {
-            let columnSet: LevelMetadata = this.buildLevelMetadata(levelOptions.columns, false);
+        for (const levelOptions of options) {
+            const columnSet: LevelMetadata = this.buildLevelMetadata(levelOptions.columns, false);
             hierarchy.levels.push(columnSet);
         }
 
@@ -270,7 +270,7 @@ export class MatrixDataViewBuilder {
             return false;
         }
 
-        let len = left.length;
+        const len = left.length;
         if (len !== right.length) {
             return false;
         }
@@ -284,7 +284,7 @@ export class MatrixDataViewBuilder {
     }
 
     private findMatchingNodeInList(nodes: powerbi.DataViewMatrixNode[], values: any[]): powerbi.DataViewMatrixNode | undefined {
-        for (let node of nodes) {
+        for (const node of nodes) {
             if (this.sequenceEqual(node.levelValues, values, (a, b) => a.value === b))
                 return node;
         }
@@ -309,9 +309,9 @@ export class MatrixDataViewBuilder {
     }
     private insertInSortedOrder(node: powerbi.DataViewMatrixNode, list: powerbi.DataViewMatrixNode[]): void {
         for (let i = 0; i < list.length; i++) {
-            let currNode = list[i];
+            const currNode = list[i];
             for (let j = 0; j < currNode.levelValues.length; j++) {
-                let comparison = this.compareValue(node.levelValues[j].value, currNode.levelValues[j].value);
+                const comparison = this.compareValue(node.levelValues[j].value, currNode.levelValues[j].value);
                 if (comparison < 0) {
                     list.splice(i, 0, node);
                     return;
@@ -339,7 +339,7 @@ export class MatrixDataViewBuilder {
             // TODO: describe the difference here, or create value nodes separately
             if (isLeafLevel && every(level.sources, (source) => source.isMeasure)) {
                 node.children = map(level.sources, (source, i) => {
-                    let child: powerbi.DataViewMatrixNode = {
+                    const child: powerbi.DataViewMatrixNode = {
                         level: levelIdx,
                     };
 
@@ -393,7 +393,7 @@ export class MatrixDataViewBuilder {
         root: powerbi.DataViewMatrixNode,
         hierarchyDepth: number): number {
         let count = 0;
-        let stack: {
+        const stack: {
             level: number;
             partialMatch: boolean;
             node: powerbi.DataViewMatrixNode
@@ -435,7 +435,7 @@ export class MatrixDataViewBuilder {
     }
     private forEachLeaf(node: powerbi.DataViewMatrixNode, visitor: (node: powerbi.DataViewMatrixNode) => void): void {
         if (node.children) {
-            for (let child of node.children) {
+            for (const child of node.children) {
                 this.forEachLeaf(child, visitor);
             }
         }
@@ -449,13 +449,9 @@ export class MatrixDataViewBuilder {
         columnHierarchyMetadata: HierarchyMetadata,
         measureMetadata: LevelMetadata | undefined,
         table: DataTable): powerbi.DataViewMatrix {
-
         const columnLevels = columnHierarchyMetadata.levels.map((level) => ({
             sources: level.sources,
         }));
-
-        // if (measureMetadata)
-        //     columnLevels.push({ sources: measureMetadata.sources });
 
         const matrix: powerbi.DataViewMatrix = {
             columns: {
@@ -472,15 +468,12 @@ export class MatrixDataViewBuilder {
         };
 
         // Fill in empty children array for dimensions that don't have any grouping
-        if (matrix.columns.levels.length === 0)
-            matrix.columns.root.children = [];
-        if (matrix.rows.levels.length === 0)
-            matrix.rows.root.children = [];
+        if (matrix.columns.levels.length === 0) { matrix.columns.root.children = [] }
+        if (matrix.rows.levels.length === 0) { matrix.rows.root.children = [] }
 
-        // We do two passes over the data table,
-        // The first pass fills in the group instances of row & column hierarchies.
-        // The second pass fills in the measure values. We need to do this as a second pass
-        // because the index of the measure value will depend on the column hierarchy.
+        // We do two passes over the data table, The first pass fills in the group instances of row & column hierarchies.
+        // The second pass fills in the measure values. 
+        // We need to do this as a second pass because the index of the measure value will depend on the column hierarchy. 
         // See the doc for findValueInHierarchy
 
         // Pass 1
@@ -515,7 +508,6 @@ export class MatrixDataViewBuilder {
                     leafNode.values =
                         range(0, leafCount)
                             .reduce((bag, i) => {
-                                // @ts-ignore: No Implicit Any
                                 bag[i] = <powerbi.DataViewMatrixNodeValue>{ value: null };
                                 return bag;
                             },
@@ -538,8 +530,7 @@ export class MatrixDataViewBuilder {
                 const indexOfColumnLeaf = this.findValueInHierarchy(isMatch, matrix.columns.root, hierarchyDepth);
                 // debug.assert((leafCount === 0 && indexOfColumnLeaf === 0) || indexOfColumnLeaf < leafCount, 'could not find leaf ');
 
-                // Find the leaf node in the row hierarchy matching this data row
-                // TODO: find? we shouldn't be adding nodes here
+                // Find the leaf node in the row hierarchy matching this data row. TODO: find? we shouldn't be adding nodes here
                 const rowNode = this.ensureValueInHierarchy(
                     rowHierarchyMetadata,
                     matrix.rows.root,
@@ -554,7 +545,7 @@ export class MatrixDataViewBuilder {
                     const tableIdx = measureMetadata.tableIndices[i];
                     const measureValue = row[tableIdx];
 
-                    let valueNode: powerbi.DataViewMatrixNodeValue = {
+                    const valueNode: powerbi.DataViewMatrixNodeValue = {
                         value: measureValue,
                     };
 
@@ -569,6 +560,7 @@ export class MatrixDataViewBuilder {
 
         return matrix;
     }
+
     public build(): powerbi.DataView {
         // Build a column hierarchy based on metadata
         let columnHierarchyMetadata: HierarchyMetadata = { levels: [] };
@@ -587,10 +579,10 @@ export class MatrixDataViewBuilder {
         }
 
         // Build a row hierarchy based on metadata
-        let rowHierarchyMetadata = this.buildHierarchyMetadata(this.rowGroupingOptions);
+        const rowHierarchyMetadata = this.buildHierarchyMetadata(this.rowGroupingOptions);
 
         // Build nodes from data
-        let matrix = this.readData(rowHierarchyMetadata, columnHierarchyMetadata, measureMetadata, this.table);
+        const matrix = this.readData(rowHierarchyMetadata, columnHierarchyMetadata, measureMetadata, this.table);
 
         return {
             metadata: {
@@ -607,7 +599,7 @@ export class MatrixDataViewBuilder {
 
 
     public buildMatrix(): DataViewMatrix {
-        let dataViewMatrix: DataViewMatrix = {
+        const dataViewMatrix: DataViewMatrix = {
             rows: {
                 levels: [{ sources: [this.levelColumn] }],
                 root: {
@@ -622,13 +614,13 @@ export class MatrixDataViewBuilder {
             valueSources: []
         };
 
-        for (let index in this.valueColumns) {
+        for (const index in this.valueColumns) {
             dataViewMatrix.valueSources.push(this.valueColumns[index]);
         }
 
-        let matrixRowsChildren = dataViewMatrix.rows.root.children;
-        for (let index in this.level) {
-            let node: DataViewMatrixNode = {
+        const matrixRowsChildren = dataViewMatrix.rows.root.children;
+        for (const index in this.level) {
+            const node: DataViewMatrixNode = {
                 values: [],
                 level: 0,
                 levelValues: [],

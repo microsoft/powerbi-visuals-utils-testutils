@@ -40,7 +40,10 @@ export class MockITooltipService implements ITooltipService {
         return this.isEnabled;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public show(options: TooltipShowOptions): void { }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public move(options: TooltipMoveOptions): void { }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public hide(options: TooltipHideOptions): void { }
 }

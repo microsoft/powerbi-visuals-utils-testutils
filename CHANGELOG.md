@@ -1,3 +1,25 @@
+## 6.0.1
+* Packages update
+* Removed coveralls
+
+## 6.0.0
+* Packages update
+* Vulnerabilities patched
+
+## 3.2.0
+* migrated to `coverage-istanbul-loader` from `istanbul-instrumenter-loader`
+
+## 3.1.0
+* updated `powerbi-visual-api` to 5.1.0
+* accordingly to PowerBI API v5.1.0, removed `enumerateObjectInstances` method support. Details are available here: [DOC article](https://learn.microsoft.com/en-us/power-bi/developer/visuals/format-pane); 
+
+## 3.0.0
+* added `pointerEvent` method to test pointer events
+* moved to `eslint` from `tslint`
+* updated dependencies to fix vulnerabilities
+
+## 2.6.0
+* fix for `uuid`
 ## 2.5.0
 * powerbi-visual-api updated to 4.2.0
 * uuid package functionality replaced with crypto method

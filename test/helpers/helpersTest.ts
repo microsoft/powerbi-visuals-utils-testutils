@@ -36,7 +36,7 @@ describe("testDom", () => {
 
 describe("uuid", () => {
     it("should be unique across multiple tests", () => {
-        const uuids = [];
+        const uuids: Uint16Array[] = [];
         const testsAmount = 1000;
 
         for (let i = 0; i < testsAmount; i++) {
@@ -44,8 +44,7 @@ describe("uuid", () => {
         }
 
         const uniqueUUids = [...new Set(uuids)];
-
-        expect(uuids.length).toEqual(uniqueUUids.length);
+        expect(uuids).toEqual(uniqueUUids);
     });
 });
 

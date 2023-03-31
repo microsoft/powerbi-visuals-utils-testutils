@@ -32,10 +32,6 @@ import { createVisualHost } from "./mocks/mocks";
 import powerbi from "powerbi-visuals-api";
 import DataView = powerbi.DataView;
 import IViewport = powerbi.IViewport;
-import VisualObjectInstance = powerbi.VisualObjectInstance;
-import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
-import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
-import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
 
 // powerbi.extensibility.visual
 import IVisual = powerbi.extensibility.visual.IVisual;
@@ -94,23 +90,10 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         } as VisualUpdateOptions);
     }
 
-    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: Function, timeout?: number): number {
+    public updateRenderTimeout(dataViews: DataView[] | DataView, fn: (() => any), timeout?: number): number {
         this.update(dataViews);
 
         return renderTimeout(fn, timeout);
-    }
-
-    public updateEnumerateObjectInstancesRenderTimeout(
-        dataViews: DataView[] | DataView,
-        options: EnumerateVisualObjectInstancesOptions,
-        fn: (enumeration: VisualObjectInstance[]) => void,
-        timeout?: number): number {
-
-        this.update(dataViews);
-
-        let enumeration: VisualObjectInstance[] = this.enumerateObjectInstances(options);
-
-        return renderTimeout(() => fn(enumeration), timeout);
     }
 
     public updateFlushAllD3Transitions(dataViews: DataView[] | DataView): void {
@@ -121,7 +104,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
 
     public updateflushAllD3TransitionsRenderTimeout(
         dataViews: DataView[] | DataView,
-        fn: Function,
+        fn: () => any,
         timeout?: number): number {
 
         this.update(dataViews);
@@ -131,18 +114,4 @@ export abstract class VisualBuilderBase<T extends IVisual> {
         return renderTimeout(fn, timeout);
     }
 
-    public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] {
-        let enumeration: VisualObjectInstanceEnumeration = this.visual.enumerateObjectInstances(options);
-
-        if (!enumeration) {
-            return enumeration as VisualObjectInstance[];
-        }
-
-        let enumerationInstances: VisualObjectInstance[] =
-            (enumeration as VisualObjectInstanceEnumerationObject).instances;
-
-        return Array.isArray(enumerationInstances)
-            ? enumerationInstances
-            : enumeration as VisualObjectInstance[];
-    }
 }

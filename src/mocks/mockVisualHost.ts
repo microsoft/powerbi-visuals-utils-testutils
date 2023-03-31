@@ -32,6 +32,7 @@ import { createSelectionIdBuilder } from "./mocks";
 import { MockILocale } from "./mockILocale";
 // powerbi
 import VisualObjectInstancesToPersist = powerbi.VisualObjectInstancesToPersist;
+import DrillArgs = powerbi.DrillArgs;
 
 // powerbi.visuals
 import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
@@ -42,9 +43,12 @@ import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
 import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
+import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
+import IWebAccessService = powerbi.extensibility.IWebAccessService;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import CustomVisualApplyCustomSortArgs = powerbi.extensibility.visual.CustomVisualApplyCustomSortArgs;
 
 export class MockIVisualHost implements IVisualHost {
     private colorPaletteInstance: IColorPalette;
@@ -58,6 +62,10 @@ export class MockIVisualHost implements IVisualHost {
     private visualEventService: IVisualEventService;
     public hostCapabilities: HostCapabilities;
     public downloadService: IDownloadService;
+    public licenseManager: IVisualLicenseManager;
+    public webAccessService: IWebAccessService;
+    public drill: (args: DrillArgs) => void;
+    public applyCustomSort: (args: CustomVisualApplyCustomSortArgs) => void;
 
     constructor(
         colorPalette?: IColorPalette,
@@ -70,7 +78,10 @@ export class MockIVisualHost implements IVisualHost {
         storageService?: ILocalVisualStorageService,
         eventService?: IVisualEventService,
         hostCapabilities?: HostCapabilities,
-        downloadService?: IDownloadService) {
+        downloadService?: IDownloadService,
+        licenseManager?: IVisualLicenseManager,
+        webAccessService?: IWebAccessService
+        ) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
@@ -83,6 +94,8 @@ export class MockIVisualHost implements IVisualHost {
         this.visualEventService = eventService;
         this.hostCapabilities = hostCapabilities;
         this.downloadService = downloadService;
+        this.licenseManager = licenseManager;
+        this.webAccessService = webAccessService;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -105,6 +118,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localeInstance.locale = language;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
 
     }
@@ -117,6 +131,7 @@ export class MockIVisualHost implements IVisualHost {
         return this.authenticationService;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public persistProperties(changes: VisualObjectInstancesToPersist) { }
 
     public get tooltipService(): ITooltipService {
@@ -143,6 +158,7 @@ export class MockIVisualHost implements IVisualHost {
         return true;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public refreshHostData() {
     }
 
