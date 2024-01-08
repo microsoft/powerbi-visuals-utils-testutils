@@ -38,6 +38,11 @@ export class MockDownloadService implements IDownloadService {
       resolve();
     }) as any;
   }
+  public exportVisualsContentExtended(content: string, fileName: string, fileType: string, fileDescription: string): IPromise<powerbi.ExportContentResultInfo> {
+    return new Promise<void>((resolve, reject) => {
+      resolve();
+    }) as any;
+  }
   public exportStatus(): IPromise<PrivilegeStatus> {
     return new Promise<PrivilegeStatus>((resolve, reject) => {
       resolve(PrivilegeStatus.Allowed);
