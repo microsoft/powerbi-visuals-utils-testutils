@@ -58,6 +58,8 @@ import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
 import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
 import IWebAccessService = powerbi.extensibility.IWebAccessService;
+import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
+import {MockIAcquireAADTokenService} from "./mockIAcquireAADTokenService";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
@@ -74,7 +76,8 @@ export function createVisualHost(locale?: Object, allowInteractions?: boolean, c
         createHostCapabilities(),
         createDownloadService(),
         licenseManager(),
-        webAccessService()
+        webAccessService(),
+        acquireAADTokenService()
     )
 }
 
@@ -137,4 +140,8 @@ export function licenseManager(): IVisualLicenseManager {
 
 export function webAccessService(): IWebAccessService {
     return new MockIWebAccessService();
+}
+
+export function acquireAADTokenService(): IAcquireAADTokenService {
+    return new MockIAcquireAADTokenService();
 }
