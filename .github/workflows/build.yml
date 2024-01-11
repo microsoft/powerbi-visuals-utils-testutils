@@ -31,7 +31,6 @@ jobs:
     - run: npm ci
     - run: npm run lint --if-present
     - run: npm run eslint --if-present
-    - run: npm run package
     - run: npm test
       env:
         CI: true
