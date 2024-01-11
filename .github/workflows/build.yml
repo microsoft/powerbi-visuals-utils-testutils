@@ -26,9 +26,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm audit
       continue-on-error: true
+    - run: npm ci
     - run: npm outdated
       continue-on-error: true
-    - run: npm ci
     - run: npm run lint --if-present
     - run: npm run eslint --if-present
     - run: npm test
