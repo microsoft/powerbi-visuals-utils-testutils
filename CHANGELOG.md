@@ -1,6 +1,8 @@
 ## 6.0.2
 * Packages update
 * Vulnerabilities patched
+* add mock `IAcquireAADTokenService` to `MockIVisualHost`
+* add mock method `canDrill` to `MockIVisualHost`
 
 ## 6.0.1
 * Packages update
