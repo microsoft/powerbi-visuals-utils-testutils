@@ -49,6 +49,7 @@ import IWebAccessService = powerbi.extensibility.IWebAccessService;
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import CustomVisualApplyCustomSortArgs = powerbi.extensibility.visual.CustomVisualApplyCustomSortArgs;
+import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
 
 export class MockIVisualHost implements IVisualHost {
     private colorPaletteInstance: IColorPalette;
@@ -64,7 +65,9 @@ export class MockIVisualHost implements IVisualHost {
     public downloadService: IDownloadService;
     public licenseManager: IVisualLicenseManager;
     public webAccessService: IWebAccessService;
+    public acquireAADTokenService: IAcquireAADTokenService;
     public drill: (args: DrillArgs) => void;
+    public setCanDrill: (drillAllowed: boolean) => void;
     public applyCustomSort: (args: CustomVisualApplyCustomSortArgs) => void;
 
     constructor(
@@ -80,7 +83,8 @@ export class MockIVisualHost implements IVisualHost {
         hostCapabilities?: HostCapabilities,
         downloadService?: IDownloadService,
         licenseManager?: IVisualLicenseManager,
-        webAccessService?: IWebAccessService
+        webAccessService?: IWebAccessService,
+        acquireAADTokenService?: IAcquireAADTokenService
         ) {
 
         this.colorPaletteInstance = colorPalette;
@@ -96,6 +100,7 @@ export class MockIVisualHost implements IVisualHost {
         this.downloadService = downloadService;
         this.licenseManager = licenseManager;
         this.webAccessService = webAccessService;
+        this.acquireAADTokenService = acquireAADTokenService;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
