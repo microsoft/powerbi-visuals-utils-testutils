@@ -1,4 +1,7 @@
 ## 6.0.2
+* Added missing mock functions
+
+## 6.0.2
 * Packages update
 * Vulnerabilities patched
 * add mock `IAcquireAADTokenService` to `MockIVisualHost`

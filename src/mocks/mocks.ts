@@ -59,10 +59,11 @@ import HostCapabilities = powerbi.extensibility.HostCapabilities;
 import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
 import IWebAccessService = powerbi.extensibility.IWebAccessService;
 import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
+import ModalDialogResult = powerbi.extensibility.visual.ModalDialogResult
 import {MockIAcquireAADTokenService} from "./mockIAcquireAADTokenService";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string): IVisualHost {
+export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string, modalDialogResult?: ModalDialogResult): IVisualHost {
     return new MockIVisualHost(
         createColorPalette(colors),
         createSelectionManager(),
@@ -77,7 +78,8 @@ export function createVisualHost(locale?: Object, allowInteractions?: boolean, c
         createDownloadService(),
         licenseManager(),
         webAccessService(),
-        acquireAADTokenService()
+        acquireAADTokenService(),
+        modalDialogResult
     )
 }
 

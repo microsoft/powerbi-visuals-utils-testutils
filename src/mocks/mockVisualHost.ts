@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars*/
 /*
  *  Power BI Visualizations
  *
@@ -48,6 +49,8 @@ import IWebAccessService = powerbi.extensibility.IWebAccessService;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
+import ModalDialogResult = powerbi.extensibility.visual.ModalDialogResult
+import DialogOpenOptions = powerbi.extensibility.visual.DialogOpenOptions
 import CustomVisualApplyCustomSortArgs = powerbi.extensibility.visual.CustomVisualApplyCustomSortArgs;
 import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
 
@@ -66,9 +69,8 @@ export class MockIVisualHost implements IVisualHost {
     public licenseManager: IVisualLicenseManager;
     public webAccessService: IWebAccessService;
     public acquireAADTokenService: IAcquireAADTokenService;
-    public drill: (args: DrillArgs) => void;
-    public setCanDrill: (drillAllowed: boolean) => void;
-    public applyCustomSort: (args: CustomVisualApplyCustomSortArgs) => void;
+    public modalDialogResult: ModalDialogResult;
+    public hostEnv: powerbi.common.CustomVisualHostEnv = 1;
 
     constructor(
         colorPalette?: IColorPalette,
@@ -84,8 +86,9 @@ export class MockIVisualHost implements IVisualHost {
         downloadService?: IDownloadService,
         licenseManager?: IVisualLicenseManager,
         webAccessService?: IWebAccessService,
-        acquireAADTokenService?: IAcquireAADTokenService
-        ) {
+        acquireAADTokenService?: IAcquireAADTokenService,
+        modalDialogResult?: powerbi.extensibility.visual.ModalDialogResult
+    ) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
@@ -101,6 +104,7 @@ export class MockIVisualHost implements IVisualHost {
         this.licenseManager = licenseManager;
         this.webAccessService = webAccessService;
         this.acquireAADTokenService = acquireAADTokenService;
+        this.modalDialogResult = modalDialogResult;
     }
 
     public createSelectionIdBuilder(): ISelectionIdBuilder {
@@ -123,10 +127,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localeInstance.locale = language;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {
-
-    }
+    public applyJsonFilter(filter: powerbi.IFilter, objectName: string, propertyName: string, action: powerbi.FilterAction) {}
 
     public get telemetry() {
         return this.telemetryService;
@@ -136,7 +137,6 @@ export class MockIVisualHost implements IVisualHost {
         return this.authenticationService;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public persistProperties(changes: VisualObjectInstancesToPersist) { }
 
     public get tooltipService(): ITooltipService {
@@ -163,21 +163,27 @@ export class MockIVisualHost implements IVisualHost {
         return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    public refreshHostData() {
-    }
+    public refreshHostData() {}
 
     public createLocalizationManager(): powerbi.extensibility.ILocalizationManager {
         return {
             getDisplayName: (key: string) => ""
         };
     }
+    
+    public drill(args: DrillArgs): void {}
 
-    public switchFocusModeState: (on: boolean) => void;
+    public setCanDrill(drillAllowed: boolean): void {}
 
-    public hostEnv: powerbi.common.CustomVisualHostEnv = 1;
+    public applyCustomSort(args: CustomVisualApplyCustomSortArgs): void {}
 
-    public displayWarningIcon: (hoverText: string, detailedText: string) => void;
+    public switchFocusModeState(on: boolean): void {}
 
-    public openModalDialog: (dialogId: string, options?: powerbi.extensibility.visual.DialogOpenOptions, initialState?: object) => powerbi.IPromise<powerbi.extensibility.visual.ModalDialogResult>;
+    public displayWarningIcon(hoverText: string, detailedText: string): void {}
+
+    public openModalDialog(dialogId: string, options?: DialogOpenOptions, initialState?: object): powerbi.IPromise<ModalDialogResult> {
+        return new Promise<ModalDialogResult>((resolve, rejects) => {
+            resolve(this.modalDialogResult)
+        }) as any;
+    }
 }
