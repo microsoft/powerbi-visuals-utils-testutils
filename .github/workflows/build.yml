@@ -30,7 +30,6 @@ jobs:
     - run: npm outdated
       continue-on-error: true
     - run: npm run lint --if-present
-    - run: npm run eslint --if-present
     - run: npm test
       env:
         CI: true

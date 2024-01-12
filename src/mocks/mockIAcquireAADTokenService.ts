@@ -6,7 +6,7 @@ import PrivilegeStatus = powerbi.PrivilegeStatus;
 export class MockIAcquireAADTokenService implements IAcquireAADTokenService {
     acquireAADToken(): powerbi.IPromise<powerbi.extensibility.AcquireAADTokenResult> {
         return new Promise<AcquireAADTokenResult>((resolve) => {
-            const token: AcquireAADTokenResult = { accessToken: undefined };
+            const token: AcquireAADTokenResult = { accessToken: "" };
             resolve(token);
         }) as any;
     }
