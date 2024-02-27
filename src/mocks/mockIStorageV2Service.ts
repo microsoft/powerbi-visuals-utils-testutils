@@ -62,7 +62,7 @@ export class MockIStorageV2Service implements IVisualLocalStorageV2Service {
         localStorage.setItem(key, data);
 
         return new Promise((resolve, reject) => {
-            resolve(data.length);
+            resolve({ success: true });
         }) as any;
     }
 
