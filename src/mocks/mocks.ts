@@ -68,6 +68,7 @@ import { MockIAcquireAADTokenService } from "./mockIAcquireAADTokenService";
 import { MockSubSelectionService } from "./mockSubSelectionService";
 
 export interface CreateVisualHostOptions {
+// eslint-disable-next-line @typescript-eslint/ban-types
     locale?: Object,
     allowInteractions?: boolean,
     colors?: IColorInfo[],
@@ -77,7 +78,6 @@ export interface CreateVisualHostOptions {
     modalDialogResult?: ModalDialogResult
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export function createVisualHost({locale, allowInteractions, colors, isEnabled, displayNames, token, modalDialogResult}: CreateVisualHostOptions): IVisualHost {
     return new MockIVisualHost({
         colorPalette: createColorPalette(colors),

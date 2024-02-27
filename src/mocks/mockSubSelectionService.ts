@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+/* eslint-disable @typescript-eslint/no-empty-function */
 
-// powerbi
 import powerbi from "powerbi-visuals-api";
 import IVisualSubSelectionService = powerbi.extensibility.IVisualSubSelectionService
 import CustomVisualSubSelection = powerbi.visuals.CustomVisualSubSelection

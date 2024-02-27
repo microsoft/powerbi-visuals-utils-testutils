@@ -51,7 +51,7 @@ export class MockIStorageV2Service implements IVisualLocalStorageV2Service {
     }
 
     public get(key: string): IPromise<string> {
-        const data: string = localStorage.getItem(key) || "";
+        const data: string | null = localStorage.getItem(key);
 
         return new Promise((resolve, reject) => {
             resolve(data);

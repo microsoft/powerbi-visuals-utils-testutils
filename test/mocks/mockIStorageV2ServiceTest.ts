@@ -52,17 +52,17 @@ describe("MockIStorageV2Service", () => {
 
     it("MockIStorageV2Service.remove method test", () => {
         localStorage.setItem(keyToBeStored, objectToBeStoredStringifyed);
-        let localStorageItem: string = localStorage.getItem(keyToBeStored) || "";
+        let localStorageItem: string | null = localStorage.getItem(keyToBeStored);
         expect(localStorageItem).toBeTruthy();
 
         mockStorageService.remove(keyToBeStored);
-        localStorageItem = localStorage.getItem(keyToBeStored) || "";
+        localStorageItem = localStorage.getItem(keyToBeStored);
         expect(localStorageItem).toBeNull();
     });
 
     it("MockIStorageV2Service.set method test", (done) => {
         mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: StorageV2ResultInfo) => {
-            const localStorageItem: string = localStorage.getItem(keyToBeStored) || "";
+            const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
             expect(localStorageItem).toBeTruthy();
             expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
             expect(data.success).toBeTrue();
@@ -71,8 +71,8 @@ describe("MockIStorageV2Service", () => {
     });
 
     it("MockIStorageV2Service.get method test", (done) => {
-        const localStorageItem: string = localStorage.getItem(keyToBeStored) || "";
-        mockStorageService.get(keyToBeStored).then((data: string) => {
+        const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
+        mockStorageService.get(keyToBeStored).then((data: string | null) => {
             expect(data).toEqual(localStorageItem);
             done();
         });

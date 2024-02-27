@@ -32,7 +32,7 @@ describe("MockIVisualHost", () => {
     let visualHost: IVisualHost;
 
     beforeEach(() => {
-        visualHost = createVisualHost();
+        visualHost = createVisualHost({});
     });
 
     describe("createSelectionIdBuilder", () => {
