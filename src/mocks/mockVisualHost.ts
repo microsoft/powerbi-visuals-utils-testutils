@@ -28,7 +28,6 @@
 import powerbi from "powerbi-visuals-api";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
-import { ILocalVisualStorageService } from "./mockIStorageService";
 import { createSelectionIdBuilder } from "./mocks";
 import { MockILocale } from "./mockILocale";
 // powerbi
@@ -46,6 +45,9 @@ import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
 import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
 import IWebAccessService = powerbi.extensibility.IWebAccessService;
+import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService;
+import IVisualLocalStorageV2Service = powerbi.extensibility.IVisualLocalStorageV2Service;
+import IVisualSubSelectionService = powerbi.extensibility.IVisualSubSelectionService;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -53,6 +55,26 @@ import ModalDialogResult = powerbi.extensibility.visual.ModalDialogResult
 import DialogOpenOptions = powerbi.extensibility.visual.DialogOpenOptions
 import CustomVisualApplyCustomSortArgs = powerbi.extensibility.visual.CustomVisualApplyCustomSortArgs;
 import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
+
+export interface IMockVisualHostOptions {
+    colorPalette?: IColorPalette,
+    selectionManager?: ISelectionManager,
+    tooltipServiceInstance?: ITooltipService,
+    localeInstance?: MockILocale,
+    localizationManager?: powerbi.extensibility.ILocalizationManager,
+    telemetryService?: powerbi.extensibility.ITelemetryService,
+    authService?: powerbi.extensibility.IAuthenticationService,
+    storageService?: ILocalVisualStorageService,
+    eventService?: IVisualEventService,
+    hostCapabilities?: HostCapabilities,
+    downloadService?: IDownloadService,
+    licenseManager?: IVisualLicenseManager,
+    webAccessService?: IWebAccessService,
+    acquireAADTokenService?: IAcquireAADTokenService,
+    modalDialogResult?: powerbi.extensibility.visual.ModalDialogResult,
+    storageV2Service?: IVisualLocalStorageV2Service,
+    subSelectionService?: IVisualSubSelectionService
+}
 
 export class MockIVisualHost implements IVisualHost {
     private colorPaletteInstance: IColorPalette;
@@ -70,28 +92,33 @@ export class MockIVisualHost implements IVisualHost {
     public webAccessService: IWebAccessService;
     public acquireAADTokenService: IAcquireAADTokenService;
     public modalDialogResult: ModalDialogResult;
+    public storageV2Service: IVisualLocalStorageV2Service;
+    public subSelectionService: IVisualSubSelectionService;
     public hostEnv: powerbi.common.CustomVisualHostEnv = 1;
 
-    constructor(
-        colorPalette?: IColorPalette,
-        selectionManager?: ISelectionManager,
-        tooltipServiceInstance?: ITooltipService,
-        localeInstance?: MockILocale,
-        localizationManager?: powerbi.extensibility.ILocalizationManager,
-        telemetryService?: powerbi.extensibility.ITelemetryService,
-        authService?: powerbi.extensibility.IAuthenticationService,
-        storageService?: ILocalVisualStorageService,
-        eventService?: IVisualEventService,
-        hostCapabilities?: HostCapabilities,
-        downloadService?: IDownloadService,
-        licenseManager?: IVisualLicenseManager,
-        webAccessService?: IWebAccessService,
-        acquireAADTokenService?: IAcquireAADTokenService,
-        modalDialogResult?: powerbi.extensibility.visual.ModalDialogResult
-    ) {
+    constructor({
+        colorPalette,
+        selectionManager,
+        subSelectionService,
+        tooltipServiceInstance,
+        localeInstance,
+        localizationManager,
+        telemetryService,
+        authService,
+        storageService,
+        storageV2Service,
+        eventService,
+        hostCapabilities,
+        downloadService,
+        licenseManager,
+        webAccessService,
+        acquireAADTokenService,
+        modalDialogResult,
+    }: IMockVisualHostOptions) {
 
         this.colorPaletteInstance = colorPalette;
         this.selectionManager = selectionManager;
+        this.subSelectionService = subSelectionService;
         this.tooltipServiceInstance = tooltipServiceInstance;
         this.localeInstance = localeInstance;
         this.telemetryService = telemetryService;
@@ -99,6 +126,7 @@ export class MockIVisualHost implements IVisualHost {
         this.localizationManager = localizationManager;
         this.localStorageService = storageService;
         this.visualEventService = eventService;
+        this.storageV2Service = storageV2Service;
         this.hostCapabilities = hostCapabilities;
         this.downloadService = downloadService;
         this.licenseManager = licenseManager;

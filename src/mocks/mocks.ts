@@ -24,8 +24,28 @@
  *  THE SOFTWARE.
  */
 import powerbi from "powerbi-visuals-api";
+// powerbi
+import IColorInfo = powerbi.IColorInfo;
+
+// powerbi.visuals
+import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import ISelectionId = powerbi.visuals.ISelectionId;
+
+// powerbi.extensibility
+import IDownloadService = powerbi.extensibility.IDownloadService;
+import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
+import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import ITooltipService = powerbi.extensibility.ITooltipService;
+import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
+import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService
+import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
+import IVisualLocalStorageV2Service = powerbi.extensibility.IVisualLocalStorageV2Service
+import IWebAccessService = powerbi.extensibility.IWebAccessService;
+import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
+import ModalDialogResult = powerbi.extensibility.visual.ModalDialogResult
+import HostCapabilities = powerbi.extensibility.HostCapabilities;
+import IVisualSubSelectionService = powerbi.extensibility.IVisualSubSelectionService
 
 import { MockILocale } from "./mockILocale";
 import { MockITooltipService } from "./mockITooltipService";
@@ -38,49 +58,46 @@ import { MockISelectionId } from "./mockISelectionId";
 import { MockIColorPalette } from "./mockIColorPalette";
 import { MockIVisualHost } from "./mockVisualHost";
 import { MockIEventService } from "./mockIEventService";
-import { MockIStorageService, ILocalVisualStorageService } from "./mockIStorageService";
+import { MockIStorageService } from "./mockIStorageService";
+import { MockIStorageV2Service } from "./mockIStorageV2Service";
 import { MockHostCapabilities } from "./mockHostCapabilities";
 import { MockDownloadService } from "./mockDownloadService";
 import { MockIVisualLicenseManager } from "./mockIVisualLicenseManager";
 import { MockIWebAccessService } from "./mockIWebAccessService";
-// powerbi
-import IColorInfo = powerbi.IColorInfo;
+import { MockIAcquireAADTokenService } from "./mockIAcquireAADTokenService";
+import { MockSubSelectionService } from "./mockSubSelectionService";
 
-// powerbi.visuals
-import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
-import ISelectionId = powerbi.visuals.ISelectionId;
-
-// powerbi.extensibility
-import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
-import ISelectionManager = powerbi.extensibility.ISelectionManager;
-import IVisualHost = powerbi.extensibility.visual.IVisualHost;
-import IDownloadService = powerbi.extensibility.IDownloadService;
-import HostCapabilities = powerbi.extensibility.HostCapabilities;
-import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
-import IWebAccessService = powerbi.extensibility.IWebAccessService;
-import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
-import ModalDialogResult = powerbi.extensibility.visual.ModalDialogResult
-import {MockIAcquireAADTokenService} from "./mockIAcquireAADTokenService";
+export interface CreateVisualHostOptions {
+    locale?: Object,
+    allowInteractions?: boolean,
+    colors?: IColorInfo[],
+    isEnabled?: boolean,
+    displayNames?: any,
+    token?: string,
+    modalDialogResult?: ModalDialogResult
+}
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function createVisualHost(locale?: Object, allowInteractions?: boolean, colors?: IColorInfo[], isEnabled?: boolean, displayNames?: any, token?: string, modalDialogResult?: ModalDialogResult): IVisualHost {
-    return new MockIVisualHost(
-        createColorPalette(colors),
-        createSelectionManager(),
-        createTooltipService(isEnabled),
-        createLocale(locale),
-        createLocalizationManager(displayNames),
-        createTelemetryService(),
-        createAuthenticationService(token),
-        createStorageService(),
-        createEventService(),
-        createHostCapabilities(),
-        createDownloadService(),
-        licenseManager(),
-        webAccessService(),
-        acquireAADTokenService(),
+export function createVisualHost({locale, allowInteractions, colors, isEnabled, displayNames, token, modalDialogResult}: CreateVisualHostOptions): IVisualHost {
+    return new MockIVisualHost({
+        colorPalette: createColorPalette(colors),
+        selectionManager: createSelectionManager(),
+        subSelectionService: createSubSelectionService(),
+        tooltipServiceInstance: createTooltipService(isEnabled),
+        localeInstance: createLocale(locale),
+        localizationManager: createLocalizationManager(displayNames),
+        telemetryService: createTelemetryService(),
+        authService: createAuthenticationService(token),
+        storageService: createStorageService(),
+        storageV2Service: createStorageV2Service(),
+        eventService: createEventService(),
+        hostCapabilities: createHostCapabilities(allowInteractions),
+        downloadService: createDownloadService(),
+        licenseManager: licenseManager(),
+        webAccessService: webAccessService(),
+        acquireAADTokenService: acquireAADTokenService(),
         modalDialogResult
-    )
+    })
 }
 
 export function createColorPalette(colors?: IColorInfo[]): IColorPalette {
@@ -124,12 +141,16 @@ export function createStorageService(): ILocalVisualStorageService {
     return new MockIStorageService();
 }
 
+export function createStorageV2Service(): IVisualLocalStorageV2Service {
+    return new MockIStorageV2Service();
+}
+
 export function createEventService(): IVisualEventService {
     return new MockIEventService();
 }
 
-export function createHostCapabilities(): HostCapabilities {
-    return new MockHostCapabilities();
+export function createHostCapabilities(allowInteractions): HostCapabilities {
+    return new MockHostCapabilities(allowInteractions);
 }
 
 export function createDownloadService(): IDownloadService {
@@ -146,4 +167,8 @@ export function webAccessService(): IWebAccessService {
 
 export function acquireAADTokenService(): IAcquireAADTokenService {
     return new MockIAcquireAADTokenService();
+}
+
+export function createSubSelectionService(): IVisualSubSelectionService {
+    return new MockSubSelectionService();
 }

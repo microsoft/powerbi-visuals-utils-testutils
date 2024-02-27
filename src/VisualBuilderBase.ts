@@ -58,7 +58,7 @@ export abstract class VisualBuilderBase<T extends IVisual> {
             this.element.classList.add(`visual-${guid}`);
         }
 
-        this.visualHost = createVisualHost();
+        this.visualHost = createVisualHost({});
 
         this.viewport = {
             height: height,

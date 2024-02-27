@@ -8,7 +8,15 @@ import { MockILocalizationManager } from "./mocks/mockILocalizationManager";
 import { MockISelectionId } from "./mocks/mockISelectionId";
 import { MockIColorPalette } from "./mocks/mockIColorPalette";
 import { MockIVisualHost } from "./mocks/mockVisualHost";
+import { MockIEventService } from "./mocks/mockIEventService";
+import { MockIStorageService } from "./mocks/mockIStorageService";
+import { MockIStorageV2Service } from "./mocks/mockIStorageV2Service";
 import { MockHostCapabilities } from "./mocks/mockHostCapabilities";
+import { MockDownloadService } from "./mocks/mockDownloadService";
+import { MockIVisualLicenseManager } from "./mocks/mockIVisualLicenseManager";
+import { MockIWebAccessService } from "./mocks/mockIWebAccessService";
+import { MockIAcquireAADTokenService } from "./mocks/mockIAcquireAADTokenService";
+import { MockSubSelectionService } from "./mocks/mockSubSelectionService";
 
 import {
     testDom,
@@ -63,6 +71,7 @@ import {
     createSelectionManager,
     createTooltipService,
     createHostCapabilities,
+    CreateVisualHostOptions
 } from "./mocks/mocks";
 import { setGrouped, createValueColumns, createCategoricalDataViewBuilder } from "./dataViewBuilder/dataViewBuilder";
 import { MatrixDataViewBuilder} from "./dataViewBuilder/matrixBuilder";
@@ -90,6 +99,7 @@ export {
     createSelectionManager,
     createTooltipService,
     createHostCapabilities,
+    CreateVisualHostOptions,
     setGrouped,
     createValueColumns,
     createCategoricalDataViewBuilder,
@@ -107,7 +117,15 @@ export {
     MockISelectionId,
     MockIColorPalette,
     MockIVisualHost,
+    MockIEventService,
+    MockIStorageService,
+    MockIStorageV2Service,
     MockHostCapabilities,
+    MockDownloadService,
+    MockIVisualLicenseManager,
+    MockIWebAccessService,
+    MockIAcquireAADTokenService,
+    MockSubSelectionService,
     renderTimeout,
     assertColorsMatch,
     getSolidColorStructuralObject,

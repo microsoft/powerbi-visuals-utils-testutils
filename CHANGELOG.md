@@ -1,3 +1,8 @@
+## 6.1.0
+* Now `createVisualHost` method has only one parameter with interface `CreateVisualHostOptions` (includes all previous parameters)
+* Added mock service for `IVisualLocalStorageV2Service`
+* Added mock service for `IVisualSubSelectionService`
+
 ## 6.0.2
 * Added missing mock functions
 
