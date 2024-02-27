@@ -24,38 +24,49 @@
  *  THE SOFTWARE.
  */
 
+// powerbi
 import powerbi from "powerbi-visuals-api";
-import IVisualHost = powerbi.extensibility.visual.IVisualHost;
-import { createVisualHost } from "../../src/mocks/mocks";
+import IPromise = powerbi.IPromise;
+import PrivilegeStatus = powerbi.PrivilegeStatus;
+import IVisualLocalStorageV2Service = powerbi.extensibility.IVisualLocalStorageV2Service
+import StorageV2ResultInfo = powerbi.extensibility.StorageV2ResultInfo
 
-describe("MockIVisualHost", () => {
-    let visualHost: IVisualHost;
+function getLocalStorageStatus() {
+    try {
+        return PrivilegeStatus.Allowed;
+    }
+    catch (e) {
+        return PrivilegeStatus.NotDeclared;
+    }
+}
 
-    beforeEach(() => {
-        visualHost = createVisualHost({});
-    });
+export class MockIStorageV2Service implements IVisualLocalStorageV2Service {
 
-    describe("createSelectionIdBuilder", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.createSelectionIdBuilder()).not.toBeNull();
-        });
-    });
+    public status(): IPromise<PrivilegeStatus> {
+        const status: PrivilegeStatus = getLocalStorageStatus();
 
-    describe("createSelectionManager", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.createSelectionManager()).not.toBeNull();
-        });
-    });
+        return new Promise((resolve, reject) => {
+            resolve(status);
+        }) as any;
+    }
 
-    describe("colorPalette", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.colorPalette).not.toBeNull();
-        });
-    });
+    public get(key: string): IPromise<string> {
+        const data: string | null = localStorage.getItem(key);
 
-    describe("locale", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.locale).not.toBeNull();
-        });
-    });
-});
+        return new Promise((resolve, reject) => {
+            resolve(data);
+        }) as any;
+    }
+
+    public set(key: string, data: string): IPromise<StorageV2ResultInfo> {
+        localStorage.setItem(key, data);
+
+        return new Promise((resolve, reject) => {
+            resolve({ success: true });
+        }) as any;
+    }
+
+    public remove(key: string): void {
+        localStorage.removeItem(key);
+    }
+}

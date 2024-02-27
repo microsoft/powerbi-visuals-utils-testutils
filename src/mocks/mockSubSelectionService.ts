@@ -23,39 +23,16 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+/* eslint-disable @typescript-eslint/no-empty-function */
 
 import powerbi from "powerbi-visuals-api";
-import IVisualHost = powerbi.extensibility.visual.IVisualHost;
-import { createVisualHost } from "../../src/mocks/mocks";
+import IVisualSubSelectionService = powerbi.extensibility.IVisualSubSelectionService
+import CustomVisualSubSelection = powerbi.visuals.CustomVisualSubSelection
+import SubSelectionRegionOutline = powerbi.visuals.SubSelectionRegionOutline
 
-describe("MockIVisualHost", () => {
-    let visualHost: IVisualHost;
+export class MockSubSelectionService implements IVisualSubSelectionService {
 
-    beforeEach(() => {
-        visualHost = createVisualHost({});
-    });
+    public subSelect(subSelection: CustomVisualSubSelection): void {}
 
-    describe("createSelectionIdBuilder", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.createSelectionIdBuilder()).not.toBeNull();
-        });
-    });
-
-    describe("createSelectionManager", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.createSelectionManager()).not.toBeNull();
-        });
-    });
-
-    describe("colorPalette", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.colorPalette).not.toBeNull();
-        });
-    });
-
-    describe("locale", () => {
-        it("shouldn't return null", () => {
-            expect(visualHost.locale).not.toBeNull();
-        });
-    });
-});
+    public updateRegionOutlines(outlines: SubSelectionRegionOutline[]): void {}
+}

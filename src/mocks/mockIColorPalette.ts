@@ -106,32 +106,32 @@ export class MockIColorPalette implements IColorPalette {
         return color;
     }
 
-    isHighContrast: true;
-    foreground: {value: "#333333" };
-    foregroundLight: {value: "#FFF" };
-    foregroundDark: {value: "#000" };
-    foregroundNeutralLight: {value: "#EAEAEA" };
-    foregroundNeutralDark: {value: "#212121" };
-    foregroundNeutralSecondary: {value: "#666666" };
-    foregroundNeutralSecondaryAlt: {value: "#777777" };
-    foregroundNeutralSecondaryAlt2: {value: "#888888" };
-    foregroundNeutralTertiary: {value: "#A6A6A6" };
-    foregroundNeutralTertiaryAlt: {value: "#C8C8C8" };
-    foregroundSelected: {value: "#333333" };
-    foregroundButton: {value: "#666666" };
-    background: {value: "#FFF" };
-    backgroundLight: {value: "#EAEAEA" };
-    backgroundNeutral: {value: "#C8C8C8" };
-    backgroundDark: {value: "#000" };
-    hyperlink: {value: "#1F3A93" };
-    visitedHyperlink: {value: "#551A8B" };
-    mapPushpin: {value: "#FF5F00" };
-    shapeStroke: {value: "#01B8AA" };
-    selection: {value: undefined };
-    separator: {value: undefined };
-    negative: {value: undefined };
-    neutral: {value: undefined };
-    positive: {value: undefined };
+    public isHighContrast: true;
+    public foreground = {value: "#333333" };
+    public foregroundLight = {value: "#FFF" };
+    public foregroundDark = {value: "#000" };
+    public foregroundNeutralLight = {value: "#EAEAEA" };
+    public foregroundNeutralDark = {value: "#212121" };
+    public foregroundNeutralSecondary = {value: "#666666" };
+    public foregroundNeutralSecondaryAlt = {value: "#777777" };
+    public foregroundNeutralSecondaryAlt2 = {value: "#888888" };
+    public foregroundNeutralTertiary = {value: "#A6A6A6" };
+    public foregroundNeutralTertiaryAlt = {value: "#C8C8C8" };
+    public foregroundSelected = {value: "#333333" };
+    public foregroundButton = {value: "#666666" };
+    public background = {value: "#FFF" };
+    public backgroundLight = {value: "#EAEAEA" };
+    public backgroundNeutral = {value: "#C8C8C8" };
+    public backgroundDark = {value: "#000" };
+    public hyperlink = {value: "#1F3A93" };
+    public visitedHyperlink = {value: "#551A8B" };
+    public mapPushpin = {value: "#FF5F00" };
+    public shapeStroke = {value: "#01B8AA" };
+    public selection = {value: undefined };
+    public separator = {value: undefined };
+    public negative = {value: undefined };
+    public neutral = {value: undefined };
+    public positive = {value: undefined };
 
     public reset(): IColorPalette {
         return this;

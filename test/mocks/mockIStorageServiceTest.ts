@@ -23,8 +23,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-
-import { ILocalVisualStorageService } from "../../src/mocks/mockIStorageService";
+import powerbi from "powerbi-visuals-api";
+import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService
 import { createStorageService } from "../../src/mocks/mocks";
 
 const keyToBeStored: string = "LS_KEY";
@@ -51,7 +51,7 @@ describe("MockIStorageService", () => {
 
     it("MockIStorageService.remove method test", () => {
         localStorage.setItem(keyToBeStored, objectToBeStoredStringifyed);
-        let localStorageItem: string = localStorage.getItem(keyToBeStored);
+        let localStorageItem: string | null = localStorage.getItem(keyToBeStored);
         expect(localStorageItem).toBeTruthy();
 
         mockStorageService.remove(keyToBeStored);
@@ -61,7 +61,7 @@ describe("MockIStorageService", () => {
 
     it("MockIStorageService.set method test", (done) => {
         mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: number) => {
-            const localStorageItem: string = localStorage.getItem(keyToBeStored);
+            const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
             expect(localStorageItem).toBeTruthy();
             expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
             expect(data).toEqual(objectToBeStoredStringifyed.length);
@@ -70,8 +70,8 @@ describe("MockIStorageService", () => {
     });
 
     it("MockIStorageService.get method test", (done) => {
-        const localStorageItem: string = localStorage.getItem(keyToBeStored);
-        mockStorageService.get(keyToBeStored).then((data: string) => {
+        const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
+        mockStorageService.get(keyToBeStored).then((data: string | null) => {
             expect(data).toEqual(localStorageItem);
             done();
         });
