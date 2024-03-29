@@ -32,6 +32,7 @@
     "snyk-protect": "snyk-protect"
   },
   "devDependencies": {
+    "@snyk/protect": "^1.1280.1",
     "@types/d3-timer": "3.0.2",
     "@types/jasmine": "5.1.4",
     "@types/jquery": "^3.5.29",
@@ -40,7 +41,6 @@
     "@types/webpack": "5.28.5",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "@snyk/protect": "^1.1280.1",
     "chalk": "5.3.0",
     "coverage-istanbul-loader": "^3.0.5",
     "eslint": "^8.57.0",
@@ -66,7 +66,7 @@
     "d3-array": "3.2.4",
     "d3-timer": "3.0.1",
     "lodash-es": "4.17.21",
-    "powerbi-visuals-api": "^5.8.0",
+    "powerbi-visuals-api": "^5.9.0",
     "powerbi-visuals-utils-formattingmodel": "^6.0.1",
     "powerbi-visuals-utils-typeutils": "^6.0.2"
   },
