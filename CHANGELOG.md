@@ -1,3 +1,7 @@
+
+## 6.1.1
+* powerbi-visuals-api update to 5.9.0
+
 ## 6.1.0
 * Now `createVisualHost` method has only **one parameter** with interface `CreateVisualHostOptions` (includes all previous parameters)
 * Added mock service for `IVisualLocalStorageV2Service`
