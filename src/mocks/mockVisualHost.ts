@@ -36,6 +36,7 @@ import DrillArgs = powerbi.DrillArgs;
 
 // powerbi.visuals
 import ISelectionIdBuilder = powerbi.visuals.ISelectionIdBuilder;
+import CustomVisualOpaqueIdentity = powerbi.visuals.CustomVisualOpaqueIdentity;
 
 // powerbi.extensibility
 import ISelectionManager = powerbi.extensibility.ISelectionManager;
@@ -48,6 +49,7 @@ import IWebAccessService = powerbi.extensibility.IWebAccessService;
 import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService;
 import IVisualLocalStorageV2Service = powerbi.extensibility.IVisualLocalStorageV2Service;
 import IVisualSubSelectionService = powerbi.extensibility.IVisualSubSelectionService;
+import ICustomVisualsOpaqueUtils = powerbi.extensibility.ICustomVisualsOpaqueUtils;
 
 // powerbi.extensibility.visual
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
@@ -213,5 +215,11 @@ export class MockIVisualHost implements IVisualHost {
         return new Promise<ModalDialogResult>((resolve, rejects) => {
             resolve(this.modalDialogResult)
         }) as any;
+    }
+
+    public createOpaqueUtils(): ICustomVisualsOpaqueUtils {
+        return {
+            compareCustomVisualOpaqueIdentities: (identity1: CustomVisualOpaqueIdentity, identity2: CustomVisualOpaqueIdentity) => true
+        };
     }
 }
