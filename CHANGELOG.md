@@ -1,6 +1,7 @@
 
 ## 6.1.1
 * powerbi-visuals-api update to 5.9.0
+* Add createOpaqueUtils to IVisualHost mock
 
 ## 6.1.0
 * Now `createVisualHost` method has only **one parameter** with interface `CreateVisualHostOptions` (includes all previous parameters)
