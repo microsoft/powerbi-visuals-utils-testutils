@@ -55,25 +55,54 @@ export class MockISelectionManager implements ISelectionManager {
     }
 
     public select(selectionId: ISelectionId | ISelectionId[], multiSelect?: boolean): IPromise<ISelectionId[]> {
-        const selectionIds: ISelectionId[] = [].concat(selectionId);
+        const selectionIds: ISelectionId[] = Array.isArray(selectionId) ? selectionId : [selectionId];
 
-        // if no multiselect reset current selection and save new passed selections;
-        if (!multiSelect) {
-            this.selectionIds = selectionIds;
-        } else {
-            // if multiselect then check all passed selections
-            selectionIds.forEach( (id: ISelectionId) => {
-                // if selectionManager has passed selection in list of current selections
-                if (this.containsSelection(id)) {
-                    // need to exclude from selection (selection of selected element should deselect element)
-                    this.selectionIds = this.selectionIds.filter((selectedId: ISelectionId) => {
-                        return !selectedId.equals(id);
-                    });
+        if (selectionIds.length === 0) {
+            return new Promise((resolve, reject) => {
+                resolve(this.selectionIds);
+            }) as any;
+        }
+
+        const handleMultipleSelection = ((selectionIds: ISelectionId[]) => {
+            if (multiSelect) {
+                // add new selection and toggle existing selection
+                selectionIds.forEach(id => {
+                    const matchingIndex = this.selectionIds.findIndex(selectedId => selectedId.equals(id));
+                    if (matchingIndex > -1) {
+                        this.selectionIds.splice(matchingIndex, 1);
+                    } else {
+                        this.selectionIds.push(id);
+                    }
+                });
+            } else {
+                // replace the current selection with the new selection
+                this.selectionIds = selectionIds;
+            }
+        });
+
+        const handleSingleSelection = ((selectionId: ISelectionId) => {
+            const matchingIndex = this.selectionIds.findIndex(selectedId => selectedId.equals(selectionId));
+            if (matchingIndex > -1) {
+                // the selection is already selected, so we need to deselect it
+                if (multiSelect) {
+                    this.selectionIds.splice(matchingIndex, 1);
                 } else {
-                    // otherwise include the new selection into current selections
-                    this.selectionIds.push(id);
+                    this.selectionIds = [];
                 }
-            });
+            } else {
+                // the selection is off, so we need to select it
+                if (multiSelect) {
+                    this.selectionIds.push(selectionId);
+                } else {
+                    this.selectionIds = [selectionId];
+                }
+            }
+        });
+
+        if (selectionIds.length > 1) {
+            handleMultipleSelection(selectionIds);
+        } else {
+            handleSingleSelection(selectionIds[0]);
         }
 
         return new Promise((resolve, reject) => {
@@ -112,6 +141,8 @@ export class MockISelectionManager implements ISelectionManager {
     }
 
     public simutateSelection(selections: ISelectionId[]): void {
-        this.callback(selections);
+        if (typeof this.callback === "function") {
+            this.callback(selections);
+        }
     }
 }
