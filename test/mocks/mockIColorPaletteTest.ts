@@ -52,12 +52,23 @@ describe("MockIColorPalette", () => {
             expect(color.value).toBe("#01B8AA");
         });
     });
-});
 
-describe("createColorPalette", () => {
-    it("should return an instance of MockIColorPalette", () => {
-        const instance: IColorPalette = createColorPalette();
+    describe("reset", () => {
+        it("the method should be defined", () => {
+            expect(colorPalette.reset).toBeDefined();
+            const firstColor = colorPalette.getColor("firstKey");
+            colorPalette.getColor("anotherKey");
+            colorPalette.reset();
+            const colorAfterReset = colorPalette.getColor("secondKey");
+            expect(firstColor).toEqual(colorAfterReset);
+        });
+    });
 
-        expect(instance instanceof MockIColorPalette).toBeTruthy();
+    describe("createColorPalette", () => {
+        it("should return an instance of MockIColorPalette", () => {
+            const instance: IColorPalette = createColorPalette();
+
+            expect(instance instanceof MockIColorPalette).toBeTruthy();
+        });
     });
 });
