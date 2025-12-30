@@ -47,29 +47,29 @@ describe("TestDataViewBuilder", () => {
         it("dataView.categorical should be correct", () => {
             expect(dataView.categorical).toBeDefined();
 
-            expect(dataView.categorical.categories.length).toBe(1);
+            expect(dataView.categorical!.categories!.length).toBe(1);
 
-            expect(dataView.categorical.categories[0]).toBeDefined();
-            expect(dataView.categorical.categories[0].identity.length).toBe(2);
-            expect(dataView.categorical.categories[0].identityFields.length).toBe(1);
+            expect(dataView.categorical!.categories![0]).toBeDefined();
+            expect(dataView.categorical!.categories![0].identity!.length).toBe(2);
+            expect(dataView.categorical!.categories![0].identityFields!.length).toBe(1);
 
-            expect(dataView.categorical.categories[0].source).toBeDefined();
-            expect(dataView.categorical.categories[0].source.displayName).toBe(TestDataViewBuilderImplementation.ColumnSource);
-            expect(dataView.categorical.categories[0].source.roles[TestDataViewBuilderImplementation.ColumnSource]).toBeTruthy();
+            expect(dataView.categorical!.categories![0].source).toBeDefined();
+            expect(dataView.categorical!.categories![0].source.displayName).toBe(TestDataViewBuilderImplementation.ColumnSource);
+            expect(dataView.categorical!.categories![0].source.roles![TestDataViewBuilderImplementation.ColumnSource]).toBeTruthy();
 
-            expect(dataView.categorical.categories[0].values).toBeDefined();
-            expect(dataView.categorical.categories[0].values[0]).toBe(TestDataViewBuilderImplementation.Column1);
-            expect(dataView.categorical.categories[0].values[1]).toBe(TestDataViewBuilderImplementation.Column2);
+            expect(dataView.categorical!.categories![0].values).toBeDefined();
+            expect(dataView.categorical!.categories![0].values[0]).toBe(TestDataViewBuilderImplementation.Column1);
+            expect(dataView.categorical!.categories![0].values[1]).toBe(TestDataViewBuilderImplementation.Column2);
 
-            expect(dataView.categorical.values).toBeDefined();
-            expect(dataView.categorical.values.length).toBe(1);
+            expect(dataView.categorical!.values).toBeDefined();
+            expect(dataView.categorical!.values!.length).toBe(1);
 
-            expect(dataView.categorical.values[0].source).toBeDefined();
-            expect(dataView.categorical.values[0].source.displayName).toBe(TestDataViewBuilderImplementation.ColumnValue);
-            expect(dataView.categorical.values[0].source.isMeasure).toBeTruthy();
+            expect(dataView.categorical!.values![0].source).toBeDefined();
+            expect(dataView.categorical!.values![0].source.displayName).toBe(TestDataViewBuilderImplementation.ColumnValue);
+            expect(dataView.categorical!.values![0].source.isMeasure).toBeTruthy();
 
-            expect(dataView.categorical.values[0].values[0]).toBe(TestDataViewBuilderImplementation.Value1);
-            expect(dataView.categorical.values[0].values[1]).toBe(TestDataViewBuilderImplementation.Value2);
+            expect(dataView.categorical!.values![0].values[0]).toBe(TestDataViewBuilderImplementation.Value1);
+            expect(dataView.categorical!.values![0].values[1]).toBe(TestDataViewBuilderImplementation.Value2);
         });
 
         it("dataView.metadata should be correct", () => {
@@ -80,10 +80,10 @@ describe("TestDataViewBuilder", () => {
             expect(dataView.metadata.columns[1]).toBeDefined();
 
             expect(dataView.metadata.columns[0].displayName).toBe(TestDataViewBuilderImplementation.ColumnSource);
-            expect(dataView.metadata.columns[0].roles[TestDataViewBuilderImplementation.ColumnSource]).toBeTruthy();
+            expect(dataView.metadata.columns[0].roles![TestDataViewBuilderImplementation.ColumnSource]).toBeTruthy();
 
             expect(dataView.metadata.columns[1].displayName).toBe(TestDataViewBuilderImplementation.ColumnValue);
-            expect(dataView.metadata.columns[1].roles[TestDataViewBuilderImplementation.ColumnValue]).toBeTruthy();
+            expect(dataView.metadata.columns[1].roles![TestDataViewBuilderImplementation.ColumnValue]).toBeTruthy();
         });
     });
 });
@@ -190,43 +190,43 @@ describe("test MatrixDataViewBuilder ", () => {
                     }
                 ]
             };
-            expect(dataView.matrix.columns.root).toEqual(root);
-            expect(dataView.matrix.columns.levels[0].sources[0].displayName).toBe("Revenue Budget");
-            expect(dataView.matrix.columns.levels[0].sources[1].displayName).toBe("Total COGS");
+            expect(dataView.matrix!.columns.root).toEqual(root);
+            expect(dataView.matrix!.columns.levels[0].sources[0].displayName).toBe("Revenue Budget");
+            expect(dataView.matrix!.columns.levels[0].sources[1].displayName).toBe("Total COGS");
         });
 
         it("dataview should be populated with valid measures", () => {
-            const root = dataView.matrix.rows.root;
-            const coreIndex = root.children.findIndex(el => el.value === "Core");
-            expect(root.children[coreIndex].children[1].values).toEqual({ 0: { value: 1191435 }, 1: { value: 1419847.51, valueSourceIndex: 1 } });
-            expect(root.children[coreIndex].children[2].values).toEqual({ 0: { value: 27199561.42 }, 1: { value: 35353245.96, valueSourceIndex: 1 } });
-            expect(root.children[coreIndex].children[3].values).toEqual({ 0: { value: 35763040.53 }, 1: { value: 45951725.04, valueSourceIndex: 1 } });
-            expect(root.children[coreIndex].children[4].values).toEqual({ 0: { value: 2507806.098 }, 1: { value: 3151651.45, valueSourceIndex: 1 } });
-            expect(root.children[coreIndex].children[5].values).toEqual({ 0: { value: 374458.462 }, 1: { value: 688982.45, valueSourceIndex: 1 } });
+            const root = dataView.matrix!.rows.root;
+            const coreIndex = root.children!.findIndex(el => el.value === "Core");
+            expect(root.children![coreIndex].children![1].values).toEqual({ 0: { value: 1191435 }, 1: { value: 1419847.51, valueSourceIndex: 1 } });
+            expect(root.children![coreIndex].children![2].values).toEqual({ 0: { value: 27199561.42 }, 1: { value: 35353245.96, valueSourceIndex: 1 } });
+            expect(root.children![coreIndex].children![3].values).toEqual({ 0: { value: 35763040.53 }, 1: { value: 45951725.04, valueSourceIndex: 1 } });
+            expect(root.children![coreIndex].children![4].values).toEqual({ 0: { value: 2507806.098 }, 1: { value: 3151651.45, valueSourceIndex: 1 } });
+            expect(root.children![coreIndex].children![5].values).toEqual({ 0: { value: 374458.462 }, 1: { value: 688982.45, valueSourceIndex: 1 } });
 
-            const growthIndex = root.children.findIndex(el => el.value === "Growth");
-            expect(root.children[growthIndex].children[1].values).toEqual({ 0: { value: 219665.6 }, 1: { value: 254855.52, valueSourceIndex: 1 } });
-            expect(root.children[growthIndex].children[2].values).toEqual({ 0: { value: 16373481.29 }, 1: { value: 18230138.93, valueSourceIndex: 1 } });
-            expect(root.children[growthIndex].children[3].values).toEqual({ 0: { value: 2585794.4 }, 1: { value: 3875087.19, valueSourceIndex: 1 } });
-            expect(root.children[growthIndex].children[4].values).toEqual({ 0: { value: 6985752.48 }, 1: { value: 7881063.82, valueSourceIndex: 1 } });
-            expect(root.children[growthIndex].children[5].values).toEqual({ 0: { value: 822250.324 }, 1: { value: 673989.44, valueSourceIndex: 1 } });
+            const growthIndex = root.children!.findIndex(el => el.value === "Growth");
+            expect(root.children![growthIndex].children![1].values).toEqual({ 0: { value: 219665.6 }, 1: { value: 254855.52, valueSourceIndex: 1 } });
+            expect(root.children![growthIndex].children![2].values).toEqual({ 0: { value: 16373481.29 }, 1: { value: 18230138.93, valueSourceIndex: 1 } });
+            expect(root.children![growthIndex].children![3].values).toEqual({ 0: { value: 2585794.4 }, 1: { value: 3875087.19, valueSourceIndex: 1 } });
+            expect(root.children![growthIndex].children![4].values).toEqual({ 0: { value: 6985752.48 }, 1: { value: 7881063.82, valueSourceIndex: 1 } });
+            expect(root.children![growthIndex].children![5].values).toEqual({ 0: { value: 822250.324 }, 1: { value: 673989.44, valueSourceIndex: 1 } });
 
-            const minorIndex = root.children.findIndex(el => el.value === "Minor");
-            expect(root.children[minorIndex].children[1].values).toEqual({ 0: { value: 469392.84 }, 1: { value: 494907.02, valueSourceIndex: 1 } });
-            expect(root.children[minorIndex].children[2].values).toEqual({ 0: { value: 2862202 }, 1: { value: 2894830.67, valueSourceIndex: 1 } });
-            expect(root.children[minorIndex].children[3].values).toEqual({ 0: { value: 16961930.3 }, 1: { value: 16632528.85, valueSourceIndex: 1 } });
-            expect(root.children[minorIndex].children[4].values).toEqual({ 0: { value: 1339611 }, 1: { value: 1851610.18, valueSourceIndex: 1 } });
-            expect(root.children[minorIndex].children[5].values).toEqual({ 0: { value: 638005.2 }, 1: { value: 322058.2, valueSourceIndex: 1 } });
+            const minorIndex = root.children!.findIndex(el => el.value === "Minor");
+            expect(root.children![minorIndex].children![1].values).toEqual({ 0: { value: 469392.84 }, 1: { value: 494907.02, valueSourceIndex: 1 } });
+            expect(root.children![minorIndex].children![2].values).toEqual({ 0: { value: 2862202 }, 1: { value: 2894830.67, valueSourceIndex: 1 } });
+            expect(root.children![minorIndex].children![3].values).toEqual({ 0: { value: 16961930.3 }, 1: { value: 16632528.85, valueSourceIndex: 1 } });
+            expect(root.children![minorIndex].children![4].values).toEqual({ 0: { value: 1339611 }, 1: { value: 1851610.18, valueSourceIndex: 1 } });
+            expect(root.children![minorIndex].children![5].values).toEqual({ 0: { value: 638005.2 }, 1: { value: 322058.2, valueSourceIndex: 1 } });
 
         });
 
         it("columns should be valid", () => {
-            expect(dataView.matrix.columns.levels[0].sources[0].displayName).toBe("Revenue Budget");
-            expect(dataView.matrix.columns.levels[0].sources[1].displayName).toBe("Total COGS");
+            expect(dataView.matrix!.columns.levels[0].sources[0].displayName).toBe("Revenue Budget");
+            expect(dataView.matrix!.columns.levels[0].sources[1].displayName).toBe("Total COGS");
         });
         it("rows should be valid", () => {
-            expect(dataView.matrix.rows.levels[0].sources[0].displayName).toBe("Division");
-            expect(dataView.matrix.rows.levels[1].sources[0].displayName).toBe("Region");
+            expect(dataView.matrix!.rows.levels[0].sources[0].displayName).toBe("Division");
+            expect(dataView.matrix!.rows.levels[1].sources[0].displayName).toBe("Region");
         });
 
     });
@@ -300,7 +300,7 @@ describe("test MatrixDataViewBuilder ", () => {
 
 
         it("value sources should be empty", () => {
-            expect(dataView.matrix.valueSources).toEqual([]);
+            expect(dataView.matrix!.valueSources).toEqual([]);
         });
 
         it("columns should be empty", () => {
@@ -310,22 +310,22 @@ describe("test MatrixDataViewBuilder ", () => {
                 },
                 levels: []
             };
-            expect(dataView.matrix.columns).toEqual(columns);
+            expect(dataView.matrix!.columns).toEqual(columns);
 
         });
 
         it("rows' levels' sources should be valid", () => {
-            expect(dataView.matrix.rows.levels[0].sources[0].displayName).toBe("Division");
-            expect(dataView.matrix.rows.levels[1].sources[0].displayName).toBe("Region");
+            expect(dataView.matrix!.rows.levels[0].sources[0].displayName).toBe("Division");
+            expect(dataView.matrix!.rows.levels[1].sources[0].displayName).toBe("Region");
         });
 
         it("rows' levels' depth should be valid", () => {
-            expect(dataView.matrix.rows.root.children[0].level).toBe(0);
-            expect(dataView.matrix.rows.root.children[1].level).toBe(0);
-            expect(dataView.matrix.rows.root.children[2].level).toBe(0);
-            expect(dataView.matrix.rows.root.children[0].children[0].level).toBe(1);
-            expect(dataView.matrix.rows.root.children[1].children[0].level).toBe(1);
-            expect(dataView.matrix.rows.root.children[2].children[0].level).toBe(1);
+            expect(dataView.matrix!.rows.root.children![0].level).toBe(0);
+            expect(dataView.matrix!.rows.root.children![1].level).toBe(0);
+            expect(dataView.matrix!.rows.root.children![2].level).toBe(0);
+            expect(dataView.matrix!.rows.root.children![0].children![0].level).toBe(1);
+            expect(dataView.matrix!.rows.root.children![1].children![0].level).toBe(1);
+            expect(dataView.matrix!.rows.root.children![2].children![0].level).toBe(1);
         });
 
         it("root should be valid", () => {
@@ -549,32 +549,32 @@ describe("test MatrixDataViewBuilder ", () => {
                     }
                 ]
             };
-            expect(dataView.matrix.rows.root).toEqual(root);
+            expect(dataView.matrix!.rows.root).toEqual(root as any);
         });
 
         it("rows should be valid", () => {
             const rows = ["Core", "Growth", "Minor"];
-            expect(rows).toContain(dataView.matrix.rows.root.children[0].value.toString());
-            expect(rows).toContain(dataView.matrix.rows.root.children[1].value.toString());
-            expect(rows).toContain(dataView.matrix.rows.root.children[2].value.toString());
+            expect(rows).toContain(dataView.matrix!.rows.root.children![0].value!.toString());
+            expect(rows).toContain(dataView.matrix!.rows.root.children![1].value!.toString());
+            expect(rows).toContain(dataView.matrix!.rows.root.children![2].value!.toString());
 
-            expect(dataView.matrix.rows.root.children[0].children[1].value).toBe("CENTRAL");
-            expect(dataView.matrix.rows.root.children[0].children[2].value).toBe("EAST");
-            expect(dataView.matrix.rows.root.children[0].children[3].value).toBe("NORTH");
-            expect(dataView.matrix.rows.root.children[0].children[4].value).toBe("SOUTH");
-            expect(dataView.matrix.rows.root.children[0].children[5].value).toBe("WEST");
+            expect(dataView.matrix!.rows.root.children![0].children![1].value).toBe("CENTRAL");
+            expect(dataView.matrix!.rows.root.children![0].children![2].value).toBe("EAST");
+            expect(dataView.matrix!.rows.root.children![0].children![3].value).toBe("NORTH");
+            expect(dataView.matrix!.rows.root.children![0].children![4].value).toBe("SOUTH");
+            expect(dataView.matrix!.rows.root.children![0].children![5].value).toBe("WEST");
 
-            expect(dataView.matrix.rows.root.children[1].children[1].value).toBe("CENTRAL");
-            expect(dataView.matrix.rows.root.children[1].children[2].value).toBe("EAST");
-            expect(dataView.matrix.rows.root.children[1].children[3].value).toBe("NORTH");
-            expect(dataView.matrix.rows.root.children[1].children[4].value).toBe("SOUTH");
-            expect(dataView.matrix.rows.root.children[1].children[5].value).toBe("WEST");
+            expect(dataView.matrix!.rows.root.children![1].children![1].value).toBe("CENTRAL");
+            expect(dataView.matrix!.rows.root.children![1].children![2].value).toBe("EAST");
+            expect(dataView.matrix!.rows.root.children![1].children![3].value).toBe("NORTH");
+            expect(dataView.matrix!.rows.root.children![1].children![4].value).toBe("SOUTH");
+            expect(dataView.matrix!.rows.root.children![1].children![5].value).toBe("WEST");
 
-            expect(dataView.matrix.rows.root.children[2].children[1].value).toBe("CENTRAL");
-            expect(dataView.matrix.rows.root.children[2].children[2].value).toBe("EAST");
-            expect(dataView.matrix.rows.root.children[2].children[3].value).toBe("NORTH");
-            expect(dataView.matrix.rows.root.children[2].children[4].value).toBe("SOUTH");
-            expect(dataView.matrix.rows.root.children[2].children[5].value).toBe("WEST");
+            expect(dataView.matrix!.rows.root.children![2].children![1].value).toBe("CENTRAL");
+            expect(dataView.matrix!.rows.root.children![2].children![2].value).toBe("EAST");
+            expect(dataView.matrix!.rows.root.children![2].children![3].value).toBe("NORTH");
+            expect(dataView.matrix!.rows.root.children![2].children![4].value).toBe("SOUTH");
+            expect(dataView.matrix!.rows.root.children![2].children![5].value).toBe("WEST");
         });
 
 

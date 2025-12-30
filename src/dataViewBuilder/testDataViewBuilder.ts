@@ -240,7 +240,7 @@ export abstract class TestDataViewBuilder {
     protected createCategoricalDataViewBuilder(
         categoriesColumns: (TestDataViewBuilderCategoryColumnOptions | TestDataViewBuilderCategoryColumnOptions[])[],
         valuesColumns: (DataViewBuilderValuesColumnOptions | DataViewBuilderValuesColumnOptions[])[],
-        columnNames: string[],
+        columnNames?: string[],
         customizeColumns?: CustomizeColumnFn): IDataViewBuilderCategorical {
 
         const builder = createCategoricalDataViewBuilder();

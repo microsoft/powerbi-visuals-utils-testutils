@@ -29,6 +29,7 @@ import powerbi from "powerbi-visuals-api";
 import IColorPalette = powerbi.extensibility.ISandboxExtendedColorPalette;
 import IColorInfo = powerbi.IColorInfo;
 
+
 export class MockIColorPalette implements IColorPalette {
     /**
      * This array represents the default colors of the IColorPalette.
@@ -86,8 +87,8 @@ export class MockIColorPalette implements IColorPalette {
     private colors: IColorInfo[];
     private colorIndex: number = 0;
 
-    constructor(colors: IColorInfo[] = []) {
-        this.colors = colors;
+    constructor(colors?: IColorInfo[]) {
+        this.colors = colors || [];
     }
 
     public getColor(key: string): IColorInfo {
@@ -107,33 +108,34 @@ export class MockIColorPalette implements IColorPalette {
     }
 
     public isHighContrast: true;
-    public foreground = {value: "#333333" };
-    public foregroundLight = {value: "#FFF" };
-    public foregroundDark = {value: "#000" };
-    public foregroundNeutralLight = {value: "#EAEAEA" };
-    public foregroundNeutralDark = {value: "#212121" };
-    public foregroundNeutralSecondary = {value: "#666666" };
-    public foregroundNeutralSecondaryAlt = {value: "#777777" };
-    public foregroundNeutralSecondaryAlt2 = {value: "#888888" };
-    public foregroundNeutralTertiary = {value: "#A6A6A6" };
-    public foregroundNeutralTertiaryAlt = {value: "#C8C8C8" };
-    public foregroundSelected = {value: "#333333" };
-    public foregroundButton = {value: "#666666" };
-    public background = {value: "#FFF" };
-    public backgroundLight = {value: "#EAEAEA" };
-    public backgroundNeutral = {value: "#C8C8C8" };
-    public backgroundDark = {value: "#000" };
-    public hyperlink = {value: "#1F3A93" };
-    public visitedHyperlink = {value: "#551A8B" };
-    public mapPushpin = {value: "#FF5F00" };
-    public shapeStroke = {value: "#01B8AA" };
-    public selection = {value: undefined };
-    public separator = {value: undefined };
-    public negative = {value: undefined };
-    public neutral = {value: undefined };
-    public positive = {value: undefined };
+    public foreground = { value: "#333333" };
+    public foregroundLight = { value: "#FFF" };
+    public foregroundDark = { value: "#000" };
+    public foregroundNeutralLight = { value: "#EAEAEA" };
+    public foregroundNeutralDark = { value: "#212121" };
+    public foregroundNeutralSecondary = { value: "#666666" };
+    public foregroundNeutralSecondaryAlt = { value: "#777777" };
+    public foregroundNeutralSecondaryAlt2 = { value: "#888888" };
+    public foregroundNeutralTertiary = { value: "#A6A6A6" };
+    public foregroundNeutralTertiaryAlt = { value: "#C8C8C8" };
+    public foregroundSelected = { value: "#333333" };
+    public foregroundButton = { value: "#666666" };
+    public background = { value: "#FFF" };
+    public backgroundLight = { value: "#EAEAEA" };
+    public backgroundNeutral = { value: "#C8C8C8" };
+    public backgroundDark = { value: "#000" };
+    public hyperlink = { value: "#1F3A93" };
+    public visitedHyperlink = { value: "#551A8B" };
+    public mapPushpin = { value: "#FF5F00" };
+    public shapeStroke = { value: "#01B8AA" };
+    public selection = { value: undefined };
+    public separator = { value: undefined };
+    public negative = { value: undefined };
+    public neutral = { value: undefined };
+    public positive = { value: undefined };
 
     public reset(): IColorPalette {
+        this.colorIndex = 0;
         return this;
     }
 }
