@@ -1,5 +1,5 @@
 # Microsoft Power BI visuals TestUtils
-![Build](https://github.com/microsoft/powerbi-visuals-utils-testutils/workflows/build/badge.svg) [![npm version](https://img.shields.io/npm/v/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils) [![npm](https://img.shields.io/npm/dm/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils)
+[![Build](https://github.com/microsoft/powerbi-visuals-utils-testutils/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/microsoft/powerbi-visuals-utils-testutils/actions/workflows/build.yml) [![npm version](https://img.shields.io/npm/v/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils) [![npm](https://img.shields.io/npm/dm/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils)
 
 > TestUtils is a set of mocks and fakes in order to simplify unit testing for Power BI custom visuals
 
