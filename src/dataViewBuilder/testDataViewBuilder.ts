@@ -303,7 +303,13 @@ export abstract class TestDataViewBuilder {
         const builderBuild = builder.build.bind(builder);
 
         builder.build = () => {
-            return TestDataViewBuilder.setUpDataView(builderBuild(), options);
+            const dataView = builderBuild();
+
+            if (!dataView) {
+                return undefined;
+            }
+
+            return TestDataViewBuilder.setUpDataView(dataView, options);
         };
 
         return builder;

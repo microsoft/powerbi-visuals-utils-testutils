@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 
+import { createCategoricalDataViewBuilder } from "../../src/dataViewBuilder/dataViewBuilder";
 import { TestDataViewBuilder } from "../../src/dataViewBuilder/testDataViewBuilder";
 import powerbi from "powerbi-visuals-api";
 
@@ -84,6 +85,42 @@ describe("TestDataViewBuilder", () => {
 
             expect(dataView.metadata.columns[1].displayName).toBe(TestDataViewBuilderImplementation.ColumnValue);
             expect(dataView.metadata.columns[1].roles[TestDataViewBuilderImplementation.ColumnValue]).toBeTruthy();
+        });
+
+        it("returns undefined for an illegal visual dataview with both grouped and static values", () => {
+            const dataView = createCategoricalDataViewBuilder()
+                .withGroupedValues({
+                    groupColumn: {
+                        source: {
+                            displayName: "Series",
+                            queryName: "Series",
+                            type: { text: true }
+                        },
+                        identityFrom: { fields: [] },
+                        values: ["A"]
+                    },
+                    valueColumns: [{
+                        source: {
+                            displayName: "Grouped Value",
+                            queryName: "Grouped Value",
+                            isMeasure: true
+                        }
+                    }],
+                    data: [[{ values: [] }]]
+                })
+                .withValues({
+                    columns: [{
+                        source: {
+                            displayName: "Static Value",
+                            queryName: "Static Value",
+                            isMeasure: true
+                        },
+                        values: []
+                    }]
+                })
+                .build();
+
+            expect(dataView).toBeUndefined();
         });
     });
 });

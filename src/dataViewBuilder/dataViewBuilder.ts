@@ -52,7 +52,7 @@ export interface IDataViewBuilderCategorical {
     withValues(options: DataViewBuilderValuesOptions): IDataViewBuilderCategorical;
     withGroupedValues(options: DataViewBuilderGroupedValuesOptions): IDataViewBuilderCategorical;
 
-    build(): DataView;
+    build(): DataView | undefined;
 }
 
 export interface DataViewBuilderColumnOptions {
@@ -257,7 +257,7 @@ class CategoricalDataViewBuilder implements IDataViewBuilderCategorical {
      * Returns the DataView with metadata and DataViewCategorical.
      * Returns undefined if the combination of parameters is illegal, such as having both dynamic series and static series when building a visual DataView.
      */
-    public build(): DataView {
+    public build(): DataView | undefined {
         const metadataColumns: DataViewMetadataColumn[] = [];
         const categorical: DataViewCategorical = {};
 

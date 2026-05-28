@@ -13,8 +13,7 @@
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
     "types": [
-      "jquery",
-      "vitest/globals"
+      "jquery"
     ],
     "lib": [
       "es2020",
