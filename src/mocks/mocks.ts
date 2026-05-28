@@ -38,7 +38,6 @@ import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import ITooltipService = powerbi.extensibility.ITooltipService;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import IVisualEventService = powerbi.extensibility.IVisualEventService;
-import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService
 import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
 import IVisualLocalStorageV2Service = powerbi.extensibility.IVisualLocalStorageV2Service
 import IWebAccessService = powerbi.extensibility.IWebAccessService;
@@ -58,7 +57,7 @@ import { MockISelectionId } from "./mockISelectionId";
 import { MockIColorPalette } from "./mockIColorPalette";
 import { MockIVisualHost } from "./mockVisualHost";
 import { MockIEventService } from "./mockIEventService";
-import { MockIStorageService } from "./mockIStorageService";
+import { ILocalVisualStorageService, MockIStorageService } from "./mockIStorageService";
 import { MockIStorageV2Service } from "./mockIStorageV2Service";
 import { MockHostCapabilities } from "./mockHostCapabilities";
 import { MockDownloadService } from "./mockDownloadService";
@@ -68,7 +67,7 @@ import { MockIAcquireAADTokenService } from "./mockIAcquireAADTokenService";
 import { MockSubSelectionService } from "./mockSubSelectionService";
 
 export interface CreateVisualHostOptions {
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
     locale?: Object,
     allowInteractions?: boolean,
     colors?: IColorInfo[],
@@ -120,7 +119,7 @@ export function createTooltipService(isEnabled?: boolean): ITooltipService {
     return new MockITooltipService(isEnabled);
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export function createLocale(locales?: Object): MockILocale {
     return new MockILocale(locales);
 }

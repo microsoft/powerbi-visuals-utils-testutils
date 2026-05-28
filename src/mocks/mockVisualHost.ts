@@ -46,7 +46,6 @@ import IDownloadService = powerbi.extensibility.IDownloadService;
 import HostCapabilities = powerbi.extensibility.HostCapabilities;
 import IVisualLicenseManager = powerbi.extensibility.IVisualLicenseManager;
 import IWebAccessService = powerbi.extensibility.IWebAccessService;
-import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService;
 import IVisualLocalStorageV2Service = powerbi.extensibility.IVisualLocalStorageV2Service;
 import IVisualSubSelectionService = powerbi.extensibility.IVisualSubSelectionService;
 import ICustomVisualsOpaqueUtils = powerbi.extensibility.ICustomVisualsOpaqueUtils;
@@ -57,6 +56,7 @@ import ModalDialogResult = powerbi.extensibility.visual.ModalDialogResult
 import DialogOpenOptions = powerbi.extensibility.visual.DialogOpenOptions
 import CustomVisualApplyCustomSortArgs = powerbi.extensibility.visual.CustomVisualApplyCustomSortArgs;
 import IAcquireAADTokenService = powerbi.extensibility.IAcquireAADTokenService;
+import { ILocalVisualStorageService } from "./mockIStorageService";
 
 export interface IMockVisualHostOptions {
     colorPalette?: IColorPalette,

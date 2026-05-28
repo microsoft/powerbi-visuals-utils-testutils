@@ -28,7 +28,13 @@
 import powerbi from "powerbi-visuals-api";
 import IPromise = powerbi.IPromise;
 import PrivilegeStatus = powerbi.PrivilegeStatus;
-import ILocalVisualStorageService = powerbi.extensibility.ILocalVisualStorageService
+
+export interface ILocalVisualStorageService {
+    status(): IPromise<PrivilegeStatus>;
+    get(key: string): IPromise<string>;
+    set(key: string, data: string): IPromise<number>;
+    remove(key: string): void;
+}
 
 function getLocalStorageStatus() {
     try {

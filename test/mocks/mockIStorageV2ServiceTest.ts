@@ -60,21 +60,17 @@ describe("MockIStorageV2Service", () => {
         expect(localStorageItem).toBeNull();
     });
 
-    it("MockIStorageV2Service.set method test", (done) => {
-        mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed).then((data: StorageV2ResultInfo) => {
-            const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
-            expect(localStorageItem).toBeTruthy();
-            expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
-            expect(data.success).toBeTrue();
-            done();
-        });
+    it("MockIStorageV2Service.set method test", async () => {
+        const data: StorageV2ResultInfo = await mockStorageService.set(keyToBeStored, objectToBeStoredStringifyed);
+        const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
+        expect(localStorageItem).toBeTruthy();
+        expect(localStorageItem).toEqual(objectToBeStoredStringifyed);
+        expect(data.success).toBe(true);
     });
 
-    it("MockIStorageV2Service.get method test", (done) => {
+    it("MockIStorageV2Service.get method test", async () => {
         const localStorageItem: string | null = localStorage.getItem(keyToBeStored);
-        mockStorageService.get(keyToBeStored).then((data: string | null) => {
-            expect(data).toEqual(localStorageItem);
-            done();
-        });
+        const data: string | null = await mockStorageService.get(keyToBeStored);
+        expect(data).toEqual(localStorageItem);
     });
 });

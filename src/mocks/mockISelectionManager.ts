@@ -40,14 +40,14 @@ export class MockISelectionManager implements ISelectionManager {
 
     private callback: (ids: ISelectionId[]) => void;
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     public toggleExpandCollapse(selectionId: ISelectionId): IPromise<{}> {
         return new Promise<void>((resolve, reject) => {
             resolve();
         }) as any;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     public showContextMenu(selectionId: ISelectionId, position: IPoint): IPromise<{}> {
         return new Promise<void>((resolve, reject) => {
             resolve();
@@ -85,7 +85,7 @@ export class MockISelectionManager implements ISelectionManager {
         return this.selectionIds.length > 0;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     public clear(): IPromise<{}> {
         this.selectionIds = [];
 
