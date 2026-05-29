@@ -22,6 +22,11 @@
   "directories": {
     "lib": "lib"
   },
+  "files": [
+    "lib/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
