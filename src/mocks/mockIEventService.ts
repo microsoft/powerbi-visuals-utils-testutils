@@ -24,8 +24,6 @@
  *  THE SOFTWARE.
  */
 
-/* eslint-disable @typescript-eslint/no-empty-function */
-
 // powerbi
 import powerbi from "powerbi-visuals-api";
 import IVisualEventService = powerbi.extensibility.IVisualEventService;

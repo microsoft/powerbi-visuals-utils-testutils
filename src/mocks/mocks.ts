@@ -67,7 +67,6 @@ import { MockIAcquireAADTokenService } from "./mockIAcquireAADTokenService";
 import { MockSubSelectionService } from "./mockSubSelectionService";
 
 export interface CreateVisualHostOptions {
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
     locale?: Object,
     allowInteractions?: boolean,
     colors?: IColorInfo[],
@@ -119,7 +118,6 @@ export function createTooltipService(isEnabled?: boolean): ITooltipService {
     return new MockITooltipService(isEnabled);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export function createLocale(locales?: Object): MockILocale {
     return new MockILocale(locales);
 }

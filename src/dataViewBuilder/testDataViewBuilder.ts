@@ -95,7 +95,6 @@ export abstract class TestDataViewBuilder {
     static getDataViewBuilderColumnIdentitySources(options: TestDataViewBuilderColumnOptions[] | TestDataViewBuilderColumnOptions): DataViewBuilderColumnIdentitySource[] {
         const optionsArray: TestDataViewBuilderColumnOptions[] = <any>(Array.isArray(options) ? options : [options]);
 
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         const fields = optionsArray.map(() => { }),
             optionsIdentityExpressions: any[][] = optionsArray.map((opt) => opt.values)
         let identityExpressions: any[] = [];
