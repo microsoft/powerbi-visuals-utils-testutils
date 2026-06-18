@@ -40,7 +40,7 @@ export function assertColorsMatch(actual: string, expected: string, invert: bool
         rgbExpected: RgbColor | undefined = parseColorString(expected),
         matches = JSON.stringify(rgbActual) === JSON.stringify(rgbExpected);
 
-    if (matches !== !invert) {
+    if (matches !== invert) {
         return;
     }
 
