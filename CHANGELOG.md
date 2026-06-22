@@ -5,11 +5,8 @@
 * `dataViewBuilder.IDataViewBuilderCategorical.build()` now returns `DataView | undefined` for illegal grouped+static visual categorical combinations.
 * `helpers.color.parseColorString()` now returns `RgbColor | undefined`.
 
-### Changed
-* Updated dependencies to `powerbi-visuals-utils-typeutils` 7.x.
-
 ### Infrastructure
-* Test runner replaced: Karma + Jasmine -> Vitest (`happy-dom`) with V8 coverage.
+* Test runner replaced: legacy browser-based test stack -> Vitest (`happy-dom`) with V8 coverage.
 * Lint stack upgraded to ESLint 10 flat config.
 * TypeScript upgraded to 6.x.
 * GitHub Actions workflows modernized (build/release/codeql) and Dependabot configuration added.
@@ -41,7 +38,7 @@
 * Vulnerabilities patched
 
 ## 3.2.0
-* migrated to `coverage-istanbul-loader` from `istanbul-instrumenter-loader`
+* migrated to the Istanbul-based coverage loader pipeline from `istanbul-instrumenter-loader`
 
 ## 3.1.0
 * updated `powerbi-visual-api` to 5.1.0
@@ -80,7 +77,7 @@
 * JQuery.each bugfix
 
 ## 2.3.0
-* JQuery and Jasmine-Jquery removed.
+* JQuery and the related testing helper plugin removed.
 * JQuery3dClicks interface is not supported any more.
 
 ## 2.2.1
@@ -106,7 +103,7 @@ Selection manager should select all passed selections if multiselect is false
 * Update packages to fix vulnerabilities
 
 ## 2.0.0
- * Moved to webpack 3, commonjs style.
+ * Moved to a bundled CommonJS build style.
 
 ## 1.0.2
  * Added multiple colors logic to mock palette. Only red color was available.
