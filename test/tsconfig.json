@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "rootDir": "..",
+        "types": ["vitest/globals", "jquery"]
+    },
+    "include": [
+        "../src/**/*.ts",
+        "./**/*.ts"
+    ]
+}

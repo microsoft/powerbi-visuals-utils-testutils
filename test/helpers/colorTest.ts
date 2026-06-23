@@ -24,7 +24,7 @@
  *  THE SOFTWARE.
  */
 
-import { parseColorString } from "../../src/helpers/color";
+import { assertColorsMatch, parseColorString } from "../../src/helpers/color";
 
 describe("parseColorString", () => {
     it("invalid hex", () => {
@@ -124,5 +124,23 @@ describe("parseColorString", () => {
             B: 3,
             A: 1.0,
         });
+    });
+});
+
+describe("assertColorsMatch", () => {
+    it("does not throw when colors match and invert is false", () => {
+        expect(() => assertColorsMatch("#ff0000", "#ff0000")).not.toThrow();
+    });
+
+    it("throws when colors do not match and invert is false", () => {
+        expect(() => assertColorsMatch("#ff0000", "#00ff00")).toThrow();
+    });
+
+    it("throws when colors match and invert is true", () => {
+        expect(() => assertColorsMatch("#ff0000", "#ff0000", true)).toThrow();
+    });
+
+    it("does not throw when colors do not match and invert is true", () => {
+        expect(() => assertColorsMatch("#ff0000", "#00ff00", true)).not.toThrow();
     });
 });

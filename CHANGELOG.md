@@ -1,4 +1,16 @@
 
+## 7.0.0
+
+### Breaking changes
+* `dataViewBuilder.IDataViewBuilderCategorical.build()` now returns `DataView | undefined` for illegal grouped+static visual categorical combinations.
+* `helpers.color.parseColorString()` now returns `RgbColor | undefined`.
+
+### Infrastructure
+* Test runner replaced: legacy browser-based test stack -> Vitest (`happy-dom`) with V8 coverage.
+* Lint stack upgraded to ESLint 10 flat config.
+* TypeScript upgraded to 6.x.
+* GitHub Actions workflows modernized (build/release/codeql) and Dependabot configuration added.
+
 ## 6.1.1
 * powerbi-visuals-api update to 5.9.0
 * Add createOpaqueUtils to IVisualHost mock

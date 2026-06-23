@@ -1,5 +1,5 @@
 # Microsoft Power BI visuals TestUtils
-![Build](https://github.com/microsoft/powerbi-visuals-utils-testutils/workflows/build/badge.svg) [![npm version](https://img.shields.io/npm/v/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils) [![npm](https://img.shields.io/npm/dm/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils)
+[![Build](https://github.com/microsoft/powerbi-visuals-utils-testutils/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/microsoft/powerbi-visuals-utils-testutils/actions/workflows/build.yml) [![npm version](https://img.shields.io/npm/v/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils) [![npm](https://img.shields.io/npm/dm/powerbi-visuals-utils-testutils.svg)](https://www.npmjs.com/package/powerbi-visuals-utils-testutils)
 
 > TestUtils is a set of mocks and fakes in order to simplify unit testing for Power BI custom visuals
 
@@ -18,6 +18,30 @@ From version 2.3.0 `testDom` function returns `HTMLElement` instead of `JQuery` 
 ```
 
 The motivation is not to force JQuery usage. It might be not necessary in tests. In lots of cases `element.get(0)` is the next operation after receiving an element with `testDom`. Now JQuery is not required to use powerbi-visuals-utils-testutils, so you can drop this dependency. If you keep it, you can easily migrate your code to 2.3.* version using the example above.
+
+## Development
+
+Common scripts:
+
+| Command | Description |
+| --- | --- |
+| `npm ci` | Install pinned dependencies from `package-lock.json` |
+| `npm run build` | Compile `src/` into `lib/` with TypeScript declarations and source maps |
+| `npm test` | Run the full Vitest suite once (used by CI) |
+| `npm run test:watch` | Run Vitest in watch mode |
+| `npm run test:coverage` | Run Vitest once and produce a coverage report under `coverage/` |
+| `npm run test:typecheck` | Type-check the `test/` tree using `test/tsconfig.json` |
+| `npm run lint` | Lint the codebase with ESLint flat config in `eslint.config.mjs` |
+| `npm run lint:fix` | Auto-fix lint issues where possible |
+
+### TypeScript configs
+
+* `tsconfig.json` builds `src/` to `lib/`.
+* `test/tsconfig.json` extends the main config, adds `vitest/globals` types, and includes `test/`.
+
+### Tests
+
+Tests live under `test/` and run via Vitest in a `happy-dom` environment. See `vitest.config.mts`.
 
 
 ## Contributing

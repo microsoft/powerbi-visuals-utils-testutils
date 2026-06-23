@@ -36,17 +36,18 @@ export function getSolidColorStructuralObject(color: string): any {
 }
 
 export function assertColorsMatch(actual: string, expected: string, invert: boolean = false): void {
-    const rgbActual: RgbColor = parseColorString(actual),
-        rgbExpected: RgbColor = parseColorString(expected);
+    const rgbActual: RgbColor | undefined = parseColorString(actual),
+        rgbExpected: RgbColor | undefined = parseColorString(expected),
+        matches = JSON.stringify(rgbActual) === JSON.stringify(rgbExpected);
 
-    if (invert) {
-        return expect(rgbActual).not.toEqual(rgbExpected);
+    if (matches !== invert) {
+        return;
     }
 
-    return expect(rgbActual).toEqual(rgbExpected);
+    throw new Error(`Expected ${actual} ${invert ? "not " : ""}to match ${expected}`);
 }
 
-export function parseColorString(color: string): RgbColor {
+export function parseColorString(color: string): RgbColor | undefined {
     if (color.indexOf("#") >= 0) {
         if (color.length === 7) {
             // #RRGGBB
