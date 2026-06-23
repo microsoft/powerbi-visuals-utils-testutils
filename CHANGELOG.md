@@ -38,7 +38,7 @@
 * Vulnerabilities patched
 
 ## 3.2.0
-* migrated to the Istanbul-based coverage loader pipeline from `istanbul-instrumenter-loader`
+* migrated to `coverage-istanbul-loader` from `istanbul-instrumenter-loader`
 
 ## 3.1.0
 * updated `powerbi-visual-api` to 5.1.0
@@ -77,7 +77,7 @@
 * JQuery.each bugfix
 
 ## 2.3.0
-* JQuery and the related testing helper plugin removed.
+* JQuery and Jasmine-Jquery removed.
 * JQuery3dClicks interface is not supported any more.
 
 ## 2.2.1
@@ -103,7 +103,7 @@ Selection manager should select all passed selections if multiselect is false
 * Update packages to fix vulnerabilities
 
 ## 2.0.0
- * Moved to a bundled CommonJS build style.
+ * Moved to webpack 3, commonjs style.
 
 ## 1.0.2
  * Added multiple colors logic to mock palette. Only red color was available.
