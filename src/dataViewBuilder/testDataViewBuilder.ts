@@ -73,6 +73,10 @@ export interface DataViewBuilderAllColumnOptions {
     values: DataViewBuilderValuesColumnOptions[];
 }
 
+export interface IStrictDataViewBuilderCategorical extends IDataViewBuilderCategorical {
+    build(): DataView;
+}
+
 export abstract class TestDataViewBuilder {
     static DataViewName: string = "Data";
     private aggregateFunction: (array: number[]) => number = sum;
@@ -239,8 +243,8 @@ export abstract class TestDataViewBuilder {
     protected createCategoricalDataViewBuilder(
         categoriesColumns: (TestDataViewBuilderCategoryColumnOptions | TestDataViewBuilderCategoryColumnOptions[])[],
         valuesColumns: (DataViewBuilderValuesColumnOptions | DataViewBuilderValuesColumnOptions[])[],
-        columnNames: string[],
-        customizeColumns?: CustomizeColumnFn): IDataViewBuilderCategorical {
+        columnNames?: string[],
+        customizeColumns?: CustomizeColumnFn): IStrictDataViewBuilderCategorical {
 
         const builder = createCategoricalDataViewBuilder();
 
@@ -299,19 +303,23 @@ export abstract class TestDataViewBuilder {
             builder.withValues({ columns: options.values });
         }
 
-        const builderBuild = builder.build.bind(builder);
+        const strictBuilder: IStrictDataViewBuilderCategorical = {
+            withCategory: (categoryOptions) => { builder.withCategory(categoryOptions); return strictBuilder; },
+            withCategories: (categories) => { builder.withCategories(categories); return strictBuilder; },
+            withValues: (valuesOptions) => { builder.withValues(valuesOptions); return strictBuilder; },
+            withGroupedValues: (groupedOptions) => { builder.withGroupedValues(groupedOptions); return strictBuilder; },
+            build: () => {
+                const dataView = builder.build();
 
-        builder.build = () => {
-            const dataView = builderBuild();
+                if (!dataView) {
+                    throw new Error("Failed to build categorical DataView: the underlying builder returned undefined.");
+                }
 
-            if (!dataView) {
-                return undefined;
+                return TestDataViewBuilder.setUpDataView(dataView, options);
             }
-
-            return TestDataViewBuilder.setUpDataView(dataView, options);
         };
 
-        return builder;
+        return strictBuilder;
     }
 
     public abstract getDataView(columnNames?: string[]): DataView;

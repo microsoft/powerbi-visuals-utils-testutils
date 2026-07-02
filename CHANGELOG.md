@@ -1,9 +1,18 @@
 
+## 7.0.1
+
+### API changes
+* `TestDataViewBuilder.createCategoricalDataViewBuilder()`:
+  * Returns the new `IStrictDataViewBuilderCategorical` type; its `build()` now returns `DataView` (non-nullable).
+  * `build()` throws an `Error` when both dynamic series (`withGroupedValues`) and static series (`withValues`) are combined in a single visual categorical — a combination that cannot be represented and previously returned `undefined`. Wrap in `try/catch` if you build such combinations.
+  * `columnNames` parameter is now optional — omit it to include all columns (no filtering), matching the optional `getDataView(columnNames?)` contract.
+
 ## 7.0.0
 
 ### Breaking changes
 * `dataViewBuilder.IDataViewBuilderCategorical.build()` now returns `DataView | undefined` for illegal grouped+static visual categorical combinations.
 * `helpers.color.parseColorString()` now returns `RgbColor | undefined`.
+* `helpers.color.assertColorsMatch()` no longer depends on the test framework's global `expect`; it now throws a plain `Error` on mismatch and does not register a framework assertion.
 
 ### Infrastructure
 * Test runner replaced: legacy browser-based test stack -> Vitest (`happy-dom`) with V8 coverage.

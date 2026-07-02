@@ -1,6 +1,6 @@
 {
   "name": "powerbi-visuals-utils-testutils",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "powerbi-visuals-utils-testutils",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -59,7 +59,7 @@
     "d3-timer": "3.0.1",
     "lodash-es": "4.18.1",
     "powerbi-visuals-api": "^5.11.0",
-    "powerbi-visuals-utils-formattingmodel": "^7.0.0",
+    "powerbi-visuals-utils-formattingmodel": "^7.1.0",
     "powerbi-visuals-utils-typeutils": "^7.0.0"
   },
   "snyk": true
