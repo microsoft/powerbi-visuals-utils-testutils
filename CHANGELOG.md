@@ -1,3 +1,5 @@
+## 7.0.2
+* Updated dependencies to address npm audit vulnerabilities.
 
 ## 7.0.1
 
